@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Contrail+One&display=swap');
+
+body{background:none transparent;
+  font-family: 'Contrail One', cursive;
+text-transform: uppercase;}
+#reproductor 
+{
+  position:relative;
+  float:left;
+  min-width:200px;
+  width:100%;
+  background:#230046;
+  border-radius:15px;color:#fff
+}
+.cover
+{
+  position:relative;
+  background-image:url(https://vignette.wikia.nocookie.net/habbofanon/images/5/50/Wiki-background/revision/latest?cb=20120928051619);
+  z-index:1;
+  float:left;
+  width:120px;
+  height:145px;
+  overflow:hidden;
+  padding-top:-120px;
+  padding-left:0px;
+  border-radius:15px 0 0 15px
+}
+.cover:after{content:"";overflow:hidden;position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(140,0,255,.74);z-index:-1;border-radius:15px 0 0 15px;transition:all ease-in .3s}
+.cover:hover:after{background:rgba(255,0,179,.74)}
+.area-botones{position:relative;float:left;width:calc(100% - 230px);height:145px;padding-top:10px;padding-left:15px}
+.area-botones i{margin-right:0px}
+.iconos{float:left}
+small {
+  width: 150px;
+  text-align: center;
+  float: left;
+  background: #7289DA;
+  border-radius: 10px;
+}
+small a {
+  color: #fff;
+}
+small a:hover {
+  color:#00dcff;
+  text-decoration: none;
+}
+.section
+{
+  position:relative;
+  width:100%;
+  height:30px
+}
+#djactual
+{
+  float:left;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  margin-right:20px
+}
+#dj
+{
+  float:right;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  margin-right:20px
+}#oyentes
+{float:left}
+.repro
+{
+  padding:8px;
+  border-radius:10px;
+  background-color:#4e0894;
+  width:130px
+}
+.separacion
+{
+}
+#player{float:left;width:120px}
+#autor{height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:120px}
+#cancion{width:120px;float:left}
+.refrescar{margin-left:20px;color:#fff;transition:.2s}
+.refrescar:hover{color:#db1d8c}
+.area-play{display:block;float:left;position:relative;z-index:30;height:100%;padding-top:2px}
+#play{display:block;width:120px;height:60px;position:relative;float: left;left:-35px;padding:17px;border-radius:30px;color:#fff;background-color:#4e0894;border:none;cursor:pointer}
+#play:hover{background-color:#db1d8c}
+#pause{display:block;width:35px;height:35px;position:relative;bottom:10px;padding:5px;border-radius:30px;color:#fff;background-color:#4e0894;border:none;cursor:pointer}
+#pause:hover{background-color:#db1d8c}@media(max-width:360px){.area-botones i{display:none}
+#player{width:40px}
+#cancion{width:50px}
+#autor{width:50px}
+#oyentes{display:none}.icooyente{display:none}}@media(min-width:100px) and (max-width:300px){#reproductor{font-size:13px}
+#player{width:150px}
+#cancion{width:100px}
+#autor{width:100px}}@media(min-width:100px) and (max-width:100px){#player{width:200px}#cancion{width:100px}#autor{width:250px}}
+#dj_avatar
+{
+  position: relative;
+top: -40px;
+  filter: drop-shadow(0 2px 5px #fff);
+}
+        .ball {
+            border-radius: 50%;
+            background-color: transparent;
+            animation: bounce 0.5s;
+            animation-direction: alternate;
+            animation-timing-function: cubic-bezier(.5, 0.05, 1, .5);
+            animation-iteration-count: infinite;
+        }
+          
+        @keyframes bounce {
+            from {
+                transform: translate3d(0, 0, 0);
+            }
+            to {
+                transform: translate3d(0, 25px, 0);
+            }
+        }
+        /* Prefix Support */
+          
+        ball {
+            -webkit-animation-name: bounce;
+            -webkit-animation-duration: 0.2s;
+            -webkit-animation-direction: alternate;
+            -webkit-animation-timing-function: cubic-bezier(
+            .5, 0.05, 1, .5);
+            -webkit-animation-iteration-count: infinite;
+        }
+          
+        @-webkit-keyframes bounce {
+            from {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+            to {
+                -webkit-transform: translate3d(0, 200px, 0);
+                transform: translate3d(0, 200px, 0);
+            }
+        }
