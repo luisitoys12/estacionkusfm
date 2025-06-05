@@ -288,6 +288,39 @@
     </div>
   </nav>
 
+  <!-- HERO: Reproductor de radio ancho completo -->
+  <section style="background:rgba(255,255,255,0.96);box-shadow:0 4px 24px #ffd60044;" id="radio">
+    <div class="container py-4">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10">
+          <div class="text-center mb-2">
+            <span class="sidebar-title" style="font-size:1.6rem;">Radio en vivo</span>
+          </div>
+          <iframe 
+            src="repro/index.html" 
+            title="Reproductor KusFM" 
+            width="100%" 
+            height="420" 
+            style="border-radius: 16px; border: none; background: #fff; box-shadow:0 2px 15px #ffd60099;" 
+            allow="autoplay">
+          </iframe>
+          <div class="fansite-btns-row mt-3 justify-content-center">
+            <button class="peticion-btn" onclick="document.getElementById('peticion-popup-bg').style.display='flex'">🌊 Peticiones</button>
+            <button class="destacados-btn" onclick="document.getElementById('destacados-popup-bg').style.display='flex'">🌞 Destacados</button>
+            <button class="vacantes-btn" onclick="document.getElementById('vacantes-popup-bg').style.display='flex'">🏄 Vacantes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Encabezado fansite -->
+  <div class="fansite-header" id="inicio">
+    <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=srp&action=wlk&direction=4&head_direction=2&headonly=0&size=l" alt="Logo EstacionKusFM" class="fansite-logo">
+    <div class="fansite-title">☀️ estacionkusfm 🏖️</div>
+    <div class="fansite-sub">Tu fansite Habbo con la mejor radio y comunidad <span style="font-size:1.3em;">🌴</span></div>
+  </div>
+
   <!-- Reloj digital -->
   <div class="container text-center mt-3 mb-2">
     <div style="display:inline-block; background:rgba(255,255,255,0.85); border-radius:10px; padding:8px 28px; box-shadow:0 2px 10px #70e1f599;">
@@ -297,37 +330,11 @@
     </div>
   </div>
 
-  <!-- Encabezado -->
-  <div class="fansite-header" id="inicio">
-    <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=srp&action=wlk&direction=4&head_direction=2&headonly=0&size=l" alt="Logo EstacionKusFM" class="fansite-logo">
-    <div class="fansite-title">☀️ estacionkusfm 🏖️</div>
-    <div class="fansite-sub">Tu fansite Habbo con la mejor radio y comunidad <span style="font-size:1.3em;">🌴</span></div>
-  </div>
-
-  <!-- Main con sidebar a la derecha -->
+  <!-- MAIN: contenido principal y sidebar -->
   <div class="container mt-4">
     <div class="row">
-      <!-- Contenido principal -->
+      <!-- CONTENIDO PRINCIPAL -->
       <div class="col-lg-8">
-        <!-- Radio en vivo -->
-        <section class="mb-4" id="radio">
-          <div class="sidebar-section" style="background:rgba(255,255,255,0.96)">
-            <span class="sidebar-title">Radio en vivo</span>
-<iframe 
-  src="repro/index.html" 
-  title="Reproductor KusFM" 
-  width="100%" 
-  height="420" 
-  style="border-radius: 16px; border: none; background: #fff;" 
-  allow="autoplay">
-</iframe>
-<div class="fansite-btns-row mt-2"></div>
-              <button class="peticion-btn" onclick="document.getElementById('peticion-popup-bg').style.display='flex'">🌊 Peticiones</button>
-              <button class="destacados-btn" onclick="document.getElementById('destacados-popup-bg').style.display='flex'">🌞 Destacados</button>
-              <button class="vacantes-btn" onclick="document.getElementById('vacantes-popup-bg').style.display='flex'">🏄 Vacantes</button>
-            </div>
-          </div>
-        </section>
         <!-- Noticias / Comunidad -->
         <section class="mb-4">
           <div class="sidebar-section" style="background:rgba(255,255,255,0.88)">
@@ -384,17 +391,16 @@
           </div>
         </section>
       </div>
-
-      <!-- Sidebar derecho -->
+      <!-- SIDEBAR DERECHO -->
       <div class="col-lg-4 sidebar-right">
-        <!-- Galería en sidebar -->
+        <!-- Galería -->
         <div class="sidebar-section mb-4" id="galeria">
           <span class="sidebar-title">Galería</span>
           <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" class="img-fluid mb-2 rounded" alt="Galería 1">
           <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" class="img-fluid mb-2 rounded" alt="Galería 2">
           <img src="https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?auto=format&fit=crop&w=400&q=80" class="img-fluid mb-2 rounded" alt="Galería 3">
         </div>
-        <!-- Ranking en sidebar -->
+        <!-- Ranking -->
         <div class="sidebar-section mb-4" id="ranking">
           <span class="sidebar-title">Ranking</span>
           <ol class="text-left pl-4" style="color:#ff9800;">
@@ -406,7 +412,7 @@
             <li>niko</li>
           </ol>
         </div>
-        <!-- Redes sociales en sidebar -->
+        <!-- Redes Sociales -->
         <div class="sidebar-section mb-4">
           <span class="sidebar-title">Redes Sociales</span>
           <div class="sidebar-social">
@@ -421,7 +427,7 @@
           <span class="sidebar-title mt-2">Últimos furnis</span>
           <div class="api-furnis d-flex flex-wrap justify-content-center" id="api-furnis"></div>
         </div>
-        <!-- Disclaimer en el sidebar -->
+        <!-- Disclaimer -->
         <div class="fansite-disclaimer">
           <strong>Hecho con <span class="fansite-love">♥</span> por <b>@estacionkusfm</b></strong><br>
           Se respeta la manera Habbo. Todos los derechos reservados.<br>
@@ -433,6 +439,7 @@
     </div>
   </div>
 
+  <!-- FOOTER -->
   <div class="fansite-footer mt-4">
     &copy; 2025 estacionkusfm • Fansite Habbo no oficial · Hecho con <span style="color:#ff9800;">♥</span> para la comunidad<br>
     Versión 1.0.0
@@ -496,7 +503,7 @@
         });
       });
 
-    // Equipo con look de playa (se fuerza gesture=sml, action=wlk y look playero si quieres personalizar más)
+    // Equipo con look de playa
     const onlineUsers = {
       "estacionkusfm": true,
       "ser03z-51": false,
@@ -527,9 +534,8 @@
             ? `<span class="equipo-status" title="Online">🔵</span>`
             : `<span class="equipo-status" title="Offline">🔴</span>`;
         }
-        // Playa: gesture=sml, action=wlk, direction=2, head_direction=2, size=l
         div.innerHTML = `
-          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(miembro.user)}&gesture=sml&action=wlk&direction=2&head_direction=2&headonly=0&size=l" alt="${miembro.nombre}">
+          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(miembro.user)}&gesture=sml&action=wlk&direction=2&head_direction=2&headonly=0&size=l" alt="${miembro.nombre}" />
           ${estado}
           <span>${miembro.nombre}</span>`;
         cont.appendChild(div);
