@@ -6,8 +6,9 @@
   <title>estacionkusfm • Fansite Habbo</title>
   <!-- Bootstrap 4 CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://kit.fontawesome.com/df2a1fbcf1.css" crossorigin="anonymous">
   <style>
     body {
       background: linear-gradient(135deg, #f8e473 0%, #70e1f5 100%);
@@ -51,238 +52,28 @@
       letter-spacing: 1px;
       text-shadow: 0px 2px 8px #ffe082;
     }
-    .fansite-main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 35px;
-      margin-bottom: 40px;
-    }
-    .fansite-card {
+    .sidebar-section {
       background: rgba(255,255,255,0.92);
-      box-shadow: 0 4px 24px 0 #70e1f599;
       border-radius: 16px;
-      padding: 24px 18px 16px 18px;
-      width: 95%;
-      max-width: 470px;
-      margin-bottom: 20px;
-      text-align: center;
-      color: #ff9800;
+      box-shadow: 0 2px 12px #70e1f599;
+      margin-bottom: 24px;
+      padding: 14px 12px;
       border: 2px solid #f8e473;
-      position: relative;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .fansite-card h2 {
-      color: #ff9800;
-      margin-bottom: 16px;
-      font-size: 1.3rem;
-      font-family: 'Contrail One', Arial, sans-serif;
-      letter-spacing: 1px;
-      text-shadow: 0px 2px 12px #f8e473;
-    }
-    .fansite-card .badge {
-      background: #00dcff;
-      color: #1b1b1b;
-      font-family: 'Contrail One', Arial, sans-serif;
-      font-size: 1rem;
-      margin: 10px 2px 18px 2px;
-      border-radius: 6px;
-      padding: 5px 13px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      box-shadow: 0 1px 6px #ffd600;
-      display: inline-block;
-    }
-    .fansite-iframe-container {
-      width: 100%;
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 0;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 8px 32px 0 #70e1f599;
-      border: 2px solid #70e1f5;
-      background: #fff9;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 395px;
-      height: 395px;
-    }
-    .fansite-iframe {
-      width: 100%;
-      height: 395px;
-      border: none;
-      background: transparent;
-      display: block;
-    }
-    .fansite-btns-row {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 10px;
-      margin-bottom: 10px;
-    }
-    .peticion-btn, .destacados-btn, .vacantes-btn {
-      background: #70e1f5;
-      color: #ff9800;
-      border-radius: 8px;
-      padding: 7px 22px;
-      font-size: 1.12rem;
-      font-family: 'Contrail One', Arial, sans-serif;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      transition: background .2s;
-      box-shadow: 0 1px 7px #ffd600;
-      text-shadow: 0 1px 7px #fff2;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-    .peticion-btn:hover, .destacados-btn:hover, .vacantes-btn:hover {
-      background: #ffe082;
-      color: #388e3c;
-    }
-    .fansite-section {
-      margin: 16px auto 22px auto;
-      width: 98%;
-      max-width: 700px;
-      background: rgba(255,255,255,0.92);
-      color: #388e3c;
-      border-radius: 16px;
-      padding: 21px 12px 13px 12px;
-      border: 2px solid #f8e473;
-      box-shadow: 0 2px 18px #70e1f599;
       text-align: center;
-      font-size:1.03rem;
     }
-    .fansite-section .fansite-section-title {
+    .sidebar-title {
       color: #ff9800;
       font-family: 'Contrail One', Arial, sans-serif;
       font-size: 1.18rem;
-      margin-bottom: 7px;
+      margin-bottom: 12px;
       letter-spacing: 1px;
       text-shadow: 0px 1px 7px #f8e473;
       display: block;
     }
-    .fansite-section .fansite-section-sub {
-      color: #00dcff;
-      font-size: 1rem;
-      margin-bottom: 7px;
-    }
-    .fansite-habbo-api-section {
-      margin: 21px auto 22px auto;
-      width: 98%;
-      max-width: 700px;
-      background: rgba(255,255,255,0.87);
-      color: #388e3c;
-      border-radius: 16px;
-      padding: 18px 7px 13px 7px;
-      border: 2px solid #70e1f5;
-      box-shadow: 0 2px 18px #70e1f599;
-      text-align: center;
-      font-size:1.01rem;
-    }
-    .api-badges, .api-furnis {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 9px;
-      margin: 12px 0;
-    }
-    .api-badges img, .api-furnis img {
-      border-radius: 7px;
-      box-shadow: 0 2px 8px #f8e473;
-      background: #fff;
-      padding: 2px;
-      width: 52px;
-      height: 52px;
-      object-fit: contain;
-      border: 1px solid #70e1f5;
-    }
-    .fansite-equipo-container {
-      margin: 24px auto 22px auto;
-      width: 98%;
-      max-width: 820px;
-      background: rgba(255,255,255,0.93);
-      color: #388e3c;
-      border-radius: 16px;
-      padding: 20px 15px 20px 15px;
-      border: 2px solid #f8e473;
-      box-shadow: 0 2px 18px #70e1f599;
-    }
-    .equipo-group {
-      margin-bottom: 18px;
-    }
-    .equipo-title {
-      color: #ff9800;
-      font-family: 'Contrail One', Arial, sans-serif;
-      font-size: 1.16rem;
-      margin-bottom: 7px;
-      text-shadow: 0px 1px 7px #f8e473;
-    }
-    .equipo-miembros {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px 14px;
-      justify-content: center;
-    }
-    .equipo-miembro {
-      background: #70e1f533;
-      border-radius: 10px;
-      padding: 8px 14px 7px 14px;
-      text-align: center;
-      box-shadow: 0 1px 7px #ffd600;
-      min-width: 105px;
-      min-height: 108px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      position: relative;
-    }
-    .equipo-miembro img {
-      width: 48px;
-      height: 60px;
-      border-radius: 6px;
-      margin-bottom: 3px;
-      background: #fff;
-      border: 1px solid #00dcff66;
-    }
-    .equipo-miembro span {
-      display: block;
-      font-size: 1.04rem;
-      margin-top: 2px;
-      color: #ff9800;
-      font-family: 'Contrail One', Arial, sans-serif;
-    }
-    .equipo-status {
-      position: absolute;
-      top: 6px;
-      right: 13px;
-      font-size: 1.3rem;
-      pointer-events: none;
-    }
-    .equipo-miembro.vacio {
-      background: #f8e47377;
-      border: 1px dashed #ffd600;
-      min-width: 105px;
-      min-height: 108px;
-      box-shadow: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-    .equipo-miembro.vacio::after {
-      content: "+";
-      color: #ffd600;
-      font-size: 2.3rem;
-      font-weight: bold;
-      margin-top: 18px;
-      opacity: 0.55;
+    @media (max-width: 991px) {
+      .sidebar-right {
+        margin-top: 30px;
+      }
     }
     .fansite-footer {
       color: #fff;
@@ -299,178 +90,11 @@
       font-size: 1.18rem;
       margin-right: 3px;
     }
-    .fansite-disclaimer {
-      font-size: 0.98rem;
-      color: #d2d2d2;
-      margin: 0 auto 12px auto;
-      padding: 16px 8px 8px 8px;
-      max-width: 780px;
-      background: rgba(0,0,0,0.67);
-      border-radius: 12px;
-      text-align: left;
-      border: 2px solid #ffdf2a33;
-      position: relative;
-      min-height: 90px;
-    }
-    .fansite-disclaimer .summer-badge {
-      position: absolute;
-      right: 12px;
-      top: 12px;
-      width: 60px;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px #f8e473;
-      border: 2px solid #70e1f5;
-      background: #fff;
-    }
-    .fansite-alianzas {
-      margin: 24px auto 22px auto;
-      width: 98%;
-      max-width: 700px;
-      background: rgba(112,225,245,0.89);
-      color: #388e3c;
-      border-radius: 16px;
-      padding: 18px 12px 15px 12px;
-      border: 2px solid #70e1f5;
-      box-shadow: 0 2px 18px #70e1f599;
-      font-size: 0.98rem;
-      text-align: center;
-    }
-    .alianzas-lista {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 13px 17px;
-      margin-top: 13px;
-      margin-bottom: 6px;
-    }
-    .alianza-room {
-      background: #ff9800;
-      color: #fff;
-      border-radius: 8px;
-      padding: 7px 16px;
-      font-weight: 700;
-      font-family: 'Contrail One', Arial, sans-serif;
-      box-shadow: 0 2px 8px #ffd600;
-      display: inline-block;
-      text-decoration: none;
-      transition: background .2s;
-    }
-    .alianza-room:hover {
-      background: #ffe082;
-      color: #00dcff;
-      text-decoration: underline;
-    }
-    /* Popup común */
-    .vacantes-popup-bg {
-      display: none;
-      position: fixed;
-      z-index: 10000;
-      left: 0; top: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.58);
-      justify-content: center;
-      align-items: center;
-    }
-    .vacantes-popup {
-      background: #fffbe6;
-      color: #ff9800;
-      padding: 28px 20px 18px 20px;
-      border-radius: 14px;
-      box-shadow: 0 2px 24px #70e1f599;
-      max-width: 360px;
-      width: 97vw;
-      position: relative;
-    }
-    .vacantes-popup h3 {
-      font-family: 'Contrail One', Arial, sans-serif;
-      font-size: 1.3rem;
-      color: #ff9800;
-      margin-bottom: 17px;
-      text-align: center;
-    }
-    .vacantes-popup .close-btn {
-      position: absolute;
-      right: 12px;
-      top: 10px;
-      font-size: 1.7rem;
-      color: #70e1f5;
-      cursor: pointer;
-      background: none;
-      border: none;
-      font-weight: bold;
-    }
-    .vacantes-popup form label {
-      font-size: 1rem;
-      color: #ff9800;
-      margin-bottom: 4px;
-      margin-top: 7px;
-      display: block;
-    }
-    .vacantes-popup form input,
-    .vacantes-popup form select {
-      width: 100%;
-      padding: 4px 8px;
-      border: 1px solid #70e1f5;
-      border-radius: 6px;
-      margin-bottom: 9px;
-      background: #fff;
-      color: #ff9800;
-      font-size: 1rem;
-    }
-    .vacantes-popup textarea {
-      width: 100%;
-      background:#fff;
-      color:#ff9800;
-      border-radius:6px;
-      border:1px solid #70e1f5;
-      margin-bottom:9px;
-      padding:4px 8px;
-      resize:vertical;
-      min-height:60px;
-      font-size:1rem;
-    }
-    .vacantes-popup .extra-sala {
-      margin-bottom: 10px;
-      display: none;
-    }
-    .vacantes-popup .submit-btn {
-      background: #70e1f5;
-      color: #ff9800;
-      border: none;
-      border-radius: 7px;
-      padding: 7px 20px;
-      font-weight: bold;
-      font-size: 1.1rem;
-      width: 100%;
-      margin-top: 5px;
-      transition: background .2s;
-    }
-    .vacantes-popup .submit-btn:hover {
-      background: #ffe082;
-      color: #388e3c;
-    }
-    @media (max-width: 600px) {
-      .fansite-header { padding: 15px 0 12px 0; }
-      .fansite-title { font-size: 1.6rem; }
-      .fansite-main { margin-top: 15px; }
-      .fansite-card { padding: 11px 5px 8px 5px; max-width: 99vw;}
-      .fansite-iframe-container { max-width: auto;}
-      .fansite-iframe { height: auto;}
-      .fansite-section, .fansite-habbo-api-section, .fansite-equipo-container, .fansite-alianzas { max-width: 99vw; padding: 12px 2px 7px 2px;}
-      .fansite-disclaimer { font-size: 0.92rem; }
-      .equipo-miembro { min-width: 85px; }
-      .equipo-miembro img { width: 35px; height: 40px; }
-      .equipo-miembro.vacio { min-width: 65px; min-height: 75px; }
-      .vacantes-popup { padding: 14px 3vw 10px 3vw; }
-      .fansite-btns-row { flex-direction: column; gap: 6px; }
-      .fansite-disclaimer .summer-badge { width: 40px; top: 6px; right: 6px; }
-    }
   </style>
 </head>
 <body>
   <!-- Menú de navegación Bootstrap -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
       <a class="navbar-brand" href="#">KUSFM</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -479,21 +103,27 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Inicio</a>
+          <li class="nav-item">
+            <a class="nav-link" href="#inicio">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Programación</a>
+            <a class="nav-link" href="#placas">Placas/API</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contacto</a>
+            <a class="nav-link" href="#generador">Generador Habbo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#equipo">Equipo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contacto.html">Contacto</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- Sección de reloj digital -->
+  <!-- Reloj digital -->
   <div class="container text-center mt-3 mb-2">
     <div style="display:inline-block; background:rgba(255,255,255,0.85); border-radius:10px; padding:8px 28px; box-shadow:0 2px 10px #70e1f599;">
       <span style="font-size:1.3rem; color:#ff9800; font-family: 'Contrail One', Arial, sans-serif;">
@@ -502,84 +132,63 @@
     </div>
   </div>
 
-  <div class="fansite-header">
+  <!-- Encabezado -->
+  <div class="fansite-header" id="inicio">
     <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=srp&action=wlk&direction=4&head_direction=2&headonly=0&size=l" alt="Logo EstacionKusFM" class="fansite-logo">
     <div class="fansite-title">☀️ estacionkusfm 🏖️</div>
     <div class="fansite-sub">Tu fansite Habbo con la mejor radio y comunidad <span style="font-size:1.3em;">🌴</span></div>
   </div>
-  <main class="fansite-main">
-    <div class="fansite-card">
-      <span class="badge">RADIO EN VIVO</span>
-      <h2>¡Dale play y disfruta la mejor música de verano! 🌞🎶</h2>
-      <div class="fansite-iframe-container">
-        <iframe src="repro/index.html" title="Reproductor KusFM" class="fansite-iframe" allow="autoplay"></iframe>
+
+  <!-- Main con sidebar a la derecha -->
+  <div class="container mt-4">
+    <div class="row">
+      <!-- Contenido principal -->
+      <div class="col-lg-8">
+        <section class="mb-4">
+          <div class="sidebar-section" style="background:rgba(255,255,255,0.88)">
+            <span class="sidebar-title">Noticias / Comunidad</span>
+            <!-- Aquí puedes poner noticias, posts, bienvenida, etc -->
+            <p>¡Bienvenido a la mejor radio de Habbo! Disfruta música, placas, comunidad y mucho más.</p>
+          </div>
+        </section>
+
+        <section class="mb-4" id="equipo">
+          <div class="sidebar-section">
+            <span class="sidebar-title">Equipo</span>
+            <div id="equipo-contenido">
+              <!-- Aquí va tu equipo, lo puedes rellenar con JS como ya hacías antes -->
+              <p>Pronto conocerás a todo el staff de KusFM.</p>
+            </div>
+          </div>
+        </section>
       </div>
-      <div class="fansite-btns-row">
-        <button class="peticion-btn" onclick="document.getElementById('peticion-popup-bg').style.display='flex'">🌊 Peticiones</button>
-        <button class="destacados-btn" onclick="document.getElementById('destacados-popup-bg').style.display='flex'">🌞 Destacados</button>
-        <button class="vacantes-btn" onclick="document.getElementById('vacantes-popup-bg').style.display='flex'">🏄 Vacantes</button>
-      </div>
-    </div>
-    <div class="fansite-habbo-api-section">
-      <span class="fansite-section-title">USANDO API DE HABBO</span>
-      <div class="fansite-section-sub">Últimas placas ganadas</div>
-      <div class="api-badges" id="api-badges"></div>
-      <div class="fansite-section-sub">Últimos furnis añadidos</div>
-      <div class="api-furnis" id="api-furnis"></div>
-    </div>
-    <div class="fansite-alianzas">
-      <span class="fansite-section-title">Alianzas</span>
-      <div class="alianzas-lista" id="alianzas-lista">
-        <a class="alianza-room" href="https://www.habbo.es/room/12345678" target="_blank">Agencia HabboSegura</a>
-        <a class="alianza-room" href="https://www.habbo.es/room/23456789" target="_blank">Imperio Real</a>
-        <a class="alianza-room" href="https://www.habbo.es/room/34567890" target="_blank">Osio Club</a>
-      </div>
-    </div>
-    <div class="fansite-equipo-container">
-      <div class="equipo-group">
-        <span class="equipo-title">Equipo Fundador</span>
-        <div class="equipo-miembros" id="fundadores"></div>
-      </div>
-      <div class="equipo-group">
-        <span class="equipo-title">Administradores</span>
-        <div class="equipo-miembros" id="admins"></div>
-      </div>
-      <div class="equipo-group">
-        <span class="equipo-title">Ayudantes</span>
-        <div class="equipo-miembros" id="ayudantes"></div>
-      </div>
-      <div class="equipo-group">
-        <span class="equipo-title">Locutores</span>
-        <div class="equipo-miembros" id="locutores"></div>
-      </div>
-      <div class="equipo-group">
-        <span class="equipo-title">Guías</span>
-        <div class="equipo-miembros" id="guias"></div>
-      </div>
-      <div class="equipo-group">
-        <span class="equipo-title">Publicistas</span>
-        <div class="equipo-miembros" id="publicistas"></div>
+
+      <!-- Sidebar derecho -->
+      <div class="col-lg-4 sidebar-right">
+        <!-- Reproductor Radio -->
+        <div class="sidebar-section mb-4">
+          <span class="sidebar-title">Radio en vivo</span>
+          <iframe src="repro/index.html" title="Reproductor KusFM" class="w-100" height="140" style="border-radius:8px; border:none; background:#fff;" allow="autoplay"></iframe>
+        </div>
+
+        <!-- Placas/API -->
+        <div class="sidebar-section mb-4" id="placas">
+          <span class="sidebar-title">Últimas placas ganadas</span>
+          <div class="api-badges d-flex flex-wrap justify-content-center" id="api-badges"></div>
+          <span class="sidebar-title mt-2">Últimos furnis</span>
+          <div class="api-furnis d-flex flex-wrap justify-content-center" id="api-furnis"></div>
+        </div>
+
+        <!-- Generador Habbo -->
+        <div class="sidebar-section mb-4" id="generador">
+          <span class="sidebar-title">Generador Habbo</span>
+          <iframe src="https://habboemotion.com/generator" title="Generador Habbo" class="w-100" height="160" style="border-radius:8px; border:none; background:#fff;"></iframe>
+        </div>
       </div>
     </div>
-    <div class="fansite-disclaimer">
-      <strong>Hecho con <span class="fansite-love">♥</span> por <b>@estacionkusfm</b></strong><br>
-      Se respeta la manera Habbo. Todos los derechos reservados.<br>
-      <b>estacionkusfm</b> no está afiliada a, respaldada, promocionada o aprobada específicamente por Sulake Corporation Oy o sus Afiliados.
-      <img src="https://habsite.es/wp-content/uploads/2025/03/fansite_badge.gif" alt="Fansite Badge" class="summer-badge">
-      <br>De acuerdo a la Política de Webs fans de Habbo, esta radio puede utilizar las marcas comerciales y otras propiedades intelectuales de Habbo.
-    </div>
-  </main>
-  <!-- POPUPS -->
-  <div class="vacantes-popup-bg" id="vacantes-popup-bg" onclick="if(event.target==this)this.style.display='none'">
-    <!-- ...contenido igual... -->
   </div>
-  <div class="vacantes-popup-bg" id="peticion-popup-bg" onclick="if(event.target==this)this.style.display='none'">
-    <!-- ...contenido igual... -->
-  </div>
-  <div class="vacantes-popup-bg" id="destacados-popup-bg" onclick="if(event.target==this)this.style.display='none'">
-    <!-- ...contenido igual... -->
-  </div>
-  <div class="fansite-footer">
+
+  <div class="fansite-footer mt-4">
     &copy; 2025 estacionkusfm • Fansite Habbo no oficial · Hecho con <span style="color:#ff9800;">♥</span> para la comunidad<br>
     Versión 1.0.0
   </div>
@@ -601,7 +210,7 @@
     updateClock();
   </script>
   <script>
-    // JS original de la web (badges, equipo, popups, etc.)
+    // Badges y furnis (API)
     const exampleBadges = [
       "ES620", "ES621", "ES622", "ES623", "ES624", "ES625"
     ];
@@ -610,6 +219,8 @@
       const img = document.createElement('img');
       img.src = `https://images.habbo.com/c_images/album1584/${code}.gif`;
       img.alt = code;
+      img.style.width = "48px";
+      img.style.margin = "3px";
       badgeContainer.appendChild(img);
     });
     fetch('https://habboemotion.com/api/furni/latest')
@@ -617,64 +228,16 @@
       .then(furnis => {
         const furniContainer = document.getElementById('api-furnis');
         furniContainer.innerHTML = '';
-        furnis.slice(0, 12).forEach(furni => {
+        furnis.slice(0, 6).forEach(furni => {
           const img = document.createElement('img');
           img.src = furni.image_large;
           img.alt = furni.name;
           img.title = furni.name;
+          img.style.width = "48px";
+          img.style.margin = "3px";
           furniContainer.appendChild(img);
         });
       });
-    const onlineUsers = {
-      "estacionkusfm": true,
-      "ser03z-51": false,
-      "ayente": true
-    };
-    const fundadores = [
-      {user: "estacionkusfm", nombre: "estacionkusfm"},
-      {user: "ser03z-51", nombre: "ser03z-51"}
-    ];
-    const admins = [];
-    const ayudantes = [
-      {user: "ayente", nombre: "ayente"}
-    ];
-    const locutores = [
-      {user: "ser03z-51", nombre: "ser03z-51"}
-    ];
-    const guias = [];
-    const publicistas = [];
-    function renderEquipo(arr, id, total=6) {
-      const cont = document.getElementById(id);
-      cont.innerHTML = '';
-      arr.forEach(miembro => {
-        const div = document.createElement('div');
-        div.className = "equipo-miembro";
-        let estado = '';
-        if(typeof onlineUsers[miembro.user] !== "undefined") {
-          estado = onlineUsers[miembro.user]
-            ? `<span class="equipo-status" title="Online">🔵</span>`
-            : `<span class="equipo-status" title="Offline">🔴</span>`;
-        }
-        div.innerHTML = `
-          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(miembro.user)}&gesture=sml&direction=2&head_direction=2&headonly=0" alt="${miembro.nombre}">
-          ${estado}
-          <span>${miembro.nombre}</span>`;
-        cont.appendChild(div);
-      });
-      for(let i=arr.length; i<total; i++) {
-        const empty = document.createElement('div');
-        empty.className = "equipo-miembro vacio";
-        cont.appendChild(empty);
-      }
-    }
-    renderEquipo(fundadores, "fundadores", 6);
-    renderEquipo(admins, "admins", 6);
-    renderEquipo(ayudantes, "ayudantes", 6);
-    renderEquipo(locutores, "locutores", 6);
-    renderEquipo(guias, "guias", 6);
-    renderEquipo(publicistas, "publicistas", 6);
-    // Popups y formularios
-    // (El resto de JS de los popups lo puedes dejar igual)
   </script>
 </body>
 </html>
