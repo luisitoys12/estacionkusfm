@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>estacionkusfm • Fansite Habbo</title>
-  <!-- Bootstrap 4 CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -75,6 +74,77 @@
         margin-top: 30px;
       }
     }
+    .equipo-titulo {
+      color: #ff9800;
+      font-family: 'Contrail One', Arial, sans-serif;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      text-shadow: 0px 1px 7px #f8e473;
+      display: block;
+    }
+    .equipo-miembros {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px 14px;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+    .equipo-miembro {
+      background: #70e1f533;
+      border-radius: 10px;
+      padding: 8px 14px 7px 14px;
+      text-align: center;
+      box-shadow: 0 1px 7px #ffd600;
+      min-width: 105px;
+      min-height: 108px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      position: relative;
+      margin-bottom: 10px;
+    }
+    .equipo-miembro img {
+      width: 48px;
+      height: 60px;
+      border-radius: 6px;
+      margin-bottom: 3px;
+      background: #fff;
+      border: 1px solid #00dcff66;
+    }
+    .equipo-miembro span {
+      display: block;
+      font-size: 1.04rem;
+      margin-top: 2px;
+      color: #ff9800;
+      font-family: 'Contrail One', Arial, sans-serif;
+    }
+    .equipo-status {
+      position: absolute;
+      top: 6px;
+      right: 13px;
+      font-size: 1.3rem;
+      pointer-events: none;
+    }
+    .equipo-miembro.vacio {
+      background: #f8e47377;
+      border: 1px dashed #ffd600;
+      min-width: 105px;
+      min-height: 108px;
+      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .equipo-miembro.vacio::after {
+      content: "+";
+      color: #ffd600;
+      font-size: 2.3rem;
+      font-weight: bold;
+      margin-top: 18px;
+      opacity: 0.55;
+    }
     .fansite-footer {
       color: #fff;
       background: rgba(0,0,0,0.7);
@@ -107,10 +177,10 @@
             <a class="nav-link" href="#inicio">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#placas">Placas/API</a>
+            <a class="nav-link" href="#radio">Radio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#generador">Generador Habbo</a>
+            <a class="nav-link" href="#generador">Generador</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#equipo">Equipo</a>
@@ -144,20 +214,44 @@
     <div class="row">
       <!-- Contenido principal -->
       <div class="col-lg-8">
+        <!-- Radio en vivo -->
+        <section class="mb-4" id="radio">
+          <div class="sidebar-section" style="background:rgba(255,255,255,0.96)">
+            <span class="sidebar-title">Radio en vivo</span>
+            <iframe src="repro/index.html" title="Reproductor KusFM" class="w-100" height="140" style="border-radius:8px; border:none; background:#fff;" allow="autoplay"></iframe>
+          </div>
+        </section>
+        <!-- Generador Habbo -->
+        <section class="mb-4" id="generador">
+          <div class="sidebar-section" style="background:rgba(255,255,255,0.95)">
+            <span class="sidebar-title">Generador Habbo</span>
+            <iframe src="https://habboemotion.com/generator" title="Generador Habbo" class="w-100" height="160" style="border-radius:8px; border:none; background:#fff;"></iframe>
+          </div>
+        </section>
+        <!-- Noticias / Comunidad -->
         <section class="mb-4">
           <div class="sidebar-section" style="background:rgba(255,255,255,0.88)">
             <span class="sidebar-title">Noticias / Comunidad</span>
-            <!-- Aquí puedes poner noticias, posts, bienvenida, etc -->
             <p>¡Bienvenido a la mejor radio de Habbo! Disfruta música, placas, comunidad y mucho más.</p>
           </div>
         </section>
-
+        <!-- Equipo -->
         <section class="mb-4" id="equipo">
           <div class="sidebar-section">
             <span class="sidebar-title">Equipo</span>
-            <div id="equipo-contenido">
-              <!-- Aquí va tu equipo, lo puedes rellenar con JS como ya hacías antes -->
-              <p>Pronto conocerás a todo el staff de KusFM.</p>
+            <div id="equipo-todo">
+              <span class="equipo-titulo">Equipo Fundador</span>
+              <div class="equipo-miembros" id="fundadores"></div>
+              <span class="equipo-titulo">Administradores</span>
+              <div class="equipo-miembros" id="admins"></div>
+              <span class="equipo-titulo">Ayudantes</span>
+              <div class="equipo-miembros" id="ayudantes"></div>
+              <span class="equipo-titulo">Locutores</span>
+              <div class="equipo-miembros" id="locutores"></div>
+              <span class="equipo-titulo">Guías</span>
+              <div class="equipo-miembros" id="guias"></div>
+              <span class="equipo-titulo">Publicistas</span>
+              <div class="equipo-miembros" id="publicistas"></div>
             </div>
           </div>
         </section>
@@ -165,24 +259,12 @@
 
       <!-- Sidebar derecho -->
       <div class="col-lg-4 sidebar-right">
-        <!-- Reproductor Radio -->
-        <div class="sidebar-section mb-4">
-          <span class="sidebar-title">Radio en vivo</span>
-          <iframe src="repro/index.html" title="Reproductor KusFM" class="w-100" height="140" style="border-radius:8px; border:none; background:#fff;" allow="autoplay"></iframe>
-        </div>
-
         <!-- Placas/API -->
         <div class="sidebar-section mb-4" id="placas">
           <span class="sidebar-title">Últimas placas ganadas</span>
           <div class="api-badges d-flex flex-wrap justify-content-center" id="api-badges"></div>
           <span class="sidebar-title mt-2">Últimos furnis</span>
           <div class="api-furnis d-flex flex-wrap justify-content-center" id="api-furnis"></div>
-        </div>
-
-        <!-- Generador Habbo -->
-        <div class="sidebar-section mb-4" id="generador">
-          <span class="sidebar-title">Generador Habbo</span>
-          <iframe src="https://habboemotion.com/generator" title="Generador Habbo" class="w-100" height="160" style="border-radius:8px; border:none; background:#fff;"></iframe>
         </div>
       </div>
     </div>
@@ -210,7 +292,7 @@
     updateClock();
   </script>
   <script>
-    // Badges y furnis (API)
+    // Placas y furnis (API)
     const exampleBadges = [
       "ES620", "ES621", "ES622", "ES623", "ES624", "ES625"
     ];
@@ -238,6 +320,56 @@
           furniContainer.appendChild(img);
         });
       });
+
+    // Equipo
+    const onlineUsers = {
+      "estacionkusfm": true,
+      "ser03z-51": false,
+      "ayente": true
+    };
+    const fundadores = [
+      {user: "estacionkusfm", nombre: "estacionkusfm"},
+      {user: "ser03z-51", nombre: "ser03z-51"}
+    ];
+    const admins = [];
+    const ayudantes = [
+      {user: "ayente", nombre: "ayente"}
+    ];
+    const locutores = [
+      {user: "ser03z-51", nombre: "ser03z-51"}
+    ];
+    const guias = [];
+    const publicistas = [];
+    function renderEquipo(arr, id, total=6) {
+      const cont = document.getElementById(id);
+      cont.innerHTML = '';
+      arr.forEach(miembro => {
+        const div = document.createElement('div');
+        div.className = "equipo-miembro";
+        let estado = '';
+        if(typeof onlineUsers[miembro.user] !== "undefined") {
+          estado = onlineUsers[miembro.user]
+            ? `<span class="equipo-status" title="Online">🔵</span>`
+            : `<span class="equipo-status" title="Offline">🔴</span>`;
+        }
+        div.innerHTML = `
+          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(miembro.user)}&gesture=sml&direction=2&head_direction=2&headonly=0" alt="${miembro.nombre}">
+          ${estado}
+          <span>${miembro.nombre}</span>`;
+        cont.appendChild(div);
+      });
+      for(let i=arr.length; i<total; i++) {
+        const empty = document.createElement('div');
+        empty.className = "equipo-miembro vacio";
+        cont.appendChild(empty);
+      }
+    }
+    renderEquipo(fundadores, "fundadores", 6);
+    renderEquipo(admins, "admins", 6);
+    renderEquipo(ayudantes, "ayudantes", 6);
+    renderEquipo(locutores, "locutores", 6);
+    renderEquipo(guias, "guias", 6);
+    renderEquipo(publicistas, "publicistas", 6);
   </script>
 </body>
 </html>
