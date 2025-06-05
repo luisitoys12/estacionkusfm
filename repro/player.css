@@ -17,7 +17,7 @@ body {
 
 /* CONTENEDOR PRINCIPAL */
 #reproductor {
-    background: rgba(35,0,70,0.92); /* Tu color original, con transparencia */
+    background: rgba(35,0,70,0.92);
     border-radius: 18px;
     box-shadow: 0 8px 32px 0 #0007;
     padding: 28px 18px 20px 18px;
@@ -45,8 +45,8 @@ body {
 
 /* CAJA DEL AVATAR / SET */
 .dj-container {
-    width: 90px;
-    height: 90px;
+    width: 120px;
+    height: 140px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -58,14 +58,14 @@ body {
     overflow: visible;
 }
 
-/* AVATAR QUIETO Y CENTRADO */
+/* AVATAR GRANDE Y CENTRADO */
 #dj_avatar {
     position: absolute;
     left: 50%;
-    bottom: 25px;
+    bottom: 38px;
     transform: translateX(-50%);
-    width: 54px;
-    height: 72px;
+    width: 90px;
+    height: 110px;
     object-fit: contain;
     z-index: 1;
     background: transparent;
@@ -73,13 +73,14 @@ body {
     filter: drop-shadow(0 2px 5px #fff9);
 }
 
-/* SET DJ PEQUEÑO */
+/* SET DJ ajustado hasta la "panza" del avatar */
 .dj-set {
     position: absolute;
     left: 50%;
-    bottom: 0;
+    /* Sube el set para cubrir panza, depende del avatar base, ajusta bottom según necesidad */
+    bottom: 38px;
     transform: translateX(-50%);
-    width: 64px;
+    width: 85px;
     z-index: 2;
     pointer-events: none;
 }
@@ -201,9 +202,9 @@ small a:hover {
 @media (max-width: 480px) {
     #reproductor { padding: 13px 2vw 10px 2vw; max-width: 99vw;}
     .cover { margin-bottom: 12px;}
-    .dj-container { width: 60px; height: 62px; }
-    #dj_avatar { width: 27px; height: 36px; bottom: 8px;}
-    .dj-set { width: 39px;}
+    .dj-container { width: 70px; height: 80px; }
+    #dj_avatar { width: 44px; height: 56px; bottom: 8px;}
+    .dj-set { width: 40px; bottom: 18px;}
     .summer-effect { width: 18px; height: 18px; left: 2px; }
     .summer-sun { width: 20px; height: 20px; right: 1px; top: -8px; }
     .meta-cards { gap: 7px; }
