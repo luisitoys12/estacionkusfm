@@ -9,11 +9,52 @@
 <link rel="stylesheet" href="player.css">
 <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+/* Centrar y superponer avatar y set DJ */
+.dj-container {
+    width: 120px;
+    height: 150px;
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+#dj_avatar {
+    position: absolute;
+    left: 50%;
+    bottom: 35px;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 90px;
+    object-fit: contain;
+    z-index: 1;
+    background: transparent;
+    display: block;
+}
+.dj-set {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 120px;
+    z-index: 2;
+    pointer-events: none;
+}
+@media (max-width: 480px) {
+    .dj-container { width: 90px; height: 110px; }
+    #dj_avatar { width: 48px; height: 60px; bottom: 20px;}
+    .dj-set { width: 85px;}
+}
+</style>
 </head>
 <body>
 <div id="reproductor">
     <div class="cover">
-        <img src="#" id="dj_avatar" class="ball" onerror="validarAvatar()"/>
+        <div class="dj-container">
+            <img src="#" id="dj_avatar" class="ball" onerror="validarAvatar()"/>
+            <img src="https://static.habbo-happy.net/img/furni/big/735778452353491.gif" class="dj-set" alt="Set DJ">
+        </div>
     </div>
     <div class="area-botones" style="font-size:14px;">
         <div class="section">
@@ -85,8 +126,9 @@
                         (song.artist ? song.artist : "Desconocido") + " - " + (song.title ? song.title : "Desconocido")
                     );
 
-                    // Si hay DJ en vivo usamos el nombre y avatar Habbo del streamer
+                    // DJ en vivo o AutoDJ
                     if (live && live.is_live && live.streamer_name) {
+                        // Hay DJ en vivo
                         $("#name_dj").text(live.streamer_name);
                         $("#dj_avatar").attr(
                             "src",
@@ -95,7 +137,7 @@
                             "&action=wav,drk=08&direction=2&head_direction=2&img_format=gif&gesture=sml&headonly=1"
                         ).css('display','block');
                     } else {
-                        // No hay DJ en vivo: avatar Habbo de estacionkusfm
+                        // Es AutoDJ
                         $("#name_dj").text("AutoDJ");
                         $("#dj_avatar").attr(
                             "src",
