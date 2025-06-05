@@ -1,84 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Coming Soon - Start Bootstrap Theme</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body>
-        <!-- Background Video-->
-        <iframe loading="lazy" width="100%" height="auto" src="http://estacionkusfm.42web.io/api/index" title="EKUS" frameborder="0"></iframe>
-        <!-- Masthead-->
-        <div class="masthead">
-            <div class="masthead-content text-white">
-                <div class="container-fluid px-4 px-lg-0">
-                    <h1 class="fst-italic lh-1 mb-4">Our Website is Coming Soon</h1>
-                    <p class="mb-5">We're working hard to finish the development of this site. Sign up below to receive updates and to be notified when we launch!</p>
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- * * SB Forms Contact Form * *-->
-                    <!-- * * * * * * * * * * * * * * *-->
-                    <!-- This form is pre-integrated with SB Forms.-->
-                    <!-- To make this form functional, sign up at-->
-                    <!-- https://startbootstrap.com/solution/contact-forms-->
-                    <!-- to get an API token!-->
-                    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                        <!-- Email address input-->
-                        <div class="row input-group-newsletter">
-                            <div class="col"><input class="form-control" id="email" type="email" placeholder="Enter email address..." aria-label="Enter email address..." data-sb-validations="required,email" /></div>
-                            <div class="col-auto"><button class="btn btn-primary disabled" id="submitButton" type="submit">Notify Me!</button></div>
-                        </div>
-                        <div class="invalid-feedback mt-2" data-sb-feedback="email:required">An email is required.</div>
-                        <div class="invalid-feedback mt-2" data-sb-feedback="email:email">Email is not valid.</div>
-                        <!-- Submit success message-->
-                        <!---->
-                        <!-- This is what your users will see when the form-->
-                        <!-- has successfully submitted-->
-                        <div class="d-none" id="submitSuccessMessage">
-                            <div class="text-center mb-3 mt-2">
-                                <div class="fw-bolder">Form submission successful!</div>
-                                To activate this form, sign up at
-                                <br />
-                                <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                            </div>
-                        </div>
-                        <frame src="https://luisitoys12.github.io/estacionkusfm.github.io/repro/"/>
-                        <!-- Submit error message-->
-                        <!---->
-                        <!-- This is what your users will see when there is-->
-                        <!-- an error submitting the form-->
-                        <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3 mt-2">Error sending message!</div></div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- Social Icons-->
-        <!-- For more icon options, visit https://fontawesome.com/icons?d=gallery&p=2&s=brands-->
-        <div class="social-icons">
-            <div class="d-flex flex-row flex-lg-column justify-content-center align-items-center h-100 mt-3 mt-lg-0">
-                <a class="btn btn-dark m-3" href="#!"><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-dark m-3" href="#!"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-dark m-3" href="#!"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-    </body>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>estacionkusfm • Fansite Habbo</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="fansite.css">
+  <style>
+    body {
+      background-image: url('https://habbo.com/habbo-imaging/badge/big/ADM');
+      background-color: #1b1b1b;
+      background-size: cover;
+      font-family: 'Contrail One', Arial, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    .fansite-header {
+      background: rgba(0,0,0,0.8);
+      color: #ffdf2a;
+      padding: 25px 0 15px 0;
+      text-align: center;
+      letter-spacing: 2px;
+      box-shadow: 0 6px 20px 0 #10101088;
+    }
+    .fansite-logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      border: 2px solid #ffdf2a;
+      background: #fff;
+      object-fit: contain;
+      box-shadow: 0 2px 15px #0004;
+    }
+    .fansite-title {
+      font-size: 2.5rem;
+      font-family: 'Contrail One', Arial, sans-serif;
+      margin-bottom: 0;
+      color: #ffdf2a;
+      text-shadow: 0px 2px 12px #0004;
+    }
+    .fansite-sub {
+      color: #00dcff;
+      font-size: 1.2rem;
+      margin-bottom: 0;
+      letter-spacing: 1px;
+      text-shadow: 0px 2px 8px #0008;
+    }
+    .fansite-main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 35px;
+      margin-bottom: 40px;
+    }
+    .fansite-card {
+      background: rgba(20,20,20,0.92);
+      box-shadow: 0 4px 24px 0 #0008;
+      border-radius: 16px;
+      padding: 24px 18px 16px 18px;
+      width: 95%;
+      max-width: 470px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #fff;
+      border: 2px solid #ffdf2a33;
+      position: relative;
+    }
+    .fansite-card h2 {
+      color: #ffdf2a;
+      margin-bottom: 16px;
+      font-size: 1.3rem;
+      font-family: 'Contrail One', Arial, sans-serif;
+      letter-spacing: 1px;
+      text-shadow: 0px 2px 12px #0004;
+    }
+    .fansite-card .badge {
+      background: #00dcff;
+      color: #1b1b1b;
+      font-family: 'Contrail One', Arial, sans-serif;
+      font-size: 1rem;
+      margin: 10px 2px 18px 2px;
+      border-radius: 6px;
+      padding: 5px 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      box-shadow: 0 1px 6px #0005;
+      display: inline-block;
+    }
+    .fansite-iframe-container {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px 0 #0009;
+      border: 2px solid #ffdf2a44;
+      background: #111a;
+    }
+    .fansite-iframe {
+      width: 100%;
+      height: 395px;
+      border: none;
+      background: transparent;
+      display: block;
+    }
+    .fansite-footer {
+      color: #fff;
+      background: rgba(0,0,0,0.7);
+      text-align: center;
+      padding: 18px 0 7px 0;
+      font-size: 1.05rem;
+      letter-spacing: 1px;
+      border-top: 2px solid #ffdf2a33;
+      font-family: 'Contrail One', Arial, sans-serif;
+      margin-top: 35px;
+    }
+    @media (max-width: 600px) {
+      .fansite-header { padding: 15px 0 12px 0; }
+      .fansite-title { font-size: 1.6rem; }
+      .fansite-main { margin-top: 15px; }
+      .fansite-card { padding: 11px 5px 8px 5px; max-width: 99vw;}
+      .fansite-iframe-container { max-width: 98vw;}
+      .fansite-iframe { height: 335px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="fansite-header">
+    <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=srp&action=wlk&direction=4&head_direction=2&headonly=0&size=l" alt="Logo EstacionKusFM" class="fansite-logo">
+    <div class="fansite-title">estacionkusfm</div>
+    <div class="fansite-sub">Tu fansite Habbo con la mejor radio y comunidad</div>
+  </div>
+
+  <main class="fansite-main">
+    <div class="fansite-card">
+      <span class="badge">RADIO EN VIVO</span>
+      <h2>¡Dale play y disfruta la mejor música!</h2>
+      <div class="fansite-iframe-container">
+        <iframe src="repro/index.html" title="Reproductor KusFM" class="fansite-iframe" allow="autoplay"></iframe>
+      </div>
+    </div>
+    <div class="fansite-card">
+      <span class="badge">COMUNIDAD</span>
+      <h2>Únete y participa en nuestros eventos de Habbo</h2>
+      <p>Síguenos en nuestras <a href="https://twitter.com/" target="_blank" style="color:#00dcff;">redes sociales</a> y no te pierdas ninguna sorpresa.</p>
+    </div>
+  </main>
+
+  <div class="fansite-footer">
+    &copy; 2025 estacionkusfm • Fansite Habbo no oficial · Hecho con <span style="color:#ffdf2a;">♥</span> para la comunidad
+  </div>
+</body>
 </html>
