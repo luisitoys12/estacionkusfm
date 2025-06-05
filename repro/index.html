@@ -107,6 +107,22 @@
 <script language="javascript" type="text/javascript">
     const API_NOWPLAYING_URL = 'https://radio.estacionkusmedios.com/api/nowplaying/esmerosound';
 
+    function getHabboAvatarUrlByUser(username, {
+        gesture = "srp",
+        action = "wlk",
+        direction = 4,
+        head_direction = 2,
+        headonly = 0
+    } = {}) {
+        return "https://www.habbo.es/habbo-imaging/avatarimage"
+            + "?user=" + encodeURIComponent(username)
+            + "&gesture=" + gesture
+            + "&action=" + action
+            + "&direction=" + direction
+            + "&head_direction=" + head_direction
+            + "&headonly=" + headonly;
+    }
+
     function validarAvatar(){
         $("#dj_avatar").css('display','none');
         console.clear();
@@ -132,16 +148,26 @@
                         $("#name_dj").text(live.streamer_name);
                         $("#dj_avatar").attr(
                             "src",
-                            "https://www.habbo.es/habbo-imaging/avatarimage?user=" +
-                            encodeURIComponent(live.streamer_name) +
-                            "&action=wav,drk=08&direction=2&head_direction=2&img_format=gif&gesture=sml&headonly=1"
+                            getHabboAvatarUrlByUser(live.streamer_name, {
+                                gesture: "srp",
+                                action: "wlk",
+                                direction: 4,
+                                head_direction: 2,
+                                headonly: 0
+                            })
                         ).css('display','block');
                     } else {
                         // Es AutoDJ
                         $("#name_dj").text("AutoDJ");
                         $("#dj_avatar").attr(
                             "src",
-                            "https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&action=wav,drk=08&direction=2&head_direction=2&img_format=gif&gesture=sml&headonly=1"
+                            getHabboAvatarUrlByUser("estacionkusfm", {
+                                gesture: "srp",
+                                action: "wlk",
+                                direction: 4,
+                                head_direction: 2,
+                                headonly: 0
+                            })
                         ).css('display','block');
                     }
 
@@ -154,7 +180,13 @@
                     $("#listeners").text("0");
                     $("#dj_avatar").attr(
                         "src",
-                        "https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&action=wav,drk=08&direction=2&head_direction=2&img_format=gif&gesture=sml&headonly=1"
+                        getHabboAvatarUrlByUser("estacionkusfm", {
+                            gesture: "srp",
+                            action: "wlk",
+                            direction: 4,
+                            head_direction: 2,
+                            headonly: 0
+                        })
                     ).css('display','block');
                 }
             });
