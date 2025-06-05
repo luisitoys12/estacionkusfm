@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Reproductor</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="player.css">
 <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
@@ -12,23 +12,32 @@
 </head>
 <body>
 <div id="reproductor">
-    <div class="cover"><img src="#" id="dj_avatar" class="ball" onerror="validarAvatar()"/></div>
+    <div class="cover">
+        <img src="#" id="dj_avatar" class="ball" onerror="validarAvatar()"/>
+    </div>
     <div class="area-botones" style="font-size:14px;">
         <div class="section">
-            <div id="djactual" style="font-weight:bold;"><i class="fas fa-microphone iconos" style="margin-right:10px;"></i><span id="name_dj" class="cc_streaminfo" style="color:#ffdf2a;" data-type="tit"></span></div>
+            <div id="djactual" style="font-weight:bold;">
+                <i class="fas fa-microphone iconos" style="margin-right:10px;"></i>
+                <span id="name_dj" class="cc_streaminfo" style="color:#ffdf2a;"></span>
+            </div>
         </div>
         <div class="section">
-            <i class="fas fa-headphones iconos" style="margin-right:10px;"></i><marquee id="cancion" scrolldelay="200"><span class="cc_streaminfo" style="color:#00dcff;" data-type="song" data-username="zonadesc"></span></marquee>
+            <i class="fas fa-headphones iconos" style="margin-right:10px;"></i>
+            <marquee id="cancion" scrolldelay="200">
+                <span class="cc_streaminfo" style="color:#00dcff;" id="song_title"></span>
+            </marquee>
         </div>
         <div class="section">
-            <i class="fas fa-user-friends iconos icooyente" style="margin-right:10px;"></i><div id="autor"><span class="cc_streaminfo" style="color:#ffdf2a;" data-type="listeners" data-username="zonadesc"></span></div>
+            <i class="fas fa-user-friends iconos icooyente" style="margin-right:10px;"></i>
+            <div id="autor">
+                <span class="cc_streaminfo" style="color:#ffdf2a;" id="listeners"></span> oyentes
+            </div>
         </div>
         <div class="section separacion">
-            <!--<i class="fas fa-volume-up iconos" style="margin-right:10px;"></i>-->
             <div id="player">
-                <div id="volume"><small><a target="_self" href="https://estacionkusfm.ml/api/">Actualizar reproductor</a></small></div>
+                <div id="volume"><small><a target="_self" href="#">Actualizar reproductor</a></small></div>
             </div>
-            <!--<a href="#"><i class="fas fa-sync-alt refrescar" style="margin-right:10px;"></i></a>-->
         </div>
     </div>
     <div class="area-play">
@@ -36,7 +45,7 @@
         <script type="text/javascript" src="https://hosted.muses.org/mrp.js"></script>
         <script type="text/javascript">
             MRP.insert({
-                'url':'https://113.30.149.133/listen/estacionkusfm/radio.mp3',
+                'url':'https://radio.estacionkusmedios.com/listen/esmerosound/radio.mp3',
                 'codec':'mp3',
                 'volume':100,
                 'autoplay':true,
@@ -51,38 +60,68 @@
             });
         </script>
         <!-- ENDS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
-        <!--<a id="play" class="btn btn-primary" role="button"><i class="fas fa-play controles"></i></a>
-        <a id="pause" class="btn btn-primary" role="button"><i class="fas fa-stop controles"></i></a>-->
     </div>
 </div>
-<!-- BEGINS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
-<!-- ENDS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
-<script language="javascript" type="text/javascript" src="https://stream5.mexiserver.com:2199/system/streaminfo.js"></script>
+
 <script language="javascript" type="text/javascript">
-    $(function(){
-        setInterval(function(){
-            $.ajax({
-                url: 'https://113.30.149.133/api/nowplaying/1',
-                headers: {
-                    'Authorization': 'Bearer 7de6e87ad5dbbc09:341818648257f97b124abc34057e267d'
-                },
-                success: function(data) {
-                    var name_dj = data.now_playing.song.artist;
-                    $("#name_dj").text(name_dj);
-                    $("#dj_avatar").attr("src","https://www.habbo.es/habbo-imaging/avatarimage?user="+name_dj+"&action=wav,drk=08&direction=2&head_direction=2&img_format=gif&gesture=sml&headonly=1");
-                    $("#dj_avatar").css('display','block');
-                }
-            });
-        }, 1000);
-    });
+    const API_NOWPLAYING_URL = 'https://radio.estacionkusmedios.com/api/nowplaying/esmerosound';
+
     function validarAvatar(){
         $("#dj_avatar").css('display','none');
         console.clear();
     }
+
+    $(function(){
+        function updateInfo() {
+            $.ajax({
+                url: API_NOWPLAYING_URL,
+                success: function(data) {
+                    const song = data.now_playing.song;
+                    const listeners = data.listeners.current;
+                    const live = data.live;
+
+                    // Song & artist
+                    $("#song_title").text(song.title ? song.title : "Desconocido");
+
+                    // Si hay DJ en vivo usamos el nombre y avatar Habbo del streamer
+                    if (live && live.is_live && live.streamer_name) {
+                        $("#name_dj").text(live.streamer_name);
+                        $("#dj_avatar").attr(
+                            "src",
+                            "https://www.habbo.es/habbo-imaging/avatarimage?user=" +
+                            encodeURIComponent(live.streamer_name) +
+                            "&action=wav,drk=08&direction=2&head_direction=2&img_format=gif&gesture=sml&headonly=1"
+                        ).css('display','block');
+                    } else {
+                        // No hay DJ en vivo: avatar Habbo de estacionkusfm
+                        $("#name_dj").text("AutoDJ");
+                        $("#dj_avatar").attr(
+                            "src",
+                            "https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&action=wav,drk=08&direction=2&head_direction=2&img_format=gif&gesture=sml&headonly=1"
+                        ).css('display','block');
+                    }
+
+                    // Listeners
+                    $("#listeners").text(listeners !== undefined ? listeners : "0");
+                },
+                error: function() {
+                    $("#song_title").text("Error al cargar");
+                    $("#name_dj").text("");
+                    $("#listeners").text("0");
+                    $("#dj_avatar").attr(
+                        "src",
+                        "https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&action=wav,drk=08&direction=2&head_direction=2&img_format=gif&gesture=sml&headonly=1"
+                    ).css('display','block');
+                }
+            });
+        }
+        updateInfo();
+        setInterval(updateInfo, 5000); // Actualiza cada 5 segundos
+    });
 </script>
-</body>
-<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-2.2.4.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="" crossorigin="anonymous"></script>
-<!--<script src="rep-zd.js"></script>-->
+<script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" crossorigin="anonymous"></script>
+</body>
 </html>
