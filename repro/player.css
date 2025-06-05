@@ -36,14 +36,15 @@ body {
     margin-bottom: 16px;
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     position: relative;
     background: none;
 }
 
 .dj-container {
     width: 120px;
-    height: 140px;
+    height: 120px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -59,7 +60,7 @@ body {
 #dj_avatar {
     position: absolute;
     left: 50%;
-    bottom: 64px; /* Sube el avatar para mostrar la cara */
+    bottom: 18px;
     transform: translateX(-50%);
     width: 90px;
     height: 90px;
@@ -70,17 +71,16 @@ body {
     filter: drop-shadow(0 2px 5px #fff9);
 }
 
+/* SET DJ FRENTE AL AVATAR, SIN TAPAR (ABAJO, SEPARADO) */
 .dj-set {
-    position: absolute;
-    left: 50%;
-    bottom: 38px;
-    transform: translateX(-50%);
+    position: static;
+    margin-top: 100px; /* Espacio debajo del avatar */
     width: 85px;
-    z-index: 2;
+    z-index: 0;
     pointer-events: none;
+    display: block;
 }
 
-/* EFECTOS DE VERANO */
 .summer-effect {
     position: absolute;
     left: 10px;
@@ -109,7 +109,6 @@ body {
     50% { filter: drop-shadow(0 0 24px #ffe600ff);}
 }
 
-/* TARJETAS DE METADATOS */
 .meta-cards {
     width: 100%;
     margin: 12px 0 0 0;
@@ -194,9 +193,9 @@ small a:hover {
 @media (max-width: 480px) {
     #reproductor { padding: 13px 2vw 10px 2vw; max-width: 99vw;}
     .cover { margin-bottom: 12px;}
-    .dj-container { width: 70px; height: 80px; }
-    #dj_avatar { width: 44px; height: 44px; bottom: 24px;}
-    .dj-set { width: 40px; bottom: 18px;}
+    .dj-container { width: 70px; height: 70px; }
+    #dj_avatar { width: 44px; height: 44px; bottom: 8px;}
+    .dj-set { width: 40px; margin-top: 55px;}
     .summer-effect { width: 18px; height: 18px; left: 2px; }
     .summer-sun { width: 20px; height: 20px; right: 1px; top: -8px; }
     .meta-cards { gap: 7px; }
