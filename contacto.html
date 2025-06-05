@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Contacto • estacionkusfm</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Contrail One', Arial, sans-serif; background: #f8e473; }
+    .container { max-width: 500px; margin-top: 60px; }
+    .card { border-radius: 14px; box-shadow: 0 2px 10px #ffe082; }
+    .card-title { color: #ff9800; }
+    .btn-main { background: #70e1f5; color: #ff9800; font-weight: bold; }
+    .btn-main:hover { background: #ffe082; color: #388e3c; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card p-4">
+      <h1 class="card-title text-center mb-4">Contacto</h1>
+      <form>
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" class="form-control" id="nombre" placeholder="Tu nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="correo">Correo electrónico</label>
+          <input type="email" class="form-control" id="correo" placeholder="tucorreo@ejemplo.com" required>
+        </div>
+        <div class="form-group">
+          <label for="mensaje">Mensaje</label>
+          <textarea class="form-control" id="mensaje" rows="3" placeholder="¿En qué podemos ayudarte?" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-main btn-block mt-3">Enviar</button>
+      </form>
+      <div class="text-center mt-4">
+        <a href="index.html" class="btn btn-link">Volver al inicio</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
