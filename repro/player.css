@@ -15,7 +15,6 @@ body {
     justify-content: center;
 }
 
-/* CONTENEDOR PRINCIPAL */
 #reproductor {
     background: rgba(35,0,70,0.92);
     border-radius: 18px;
@@ -33,7 +32,6 @@ body {
     letter-spacing: 1px;
 }
 
-/* CABECERA DEL AVATAR Y SET */
 .cover {
     margin-bottom: 16px;
     width: 100%;
@@ -43,7 +41,6 @@ body {
     background: none;
 }
 
-/* CAJA DEL AVATAR / SET */
 .dj-container {
     width: 120px;
     height: 140px;
@@ -58,14 +55,14 @@ body {
     overflow: visible;
 }
 
-/* AVATAR GRANDE Y CENTRADO */
+/* AVATAR GRANDE, SOLO CARA Y SALUDANDO */
 #dj_avatar {
     position: absolute;
     left: 50%;
-    bottom: 38px;
+    bottom: 64px; /* Sube el avatar para mostrar la cara */
     transform: translateX(-50%);
     width: 90px;
-    height: 110px;
+    height: 90px;
     object-fit: contain;
     z-index: 1;
     background: transparent;
@@ -73,11 +70,9 @@ body {
     filter: drop-shadow(0 2px 5px #fff9);
 }
 
-/* SET DJ ajustado hasta la "panza" del avatar */
 .dj-set {
     position: absolute;
     left: 50%;
-    /* Sube el set para cubrir panza, depende del avatar base, ajusta bottom según necesidad */
     bottom: 38px;
     transform: translateX(-50%);
     width: 85px;
@@ -166,7 +161,6 @@ body {
     display: block;
 }
 
-/* REPRODUCTOR RADIO */
 .area-play {
     margin-top: 19px;
     width: 100%;
@@ -182,7 +176,6 @@ body {
     padding: 0;
 }
 
-/* BOTONES Y EXTRAS - puedes personalizar más si lo deseas */
 small {
     width: 150px;
     text-align: center;
@@ -198,12 +191,11 @@ small a:hover {
     text-decoration: none;
 }
 
-/* RESPONSIVE */
 @media (max-width: 480px) {
     #reproductor { padding: 13px 2vw 10px 2vw; max-width: 99vw;}
     .cover { margin-bottom: 12px;}
     .dj-container { width: 70px; height: 80px; }
-    #dj_avatar { width: 44px; height: 56px; bottom: 8px;}
+    #dj_avatar { width: 44px; height: 44px; bottom: 24px;}
     .dj-set { width: 40px; bottom: 18px;}
     .summer-effect { width: 18px; height: 18px; left: 2px; }
     .summer-sun { width: 20px; height: 20px; right: 1px; top: -8px; }
