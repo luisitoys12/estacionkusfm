@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Reproductor</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="player.css">
 <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- FontAwesome para los íconos -->
+<script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" crossorigin="anonymous"></script>
 <style>
-/* Estilos del reproductor y su caja, ver player.css para el resto */
+/* Controles del player */
 .player-controls {
     display: flex;
     justify-content: center;
@@ -76,11 +75,13 @@
 <div id="reproductor">
     <div class="cover">
         <img src="https://cdn-icons-png.flaticon.com/512/619/619034.png" class="summer-effect" alt="Palmera verano"
-             style="filter: drop-shadow(0 1px 3px #0007)">
+             style="filter: drop-shadow(0 1px 3px #0007">
         <div class="dj-container">
+            <!-- AVATAR SALUDANDO SOLO CARA -->
             <img src="#" id="dj_avatar" onerror="validarAvatar()"/>
-            <img src="https://static.habbo-happy.net/img/furni/big/735778452353491.gif" class="dj-set" alt="Set DJ">
         </div>
+        <!-- SET DJ FUERA DEL CONTENEDOR, ABAJO DEL AVATAR -->
+        <img src="https://static.habbo-happy.net/img/furni/big/735778452353491.gif" class="dj-set" alt="Set DJ">
         <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" class="summer-sun" alt="Sol verano">
     </div>
     <div class="meta-cards">
@@ -132,132 +133,106 @@
     </div>
 </div>
 
-<script language="javascript" type="text/javascript">
-    const API_NOWPLAYING_URL = 'https://radio.estacionkusmedios.com/api/nowplaying/esmerosound';
+<script>
+const API_NOWPLAYING_URL = 'https://radio.estacionkusmedios.com/api/nowplaying/esmerosound';
 
-    function getHabboAvatarUrlByUser(username, {
-        gesture = "srp",
-        action = "wlk",
-        direction = 4,
-        head_direction = 2,
-        headonly = 0
-    } = {}) {
-        return "https://www.habbo.es/habbo-imaging/avatarimage"
-            + "?user=" + encodeURIComponent(username)
-            + "&gesture=" + gesture
-            + "&action=" + action
-            + "&direction=" + direction
-            + "&head_direction=" + head_direction
-            + "&headonly=" + headonly;
-    }
-
-    function validarAvatar(){
-        $("#dj_avatar").css('display','none');
-        console.clear();
-    }
-
-    $(function(){
-        function updateInfo() {
-            $.ajax({
-                url: API_NOWPLAYING_URL,
-                success: function(data) {
-                    const song = data.now_playing.song;
-                    const listeners = data.listeners.current;
-                    const live = data.live;
-                    $("#song_title").text(
-                        (song.artist ? song.artist : "Desconocido") + " - " + (song.title ? song.title : "Desconocido")
-                    );
-                    if (live && live.is_live && live.streamer_name) {
-                        $("#name_dj").text(live.streamer_name);
-                        $("#dj_avatar").attr(
-                            "src",
-                            getHabboAvatarUrlByUser(live.streamer_name, {
-                                gesture: "srp",
-                                action: "wlk",
-                                direction: 4,
-                                head_direction: 2,
-                                headonly: 0
-                            })
-                        ).css('display','block');
-                    } else {
-                        $("#name_dj").text("AutoDJ");
-                        $("#dj_avatar").attr(
-                            "src",
-                            getHabboAvatarUrlByUser("estacionkusfm", {
-                                gesture: "srp",
-                                action: "wlk",
-                                direction: 4,
-                                head_direction: 2,
-                                headonly: 0
-                            })
-                        ).css('display','block');
-                    }
-                    $("#listeners").text(listeners !== undefined ? listeners : "0");
-                },
-                error: function() {
-                    $("#song_title").text("Error al cargar");
-                    $("#name_dj").text("");
-                    $("#listeners").text("0");
+// FUNCIÓN PARA OBTENER SOLO LA CABEZA Y SALUDO DEL AVATAR
+function getHabboAvatarUrlByUser(username, {
+    gesture = "wav",
+    action = "std",
+    direction = 2,
+    head_direction = 2,
+    headonly = 1
+} = {}) {
+    return "https://www.habbo.es/habbo-imaging/avatarimage"
+        + "?user=" + encodeURIComponent(username)
+        + "&gesture=" + gesture
+        + "&action=" + action
+        + "&direction=" + direction
+        + "&head_direction=" + head_direction
+        + "&headonly=" + headonly;
+}
+function validarAvatar(){
+    $("#dj_avatar").css('display','none');
+    console.clear();
+}
+$(function(){
+    function updateInfo() {
+        $.ajax({
+            url: API_NOWPLAYING_URL,
+            success: function(data) {
+                const song = data.now_playing.song;
+                const listeners = data.listeners.current;
+                const live = data.live;
+                $("#song_title").text(
+                    (song.artist ? song.artist : "Desconocido") + " - " + (song.title ? song.title : "Desconocido")
+                );
+                if (live && live.is_live && live.streamer_name) {
+                    $("#name_dj").text(live.streamer_name);
                     $("#dj_avatar").attr(
                         "src",
-                        getHabboAvatarUrlByUser("estacionkusfm", {
-                            gesture: "srp",
-                            action: "wlk",
-                            direction: 4,
-                            head_direction: 2,
-                            headonly: 0
-                        })
+                        getHabboAvatarUrlByUser(live.streamer_name)
+                    ).css('display','block');
+                } else {
+                    $("#name_dj").text("AutoDJ");
+                    $("#dj_avatar").attr(
+                        "src",
+                        getHabboAvatarUrlByUser("estacionkusfm")
                     ).css('display','block');
                 }
-            });
-        }
-        updateInfo();
-        setInterval(updateInfo, 5000); // Actualiza cada 5 segundos
-    });
-
-    // PLAYER CONTROLS
-    $(function() {
-        const audio = document.getElementById('custom-player');
-        const btnPlay = document.getElementById('btn-play');
-        const btnPause = document.getElementById('btn-pause');
-        const btnReload = document.getElementById('btn-reload');
-        const slider = document.getElementById('volume-slider');
-
-        btnPlay.onclick = function() {
-            audio.play();
-        };
-        btnPause.onclick = function() {
-            audio.pause();
-        };
-        btnReload.onclick = function() {
-            audio.pause();
-            // Forzar recarga de stream
-            audio.src = audio.src.split('?')[0] + '?t=' + new Date().getTime();
-            audio.load();
-            audio.play();
-        };
-        slider.oninput = function() {
-            audio.volume = slider.value / 100;
-        };
-        // Estado de botones dependiendo de si está playing o no
-        function updateBtnState() {
-            if (audio.paused) {
-                btnPlay.disabled = false;
-                btnPause.disabled = true;
-            } else {
-                btnPlay.disabled = true;
-                btnPause.disabled = false;
+                $("#listeners").text(listeners !== undefined ? listeners : "0");
+            },
+            error: function() {
+                $("#song_title").text("Error al cargar");
+                $("#name_dj").text("");
+                $("#listeners").text("0");
+                $("#dj_avatar").attr(
+                    "src",
+                    getHabboAvatarUrlByUser("estacionkusfm")
+                ).css('display','block');
             }
+        });
+    }
+    updateInfo();
+    setInterval(updateInfo, 5000); // Actualiza cada 5 segundos
+});
+
+$(function() {
+    const audio = document.getElementById('custom-player');
+    const btnPlay = document.getElementById('btn-play');
+    const btnPause = document.getElementById('btn-pause');
+    const btnReload = document.getElementById('btn-reload');
+    const slider = document.getElementById('volume-slider');
+
+    btnPlay.onclick = function() {
+        audio.play();
+    };
+    btnPause.onclick = function() {
+        audio.pause();
+    };
+    btnReload.onclick = function() {
+        audio.pause();
+        audio.src = audio.src.split('?')[0] + '?t=' + new Date().getTime();
+        audio.load();
+        audio.play();
+    };
+    slider.oninput = function() {
+        audio.volume = slider.value / 100;
+    };
+    function updateBtnState() {
+        if (audio.paused) {
+            btnPlay.disabled = false;
+            btnPause.disabled = true;
+        } else {
+            btnPlay.disabled = true;
+            btnPause.disabled = false;
         }
-        audio.addEventListener('play', updateBtnState);
-        audio.addEventListener('pause', updateBtnState);
-        audio.addEventListener('ended', updateBtnState);
-        // Inicial
-        updateBtnState();
-    });
+    }
+    audio.addEventListener('play', updateBtnState);
+    audio.addEventListener('pause', updateBtnState);
+    audio.addEventListener('ended', updateBtnState);
+    updateBtnState();
+});
 </script>
-<script src="https://code.jquery.com/jquery-2.2.4.js" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" crossorigin="anonymous"></script>
 </body>
 </html>
