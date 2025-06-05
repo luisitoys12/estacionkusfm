@@ -63,6 +63,37 @@
       font-size: 1rem;
       color: #00cfff;
     }
+    .mini-player-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 7px;
+    }
+    .mini-btn {
+      background: #70e1f5;
+      color: #ff9800;
+      border: none;
+      border-radius: 6px;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.18rem;
+      box-shadow: 0 1px 5px #ffd60066;
+      cursor: pointer;
+      transition: background 0.2s;
+      outline: none;
+    }
+    .mini-btn:active,
+    .mini-btn:focus {
+      background: #ffe082;
+      color: #388e3c;
+    }
+    .mini-btn[disabled] {
+      opacity: 0.55;
+      pointer-events: none;
+    }
     .avatar-generator-title {
       font-size: 1.4rem;
       color: #ff9800;
@@ -74,6 +105,9 @@
     }
     @media (max-width: 550px) {
       .container-main { max-width: 99vw; }
+      .mini-player { padding: 13px 5px; }
+      .mini-player-avatar { width: 46px; height: 46px; }
+      .mini-btn { width: 28px; height: 28px; font-size: 1rem;}
     }
   </style>
 </head>
@@ -88,6 +122,15 @@
       <div class="mini-player-info">
         <div class="mini-player-dj" id="mini-dj-name">estacionkusfm</div>
         <div class="mini-player-oyentes"><i class="fas fa-user-friends"></i> <span id="mini-dj-listeners">0</span> oyentes</div>
+        <div class="mini-player-controls">
+          <button class="mini-btn" id="mini-btn-reload" title="Recargar"><i class="fas fa-undo"></i></button>
+          <button class="mini-btn" id="mini-btn-play" title="Reproducir"><i class="fas fa-play"></i></button>
+          <button class="mini-btn" id="mini-btn-pause" title="Pausar"><i class="fas fa-pause"></i></button>
+        </div>
+        <audio id="mini-audio" preload="none">
+          <source src="https://radio.estacionkusmedios.com/listen/esmerosound/radio.mp3" type="audio/mpeg">
+          Tu navegador no soporta audio HTML5.
+        </audio>
       </div>
     </div>
 
@@ -106,6 +149,7 @@
   <!-- Scripts para el mini player -->
   <script src="https://kit.fontawesome.com/df2a1fbcf1.js" crossorigin="anonymous"></script>
   <script>
+    // Actualiza info DJ y oyentes
     function updateMiniPlayer() {
       fetch('https://radio.estacionkusmedios.com/api/nowplaying/esmerosound')
         .then(res => res.json())
@@ -126,6 +170,39 @@
     }
     setInterval(updateMiniPlayer, 5000);
     updateMiniPlayer();
+
+    // Mini player controles audio
+    const audio = document.getElementById('mini-audio');
+    const btnPlay = document.getElementById('mini-btn-play');
+    const btnPause = document.getElementById('mini-btn-pause');
+    const btnReload = document.getElementById('mini-btn-reload');
+
+    btnPlay.onclick = function() {
+      audio.play();
+    };
+    btnPause.onclick = function() {
+      audio.pause();
+    };
+    btnReload.onclick = function() {
+      audio.pause();
+      audio.src = audio.src.split('?')[0] + '?t=' + new Date().getTime();
+      audio.load();
+      audio.play();
+    };
+
+    function updateBtnState() {
+      if (audio.paused) {
+        btnPlay.disabled = false;
+        btnPause.disabled = true;
+      } else {
+        btnPlay.disabled = true;
+        btnPause.disabled = false;
+      }
+    }
+    audio.addEventListener('play', updateBtnState);
+    audio.addEventListener('pause', updateBtnState);
+    audio.addEventListener('ended', updateBtnState);
+    updateBtnState();
   </script>
 </body>
 </html>
