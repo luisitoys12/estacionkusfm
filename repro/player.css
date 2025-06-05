@@ -32,74 +32,36 @@ body {
     letter-spacing: 1px;
 }
 
-.cover {
-    margin-bottom: 16px;
-    width: 100%;
+/* Avatar solo */
+.avatar-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
-    background: none;
-}
-
-.dj-container {
-    width: 120px;
-    height: 120px;
-    position: relative;
-    display: flex;
     justify-content: center;
-    align-items: flex-end;
-    background: #171a23;
-    border-radius: 14px;
-    box-shadow: 0 4px 16px #0005;
-    padding: 8px 0 0 0;
-    overflow: visible;
+    margin-bottom: 18px;
 }
 
-/* AVATAR GRANDE, SOLO CARA Y SALUDANDO */
 #dj_avatar {
-    position: absolute;
-    left: 50%;
-    bottom: 18px;
-    transform: translateX(-50%);
-    width: 90px;
-    height: 90px;
-    object-fit: contain;
-    z-index: 1;
-    background: transparent;
     display: block;
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #171a23;
+    box-shadow: 0 2px 14px #0005, 0 0 0 4px #fff2;
     filter: drop-shadow(0 2px 5px #fff9);
+    border: 3px solid #fff2;
+    position: relative;
+    z-index: 1;
 }
 
-
-.summer-effect {
-    position: absolute;
-    left: 10px;
-    bottom: 0;
-    width: 32px;
-    height: 32px;
-    z-index: 10;
-    animation: floatPalm 3.5s ease-in-out infinite;
-}
-.summer-sun {
-    position: absolute;
-    right: 6px;
-    top: -8px;
-    width: 32px;
-    height: 32px;
-    z-index: 10;
-    animation: sunGlow 2.7s ease-in-out infinite;
-    filter: drop-shadow(0 0 12px #ffe600cc);
-}
-@keyframes floatPalm {
-    0%, 100% { transform: translateY(0) rotate(-5deg);}
-    50% { transform: translateY(-8px) rotate(6deg);}
-}
-@keyframes sunGlow {
-    0%, 100% { filter: drop-shadow(0 0 12px #ffe600cc);}
-    50% { filter: drop-shadow(0 0 24px #ffe600ff);}
+/* Efectos decorativos opcionales (puedes quitar si quieres más limpio) */
+.summer-effect, .summer-sun {
+    display: none;
 }
 
+/* Meta info y reproductor */
 .meta-cards {
     width: 100%;
     margin: 12px 0 0 0;
@@ -181,14 +143,11 @@ small a:hover {
     text-decoration: none;
 }
 
+/* Responsive para móvil */
 @media (max-width: 480px) {
     #reproductor { padding: 13px 2vw 10px 2vw; max-width: 99vw;}
-    .cover { margin-bottom: 12px;}
-    .dj-container { width: 70px; height: 70px; }
-    #dj_avatar { width: 44px; height: 44px; bottom: 8px;}
-    .dj-set { width: 40px; margin-top: 55px;}
-    .summer-effect { width: 18px; height: 18px; left: 2px; }
-    .summer-sun { width: 20px; height: 20px; right: 1px; top: -8px; }
+    .avatar-container { margin-bottom: 10px; }
+    #dj_avatar { width: 54px; height: 54px; }
     .meta-cards { gap: 7px; }
     .meta-card { padding: 8px 8px 7px 8px; min-height: 32px;}
     .meta-info { font-size: 0.95rem;}
