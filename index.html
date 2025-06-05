@@ -74,6 +74,34 @@
         margin-top: 30px;
       }
     }
+    .fansite-btns-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .peticion-btn, .destacados-btn, .vacantes-btn {
+      background: #70e1f5;
+      color: #ff9800;
+      border-radius: 8px;
+      padding: 7px 22px;
+      font-size: 1.12rem;
+      font-family: 'Contrail One', Arial, sans-serif;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: background .2s;
+      box-shadow: 0 1px 7px #ffd600;
+      text-shadow: 0 1px 7px #fff2;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .peticion-btn:hover, .destacados-btn:hover, .vacantes-btn:hover {
+      background: #ffe082;
+      color: #388e3c;
+    }
     .equipo-titulo {
       color: #ff9800;
       font-family: 'Contrail One', Arial, sans-serif;
@@ -160,6 +188,30 @@
       font-size: 1.18rem;
       margin-right: 3px;
     }
+    .fansite-disclaimer {
+      font-size: 0.98rem;
+      color: #d2d2d2;
+      margin: 20px auto 12px auto;
+      padding: 16px 8px 8px 8px;
+      max-width: 780px;
+      background: rgba(0,0,0,0.67);
+      border-radius: 12px;
+      text-align: left;
+      border: 2px solid #ffdf2a33;
+      position: relative;
+      min-height: 90px;
+    }
+    .fansite-disclaimer .summer-badge {
+      position: absolute;
+      right: 12px;
+      top: 12px;
+      width: 60px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #f8e473;
+      border: 2px solid #70e1f5;
+      background: #fff;
+    }
   </style>
 </head>
 <body>
@@ -216,6 +268,11 @@
           <div class="sidebar-section" style="background:rgba(255,255,255,0.96)">
             <span class="sidebar-title">Radio en vivo</span>
             <iframe src="repro/index.html" title="Reproductor KusFM" class="w-100" height="395" style="border-radius:16px; border:none; background:#fff;" allow="autoplay"></iframe>
+            <div class="fansite-btns-row mt-2">
+              <button class="peticion-btn" onclick="document.getElementById('peticion-popup-bg').style.display='flex'">🌊 Peticiones</button>
+              <button class="destacados-btn" onclick="document.getElementById('destacados-popup-bg').style.display='flex'">🌞 Destacados</button>
+              <button class="vacantes-btn" onclick="document.getElementById('vacantes-popup-bg').style.display='flex'">🏄 Vacantes</button>
+            </div>
           </div>
         </section>
         <!-- Noticias / Comunidad -->
@@ -245,6 +302,14 @@
             </div>
           </div>
         </section>
+        <!-- Disclaimer -->
+        <div class="fansite-disclaimer">
+          <strong>Hecho con <span class="fansite-love">♥</span> por <b>@estacionkusfm</b></strong><br>
+          Se respeta la manera Habbo. Todos los derechos reservados.<br>
+          <b>estacionkusfm</b> no está afiliada a, respaldada, promocionada o aprobada específicamente por Sulake Corporation Oy o sus Afiliados.
+          <img src="https://habsite.es/wp-content/uploads/2025/03/fansite_badge.gif" alt="Fansite Badge" class="summer-badge">
+          <br>De acuerdo a la Política de Webs fans de Habbo, esta radio puede utilizar las marcas comerciales y otras propiedades intelectuales de Habbo.
+        </div>
       </div>
 
       <!-- Sidebar derecho -->
@@ -264,6 +329,18 @@
     &copy; 2025 estacionkusfm • Fansite Habbo no oficial · Hecho con <span style="color:#ff9800;">♥</span> para la comunidad<br>
     Versión 1.0.0
   </div>
+
+  <!-- Popups (debes tener el HTML de los popups en tu archivo, o incluirlos aquí) -->
+  <div class="vacantes-popup-bg" id="vacantes-popup-bg" onclick="if(event.target==this)this.style.display='none'">
+    <!-- ...contenido igual... -->
+  </div>
+  <div class="vacantes-popup-bg" id="peticion-popup-bg" onclick="if(event.target==this)this.style.display='none'">
+    <!-- ...contenido igual... -->
+  </div>
+  <div class="vacantes-popup-bg" id="destacados-popup-bg" onclick="if(event.target==this)this.style.display='none'">
+    <!-- ...contenido igual... -->
+  </div>
+
   <!-- Scripts Bootstrap y reloj -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
