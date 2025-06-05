@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="fansite.css">
   <style>
+    /* ...ESTILOS TUYOS Y MEJORAS... */
     body {
       background-image: url('https://habbo.com/habbo-imaging/badge/big/ADM');
       background-color: #1b1b1b;
@@ -61,19 +61,20 @@
       background: rgba(20,20,20,0.92);
       box-shadow: 0 4px 24px 0 #0008;
       border-radius: 16px;
-      padding: 24px 18px 16px 18px;
-      width: 95%;
+      padding: 12px 10px 10px 10px;
+      width: auto;
       max-width: 470px;
       margin-bottom: 20px;
       text-align: center;
       color: #fff;
       border: 2px solid #ffdf2a33;
       position: relative;
+      display: inline-block;
     }
     .fansite-card h2 {
       color: #ffdf2a;
-      margin-bottom: 16px;
-      font-size: 1.3rem;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
       font-family: 'Contrail One', Arial, sans-serif;
       letter-spacing: 1px;
       text-shadow: 0px 2px 12px #0004;
@@ -83,7 +84,7 @@
       color: #1b1b1b;
       font-family: 'Contrail One', Arial, sans-serif;
       font-size: 1rem;
-      margin: 10px 2px 18px 2px;
+      margin: 7px 2px 12px 2px;
       border-radius: 6px;
       padding: 5px 13px;
       font-weight: 600;
@@ -101,13 +102,48 @@
       box-shadow: 0 8px 32px 0 #0009;
       border: 2px solid #ffdf2a44;
       background: #111a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: auto;
+      height: auto;
     }
     .fansite-iframe {
       width: 100%;
-      height: 395px;
+      min-width: 260px;
+      max-width: 350px;
+      height: 400px;
       border: none;
       background: transparent;
       display: block;
+    }
+    .fansite-btns-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .peticion-btn, .destacados-btn, .vacantes-btn {
+      background: #00dcff;
+      color: #1b1b1b;
+      border-radius: 8px;
+      padding: 7px 22px;
+      font-size: 1.12rem;
+      font-family: 'Contrail One', Arial, sans-serif;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: background .2s;
+      box-shadow: 0 1px 7px #0004;
+      text-shadow: 0 1px 7px #fff2;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .peticion-btn:hover, .destacados-btn:hover, .vacantes-btn:hover {
+      background: #ffdf2a;
+      color: #242e4c;
     }
     .fansite-section {
       margin: 16px auto 22px auto;
@@ -205,6 +241,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
+      position: relative;
     }
     .equipo-miembro img {
       width: 48px;
@@ -220,6 +257,13 @@
       margin-top: 2px;
       color: #ffdf2a;
       font-family: 'Contrail One', Arial, sans-serif;
+    }
+    .equipo-status {
+      position: absolute;
+      top: 6px;
+      right: 13px;
+      font-size: 1.3rem;
+      pointer-events: none;
     }
     .equipo-miembro.vacio {
       background: #1b1b1b77;
@@ -267,18 +311,147 @@
       text-align: center;
       border: 2px solid #ffdf2a33;
     }
+    .fansite-alianzas {
+      margin: 24px auto 22px auto;
+      width: 98%;
+      max-width: 700px;
+      background: rgba(15,25,40,0.89);
+      color: #fff;
+      border-radius: 16px;
+      padding: 18px 12px 15px 12px;
+      border: 2px solid #00dcffbb;
+      box-shadow: 0 2px 18px #0007;
+      font-size: 0.98rem;
+      text-align: center;
+    }
+    .alianzas-lista {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 13px 17px;
+      margin-top: 13px;
+      margin-bottom: 6px;
+    }
+    .alianza-room {
+      background: #242e4c;
+      color: #ffdf2a;
+      border-radius: 8px;
+      padding: 7px 16px;
+      font-weight: 700;
+      font-family: 'Contrail One', Arial, sans-serif;
+      box-shadow: 0 2px 8px #0004;
+      display: inline-block;
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .alianza-room:hover {
+      background: #2b3b70;
+      color: #00dcff;
+      text-decoration: underline;
+    }
+    /* Popup común */
+    .vacantes-popup-bg {
+      display: none;
+      position: fixed;
+      z-index: 10000;
+      left: 0; top: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.58);
+      justify-content: center;
+      align-items: center;
+    }
+    .vacantes-popup {
+      background: #232b3b;
+      color: #fff;
+      padding: 28px 20px 18px 20px;
+      border-radius: 14px;
+      box-shadow: 0 2px 24px #0009;
+      max-width: 360px;
+      width: 97vw;
+      position: relative;
+    }
+    .vacantes-popup h3 {
+      font-family: 'Contrail One', Arial, sans-serif;
+      font-size: 1.3rem;
+      color: #ffdf2a;
+      margin-bottom: 17px;
+      text-align: center;
+    }
+    .vacantes-popup .close-btn {
+      position: absolute;
+      right: 12px;
+      top: 10px;
+      font-size: 1.7rem;
+      color: #00dcff;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-weight: bold;
+    }
+    .vacantes-popup form label {
+      font-size: 1rem;
+      color: #ffdf2a;
+      margin-bottom: 4px;
+      margin-top: 7px;
+      display: block;
+    }
+    .vacantes-popup form input,
+    .vacantes-popup form select {
+      width: 100%;
+      padding: 4px 8px;
+      border: 1px solid #00dcff77;
+      border-radius: 6px;
+      margin-bottom: 9px;
+      background: #151a22;
+      color: #fff;
+      font-size: 1rem;
+    }
+    .vacantes-popup textarea {
+      width: 100%;
+      background:#151a22;
+      color:#fff;
+      border-radius:6px;
+      border:1px solid #00dcff77;
+      margin-bottom:9px;
+      padding:4px 8px;
+      resize:vertical;
+      min-height:60px;
+      font-size:1rem;
+    }
+    .vacantes-popup .extra-sala {
+      margin-bottom: 10px;
+      display: none;
+    }
+    .vacantes-popup .submit-btn {
+      background: #00dcff;
+      color: #1b1b1b;
+      border: none;
+      border-radius: 7px;
+      padding: 7px 20px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      width: 100%;
+      margin-top: 5px;
+      transition: background .2s;
+    }
+    .vacantes-popup .submit-btn:hover {
+      background: #ffdf2a;
+      color: #242e4c;
+    }
     @media (max-width: 600px) {
       .fansite-header { padding: 15px 0 12px 0; }
       .fansite-title { font-size: 1.6rem; }
       .fansite-main { margin-top: 15px; }
-      .fansite-card { padding: 11px 5px 8px 5px; max-width: 99vw;}
-      .fansite-iframe-container { max-width: 98vw;}
+      .fansite-card { padding: 7px 2px 5px 2px; max-width: 99vw;}
+      .fansite-iframe-container { max-width: 99vw;}
       .fansite-iframe { height: 335px;}
-      .fansite-section, .fansite-habbo-api-section, .fansite-equipo-container { max-width: 99vw; padding: 12px 2px 7px 2px;}
+      .fansite-section, .fansite-habbo-api-section, .fansite-equipo-container, .fansite-alianzas { max-width: 99vw; padding: 12px 2px 7px 2px;}
       .fansite-disclaimer { font-size: 0.92rem; }
       .equipo-miembro { min-width: 85px; }
       .equipo-miembro img { width: 35px; height: 40px; }
       .equipo-miembro.vacio { min-width: 65px; min-height: 75px; }
+      .vacantes-popup { padding: 14px 3vw 10px 3vw; }
+      .fansite-btns-row { flex-direction: column; gap: 6px; }
     }
   </style>
 </head>
@@ -303,6 +476,11 @@
       <div class="fansite-iframe-container">
         <iframe src="repro/index.html" title="Reproductor KusFM" class="fansite-iframe" allow="autoplay"></iframe>
       </div>
+      <div class="fansite-btns-row">
+        <button class="peticion-btn" onclick="document.getElementById('peticion-popup-bg').style.display='flex'">✉️ Peticiones</button>
+        <button class="destacados-btn" onclick="document.getElementById('destacados-popup-bg').style.display='flex'">🏆 Destacados</button>
+        <button class="vacantes-btn" onclick="document.getElementById('vacantes-popup-bg').style.display='flex'">Vacantes</button>
+      </div>
     </div>
 
     <div class="fansite-habbo-api-section">
@@ -313,6 +491,15 @@
       <div class="api-furnis" id="api-furnis"></div>
     </div>
 
+    <div class="fansite-alianzas">
+      <span class="fansite-section-title">Alianzas</span>
+      <div class="alianzas-lista" id="alianzas-lista">
+        <a class="alianza-room" href="https://www.habbo.es/room/12345678" target="_blank">Agencia HabboSegura</a>
+        <a class="alianza-room" href="https://www.habbo.es/room/23456789" target="_blank">Imperio Real</a>
+        <a class="alianza-room" href="https://www.habbo.es/room/34567890" target="_blank">Osio Club</a>
+      </div>
+    </div>
+
     <div class="fansite-equipo-container">
       <div class="equipo-group">
         <span class="equipo-title">Equipo Fundador</span>
@@ -321,6 +508,10 @@
       <div class="equipo-group">
         <span class="equipo-title">Administradores</span>
         <div class="equipo-miembros" id="admins"></div>
+      </div>
+      <div class="equipo-group">
+        <span class="equipo-title">Ayudantes</span>
+        <div class="equipo-miembros" id="ayudantes"></div>
       </div>
       <div class="equipo-group">
         <span class="equipo-title">Locutores</span>
@@ -337,12 +528,111 @@
     </div>
   </main>
 
+  <!-- Popup Vacantes -->
+  <div class="vacantes-popup-bg" id="vacantes-popup-bg" onclick="if(event.target==this)this.style.display='none'">
+    <div class="vacantes-popup">
+      <button class="close-btn" onclick="document.getElementById('vacantes-popup-bg').style.display='none'">&times;</button>
+      <h3>Formulario de Vacantes</h3>
+      <form id="vacantes-form" autocomplete="off" enctype="multipart/form-data">
+        <label for="nick">Nick Habbo</label>
+        <input type="text" id="nick" name="nick" required placeholder="Tu nick en Habbo">
+        <label for="discord">Discord</label>
+        <input type="text" id="discord" name="discord" required placeholder="Tu usuario de Discord">
+        <label for="cargo">Cargo</label>
+        <select id="cargo" name="cargo" required>
+          <option value="">Selecciona...</option>
+          <option value="Locutor">Locutor</option>
+          <option value="Guía">Guía</option>
+          <option value="Publicista">Publicista</option>
+          <option value="Aliado">Aliado</option>
+        </select>
+        <div class="extra-sala" id="extra-sala">
+          <label for="tipo-sala">¿Tipo de sala?</label>
+          <select id="tipo-sala" name="tipo-sala">
+            <option value="">Selecciona...</option>
+            <option value="Agencia">Agencia</option>
+            <option value="Imperio">Imperio</option>
+            <option value="Osio">Osio</option>
+            <option value="Posible Alianza">Posible Alianza</option>
+          </select>
+          <label for="nombre-sala">Nombre de la sala</label>
+          <input type="text" id="nombre-sala" name="nombre-sala" placeholder="Ej: Agencia HabboSegura">
+          <label for="link-sala">Link de la sala</label>
+          <input type="url" id="link-sala" name="link-sala" placeholder="https://www.habbo.es/room/12345678">
+        </div>
+        <label for="descripcion">Cuéntanos tu experiencia en fansites, radios y por qué te gustaría el cargo:</label>
+        <textarea id="descripcion" name="descripcion" rows="3" required
+          placeholder="Ej: He sido locutor en RadioX, guía en FansiteY, uso VirtualDJ/SAM Broadcaster..."></textarea>
+        <div id="extra-captura-locutor" style="display:none">
+          <label>Sube una captura de VirtualDJ o SAM Broadcaster abierto:</label>
+          <input type="file" id="captura-locutor" name="captura-locutor" accept="image/*" required>
+        </div>
+        <div id="extra-captura-guia" style="display:none">
+          <label>Sube una captura de tu sala en Habbo:</label>
+          <input type="file" id="captura-guia" name="captura-guia" accept="image/*" required>
+        </div>
+        <button type="submit" class="submit-btn">Enviar</button>
+      </form>
+      <div id="vacantes-ok" style="display:none;padding:10px 0 0 0;color:#00dcff;text-align:center;">¡Solicitud enviada!</div>
+    </div>
+  </div>
+
+  <!-- Popup Peticiones -->
+  <div class="vacantes-popup-bg" id="peticion-popup-bg" onclick="if(event.target==this)this.style.display='none'">
+    <div class="vacantes-popup">
+      <button class="close-btn" onclick="document.getElementById('peticion-popup-bg').style.display='none'">&times;</button>
+      <h3>Haz tu petición</h3>
+      <form id="peticion-form" autocomplete="off">
+        <label for="pet-nick">Nick Habbo</label>
+        <input type="text" id="pet-nick" name="pet-nick" required>
+        <label for="tipo-peticion">Tipo de petición</label>
+        <select id="tipo-peticion" name="tipo-peticion" required>
+          <option value="">Selecciona...</option>
+          <option value="cancion">Canción</option>
+          <option value="saludo">Saludo</option>
+          <option value="grito">Grito</option>
+        </select>
+        <div id="campo-cancion" style="display:none">
+          <label for="cancion">Canción y artista</label>
+          <input type="text" id="cancion" name="cancion" placeholder="Ej: Shakira - Hips Don't Lie">
+        </div>
+        <div id="campo-mensaje" style="display:none">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="2"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Enviar</button>
+      </form>
+      <div id="peticion-ok" style="display:none;padding:10px 0 0 0;color:#00dcff;text-align:center;">¡Petición enviada!</div>
+    </div>
+  </div>
+
+  <!-- Popup Destacados -->
+  <div class="vacantes-popup-bg" id="destacados-popup-bg" onclick="if(event.target==this)this.style.display='none'">
+    <div class="vacantes-popup">
+      <button class="close-btn" onclick="document.getElementById('destacados-popup-bg').style.display='none'">&times;</button>
+      <h3>Destacados del Equipo</h3>
+      <div>
+        <div class="equipo-miembro" style="margin:10px auto;">
+          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=sml&direction=2&head_direction=2&headonly=0">
+          <span>Locutor del mes: <b>estacionkusfm</b></span>
+          <small style="color:#00dcff;">Por su gran dedicación y actitud en vivo</small>
+        </div>
+        <div class="equipo-miembro" style="margin:10px auto;">
+          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=ser03z-51&gesture=sml&direction=2&head_direction=2&headonly=0">
+          <span>Ayudante estrella: <b>ser03z-51</b></span>
+          <small style="color:#00dcff;">Ayuda y paciencia con los usuarios</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="fansite-footer">
-    &copy; 2025 estacionkusfm • Fansite Habbo no oficial · Hecho con <span style="color:#ffdf2a;">♥</span> para la comunidad
+    &copy; 2025 estacionkusfm • Fansite Habbo no oficial · Hecho con <span style="color:#ffdf2a;">♥</span> para la comunidad<br>
+    Versión 1.0.0
   </div>
 
   <script>
-    // Ejemplo: Carga placas recientes (estático)
+    // Últimas placas (estático)
     const exampleBadges = [
       "ES620", "ES621", "ES622", "ES623", "ES624", "ES625"
     ];
@@ -354,25 +644,36 @@
       badgeContainer.appendChild(img);
     });
 
-    // Ejemplo: Últimos furnis añadidos (estático)
-    const exampleFurnis = [
-      "shelf_norja", "bsc_diner_bardesk", "a0_prizetrophy7", "ads_lux_chair", "party_balloons", "summer_c17_sandcastle"
-    ];
-    const furniContainer = document.getElementById('api-furnis');
-    exampleFurnis.forEach(furni => {
-      const img = document.createElement('img');
-      img.src = `https://images.habbo.com/dcr/hof_furni/${furni}_icon.png`;
-      img.alt = furni;
-      furniContainer.appendChild(img);
-    });
+    // Últimos furnis usando HabboEmotion API
+    fetch('https://habboemotion.com/api/furni/latest')
+      .then(res => res.json())
+      .then(furnis => {
+        const furniContainer = document.getElementById('api-furnis');
+        furniContainer.innerHTML = '';
+        furnis.slice(0, 12).forEach(furni => {
+          const img = document.createElement('img');
+          img.src = furni.image_large;
+          img.alt = furni.name;
+          img.title = furni.name;
+          furniContainer.appendChild(img);
+        });
+      });
+
+    // Demo estado on/off de miembros (simulado, reemplaza por API real si tienes login)
+    const onlineUsers = {
+      "estacionkusfm": true,
+      "ser03z-51": false,
+      "ayente": true
+    };
 
     // Equipo
     const fundadores = [
       {user: "estacionkusfm", nombre: "estacionkusfm"},
       {user: "ser03z-51", nombre: "ser03z-51"}
     ];
-    const admins = [
-      // 2 espacios vacíos + 6 huecos
+    const admins = [];
+    const ayudantes = [
+      {user: "ayente", nombre: "ayente"}
     ];
     const locutores = [
       {user: "ser03z-51", nombre: "ser03z-51"}
@@ -382,15 +683,22 @@
 
     function renderEquipo(arr, id, total=6) {
       const cont = document.getElementById(id);
-      // Añade miembros reales
+      cont.innerHTML = '';
       arr.forEach(miembro => {
         const div = document.createElement('div');
         div.className = "equipo-miembro";
-        div.innerHTML = `<img src="https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(miembro.user)}&gesture=sml&direction=2&head_direction=2&headonly=0" alt="${miembro.nombre}">
-        <span>${miembro.nombre}</span>`;
+        let estado = '';
+        if(typeof onlineUsers[miembro.user] !== "undefined") {
+          estado = onlineUsers[miembro.user]
+            ? `<span class="equipo-status" title="Online">🔵</span>`
+            : `<span class="equipo-status" title="Offline">🔴</span>`;
+        }
+        div.innerHTML = `
+          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(miembro.user)}&gesture=sml&direction=2&head_direction=2&headonly=0" alt="${miembro.nombre}">
+          ${estado}
+          <span>${miembro.nombre}</span>`;
         cont.appendChild(div);
       });
-      // Añade huecos vacíos
       for(let i=arr.length; i<total; i++) {
         const empty = document.createElement('div');
         empty.className = "equipo-miembro vacio";
@@ -399,9 +707,49 @@
     }
     renderEquipo(fundadores, "fundadores", 6);
     renderEquipo(admins, "admins", 6);
+    renderEquipo(ayudantes, "ayudantes", 6);
     renderEquipo(locutores, "locutores", 6);
     renderEquipo(guias, "guias", 6);
     renderEquipo(publicistas, "publicistas", 6);
+
+    // Popup Vacantes interacciones
+    document.getElementById('cargo').addEventListener('change', function() {
+      const valor = this.value;
+      document.getElementById('extra-sala').style.display = valor === "Aliado" ? "block" : "none";
+      document.getElementById('extra-captura-locutor').style.display = valor === "Locutor" ? "block" : "none";
+      document.getElementById('extra-captura-guia').style.display = valor === "Guía" ? "block" : "none";
+      if(valor !== "Locutor") document.getElementById('captura-locutor').value = "";
+      if(valor !== "Guía") document.getElementById('captura-guia').value = "";
+    });
+    document.getElementById('vacantes-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      document.getElementById('vacantes-ok').style.display = "block";
+      setTimeout(() => {
+        document.getElementById('vacantes-popup-bg').style.display = "none";
+        document.getElementById('vacantes-ok').style.display = "none";
+        this.reset();
+        document.getElementById('extra-sala').style.display = "none";
+        document.getElementById('extra-captura-locutor').style.display = "none";
+        document.getElementById('extra-captura-guia').style.display = "none";
+      }, 1400);
+    });
+
+    // Popup peticiones interacciones
+    document.getElementById('tipo-peticion').addEventListener('change', function() {
+      document.getElementById('campo-cancion').style.display = this.value === "cancion" ? "block" : "none";
+      document.getElementById('campo-mensaje').style.display = (this.value === "saludo" || this.value === "grito") ? "block" : "none";
+    });
+    document.getElementById('peticion-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      document.getElementById('peticion-ok').style.display = "block";
+      setTimeout(() => {
+        document.getElementById('peticion-popup-bg').style.display = "none";
+        document.getElementById('peticion-ok').style.display = "none";
+        this.reset();
+        document.getElementById('campo-cancion').style.display = "none";
+        document.getElementById('campo-mensaje').style.display = "none";
+      }, 1400);
+    });
   </script>
 </body>
 </html>
