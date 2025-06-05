@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
   <style>
-    /* ...ESTILOS TUYOS Y MEJORAS... */
     body {
       background-image: url('https://habbo.com/habbo-imaging/badge/big/ADM');
       background-color: #1b1b1b;
@@ -61,20 +60,21 @@
       background: rgba(20,20,20,0.92);
       box-shadow: 0 4px 24px 0 #0008;
       border-radius: 16px;
-      padding: 12px 10px 10px 10px;
-      width: auto;
+      padding: 24px 18px 16px 18px;
+      width: 95%;
       max-width: 470px;
       margin-bottom: 20px;
       text-align: center;
       color: #fff;
       border: 2px solid #ffdf2a33;
       position: relative;
-      display: inline-block;
+      margin-left: auto;
+      margin-right: auto;
     }
     .fansite-card h2 {
       color: #ffdf2a;
-      margin-bottom: 10px;
-      font-size: 1.2rem;
+      margin-bottom: 16px;
+      font-size: 1.3rem;
       font-family: 'Contrail One', Arial, sans-serif;
       letter-spacing: 1px;
       text-shadow: 0px 2px 12px #0004;
@@ -84,7 +84,7 @@
       color: #1b1b1b;
       font-family: 'Contrail One', Arial, sans-serif;
       font-size: 1rem;
-      margin: 7px 2px 12px 2px;
+      margin: 10px 2px 18px 2px;
       border-radius: 6px;
       padding: 5px 13px;
       font-weight: 600;
@@ -105,14 +105,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: auto;
-      height: auto;
+      min-height: 395px;
+      height: 395px;
     }
     .fansite-iframe {
       width: 100%;
-      min-width: 260px;
-      max-width: 350px;
-      height: 400px;
+      height: 395px;
       border: none;
       background: transparent;
       display: block;
@@ -442,8 +440,8 @@
       .fansite-header { padding: 15px 0 12px 0; }
       .fansite-title { font-size: 1.6rem; }
       .fansite-main { margin-top: 15px; }
-      .fansite-card { padding: 7px 2px 5px 2px; max-width: 99vw;}
-      .fansite-iframe-container { max-width: 99vw;}
+      .fansite-card { padding: 11px 5px 8px 5px; max-width: 99vw;}
+      .fansite-iframe-container { max-width: 98vw;}
       .fansite-iframe { height: 335px;}
       .fansite-section, .fansite-habbo-api-section, .fansite-equipo-container, .fansite-alianzas { max-width: 99vw; padding: 12px 2px 7px 2px;}
       .fansite-disclaimer { font-size: 0.92rem; }
@@ -461,14 +459,6 @@
     <div class="fansite-title">estacionkusfm</div>
     <div class="fansite-sub">Tu fansite Habbo con la mejor radio y comunidad</div>
   </div>
-
-  <div class="fansite-disclaimer">
-    <strong>Hecho con <span class="fansite-love">♥</span> por <b>@estacionkusfm</b></strong><br>
-    Se respeta la manera Habbo. Todos los derechos reservados.<br>
-    <b>estacionkusfm</b> no está afiliada a, respaldada, promocionada o aprobada específicamente por Sulake Corporation Oy o sus Afiliados.<br>
-    De acuerdo a la Política de Webs fans de Habbo, esta radio puede utilizar las marcas comerciales y otras propiedades intelectuales de Habbo.
-  </div>
-
   <main class="fansite-main">
     <div class="fansite-card">
       <span class="badge">RADIO EN VIVO</span>
@@ -482,7 +472,6 @@
         <button class="vacantes-btn" onclick="document.getElementById('vacantes-popup-bg').style.display='flex'">Vacantes</button>
       </div>
     </div>
-
     <div class="fansite-habbo-api-section">
       <span class="fansite-section-title">USANDO API DE HABBO</span>
       <div class="fansite-section-sub">Últimas placas ganadas</div>
@@ -490,7 +479,6 @@
       <div class="fansite-section-sub">Últimos furnis añadidos</div>
       <div class="api-furnis" id="api-furnis"></div>
     </div>
-
     <div class="fansite-alianzas">
       <span class="fansite-section-title">Alianzas</span>
       <div class="alianzas-lista" id="alianzas-lista">
@@ -499,7 +487,6 @@
         <a class="alianza-room" href="https://www.habbo.es/room/34567890" target="_blank">Osio Club</a>
       </div>
     </div>
-
     <div class="fansite-equipo-container">
       <div class="equipo-group">
         <span class="equipo-title">Equipo Fundador</span>
@@ -526,9 +513,15 @@
         <div class="equipo-miembros" id="publicistas"></div>
       </div>
     </div>
+    <!-- LEYENDA Y DISCLAIMER DEBAJO DE EQUIPO -->
+    <div class="fansite-disclaimer">
+      <strong>Hecho con <span class="fansite-love">♥</span> por <b>@estacionkusfm</b></strong><br>
+      Se respeta la manera Habbo. Todos los derechos reservados.<br>
+      <b>estacionkusfm</b> no está afiliada a, respaldada, promocionada o aprobada específicamente por Sulake Corporation Oy o sus Afiliados.<br>
+      De acuerdo a la Política de Webs fans de Habbo, esta radio puede utilizar las marcas comerciales y otras propiedades intelectuales de Habbo.
+    </div>
   </main>
-
-  <!-- Popup Vacantes -->
+  <!-- POPUPS (vacantes, peticiones, destacados) igual -->
   <div class="vacantes-popup-bg" id="vacantes-popup-bg" onclick="if(event.target==this)this.style.display='none'">
     <div class="vacantes-popup">
       <button class="close-btn" onclick="document.getElementById('vacantes-popup-bg').style.display='none'">&times;</button>
@@ -576,8 +569,6 @@
       <div id="vacantes-ok" style="display:none;padding:10px 0 0 0;color:#00dcff;text-align:center;">¡Solicitud enviada!</div>
     </div>
   </div>
-
-  <!-- Popup Peticiones -->
   <div class="vacantes-popup-bg" id="peticion-popup-bg" onclick="if(event.target==this)this.style.display='none'">
     <div class="vacantes-popup">
       <button class="close-btn" onclick="document.getElementById('peticion-popup-bg').style.display='none'">&times;</button>
@@ -605,8 +596,6 @@
       <div id="peticion-ok" style="display:none;padding:10px 0 0 0;color:#00dcff;text-align:center;">¡Petición enviada!</div>
     </div>
   </div>
-
-  <!-- Popup Destacados -->
   <div class="vacantes-popup-bg" id="destacados-popup-bg" onclick="if(event.target==this)this.style.display='none'">
     <div class="vacantes-popup">
       <button class="close-btn" onclick="document.getElementById('destacados-popup-bg').style.display='none'">&times;</button>
@@ -625,12 +614,10 @@
       </div>
     </div>
   </div>
-
   <div class="fansite-footer">
     &copy; 2025 estacionkusfm • Fansite Habbo no oficial · Hecho con <span style="color:#ffdf2a;">♥</span> para la comunidad<br>
     Versión 1.0.0
   </div>
-
   <script>
     // Últimas placas (estático)
     const exampleBadges = [
@@ -643,7 +630,6 @@
       img.alt = code;
       badgeContainer.appendChild(img);
     });
-
     // Últimos furnis usando HabboEmotion API
     fetch('https://habboemotion.com/api/furni/latest')
       .then(res => res.json())
@@ -658,14 +644,12 @@
           furniContainer.appendChild(img);
         });
       });
-
     // Demo estado on/off de miembros (simulado, reemplaza por API real si tienes login)
     const onlineUsers = {
       "estacionkusfm": true,
       "ser03z-51": false,
       "ayente": true
     };
-
     // Equipo
     const fundadores = [
       {user: "estacionkusfm", nombre: "estacionkusfm"},
@@ -680,7 +664,6 @@
     ];
     const guias = [];
     const publicistas = [];
-
     function renderEquipo(arr, id, total=6) {
       const cont = document.getElementById(id);
       cont.innerHTML = '';
@@ -711,7 +694,6 @@
     renderEquipo(locutores, "locutores", 6);
     renderEquipo(guias, "guias", 6);
     renderEquipo(publicistas, "publicistas", 6);
-
     // Popup Vacantes interacciones
     document.getElementById('cargo').addEventListener('change', function() {
       const valor = this.value;
@@ -723,6 +705,7 @@
     });
     document.getElementById('vacantes-form').addEventListener('submit', function(e){
       e.preventDefault();
+      enviarCorreo('Vacantes', new FormData(this));
       document.getElementById('vacantes-ok').style.display = "block";
       setTimeout(() => {
         document.getElementById('vacantes-popup-bg').style.display = "none";
@@ -733,7 +716,6 @@
         document.getElementById('extra-captura-guia').style.display = "none";
       }, 1400);
     });
-
     // Popup peticiones interacciones
     document.getElementById('tipo-peticion').addEventListener('change', function() {
       document.getElementById('campo-cancion').style.display = this.value === "cancion" ? "block" : "none";
@@ -741,6 +723,7 @@
     });
     document.getElementById('peticion-form').addEventListener('submit', function(e){
       e.preventDefault();
+      enviarCorreo('Peticion', new FormData(this));
       document.getElementById('peticion-ok').style.display = "block";
       setTimeout(() => {
         document.getElementById('peticion-popup-bg').style.display = "none";
@@ -750,6 +733,23 @@
         document.getElementById('campo-mensaje').style.display = "none";
       }, 1400);
     });
+    // ENVÍO DE FORMULARIOS
+    function enviarCorreo(tipo, formData) {
+      // Simulación: en producción, usa un backend/serverless como EmailJS, Formspree, etc.
+      // Aquí solo mostramos en consola lo que se enviaría:
+      let entries = [];
+      formData.forEach((v, k) => entries.push(`${k}: ${v}`));
+      // Aquí iría la integración real con EmailJS/API, etc.
+      fetch('https://formspree.io/f/xpzvnyag', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(()=>{}); // ignora respuesta, solo simula envío
+      // Puedes mostrar en consola para debug:
+      console.log(`[Envío ${tipo}]`, entries.join('\n'), 'Enviado de: hola@trabullnetwork.pro a cushmediagroup@gmail.com');
+    }
   </script>
 </body>
 </html>
