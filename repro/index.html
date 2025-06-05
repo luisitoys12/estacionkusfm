@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -18,37 +19,49 @@ html, body {
     height: 100vh;
     overflow: hidden;
 }
-#reproductor {
-    width: 100vw;
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     min-height: 100vh;
-    background: transparent;
+}
+#reproductor {
+    background: rgba(18, 22, 33, 0.97);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 #0007;
+    padding: 28px 18px 20px 18px;
+    max-width: 350px;
+    width: 96vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0;
-    padding: 0;
 }
 .cover {
-    margin: 0;
-    padding: 0;
+    margin-bottom: 16px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 .dj-container {
-    width: 120px;
-    height: 150px;
+    width: 110px;
+    height: 105px;
     position: relative;
-    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    background: #171a23;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px #0005;
+    padding: 8px 0 0 0;
 }
 #dj_avatar {
     position: absolute;
     left: 50%;
-    bottom: 35px;
+    bottom: 32px;
     transform: translateX(-50%);
-    width: 70px;
-    height: 90px;
+    width: 60px;
+    height: 80px;
     object-fit: contain;
     z-index: 1;
     background: transparent;
@@ -59,25 +72,65 @@ html, body {
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
-    width: 120px;
+    width: 100px;
     z-index: 2;
     pointer-events: none;
 }
-.area-botones, .area-play {
+.meta-cards {
     width: 100%;
-    max-width: 340px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 0;
+    margin: 12px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
 }
-.area-botones {
-    margin-top: 2px;
+.meta-card {
+    background: #202737;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #0004;
+    padding: 12px 15px 8px 15px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 45px;
 }
-.section {
-    margin: 4px 0;
-    text-align: center;
+.meta-icon {
+    font-size: 1.25rem;
+    min-width: 29px;
+    color: #00dcff;
+}
+.meta-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.meta-title {
+    font-family: 'Contrail One', Arial, sans-serif;
+    font-size: 1.04rem;
+    color: #ffdf2a;
+    margin-bottom: -1px;
+    letter-spacing: 1px;
+}
+.meta-value {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.meta-song {
+    color: #00dcff;
+    font-size: .98rem;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    display: block;
+}
+.area-play {
+    margin-top: 19px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 #player {
     margin: 0;
@@ -86,18 +139,16 @@ html, body {
     margin: 0;
     padding: 0;
 }
-.area-play {
-    margin-top: 4px;
-    margin-bottom: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
 @media (max-width: 480px) {
-    .dj-container { width: 90px; height: 110px; }
-    #dj_avatar { width: 48px; height: 60px; bottom: 20px;}
-    .dj-set { width: 85px;}
-    .area-botones, .area-play { max-width: 99vw;}
+    #reproductor { padding: 13px 2vw 10px 2vw; max-width: 99vw;}
+    .cover { margin-bottom: 12px;}
+    .dj-container { width: 78px; height: 76px; }
+    #dj_avatar { width: 37px; height: 47px; bottom: 16px;}
+    .dj-set { width: 61px;}
+    .meta-cards { gap: 7px; }
+    .meta-card { padding: 8px 8px 7px 8px; min-height: 32px;}
+    .meta-info { font-size: 0.95rem;}
+    .meta-song { max-width: 90px; font-size: .93rem;}
 }
 </style>
 </head>
@@ -109,28 +160,26 @@ html, body {
             <img src="https://static.habbo-happy.net/img/furni/big/735778452353491.gif" class="dj-set" alt="Set DJ">
         </div>
     </div>
-    <div class="area-botones" style="font-size:14px;">
-        <div class="section">
-            <div id="djactual" style="font-weight:bold;">
-                <i class="fas fa-microphone iconos" style="margin-right:10px;"></i>
-                <span id="name_dj" class="cc_streaminfo" style="color:#ffdf2a;"></span>
+    <div class="meta-cards">
+        <div class="meta-card">
+            <span class="meta-icon"><i class="fas fa-microphone"></i></span>
+            <div class="meta-info">
+                <span class="meta-title">DJ actual</span>
+                <span id="name_dj" class="meta-value cc_streaminfo" style="color:#ffdf2a;"></span>
             </div>
         </div>
-        <div class="section">
-            <i class="fas fa-headphones iconos" style="margin-right:10px;"></i>
-            <marquee id="cancion" scrolldelay="200">
-                <span class="cc_streaminfo" style="color:#00dcff;" id="song_title"></span>
-            </marquee>
-        </div>
-        <div class="section">
-            <i class="fas fa-user-friends iconos icooyente" style="margin-right:10px;"></i>
-            <div id="autor">
-                <span class="cc_streaminfo" style="color:#ffdf2a;" id="listeners"></span> oyentes
+        <div class="meta-card">
+            <span class="meta-icon"><i class="fas fa-headphones"></i></span>
+            <div class="meta-info">
+                <span class="meta-title">Canción</span>
+                <span class="meta-song cc_streaminfo" id="song_title"></span>
             </div>
         </div>
-        <div class="section separacion">
-            <div id="player">
-                <div id="volume"><small><a target="_self" href="#">Actualizar reproductor</a></small></div>
+        <div class="meta-card">
+            <span class="meta-icon"><i class="fas fa-user-friends"></i></span>
+            <div class="meta-info">
+                <span class="meta-title">Oyentes</span>
+                <span class="meta-value cc_streaminfo" id="listeners"></span>
             </div>
         </div>
     </div>
