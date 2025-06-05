@@ -173,6 +173,32 @@
       margin-top: 18px;
       opacity: 0.55;
     }
+    .alianzas-lista {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 13px 17px;
+      margin-top: 13px;
+      margin-bottom: 6px;
+    }
+    .alianza-room {
+      background: #ff9800;
+      color: #fff;
+      border-radius: 8px;
+      padding: 7px 16px;
+      font-weight: 700;
+      font-family: 'Contrail One', Arial, sans-serif;
+      box-shadow: 0 2px 8px #ffd600;
+      display: inline-block;
+      text-decoration: none;
+      transition: background .2s;
+      margin-bottom: 7px;
+    }
+    .alianza-room:hover {
+      background: #ffe082;
+      color: #00dcff;
+      text-decoration: underline;
+    }
     .fansite-footer {
       color: #fff;
       background: rgba(0,0,0,0.7);
@@ -191,9 +217,9 @@
     .fansite-disclaimer {
       font-size: 0.98rem;
       color: #d2d2d2;
-      margin: 20px auto 12px auto;
+      margin: 0 auto 12px auto;
       padding: 16px 8px 8px 8px;
-      max-width: 780px;
+      max-width: 360px;
       background: rgba(0,0,0,0.67);
       border-radius: 12px;
       text-align: left;
@@ -225,18 +251,17 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#inicio">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#radio">Radio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#equipo">Equipo</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contacto.html">Contacto</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#radio">Radio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#equipo">Equipo</a></li>
+          <li class="nav-item"><a class="nav-link" href="#alianzas">Alianzas</a></li>
+          <li class="nav-item"><a class="nav-link" href="#eventos">Eventos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#ranking">Ranking</a></li>
+          <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
+          <li class="nav-item"><a class="nav-link" href="#foro">Foro</a></li>
+          <li class="nav-item"><a class="nav-link" href="#sugerencias">Sugerencias</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
         </ul>
       </div>
     </div>
@@ -302,14 +327,57 @@
             </div>
           </div>
         </section>
-        <!-- Disclaimer -->
-        <div class="fansite-disclaimer">
-          <strong>Hecho con <span class="fansite-love">♥</span> por <b>@estacionkusfm</b></strong><br>
-          Se respeta la manera Habbo. Todos los derechos reservados.<br>
-          <b>estacionkusfm</b> no está afiliada a, respaldada, promocionada o aprobada específicamente por Sulake Corporation Oy o sus Afiliados.
-          <img src="https://habsite.es/wp-content/uploads/2025/03/fansite_badge.gif" alt="Fansite Badge" class="summer-badge">
-          <br>De acuerdo a la Política de Webs fans de Habbo, esta radio puede utilizar las marcas comerciales y otras propiedades intelectuales de Habbo.
-        </div>
+        <!-- Alianzas -->
+        <section class="mb-4" id="alianzas">
+          <div class="sidebar-section">
+            <span class="sidebar-title">Alianzas</span>
+            <div class="alianzas-lista">
+              <a class="alianza-room" href="https://www.habbo.es/room/12345678" target="_blank">Agencia HabboSegura</a>
+              <a class="alianza-room" href="https://www.habbo.es/room/23456789" target="_blank">Imperio Real</a>
+              <a class="alianza-room" href="https://www.habbo.es/room/34567890" target="_blank">Osio Club</a>
+              <a class="alianza-room" href="https://www.habbo.es/room/45678901" target="_blank">FansiteManía</a>
+              <a class="alianza-room" href="https://www.habbo.es/room/56789012" target="_blank">Modo Habbo</a>
+              <a class="alianza-room" href="https://www.habbo.es/room/67890123" target="_blank">Club Pixelados</a>
+            </div>
+          </div>
+        </section>
+        <!-- Secciones extra -->
+        <section class="mb-4" id="eventos">
+          <div class="sidebar-section">
+            <span class="sidebar-title">Eventos</span>
+            <p>¡Participa en los próximos eventos y gana premios!</p>
+          </div>
+        </section>
+        <section class="mb-4" id="ranking">
+          <div class="sidebar-section">
+            <span class="sidebar-title">Ranking</span>
+            <p>Descubre los usuarios más activos y los top oyentes de la semana.</p>
+          </div>
+        </section>
+        <section class="mb-4" id="galeria">
+          <div class="sidebar-section">
+            <span class="sidebar-title">Galería</span>
+            <p>Explora las mejores imágenes y recuerdos de nuestra comunidad.</p>
+          </div>
+        </section>
+        <section class="mb-4" id="foro">
+          <div class="sidebar-section">
+            <span class="sidebar-title">Foro</span>
+            <p>Debate, comparte ideas y resuelve tus dudas en nuestro foro.</p>
+          </div>
+        </section>
+        <section class="mb-4" id="sugerencias">
+          <div class="sidebar-section">
+            <span class="sidebar-title">Sugerencias</span>
+            <p>¿Tienes ideas para mejorar? ¡Envíanos tus sugerencias!</p>
+          </div>
+        </section>
+        <section class="mb-4" id="faq">
+          <div class="sidebar-section">
+            <span class="sidebar-title">Preguntas Frecuentes (FAQ)</span>
+            <p>Resolvemos tus preguntas más comunes sobre la radio y la web.</p>
+          </div>
+        </section>
       </div>
 
       <!-- Sidebar derecho -->
@@ -320,6 +388,14 @@
           <div class="api-badges d-flex flex-wrap justify-content-center" id="api-badges"></div>
           <span class="sidebar-title mt-2">Últimos furnis</span>
           <div class="api-furnis d-flex flex-wrap justify-content-center" id="api-furnis"></div>
+        </div>
+        <!-- Disclaimer en el sidebar -->
+        <div class="fansite-disclaimer">
+          <strong>Hecho con <span class="fansite-love">♥</span> por <b>@estacionkusfm</b></strong><br>
+          Se respeta la manera Habbo. Todos los derechos reservados.<br>
+          <b>estacionkusfm</b> no está afiliada a, respaldada, promocionada o aprobada específicamente por Sulake Corporation Oy o sus Afiliados.
+          <img src="https://habsite.es/wp-content/uploads/2025/03/fansite_badge.gif" alt="Fansite Badge" class="summer-badge">
+          <br>De acuerdo a la Política de Webs fans de Habbo, esta radio puede utilizar las marcas comerciales y otras propiedades intelectuales de Habbo.
         </div>
       </div>
     </div>
