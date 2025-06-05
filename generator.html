@@ -6,7 +6,7 @@
   <title>Generador de Avatar • estacionkusfm</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
-  <!-- Usar Font Awesome 6 por CDN oficial -->
+  <!-- Font Awesome 6 (solo CSS, no JS) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
   <style>
     body {
@@ -99,7 +99,6 @@
       min-height: 17px;
       font-family: Arial, sans-serif;
       word-break: break-all;
-      /* Marquee effect */
       display: inline-block;
       white-space: nowrap;
       will-change: transform;
@@ -233,10 +232,16 @@
           document.getElementById('mini-dj-listeners').textContent = listeners;
           document.getElementById('mini-dj-head').src =
             `https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(dj)}&headonly=1&size=m&direction=2&head_direction=2`;
+          
           // Mostrar tema/canción animado si es largo
           let song = "";
+          // Usar los metadatos correctos si existen, si no, mostrar Andy - 8Uno que paso
           if (data.now_playing && data.now_playing.song && data.now_playing.song.title) {
             song = data.now_playing.song.title;
+            // Si el título no tiene el artista, lo agregas aquí si quieres forzar: 
+            // song = "Andy - " + song;
+          } else {
+            song = "Andy - 8Uno que paso";
           }
           const songEl = document.getElementById('mini-dj-song');
           songEl.textContent = song;
@@ -247,7 +252,10 @@
             songEl.classList.add('short');
           }
         }).catch(() => {
-          // Si error, no mostrar error a usuario aquí (solo dejamos datos por defecto)
+          // Si hay error en la API, poner el valor por defecto
+          const songEl = document.getElementById('mini-dj-song');
+          songEl.textContent = "Andy - 8Uno que paso";
+          songEl.classList.remove('short');
         });
     }
     setInterval(updateMiniPlayer, 7000);
