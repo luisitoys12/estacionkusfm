@@ -11,177 +11,64 @@
 <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
-html, body {
-    background: transparent;
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-}
-body {
+/* Estilos del reproductor y su caja, ver player.css para el resto */
+.player-controls {
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+    gap: 22px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
-#reproductor {
-    background: rgba(18, 22, 33, 0.97);
-    border-radius: 18px;
-    box-shadow: 0 8px 32px 0 #0007;
-    padding: 28px 18px 20px 18px;
-    max-width: 350px;
-    width: 96vw;
+.player-btn {
+    background: #00dcff;
+    color: #23203a;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    width: 43px;
+    height: 43px;
+    font-size: 1.5rem;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
+    transition: background .18s;
+    box-shadow: 0 2px 10px #0003;
+    cursor: pointer;
 }
-.cover {
-    margin-bottom: 16px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    position: relative;
+.player-btn:active, .player-btn:focus {
+    background: #ffdf2a;
+    color: #23203a;
 }
-.dj-container {
-    width: 90px;
-    height: 90px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    background: #171a23;
-    border-radius: 14px;
-    box-shadow: 0 4px 16px #0005;
-    padding: 8px 0 0 0;
-    overflow: visible;
-}
-#dj_avatar {
-    position: absolute;
-    left: 50%;
-    bottom: 25px;
-    transform: translateX(-50%);
-    width: 54px;
-    height: 72px;
-    object-fit: contain;
-    z-index: 1;
-    background: transparent;
-    display: block;
-}
-.dj-set {
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 64px;
-    z-index: 2;
+.player-btn[disabled] {
+    opacity: 0.55;
     pointer-events: none;
 }
-.summer-effect {
-    position: absolute;
-    left: 10px;
-    bottom: 0;
-    width: 32px;
-    height: 32px;
-    z-index: 10;
-    animation: floatPalm 3.5s ease-in-out infinite;
+.player-controls .reload-btn {
+    background: #ffdf2a;
+    color: #23203a;
+    font-size: 1.35rem;
 }
-.summer-sun {
-    position: absolute;
-    right: 6px;
-    top: -8px;
-    width: 32px;
-    height: 32px;
-    z-index: 10;
-    animation: sunGlow 2.7s ease-in-out infinite;
-    filter: drop-shadow(0 0 12px #ffe600cc);
+.player-slider {
+    width: 120px;
+    margin-left: 7px;
+    margin-right: 7px;
 }
-@keyframes floatPalm {
-    0%, 100% { transform: translateY(0) rotate(-5deg);}
-    50% { transform: translateY(-8px) rotate(6deg);}
-}
-@keyframes sunGlow {
-    0%, 100% { filter: drop-shadow(0 0 12px #ffe600cc);}
-    50% { filter: drop-shadow(0 0 24px #ffe600ff);}
-}
-.meta-cards {
-    width: 100%;
-    margin: 12px 0 0 0;
-    display: flex;
-    flex-direction: column;
-    gap: 13px;
-}
-.meta-card {
-    background: #202737;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px #0004;
-    padding: 12px 15px 8px 15px;
-    color: #fff;
+.player-volume {
     display: flex;
     align-items: center;
-    gap: 12px;
-    min-height: 45px;
+    margin-left: 8px;
 }
-.meta-icon {
-    font-size: 1.25rem;
-    min-width: 29px;
+.player-volume i {
     color: #00dcff;
-}
-.meta-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-.meta-title {
-    font-family: 'Contrail One', Arial, sans-serif;
-    font-size: 1.04rem;
-    color: #ffdf2a;
-    margin-bottom: -1px;
-    letter-spacing: 1px;
-}
-.meta-value {
-    color: #fff;
-    font-size: 1rem;
-    font-weight: bold;
-}
-.meta-song {
-    color: #00dcff;
-    font-size: .98rem;
-    font-weight: bold;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 150px;
-    display: block;
-}
-.area-play {
-    margin-top: 19px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-#player {
-    margin: 0;
-}
-#volume {
-    margin: 0;
-    padding: 0;
+    margin-right: 2px;
+    font-size: 1.1rem;
 }
 @media (max-width: 480px) {
-    #reproductor { padding: 13px 2vw 10px 2vw; max-width: 99vw;}
-    .cover { margin-bottom: 12px;}
-    .dj-container { width: 60px; height: 62px; }
-    #dj_avatar { width: 27px; height: 36px; bottom: 8px;}
-    .dj-set { width: 39px;}
-    .summer-effect { width: 18px; height: 18px; left: 2px; }
-    .summer-sun { width: 20px; height: 20px; right: 1px; top: -8px; }
-    .meta-cards { gap: 7px; }
-    .meta-card { padding: 8px 8px 7px 8px; min-height: 32px;}
-    .meta-info { font-size: 0.95rem;}
-    .meta-song { max-width: 90px; font-size: .93rem;}
+    .player-controls { gap: 11px; }
+    .player-btn { width: 31px; height: 31px; font-size: 1.08rem;}
+    .player-controls .reload-btn { font-size: 1.02rem;}
+    .player-slider { width: 68px; }
 }
 </style>
 </head>
@@ -191,7 +78,7 @@ body {
         <img src="https://cdn-icons-png.flaticon.com/512/619/619034.png" class="summer-effect" alt="Palmera verano"
              style="filter: drop-shadow(0 1px 3px #0007)">
         <div class="dj-container">
-            <img src="#" id="dj_avatar" class="ball" onerror="validarAvatar()"/>
+            <img src="#" id="dj_avatar" onerror="validarAvatar()"/>
             <img src="https://static.habbo-happy.net/img/furni/big/735778452353491.gif" class="dj-set" alt="Set DJ">
         </div>
         <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" class="summer-sun" alt="Sol verano">
@@ -220,25 +107,28 @@ body {
         </div>
     </div>
     <div class="area-play">
-        <!-- BEGINS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
-        <script type="text/javascript" src="https://hosted.muses.org/mrp.js"></script>
-        <script type="text/javascript">
-            MRP.insert({
-                'url':'https://radio.estacionkusmedios.com/listen/esmerosound/radio.mp3',
-                'codec':'mp3',
-                'volume':100,
-                'autoplay':true,
-                'jsevents':true,
-                'buffering':0,
-                'title':'estacionkusfm',
-                'welcome':'BIENVENIDO A...',
-                'wmode':'transparent',
-                'skin':'abrahadabra2',
-                'width':100,
-                'height':140
-            });
-        </script>
-        <!-- ENDS: AUTO-GENERATED MUSES RADIO PLAYER CODE -->
+        <!-- PLAYER NATIVO HTML5 PERSONALIZADO -->
+        <div style="width:100%;display:flex;flex-direction:column;align-items:center;">
+            <audio id="custom-player" preload="none">
+                <source src="https://radio.estacionkusmedios.com/listen/esmerosound/radio.mp3" type="audio/mpeg">
+                Tu navegador no soporta audio HTML5.
+            </audio>
+            <div class="player-controls">
+                <button class="player-btn reload-btn" id="btn-reload" title="Actualizar/Reiniciar">
+                    <i class="fas fa-undo"></i>
+                </button>
+                <button class="player-btn" id="btn-play" title="Reproducir">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button class="player-btn" id="btn-pause" title="Pausar">
+                    <i class="fas fa-pause"></i>
+                </button>
+                <div class="player-volume">
+                    <i class="fas fa-volume-up"></i>
+                    <input type="range" id="volume-slider" class="player-slider" min="0" max="100" value="100">
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -274,15 +164,10 @@ body {
                     const song = data.now_playing.song;
                     const listeners = data.listeners.current;
                     const live = data.live;
-
-                    // Song & artist
                     $("#song_title").text(
                         (song.artist ? song.artist : "Desconocido") + " - " + (song.title ? song.title : "Desconocido")
                     );
-
-                    // DJ en vivo o AutoDJ
                     if (live && live.is_live && live.streamer_name) {
-                        // Hay DJ en vivo
                         $("#name_dj").text(live.streamer_name);
                         $("#dj_avatar").attr(
                             "src",
@@ -295,7 +180,6 @@ body {
                             })
                         ).css('display','block');
                     } else {
-                        // Es AutoDJ
                         $("#name_dj").text("AutoDJ");
                         $("#dj_avatar").attr(
                             "src",
@@ -308,8 +192,6 @@ body {
                             })
                         ).css('display','block');
                     }
-
-                    // Listeners
                     $("#listeners").text(listeners !== undefined ? listeners : "0");
                 },
                 error: function() {
@@ -332,8 +214,48 @@ body {
         updateInfo();
         setInterval(updateInfo, 5000); // Actualiza cada 5 segundos
     });
-</script>
 
+    // PLAYER CONTROLS
+    $(function() {
+        const audio = document.getElementById('custom-player');
+        const btnPlay = document.getElementById('btn-play');
+        const btnPause = document.getElementById('btn-pause');
+        const btnReload = document.getElementById('btn-reload');
+        const slider = document.getElementById('volume-slider');
+
+        btnPlay.onclick = function() {
+            audio.play();
+        };
+        btnPause.onclick = function() {
+            audio.pause();
+        };
+        btnReload.onclick = function() {
+            audio.pause();
+            // Forzar recarga de stream
+            audio.src = audio.src.split('?')[0] + '?t=' + new Date().getTime();
+            audio.load();
+            audio.play();
+        };
+        slider.oninput = function() {
+            audio.volume = slider.value / 100;
+        };
+        // Estado de botones dependiendo de si está playing o no
+        function updateBtnState() {
+            if (audio.paused) {
+                btnPlay.disabled = false;
+                btnPause.disabled = true;
+            } else {
+                btnPlay.disabled = true;
+                btnPause.disabled = false;
+            }
+        }
+        audio.addEventListener('play', updateBtnState);
+        audio.addEventListener('pause', updateBtnState);
+        audio.addEventListener('ended', updateBtnState);
+        // Inicial
+        updateBtnState();
+    });
+</script>
 <script src="https://code.jquery.com/jquery-2.2.4.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" crossorigin="anonymous"></script>
