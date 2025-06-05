@@ -1,140 +1,213 @@
 @import url('https://fonts.googleapis.com/css2?family=Contrail+One&display=swap');
 
-body{background:none transparent;
-  font-family: 'Contrail One', cursive;
-text-transform: uppercase;}
-#reproductor 
-{
-  position:relative;
-  float:left;
-  min-width:200px;
-  width:100%;
-  background:#230046;
-  border-radius:15px;color:#fff
+body {
+    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=700&q=80') center center no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Contrail One', cursive, Arial, sans-serif;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.cover
-{
-  position:relative;
-  background-image:url(https://vignette.wikia.nocookie.net/habbofanon/images/5/50/Wiki-background/revision/latest?cb=20120928051619);
-  z-index:1;
-  float:left;
-  width:120px;
-  height:145px;
-  overflow:hidden;
-  padding-top:-120px;
-  padding-left:0px;
-  border-radius:15px 0 0 15px
+
+/* CONTENEDOR PRINCIPAL */
+#reproductor {
+    background: rgba(35,0,70,0.92); /* Tu color original, con transparencia */
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 #0007;
+    padding: 28px 18px 20px 18px;
+    max-width: 350px;
+    width: 96vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+    letter-spacing: 1px;
 }
-.cover:after{content:"";overflow:hidden;position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(140,0,255,.74);z-index:-1;border-radius:15px 0 0 15px;transition:all ease-in .3s}
-.cover:hover:after{background:rgba(255,0,179,.74)}
-.area-botones{position:relative;float:left;width:calc(100% - 230px);height:145px;padding-top:10px;padding-left:15px}
-.area-botones i{margin-right:0px}
-.iconos{float:left}
+
+/* CABECERA DEL AVATAR Y SET */
+.cover {
+    margin-bottom: 16px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    background: none;
+}
+
+/* CAJA DEL AVATAR / SET */
+.dj-container {
+    width: 90px;
+    height: 90px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background: #171a23;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px #0005;
+    padding: 8px 0 0 0;
+    overflow: visible;
+}
+
+/* AVATAR QUIETO Y CENTRADO */
+#dj_avatar {
+    position: absolute;
+    left: 50%;
+    bottom: 25px;
+    transform: translateX(-50%);
+    width: 54px;
+    height: 72px;
+    object-fit: contain;
+    z-index: 1;
+    background: transparent;
+    display: block;
+    filter: drop-shadow(0 2px 5px #fff9);
+}
+
+/* SET DJ PEQUEÑO */
+.dj-set {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 64px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* EFECTOS DE VERANO */
+.summer-effect {
+    position: absolute;
+    left: 10px;
+    bottom: 0;
+    width: 32px;
+    height: 32px;
+    z-index: 10;
+    animation: floatPalm 3.5s ease-in-out infinite;
+}
+.summer-sun {
+    position: absolute;
+    right: 6px;
+    top: -8px;
+    width: 32px;
+    height: 32px;
+    z-index: 10;
+    animation: sunGlow 2.7s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px #ffe600cc);
+}
+@keyframes floatPalm {
+    0%, 100% { transform: translateY(0) rotate(-5deg);}
+    50% { transform: translateY(-8px) rotate(6deg);}
+}
+@keyframes sunGlow {
+    0%, 100% { filter: drop-shadow(0 0 12px #ffe600cc);}
+    50% { filter: drop-shadow(0 0 24px #ffe600ff);}
+}
+
+/* TARJETAS DE METADATOS */
+.meta-cards {
+    width: 100%;
+    margin: 12px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+.meta-card {
+    background: #202737;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #0004;
+    padding: 12px 15px 8px 15px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 45px;
+}
+.meta-icon {
+    font-size: 1.25rem;
+    min-width: 29px;
+    color: #00dcff;
+}
+.meta-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.meta-title {
+    font-family: 'Contrail One', Arial, sans-serif;
+    font-size: 1.04rem;
+    color: #ffdf2a;
+    margin-bottom: -1px;
+    letter-spacing: 1px;
+}
+.meta-value {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.meta-song {
+    color: #00dcff;
+    font-size: .98rem;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    display: block;
+}
+
+/* REPRODUCTOR RADIO */
+.area-play {
+    margin-top: 19px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#player {
+    margin: 0;
+}
+#volume {
+    margin: 0;
+    padding: 0;
+}
+
+/* BOTONES Y EXTRAS - puedes personalizar más si lo deseas */
 small {
-  width: 150px;
-  text-align: center;
-  float: left;
-  background: #7289DA;
-  border-radius: 10px;
+    width: 150px;
+    text-align: center;
+    float: left;
+    background: #7289DA;
+    border-radius: 10px;
 }
 small a {
-  color: #fff;
+    color: #fff;
 }
 small a:hover {
-  color:#00dcff;
-  text-decoration: none;
+    color:#00dcff;
+    text-decoration: none;
 }
-.section
-{
-  position:relative;
-  width:100%;
-  height:30px
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+    #reproductor { padding: 13px 2vw 10px 2vw; max-width: 99vw;}
+    .cover { margin-bottom: 12px;}
+    .dj-container { width: 60px; height: 62px; }
+    #dj_avatar { width: 27px; height: 36px; bottom: 8px;}
+    .dj-set { width: 39px;}
+    .summer-effect { width: 18px; height: 18px; left: 2px; }
+    .summer-sun { width: 20px; height: 20px; right: 1px; top: -8px; }
+    .meta-cards { gap: 7px; }
+    .meta-card { padding: 8px 8px 7px 8px; min-height: 32px;}
+    .meta-info { font-size: 0.95rem;}
+    .meta-song { max-width: 90px; font-size: .93rem;}
 }
-#djactual
-{
-  float:left;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  margin-right:20px
-}
-#dj
-{
-  float:right;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  margin-right:20px
-}#oyentes
-{float:left}
-.repro
-{
-  padding:8px;
-  border-radius:10px;
-  background-color:#4e0894;
-  width:130px
-}
-.separacion
-{
-}
-#player{float:left;width:120px}
-#autor{height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:120px}
-#cancion{width:120px;float:left}
-.refrescar{margin-left:20px;color:#fff;transition:.2s}
-.refrescar:hover{color:#db1d8c}
-.area-play{display:block;float:left;position:relative;z-index:30;height:100%;padding-top:2px}
-#play{display:block;width:120px;height:60px;position:relative;float: left;left:-35px;padding:17px;border-radius:30px;color:#fff;background-color:#4e0894;border:none;cursor:pointer}
-#play:hover{background-color:#db1d8c}
-#pause{display:block;width:35px;height:35px;position:relative;bottom:10px;padding:5px;border-radius:30px;color:#fff;background-color:#4e0894;border:none;cursor:pointer}
-#pause:hover{background-color:#db1d8c}@media(max-width:360px){.area-botones i{display:none}
-#player{width:40px}
-#cancion{width:50px}
-#autor{width:50px}
-#oyentes{display:none}.icooyente{display:none}}@media(min-width:100px) and (max-width:300px){#reproductor{font-size:13px}
-#player{width:150px}
-#cancion{width:100px}
-#autor{width:100px}}@media(min-width:100px) and (max-width:100px){#player{width:200px}#cancion{width:100px}#autor{width:250px}}
-#dj_avatar
-{
-  position: relative;
-top: -40px;
-  filter: drop-shadow(0 2px 5px #fff);
-}
-        .ball {
-            border-radius: 50%;
-            background-color: transparent;
-            animation: bounce 0.5s;
-            animation-direction: alternate;
-            animation-timing-function: cubic-bezier(.5, 0.05, 1, .5);
-            animation-iteration-count: infinite;
-        }
-          
-        @keyframes bounce {
-            from {
-                transform: translate3d(0, 0, 0);
-            }
-            to {
-                transform: translate3d(0, 25px, 0);
-            }
-        }
-        /* Prefix Support */
-          
-        ball {
-            -webkit-animation-name: bounce;
-            -webkit-animation-duration: 0.2s;
-            -webkit-animation-direction: alternate;
-            -webkit-animation-timing-function: cubic-bezier(
-            .5, 0.05, 1, .5);
-            -webkit-animation-iteration-count: infinite;
-        }
-          
-        @-webkit-keyframes bounce {
-            from {
-                -webkit-transform: translate3d(0, 0, 0);
-                transform: translate3d(0, 0, 0);
-            }
-            to {
-                -webkit-transform: translate3d(0, 200px, 0);
-                transform: translate3d(0, 200px, 0);
-            }
-        }
