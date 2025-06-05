@@ -71,15 +71,6 @@ body {
     filter: drop-shadow(0 2px 5px #fff9);
 }
 
-/* SET DJ FRENTE AL AVATAR, SIN TAPAR (ABAJO, SEPARADO) */
-.dj-set {
-    position: static;
-    margin-top: 100px; /* Espacio debajo del avatar */
-    width: 85px;
-    z-index: 0;
-    pointer-events: none;
-    display: block;
-}
 
 .summer-effect {
     position: absolute;
