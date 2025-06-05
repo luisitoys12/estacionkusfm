@@ -10,7 +10,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
-/* Centrar y superponer avatar y set DJ */
+html, body {
+    background: transparent;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+#reproductor {
+    width: 100vw;
+    min-height: 100vh;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+.cover {
+    margin: 0;
+    padding: 0;
+}
 .dj-container {
     width: 120px;
     height: 150px;
@@ -41,10 +63,41 @@
     z-index: 2;
     pointer-events: none;
 }
+.area-botones, .area-play {
+    width: 100%;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+}
+.area-botones {
+    margin-top: 2px;
+}
+.section {
+    margin: 4px 0;
+    text-align: center;
+}
+#player {
+    margin: 0;
+}
+#volume {
+    margin: 0;
+    padding: 0;
+}
+.area-play {
+    margin-top: 4px;
+    margin-bottom: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
 @media (max-width: 480px) {
     .dj-container { width: 90px; height: 110px; }
     #dj_avatar { width: 48px; height: 60px; bottom: 20px;}
     .dj-set { width: 85px;}
+    .area-botones, .area-play { max-width: 99vw;}
 }
 </style>
 </head>
