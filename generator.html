@@ -6,6 +6,8 @@
   <title>Generador de Avatar • estacionkusfm</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
+  <!-- Usar Font Awesome 6 por CDN oficial -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
   <style>
     body {
       background: linear-gradient(135deg, #f8e473 0%, #70e1f5 100%);
@@ -71,6 +73,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
+      min-width: 0;
     }
     .mini-player-dj {
       font-family: 'Contrail One', Arial, sans-serif;
@@ -78,14 +81,38 @@
       color: #ff9800;
       margin-bottom: 3px;
       word-break: break-all;
+      max-width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .mini-player-song-wrap {
+      width: 170px;
+      height: 21px;
+      margin-bottom: 2px;
+      overflow: hidden;
+      position: relative;
     }
     .mini-player-song {
       font-size: 1.01rem;
       color: #666;
-      margin-bottom: 2px;
       min-height: 17px;
       font-family: Arial, sans-serif;
       word-break: break-all;
+      /* Marquee effect */
+      display: inline-block;
+      white-space: nowrap;
+      will-change: transform;
+      animation: marquee 9s linear infinite;
+    }
+    .mini-player-song.short {
+      animation: none;
+      white-space: normal;
+      display: inline;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
     .mini-player-oyentes {
       font-size: 1rem;
@@ -143,6 +170,8 @@
       .mini-player-avatar { width: 46px; height: 46px; }
       .mini-btn { width: 28px; height: 28px; font-size: 1rem;}
       .mini-player { max-width: 99vw;}
+      .mini-player-song-wrap { width: 100px; }
+      .mini-player-dj { max-width: 100px;}
     }
   </style>
 </head>
@@ -150,7 +179,7 @@
 
   <div class="container-main">
     <!-- VOLVER A INICIO -->
-    <a href="index.html" class="volver-inicio"><i class="fas fa-arrow-left"></i> Volver a inicio</a>
+    <a href="index.html" class="volver-inicio"><i class="fa-solid fa-arrow-left"></i> Volver a inicio</a>
 
     <!-- MINI PLAYER DJ -->
     <div class="mini-player" id="mini-player">
@@ -159,12 +188,14 @@
         alt="DJ Head">
       <div class="mini-player-info">
         <div class="mini-player-dj" id="mini-dj-name">estacionkusfm</div>
-        <div class="mini-player-song" id="mini-dj-song"></div>
-        <div class="mini-player-oyentes"><i class="fas fa-user-friends"></i> <span id="mini-dj-listeners">0</span> oyentes</div>
+        <div class="mini-player-song-wrap">
+          <span class="mini-player-song short" id="mini-dj-song"></span>
+        </div>
+        <div class="mini-player-oyentes"><i class="fa-solid fa-user-group"></i> <span id="mini-dj-listeners">0</span> oyentes</div>
         <div class="mini-player-controls">
-          <button class="mini-btn" id="mini-btn-reload" title="Recargar"><i class="fas fa-undo"></i></button>
-          <button class="mini-btn" id="mini-btn-play" title="Reproducir"><i class="fas fa-play"></i></button>
-          <button class="mini-btn" id="mini-btn-pause" title="Pausar"><i class="fas fa-pause"></i></button>
+          <button class="mini-btn" id="mini-btn-reload" title="Recargar"><i class="fa-solid fa-rotate-right"></i></button>
+          <button class="mini-btn" id="mini-btn-play" title="Reproducir"><i class="fa-solid fa-play"></i></button>
+          <button class="mini-btn" id="mini-btn-pause" title="Pausar"><i class="fa-solid fa-pause"></i></button>
         </div>
         <audio id="mini-audio" preload="none">
           <source src="https://radio.estacionkusmedios.com/listen/esmerosound/radio.mp3" type="audio/mpeg">
@@ -186,8 +217,6 @@
     </div>
   </div>
 
-  <!-- Scripts para el mini player -->
-  <script src="https://kit.fontawesome.com/df2a1fbcf1.js" crossorigin="anonymous"></script>
   <script>
     // Actualiza info DJ y oyentes y tema
     function updateMiniPlayer() {
@@ -204,12 +233,19 @@
           document.getElementById('mini-dj-listeners').textContent = listeners;
           document.getElementById('mini-dj-head').src =
             `https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(dj)}&headonly=1&size=m&direction=2&head_direction=2`;
-          // Mostrar tema/canción
+          // Mostrar tema/canción animado si es largo
           let song = "";
           if (data.now_playing && data.now_playing.song && data.now_playing.song.title) {
             song = data.now_playing.song.title;
           }
-          document.getElementById('mini-dj-song').textContent = song;
+          const songEl = document.getElementById('mini-dj-song');
+          songEl.textContent = song;
+          // Quitar/poner animación según largo
+          if(song.length > 22){
+            songEl.classList.remove('short');
+          }else{
+            songEl.classList.add('short');
+          }
         }).catch(() => {
           // Si error, no mostrar error a usuario aquí (solo dejamos datos por defecto)
         });
