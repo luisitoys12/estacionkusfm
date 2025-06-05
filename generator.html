@@ -6,7 +6,6 @@
   <title>Generador de Avatar • estacionkusfm</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
-  <!-- <link rel="stylesheet" href="https://kit.fontawesome.com/df2a1fbcf1.css" crossorigin="anonymous"> -->
   <style>
     body {
       background: linear-gradient(135deg, #f8e473 0%, #70e1f5 100%);
@@ -22,6 +21,27 @@
       background: rgba(255,255,255,0.93);
       border-radius: 18px;
       box-shadow: 0 4px 32px #70e1f577;
+    }
+    .volver-inicio {
+      display: block;
+      width: fit-content;
+      margin: 0 auto 20px auto;
+      background: #70e1f5;
+      color: #fff;
+      font-size: 1.01rem;
+      font-family: 'Contrail One', Arial, sans-serif;
+      padding: 8px 18px;
+      border-radius: 7px;
+      text-decoration: none;
+      box-shadow: 0 1px 7px #ffd60066;
+      transition: background 0.2s;
+      border: none;
+      outline: none;
+    }
+    .volver-inicio:hover {
+      background: #ff9800;
+      color: #fff;
+      text-decoration: none;
     }
     .mini-player {
       background: #fffbe9;
@@ -111,6 +131,12 @@
       letter-spacing: 1px;
       text-shadow: 0px 1px 6px #f8e473;
     }
+    .mini-player-error {
+      font-size: 0.97rem;
+      color: #c00;
+      margin-top: 7px;
+      font-family: Arial, sans-serif;
+    }
     @media (max-width: 550px) {
       .container-main { max-width: 99vw; }
       .mini-player { padding: 13px 5px; }
@@ -123,6 +149,9 @@
 <body>
 
   <div class="container-main">
+    <!-- VOLVER A INICIO -->
+    <a href="index.html" class="volver-inicio"><i class="fas fa-arrow-left"></i> Volver a inicio</a>
+
     <!-- MINI PLAYER DJ -->
     <div class="mini-player" id="mini-player">
       <img id="mini-dj-head" class="mini-player-avatar"
@@ -141,6 +170,7 @@
           <source src="https://radio.estacionkusmedios.com/listen/esmerosound/radio.mp3" type="audio/mpeg">
           Tu navegador no soporta audio HTML5.
         </audio>
+        <div class="mini-player-error" id="mini-player-error" style="display:none;"></div>
       </div>
     </div>
 
@@ -181,10 +211,10 @@
           }
           document.getElementById('mini-dj-song').textContent = song;
         }).catch(() => {
-          // En caso de error, mantener datos por defecto
+          // Si error, no mostrar error a usuario aquí (solo dejamos datos por defecto)
         });
     }
-    setInterval(updateMiniPlayer, 5000);
+    setInterval(updateMiniPlayer, 7000);
     updateMiniPlayer();
 
     // Mini player controles audio
@@ -192,18 +222,29 @@
     const btnPlay = document.getElementById('mini-btn-play');
     const btnPause = document.getElementById('mini-btn-pause');
     const btnReload = document.getElementById('mini-btn-reload');
+    const errorDiv = document.getElementById('mini-player-error');
 
     btnPlay.onclick = function() {
-      audio.play();
+      errorDiv.style.display = "none";
+      audio.play().catch(function(e){
+        errorDiv.textContent = "No se pudo reproducir. Haz clic para intentar de nuevo.";
+        errorDiv.style.display = "block";
+      });
     };
     btnPause.onclick = function() {
       audio.pause();
     };
     btnReload.onclick = function() {
       audio.pause();
-      audio.src = audio.src.split('?')[0] + '?t=' + new Date().getTime();
+      // Forzar recarga con nuevo parámetro para saltar caché
+      audio.src = "https://radio.estacionkusmedios.com/listen/esmerosound/radio.mp3?t=" + new Date().getTime();
       audio.load();
-      audio.play();
+      setTimeout(() => {
+        audio.play().catch(function(e){
+          errorDiv.textContent = "No se pudo reproducir. Haz clic para intentar de nuevo.";
+          errorDiv.style.display = "block";
+        });
+      }, 200);
     };
 
     function updateBtnState() {
@@ -215,9 +256,16 @@
         btnPause.disabled = false;
       }
     }
-    audio.addEventListener('play', updateBtnState);
+    audio.addEventListener('play', function() {
+      errorDiv.style.display = "none";
+      updateBtnState();
+    });
     audio.addEventListener('pause', updateBtnState);
     audio.addEventListener('ended', updateBtnState);
+    audio.addEventListener('error', function() {
+      errorDiv.textContent = "Error: No se pudo cargar el stream. Intenta recargar.";
+      errorDiv.style.display = "block";
+    });
     updateBtnState();
   </script>
 </body>
