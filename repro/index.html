@@ -36,16 +36,19 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
 }
 .cover {
     margin-bottom: 16px;
     width: 100%;
     display: flex;
     justify-content: center;
+    position: relative;
 }
 .dj-container {
-    width: 110px;
-    height: 105px;
+    width: 90px;
+    height: 90px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -54,14 +57,15 @@ body {
     border-radius: 14px;
     box-shadow: 0 4px 16px #0005;
     padding: 8px 0 0 0;
+    overflow: visible;
 }
 #dj_avatar {
     position: absolute;
     left: 50%;
-    bottom: 32px;
+    bottom: 25px;
     transform: translateX(-50%);
-    width: 60px;
-    height: 80px;
+    width: 54px;
+    height: 72px;
     object-fit: contain;
     z-index: 1;
     background: transparent;
@@ -72,9 +76,36 @@ body {
     left: 50%;
     bottom: 0;
     transform: translateX(-50%);
-    width: 100px;
+    width: 64px;
     z-index: 2;
     pointer-events: none;
+}
+.summer-effect {
+    position: absolute;
+    left: 10px;
+    bottom: 0;
+    width: 32px;
+    height: 32px;
+    z-index: 10;
+    animation: floatPalm 3.5s ease-in-out infinite;
+}
+.summer-sun {
+    position: absolute;
+    right: 6px;
+    top: -8px;
+    width: 32px;
+    height: 32px;
+    z-index: 10;
+    animation: sunGlow 2.7s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px #ffe600cc);
+}
+@keyframes floatPalm {
+    0%, 100% { transform: translateY(0) rotate(-5deg);}
+    50% { transform: translateY(-8px) rotate(6deg);}
+}
+@keyframes sunGlow {
+    0%, 100% { filter: drop-shadow(0 0 12px #ffe600cc);}
+    50% { filter: drop-shadow(0 0 24px #ffe600ff);}
 }
 .meta-cards {
     width: 100%;
@@ -142,9 +173,11 @@ body {
 @media (max-width: 480px) {
     #reproductor { padding: 13px 2vw 10px 2vw; max-width: 99vw;}
     .cover { margin-bottom: 12px;}
-    .dj-container { width: 78px; height: 76px; }
-    #dj_avatar { width: 37px; height: 47px; bottom: 16px;}
-    .dj-set { width: 61px;}
+    .dj-container { width: 60px; height: 62px; }
+    #dj_avatar { width: 27px; height: 36px; bottom: 8px;}
+    .dj-set { width: 39px;}
+    .summer-effect { width: 18px; height: 18px; left: 2px; }
+    .summer-sun { width: 20px; height: 20px; right: 1px; top: -8px; }
     .meta-cards { gap: 7px; }
     .meta-card { padding: 8px 8px 7px 8px; min-height: 32px;}
     .meta-info { font-size: 0.95rem;}
@@ -155,10 +188,13 @@ body {
 <body>
 <div id="reproductor">
     <div class="cover">
+        <img src="https://cdn-icons-png.flaticon.com/512/619/619034.png" class="summer-effect" alt="Palmera verano"
+             style="filter: drop-shadow(0 1px 3px #0007)">
         <div class="dj-container">
             <img src="#" id="dj_avatar" class="ball" onerror="validarAvatar()"/>
             <img src="https://static.habbo-happy.net/img/furni/big/735778452353491.gif" class="dj-set" alt="Set DJ">
         </div>
+        <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" class="summer-sun" alt="Sol verano">
     </div>
     <div class="meta-cards">
         <div class="meta-card">
