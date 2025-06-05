@@ -6,7 +6,6 @@
   <title>estacionkusfm • Fansite Habbo</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="https://kit.fontawesome.com/df2a1fbcf1.css" crossorigin="anonymous">
   <style>
     body {
@@ -69,6 +68,21 @@
       text-shadow: 0px 1px 7px #f8e473;
       display: block;
     }
+    .sidebar-social {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 12px;
+    }
+    .sidebar-social a {
+      color: #00dcff;
+      font-size: 2rem;
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+    .sidebar-social a:hover {
+      color: #ff9800;
+    }
     @media (max-width: 991px) {
       .sidebar-right {
         margin-top: 30px;
@@ -123,7 +137,7 @@
       padding: 8px 14px 7px 14px;
       text-align: center;
       box-shadow: 0 1px 7px #ffd600;
-      min-width: 105px;
+      min-width: 117px;
       min-height: 108px;
       display: flex;
       flex-direction: column;
@@ -131,21 +145,29 @@
       justify-content: flex-start;
       position: relative;
       margin-bottom: 10px;
+      background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80');
+      background-size: cover;
+      background-position: bottom center;
     }
     .equipo-miembro img {
-      width: 48px;
-      height: 60px;
+      width: 54px;
+      height: 68px;
       border-radius: 6px;
       margin-bottom: 3px;
       background: #fff;
-      border: 1px solid #00dcff66;
+      border: 2px solid #00dcffcc;
+      box-shadow: 0 2px 10px #0af4;
     }
     .equipo-miembro span {
       display: block;
-      font-size: 1.04rem;
+      font-size: 1.08rem;
       margin-top: 2px;
       color: #ff9800;
       font-family: 'Contrail One', Arial, sans-serif;
+      background: rgba(255,255,255,0.8);
+      border-radius: 5px;
+      padding: 2px 5px;
+      margin-bottom: 2px;
     }
     .equipo-status {
       position: absolute;
@@ -157,13 +179,14 @@
     .equipo-miembro.vacio {
       background: #f8e47377;
       border: 1px dashed #ffd600;
-      min-width: 105px;
+      min-width: 117px;
       min-height: 108px;
       box-shadow: none;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      background-image: none;
     }
     .equipo-miembro.vacio::after {
       content: "+";
@@ -258,8 +281,6 @@
           <li class="nav-item"><a class="nav-link" href="#eventos">Eventos</a></li>
           <li class="nav-item"><a class="nav-link" href="#ranking">Ranking</a></li>
           <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
-          <li class="nav-item"><a class="nav-link" href="#foro">Foro</a></li>
-          <li class="nav-item"><a class="nav-link" href="#sugerencias">Sugerencias</a></li>
           <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
           <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
         </ul>
@@ -292,7 +313,7 @@
         <section class="mb-4" id="radio">
           <div class="sidebar-section" style="background:rgba(255,255,255,0.96)">
             <span class="sidebar-title">Radio en vivo</span>
-            <iframe src="repro/index.html" title="Reproductor KusFM" class="w-1650px" height="1650px" style="border-radius:16px; border:none; background:#fff;" allow="autoplay"></iframe>
+            <iframe src="repro/index.html" title="Reproductor KusFM" class="w-100" height="145" style="border-radius:16px; border:none; background:#fff;" allow="autoplay"></iframe>
             <div class="fansite-btns-row mt-2">
               <button class="peticion-btn" onclick="document.getElementById('peticion-popup-bg').style.display='flex'">🌊 Peticiones</button>
               <button class="destacados-btn" onclick="document.getElementById('destacados-popup-bg').style.display='flex'">🌞 Destacados</button>
@@ -341,37 +362,14 @@
             </div>
           </div>
         </section>
-        <!-- Secciones extra -->
+        <!-- Eventos -->
         <section class="mb-4" id="eventos">
           <div class="sidebar-section">
             <span class="sidebar-title">Eventos</span>
             <p>¡Participa en los próximos eventos y gana premios!</p>
           </div>
         </section>
-        <section class="mb-4" id="ranking">
-          <div class="sidebar-section">
-            <span class="sidebar-title">Ranking</span>
-            <p>Descubre los usuarios más activos y los top oyentes de la semana.</p>
-          </div>
-        </section>
-        <section class="mb-4" id="galeria">
-          <div class="sidebar-section">
-            <span class="sidebar-title">Galería</span>
-            <p>Explora las mejores imágenes y recuerdos de nuestra comunidad.</p>
-          </div>
-        </section>
-        <section class="mb-4" id="foro">
-          <div class="sidebar-section">
-            <span class="sidebar-title">Foro</span>
-            <p>Debate, comparte ideas y resuelve tus dudas en nuestro foro.</p>
-          </div>
-        </section>
-        <section class="mb-4" id="sugerencias">
-          <div class="sidebar-section">
-            <span class="sidebar-title">Sugerencias</span>
-            <p>¿Tienes ideas para mejorar? ¡Envíanos tus sugerencias!</p>
-          </div>
-        </section>
+        <!-- FAQ -->
         <section class="mb-4" id="faq">
           <div class="sidebar-section">
             <span class="sidebar-title">Preguntas Frecuentes (FAQ)</span>
@@ -382,6 +380,33 @@
 
       <!-- Sidebar derecho -->
       <div class="col-lg-4 sidebar-right">
+        <!-- Galería en sidebar -->
+        <div class="sidebar-section mb-4" id="galeria">
+          <span class="sidebar-title">Galería</span>
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" class="img-fluid mb-2 rounded" alt="Galería 1">
+          <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" class="img-fluid mb-2 rounded" alt="Galería 2">
+          <img src="https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?auto=format&fit=crop&w=400&q=80" class="img-fluid mb-2 rounded" alt="Galería 3">
+        </div>
+        <!-- Ranking en sidebar -->
+        <div class="sidebar-section mb-4" id="ranking">
+          <span class="sidebar-title">Ranking</span>
+          <ol class="text-left pl-4" style="color:#ff9800;">
+            <li>estacionkusfm</li>
+            <li>ayente</li>
+            <li>ser03z-51</li>
+            <li>josecito</li>
+            <li>annita</li>
+            <li>niko</li>
+          </ol>
+        </div>
+        <!-- Redes sociales en sidebar -->
+        <div class="sidebar-section mb-4">
+          <span class="sidebar-title">Redes Sociales</span>
+          <div class="sidebar-social">
+            <a href="https://x.com/estacionkusfm" target="_blank" title="X (antes Twitter)"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://discord.gg/tuinvitediscord" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
         <!-- Placas/API -->
         <div class="sidebar-section mb-4" id="placas">
           <span class="sidebar-title">Últimas placas ganadas</span>
@@ -464,7 +489,7 @@
         });
       });
 
-    // Equipo
+    // Equipo con look de playa (se fuerza gesture=sml, action=wlk y look playero si quieres personalizar más)
     const onlineUsers = {
       "estacionkusfm": true,
       "ser03z-51": false,
@@ -495,8 +520,9 @@
             ? `<span class="equipo-status" title="Online">🔵</span>`
             : `<span class="equipo-status" title="Offline">🔴</span>`;
         }
+        // Playa: gesture=sml, action=wlk, direction=2, head_direction=2, size=l
         div.innerHTML = `
-          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(miembro.user)}&gesture=sml&direction=2&head_direction=2&headonly=0" alt="${miembro.nombre}">
+          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(miembro.user)}&gesture=sml&action=wlk&direction=2&head_direction=2&headonly=0&size=l" alt="${miembro.nombre}">
           ${estado}
           <span>${miembro.nombre}</span>`;
         cont.appendChild(div);
