@@ -539,19 +539,47 @@
     </div>
   </div>
 
+  <!-- DESTACADOS POPUP MODERNO -->
   <div class="vacantes-popup-bg" id="destacados-popup-bg" onclick="if(event.target==this)this.style.display='none'">
     <div class="vacantes-popup">
       <button class="close-btn" onclick="document.getElementById('destacados-popup-bg').style.display='none'"><i class="fas fa-times"></i></button>
       <h2 style="color:#ff9800;font-size:1.3rem;">Destacados de la Semana</h2>
-      <ul style="text-align:left;">
-        <li><b>DJManuelloca</b> – Mejor locutor</li>
-        <li><b>Annita</b> – Mejor oyente</li>
-        <li><b>Ser03z-51</b> – Más activo en Discord</li>
-      </ul>
+      <div style="display:flex; flex-direction:column; gap:18px; align-items:center;">
+        <!-- Destacado 1 -->
+        <div style="display:flex; align-items:center; gap:16px; background:rgba(255,233,121,0.25); border-radius:12px; padding:10px 24px; box-shadow:0 1px 6px #ffd60080; min-width:230px;">
+          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=djmanuelloca&gesture=sml&action=wav&direction=2&head_direction=2&headonly=0&size=m" alt="DJManuelloca" style="width:48px;height:64px;border-radius:8px;border:2px solid #00cfff;background:#fff;">
+          <div>
+            <div style="font-family:'Contrail One',Arial,sans-serif;font-size:1.18rem;color:#ff9800;">DJManuelloca</div>
+            <div style="color:#00cfff;font-size:1rem;">
+              <i class="fas fa-trophy" style="color:#ffd700;"></i> Mejor locutor
+            </div>
+          </div>
+        </div>
+        <!-- Destacado 2 -->
+        <div style="display:flex; align-items:center; gap:16px; background:rgba(255,233,121,0.25); border-radius:12px; padding:10px 24px; box-shadow:0 1px 6px #ffd60080; min-width:230px;">
+          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=Annita&gesture=sml&action=wav&direction=2&head_direction=2&headonly=0&size=m" alt="Annita" style="width:48px;height:64px;border-radius:8px;border:2px solid #00cfff;background:#fff;">
+          <div>
+            <div style="font-family:'Contrail One',Arial,sans-serif;font-size:1.18rem;color:#ff9800;">Annita</div>
+            <div style="color:#00cfff;font-size:1rem;">
+              <i class="fas fa-trophy" style="color:#ffd700;"></i> Mejor oyente
+            </div>
+          </div>
+        </div>
+        <!-- Destacado 3 -->
+        <div style="display:flex; align-items:center; gap:16px; background:rgba(255,233,121,0.25); border-radius:12px; padding:10px 24px; box-shadow:0 1px 6px #ffd60080; min-width:230px;">
+          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=Ser03z-51&gesture=sml&action=wav&direction=2&head_direction=2&headonly=0&size=m" alt="Ser03z-51" style="width:48px;height:64px;border-radius:8px;border:2px solid #00cfff;background:#fff;">
+          <div>
+            <div style="font-family:'Contrail One',Arial,sans-serif;font-size:1.18rem;color:#ff9800;">Ser03z-51</div>
+            <div style="color:#00cfff;font-size:1rem;">
+              <i class="fas fa-trophy" style="color:#ffd700;"></i> Más activo en Discord
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- NUEVO POPUP VACANTES INTEGRADO -->
+  <!-- VACANTES POPUP NUEVO -->
   <div class="vacantes-popup-bg" id="vacantes-popup-bg" onclick="if(event.target==this)this.style.display='none'">
     <div class="vacantes-popup">
       <button class="close-btn" onclick="document.getElementById('vacantes-popup-bg').style.display='none'"><i class="fas fa-times"></i></button>
@@ -606,77 +634,6 @@
       <div id="result-vacantes" style="display:none;margin-top:10px;"></div>
     </div>
   </div>
-  <script>
-    function mostrarRequisitos() {
-      const puesto = document.getElementById('puesto-vacante').value;
-      let html = '';
-      if (puesto === 'locutor') {
-        html = `
-          <div class="form-group">
-            <label>Sube una captura con VirtualDJ abierto <b>(obligatorio)</b></label>
-            <input type="file" name="archivo1" class="form-control" accept="image/*" required>
-          </div>
-          <div class="form-group">
-            <label>Si no tienes VirtualDJ, sube foto de tu keko en la sala Disco de Habbo</label>
-            <input type="file" name="archivo2" class="form-control" accept="image/*">
-          </div>
-        `;
-      }
-      if (puesto === 'guia') {
-        html = `
-          <div class="form-group">
-            <label>Sube una foto de tu keko en sala Disco de Habbo</label>
-            <input type="file" name="archivo1" class="form-control" accept="image/*" required>
-          </div>
-        `;
-      }
-      if (puesto === 'diseñador') {
-        html = `
-          <div class="form-group">
-            <label>Sube una captura de tu sala de diseño en Habbo</label>
-            <input type="file" name="archivo1" class="form-control" accept="image/*" required>
-          </div>
-          <div class="form-group">
-            <label>Link de la sala en Habbo</label>
-            <input type="url" name="salaurl" class="form-control" placeholder="https://www.habbo.es/room/..." required>
-          </div>
-        `;
-      }
-      if (puesto === 'publicista') {
-        html = `
-          <div class="form-group">
-            <label>Sube una captura de una promoción que hayas hecho (puede ser ficticia)</label>
-            <input type="file" name="archivo1" class="form-control" accept="image/*" required>
-          </div>
-        `;
-      }
-      document.getElementById('requisitos-extra').innerHTML = html;
-    }
-    document.getElementById('vacanteForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const form = e.target;
-      const data = new FormData(form);
-      document.querySelector('#result-vacantes').style.display = 'none';
-      document.querySelector('#result-vacantes').innerHTML = '';
-      try {
-        const resp = await fetch('/api/vacante', {
-          method: 'POST',
-          body: data
-        });
-        if (resp.ok) {
-          document.querySelector('#result-vacantes').style.display = 'block';
-          document.querySelector('#result-vacantes').innerHTML = "<div class='alert alert-success'>¡Postulación enviada correctamente!</div>";
-          form.reset();
-          document.getElementById('requisitos-extra').innerHTML = '';
-        } else {
-          throw new Error('Error al enviar. Intenta de nuevo.');
-        }
-      } catch (err) {
-        document.querySelector('#result-vacantes').style.display = 'block';
-        document.querySelector('#result-vacantes').innerHTML = "<div class='alert alert-danger'>Hubo un error al enviar tu postulación.</div>";
-      }
-    });
-  </script>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
@@ -756,7 +713,7 @@
             : `<span class="equipo-status" title="Offline">🔴</span>`;
         }
         div.innerHTML = `
-          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(miembro.user)}&gesture=sml&action=wlk&direction=2&head_direction=2&headonly=0&size=l" alt="${miembro.nombre}">
+          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(miembro.user)}&gesture=sml&action=wlk&direction=2&head_direction=2&headonly=0&size=l" alt="${miembro.nombre[...]
           ${estado}
           <span>${miembro.nombre}</span>`;
         cont.appendChild(div);
@@ -773,6 +730,78 @@
     renderEquipo(locutores, "locutores", 2);
     renderEquipo(guias, "guias", 2);
     renderEquipo(publicistas, "publicistas", 0);
+  </script>
+  <!-- Scripts para vacantes dinámico y envío a backend -->
+  <script>
+  function mostrarRequisitos() {
+    const puesto = document.getElementById('puesto-vacante').value;
+    let html = '';
+    if (puesto === 'locutor') {
+      html = `
+        <div class="form-group">
+          <label>Sube una captura con VirtualDJ abierto <b>(obligatorio)</b></label>
+          <input type="file" name="archivo1" class="form-control" accept="image/*" required>
+        </div>
+        <div class="form-group">
+          <label>Si no tienes VirtualDJ, sube foto de tu keko en la sala Disco de Habbo</label>
+          <input type="file" name="archivo2" class="form-control" accept="image/*">
+        </div>
+      `;
+    }
+    if (puesto === 'guia') {
+      html = `
+        <div class="form-group">
+          <label>Sube una foto de tu keko en sala Disco de Habbo</label>
+          <input type="file" name="archivo1" class="form-control" accept="image/*" required>
+        </div>
+      `;
+    }
+    if (puesto === 'diseñador') {
+      html = `
+        <div class="form-group">
+          <label>Sube una captura de tu sala de diseño en Habbo</label>
+          <input type="file" name="archivo1" class="form-control" accept="image/*" required>
+        </div>
+        <div class="form-group">
+          <label>Link de la sala en Habbo</label>
+          <input type="url" name="salaurl" class="form-control" placeholder="https://www.habbo.es/room/..." required>
+        </div>
+      `;
+    }
+    if (puesto === 'publicista') {
+      html = `
+        <div class="form-group">
+          <label>Sube una captura de una promoción que hayas hecho (puede ser ficticia)</label>
+          <input type="file" name="archivo1" class="form-control" accept="image/*" required>
+        </div>
+      `;
+    }
+    document.getElementById('requisitos-extra').innerHTML = html;
+  }
+  document.getElementById('vacanteForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    document.querySelector('#result-vacantes').style.display = 'none';
+    document.querySelector('#result-vacantes').innerHTML = '';
+    try {
+      const resp = await fetch('/api/vacante', {
+        method: 'POST',
+        body: data
+      });
+      if (resp.ok) {
+        document.querySelector('#result-vacantes').style.display = 'block';
+        document.querySelector('#result-vacantes').innerHTML = "<div class='alert alert-success'>¡Postulación enviada correctamente!</div>";
+        form.reset();
+        document.getElementById('requisitos-extra').innerHTML = '';
+      } else {
+        throw new Error('Error al enviar. Intenta de nuevo.');
+      }
+    } catch (err) {
+      document.querySelector('#result-vacantes').style.display = 'block';
+      document.querySelector('#result-vacantes').innerHTML = "<div class='alert alert-danger'>Hubo un error al enviar tu postulación.</div>";
+    }
+  });
   </script>
 </body>
 </html>
