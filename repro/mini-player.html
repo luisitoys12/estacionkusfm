@@ -73,6 +73,21 @@
       flex-wrap: wrap;
     }
     .mini-nextsong { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #ff72b5; font-weight: 600;}
+    .mini-alliance {
+      color: var(--kusfm2);
+      background: #fffae3;
+      border-radius: 1em;
+      font-size: 1.06em;
+      padding: 2px 18px 2px 12px;
+      margin-left: 0.18em;
+      font-weight: 700;
+      box-shadow: 0 2px 8px #ffe15a39;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      letter-spacing: .03em;
+      border: 1.5px solid var(--kusfm2);
+    }
     .mini-req-btn {
       background: var(--kusfm2); color: #23203a; border: none; border-radius: 1em;
       padding: 2px 13px; font-size: 1.01em; cursor: pointer; font-family:inherit; font-weight:600; transition: background .13s, color .13s;
@@ -127,6 +142,7 @@
       .verano-sun { left:-14px; top:-9px; width:33px; height:33px;}
       .verano-palm { left:-12px; bottom:-5px; width:28px; height:28px;}
       .verano-flower { right:-8px; top:-7px; width:19px; height:19px;}
+      .mini-alliance { font-size: .96em; padding: 2px 10px 2px 8px;}
     }
   </style>
 </head>
@@ -138,8 +154,11 @@
     <img class="verano-flower" src="https://cdn-icons-png.flaticon.com/512/3038/3038938.png" alt="Flor verano">
     <img id="mini-dj-avatar" class="mini-avatar" src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=wav&action=std&direction=2&head_direction=2&headonly=0" alt="DJ Avatar" onerror="this.style.display='none';">
     <div class="mini-info">
+      <div class="mini-alliance" id="mini-alliance-banner">
+        🤝 Alianza con KUSFM
+      </div>
       <div class="mini-title-artist">
-        <span id="mini-song-marquee" class="mini-marquee">Cargando...</span>
+        <span id="mini-song-marquee" class="mini-marquee"></span>
       </div>
       <div class="mini-dj" id="mini-dj-name"><span class="mini-live-dot"></span>DJ: ...</div>
       <div class="mini-listeners"><span class="mini-listeners-icon">&#128101;</span><span id="mini-listeners">0</span> oyentes</div>
@@ -232,7 +251,7 @@
           setTimeout(actualizarAnimacionMarquee, 100);
         })
         .catch(()=>{
-          document.getElementById('mini-song-marquee').textContent = "Error al cargar";
+          document.getElementById('mini-song-marquee').textContent = "";
           document.getElementById('mini-dj-name').innerHTML = `<span class="mini-live-dot mini-off-dot"></span>DJ: ...`;
           document.getElementById('mini-dj-avatar').src = getMiniHabboAvatar("estacionkusfm");
           document.getElementById('mini-listeners').textContent = "0";
@@ -281,7 +300,7 @@
 
     // Botón de solicitud
     document.getElementById('mini-req-btn').onclick = ()=>{
-      window.open('#', '_blank');
+      window.open('https://estacionkusfm.com/pedir', '_blank');
     };
 
     // Reloj en vivo (zona local)
