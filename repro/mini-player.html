@@ -27,15 +27,63 @@
       background: url('https://images.habbo.com/c_images/article_images_hq/article_summer2011_newclothes.gif') center/cover no-repeat;
       overflow: visible;
     }
+    /* Cuadro piedra detrás del avatar */
+    .mini-avatar-wrapper {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.8em;
+    }
+    .mini-avatar-bg {
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      left: 0; top: 0;
+      background: url('https://img.freepik.com/free-photo/rock-texture-background_1194-5519.jpg?w=300&q=70') center/cover no-repeat;
+      border-radius: 12px;
+      filter: brightness(0.92) contrast(1.12) grayscale(0.11);
+      box-shadow: 0 3px 14px #0004, 0 0 0 4px #2224;
+      z-index: 1;
+    }
+    /* Efecto disco animado solo delante del cuadro piedra */
+    .mini-avatar-disco {
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      left: 0; top: 0;
+      border-radius: 12px;
+      z-index: 2;
+      pointer-events: none;
+      /* Fondo disco animado */
+      background: conic-gradient(
+        #ffdf2a 10%, #ff72b5 30%, #00dcff 60%, #30d191 80%, #ffdf2a 100%
+      );
+      mix-blend-mode: lighten;
+      opacity: 0.45;
+      animation: disco-colors 2s linear infinite;
+    }
+    @keyframes disco-colors {
+      0% { filter: hue-rotate(0deg) brightness(1.04);}
+      100% { filter: hue-rotate(360deg) brightness(1.08);}
+    }
+    /* Avatar cuadrado encima del efecto disco */
     .mini-avatar {
-      width: 56px; height: 56px;
-      border-radius: 50%;
+      width: 50px; height: 50px;
+      border-radius: 7px;
       background: #eee;
       object-fit: cover;
-      box-shadow: 0 3px 12px #00dcff60;
-      flex-shrink: 0;
-      border: 3.5px solid #30d191;
+      box-shadow: 0 2px 6px #30d19199, 0 0px 0px #0001;
+      border: 3.5px solid #fff;
+      position: relative;
+      z-index: 3;
+      transition: transform 0.16s;
+      background-color: #fff;
     }
+    .mini-avatar:hover { transform: scale(1.10) rotate(-6deg);}
+    /* Resto del miniplayer igual */
     .mini-info {
       flex: 1;
       min-width: 0;
@@ -155,7 +203,6 @@
       background: #ffdf2a;
       color: #00dcff;
     }
-
     /* Modal */
     .modal-bg {
       display: none;
@@ -227,7 +274,9 @@
     @keyframes verano-flower-bounce { 0%{transform:translateY(0);} 100%{transform:translateY(9px);} }
     @media (max-width:600px) {
       .kusfm-miniplayer { max-width: 100%; font-size: 0.95em;}
-      .mini-avatar { width: 40px; height: 40px; }
+      .mini-avatar-wrapper { width: 44px; height: 44px;}
+      .mini-avatar-bg, .mini-avatar-disco { width: 44px; height: 44px;}
+      .mini-avatar { width: 34px; height: 34px;}
       .verano-sun { left:-14px; top:-9px; width:33px; height:33px;}
       .verano-palm { left:-12px; bottom:-5px; width:28px; height:28px;}
       .verano-flower { right:-8px; top:-7px; width:19px; height:19px;}
@@ -240,12 +289,17 @@
     <img class="verano-sun" src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Sol verano" />
     <img class="verano-palm" src="https://cdn-icons-png.flaticon.com/512/619/619034.png" alt="Palmera verano" />
     <img class="verano-flower" src="https://cdn-icons-png.flaticon.com/512/3038/3038938.png" alt="Flor verano" />
-    <img
-      id="mini-dj-avatar"
-      class="mini-avatar"
-      src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=wav&action=std&direction=2&head_direction=2&headonly=0"
-      alt="DJ Avatar"
-    />
+
+    <div class="mini-avatar-wrapper">
+      <div class="mini-avatar-bg"></div>
+      <div class="mini-avatar-disco"></div>
+      <img
+        id="mini-dj-avatar"
+        class="mini-avatar"
+        src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=wav&action=std&direction=2&head_direction=2&headonly=0"
+        alt="DJ Avatar"
+      />
+    </div>
     <div class="mini-info">
       <div class="mini-alliance">
         🤝 Alianza con KUSFM
