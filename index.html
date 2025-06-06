@@ -669,7 +669,7 @@
     setInterval(updateClock, 1000);
     updateClock();
   </script>
-  <script>
+    <script>
   // Placas (badges)
   const exampleBadges = [
     "ES620", "ES621", "ES622", "ES623", "ES624", "ES625"
@@ -684,15 +684,16 @@
     badgeContainer.appendChild(img);
   });
 
-  // Últimos furnis con la API nueva
-  fetch('https://habbofurni.com/api/v1')
+  // Últimos furnis usando el endpoint correcto
+  fetch('https://habbofurni.com/api/v1/furniture?hotel=1')
     .then(res => res.json())
-    .then(furnis => {
+    .then(response => {
+      const furnis = response.data || response; // Normalmente está en .data
       const furniContainer = document.getElementById('api-furnis');
       furniContainer.innerHTML = '';
       furnis.slice(0, 6).forEach(furni => {
         const img = document.createElement('img');
-        img.src = furni.image || furni.icon;
+        img.src = furni.image_url || furni.icon || furni.image;
         img.alt = furni.name;
         img.title = furni.name;
         img.style.width = "48px";
