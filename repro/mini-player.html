@@ -15,36 +15,79 @@
       padding: 0.6em 1em;
       gap: 1em;
       width: 100%;
-      max-width: 420px;
+      max-width: 440px;
       font-family: 'Contrail One', 'Arial', sans-serif;
+      position: relative;
+      min-height: 65px;
     }
     .mini-avatar {
       width: 48px; height: 48px; border-radius: 50%; background: #eee; object-fit: cover;
       box-shadow: 0 2px 8px #0001;
+      flex-shrink: 0;
+      transition: transform 0.15s;
     }
+    .mini-avatar:hover { transform: scale(1.07) rotate(-4deg);}
     .mini-info { flex:1; min-width:0; display:flex; flex-direction:column; gap:0.25em;}
     .mini-title-artist {
       overflow: hidden; white-space: nowrap; width: 100%; font-size: 1em; color: #23203a;
+      min-height: 1.4em;
+      position: relative;
+      line-height: 1.4;
+      font-weight: bold;
+      letter-spacing: .02em;
     }
     .mini-marquee {
-      display: inline-block; min-width: 100%; 
+      display: inline-block; min-width: 100%; vertical-align: middle;
+      font-size: 1em;
+      /* La animación se agregará/quitará por JS según el largo */
+    }
+    .mini-marquee.marquee-animate {
       animation: mini-marquee 9s linear infinite;
       will-change: transform;
+      padding-left: 100%;
     }
     @keyframes mini-marquee {
       0% { transform: translateX(0%);}
       100% { transform: translateX(-100%);}
     }
-    .mini-controls { display:flex; gap:0.5em; margin-top:0.2em;}
+    .mini-controls { display:flex; gap:0.5em; margin-top:0.1em;}
     .mini-controls button {
-      background: #00dcff; color: #23203a; border: none; border-radius: 50%;
-      width: 32px; height: 32px; font-size: 1.2em; cursor: pointer; box-shadow: 0 2px 6px #0001; transition: background .18s;
+      background: #00dcff;
+      color: #23203a;
+      border: none;
+      border-radius: 50%;
+      width: 32px; height: 32px; font-size: 1.2em;
+      cursor: pointer;
+      box-shadow: 0 2px 6px #0001;
+      transition: background .18s;
+      display: flex; align-items: center; justify-content: center;
     }
     .mini-controls button:active, .mini-controls button:focus { background: #ffdf2a;}
+    .kusfm-brand {
+      position: absolute; right: 10px; bottom: 6px;
+      font-size: .79em; color: #00dcff; text-decoration: none; opacity: .77;
+      font-family: inherit; font-weight:600; letter-spacing: .06em;
+      transition: opacity .2s;
+    }
+    .kusfm-brand:hover { opacity: 1; color: #ffdf2a;}
+    .mini-volume {
+      margin-left: 0.6em;
+      display: flex; align-items: center; gap: 0.18em;
+    }
+    .mini-volume input[type="range"] {
+      width: 60px;
+      accent-color: #00dcff;
+      vertical-align: middle;
+    }
+    .mini-volume-icon {
+      font-size: 1.1em; color: #00dcff;
+    }
     @media (max-width:480px) {
       .kusfm-miniplayer { max-width: 100%; padding: 0.5em; font-size: 0.97em;}
-      .mini-avatar { width: 30px; height: 30px; }
+      .mini-avatar { width: 32px; height: 32px; }
       .mini-controls button { width: 24px; height: 24px; font-size: 1em; }
+      .kusfm-brand { right: 5px; font-size: .7em;}
+      .mini-volume input[type="range"] { width: 38px;}
     }
   </style>
 </head>
@@ -57,14 +100,21 @@
         <span id="mini-song-marquee" class="mini-marquee">Cargando...</span>
       </div>
       <audio id="mini-audio" src="https://radio.estacionkusmedios.com/listen/esmerosound/radio.mp3" preload="none"></audio>
-      <div class="mini-controls">
-        <button id="mini-play" title="Reproducir">&#9654;</button>
-        <button id="mini-pause" title="Pausar">&#10073;&#10073;</button>
+      <div style="display:flex;align-items:center;">
+        <div class="mini-controls">
+          <button id="mini-play" title="Reproducir">&#9654;</button>
+          <button id="mini-pause" title="Pausar">&#10073;&#10073;</button>
+        </div>
+        <div class="mini-volume" title="Volumen">
+          <span class="mini-volume-icon">&#128266;</span>
+          <input id="mini-volume-slider" type="range" min="0" max="100" value="80">
+        </div>
       </div>
     </div>
+    <a class="kusfm-brand" href="https://estacionkusfm.com" target="_blank" rel="noopener">KUSFM</a>
   </div>
   <script>
-    // -- API endpoint y avatar Habbo igual que el player principal --
+    // --- API endpoint y avatar Habbo igual que el player principal ---
     const MINI_API_NOWPLAYING_URL = 'https://radio.estacionkusmedios.com/api/nowplaying/esmerosound';
     function getMiniHabboAvatar(username) {
       return "https://www.habbo.es/habbo-imaging/avatarimage"
@@ -72,7 +122,20 @@
         + "&gesture=wav&action=std&direction=2&head_direction=2&headonly=0";
     }
 
-    // -- Actualiza la info cada 5s igual que el player --
+    // --- Slug/marquee solo si es largo ---
+    function actualizarAnimacionMarquee() {
+      const marquee = document.getElementById('mini-song-marquee');
+      const parent = marquee.parentElement;
+      marquee.classList.remove('marquee-animate');
+      marquee.style.paddingLeft = '0';
+      void marquee.offsetWidth;
+      if (marquee.scrollWidth > parent.offsetWidth+2) {
+        marquee.classList.add('marquee-animate');
+        marquee.style.paddingLeft = '100%';
+      }
+    }
+
+    // --- Actualiza la info cada 5s igual que el player ---
     function updateMiniPlayer() {
       fetch(MINI_API_NOWPLAYING_URL)
         .then(r=>r.json())
@@ -87,19 +150,46 @@
           } else {
             document.getElementById('mini-dj-avatar').src = getMiniHabboAvatar("estacionkusfm");
           }
+          setTimeout(actualizarAnimacionMarquee, 100);
         })
         .catch(()=>{
           document.getElementById('mini-song-marquee').textContent = "Error al cargar";
           document.getElementById('mini-dj-avatar').src = getMiniHabboAvatar("estacionkusfm");
+          setTimeout(actualizarAnimacionMarquee, 100);
         });
     }
+    window.addEventListener("load", actualizarAnimacionMarquee);
     updateMiniPlayer();
     setInterval(updateMiniPlayer,5000);
+    window.addEventListener('resize', ()=>{
+      setTimeout(actualizarAnimacionMarquee, 100);
+    });
 
-    // -- Play/Pause controles simples --
+    // --- Play/Pause controles simples ---
     const miniAudio = document.getElementById('mini-audio');
     document.getElementById('mini-play').onclick = ()=>miniAudio.play();
     document.getElementById('mini-pause').onclick = ()=>miniAudio.pause();
+
+    // --- Volumen control ---
+    const miniVolume = document.getElementById('mini-volume-slider');
+    miniAudio.volume = miniVolume.value/100;
+    miniVolume.addEventListener('input', e => {
+      miniAudio.volume = miniVolume.value/100;
+    });
+
+    // --- Auto-pausa si el usuario sale de la pestaña (mejora experiencia) ---
+    document.addEventListener("visibilitychange", ()=>{
+      if(document.hidden) miniAudio.pause();
+    });
+
+    // --- Mejora accesibilidad: barra espaciadora para play/pause ---
+    document.addEventListener('keydown', function(e){
+      if(document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+      if (e.code === 'Space' || e.key === ' ') {
+        if(miniAudio.paused) { miniAudio.play(); } else { miniAudio.pause(); }
+        e.preventDefault();
+      }
+    });
   </script>
 </body>
 </html>
