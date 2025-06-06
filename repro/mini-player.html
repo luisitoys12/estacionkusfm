@@ -18,7 +18,7 @@
       max-width: 440px;
       font-family: 'Contrail One', 'Arial', sans-serif;
       position: relative;
-      min-height: 65px;
+      min-height: 70px;
     }
     .mini-avatar {
       width: 48px; height: 48px; border-radius: 50%; background: #eee; object-fit: cover;
@@ -27,7 +27,7 @@
       transition: transform 0.15s;
     }
     .mini-avatar:hover { transform: scale(1.07) rotate(-4deg);}
-    .mini-info { flex:1; min-width:0; display:flex; flex-direction:column; gap:0.25em;}
+    .mini-info { flex:1; min-width:0; display:flex; flex-direction:column; gap:0.19em;}
     .mini-title-artist {
       overflow: hidden; white-space: nowrap; width: 100%; font-size: 1em; color: #23203a;
       min-height: 1.4em;
@@ -39,7 +39,6 @@
     .mini-marquee {
       display: inline-block; min-width: 100%; vertical-align: middle;
       font-size: 1em;
-      /* La animación se agregará/quitará por JS según el largo */
     }
     .mini-marquee.marquee-animate {
       animation: mini-marquee 9s linear infinite;
@@ -50,7 +49,18 @@
       0% { transform: translateX(0%);}
       100% { transform: translateX(-100%);}
     }
-    .mini-controls { display:flex; gap:0.5em; margin-top:0.1em;}
+    .mini-dj {
+      font-size: .98em;
+      color: #0097b2;
+      font-weight: normal;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      line-height: 1.2;
+      margin-bottom: 1px;
+    }
+    .mini-controls { display:flex; gap:0.5em; margin-top:0.09em;}
     .mini-controls button {
       background: #00dcff;
       color: #23203a;
@@ -88,6 +98,7 @@
       .mini-controls button { width: 24px; height: 24px; font-size: 1em; }
       .kusfm-brand { right: 5px; font-size: .7em;}
       .mini-volume input[type="range"] { width: 38px;}
+      .mini-dj { font-size: .91em;}
     }
   </style>
 </head>
@@ -99,6 +110,7 @@
       <div class="mini-title-artist">
         <span id="mini-song-marquee" class="mini-marquee">Cargando...</span>
       </div>
+      <div class="mini-dj" id="mini-dj-name">DJ: ...</div>
       <audio id="mini-audio" src="https://radio.estacionkusmedios.com/listen/esmerosound/radio.mp3" preload="none"></audio>
       <div style="display:flex;align-items:center;">
         <div class="mini-controls">
@@ -145,15 +157,20 @@
           let artist = song.artist ? song.artist : "Desconocido";
           let title = song.title ? song.title : "Desconocido";
           document.getElementById('mini-song-marquee').textContent = artist + " - " + title;
+          let nombreDj;
           if(live && live.is_live && live.streamer_name){
-            document.getElementById('mini-dj-avatar').src = getMiniHabboAvatar(live.streamer_name);
+            nombreDj = live.streamer_name;
+            document.getElementById('mini-dj-avatar').src = getMiniHabboAvatar(nombreDj);
           } else {
+            nombreDj = "AutoDJ";
             document.getElementById('mini-dj-avatar').src = getMiniHabboAvatar("estacionkusfm");
           }
+          document.getElementById('mini-dj-name').textContent = "DJ: " + nombreDj;
           setTimeout(actualizarAnimacionMarquee, 100);
         })
         .catch(()=>{
           document.getElementById('mini-song-marquee').textContent = "Error al cargar";
+          document.getElementById('mini-dj-name').textContent = "DJ: ...";
           document.getElementById('mini-dj-avatar').src = getMiniHabboAvatar("estacionkusfm");
           setTimeout(actualizarAnimacionMarquee, 100);
         });
