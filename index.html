@@ -674,35 +674,41 @@
     updateClock();
   </script>
   <script>
-    // Placas y furnis (API)
-    const exampleBadges = [
-      "ES620", "ES621", "ES622", "ES623", "ES624", "ES625"
-    ];
-    const badgeContainer = document.getElementById('api-badges');
-    exampleBadges.forEach(code => {
-      const img = document.createElement('img');
-      img.src = `https://images.habbo.com/c_images/album1584/${code}.gif`;
-      img.alt = code;
-      img.style.width = "48px";
-      img.style.margin = "3px";
-      badgeContainer.appendChild(img);
-    });
-    fetch('https://habboemotion.com/api/furni/latest')
-      .then(res => res.json())
-      .then(furnis => {
-        const furniContainer = document.getElementById('api-furnis');
-        furniContainer.innerHTML = '';
-        furnis.slice(0, 6).forEach(furni => {
-          const img = document.createElement('img');
-          img.src = furni.image_large;
-          img.alt = furni.name;
-          img.title = furni.name;
-          img.style.width = "48px";
-          img.style.margin = "3px";
-          furniContainer.appendChild(img);
-        });
+  // Placas (badges)
+  const exampleBadges = [
+    "ES620", "ES621", "ES622", "ES623", "ES624", "ES625"
+  ];
+  const badgeContainer = document.getElementById('api-badges');
+  exampleBadges.forEach(code => {
+    const img = document.createElement('img');
+    img.src = `https://images.habbo.com/c_images/album1584/${code}.gif`;
+    img.alt = code;
+    img.style.width = "48px";
+    img.style.margin = "3px";
+    badgeContainer.appendChild(img);
+  });
+
+  // Últimos furnis con la API nueva
+  fetch('https://habbofurni.com/api/v1')
+    .then(res => res.json())
+    .then(furnis => {
+      const furniContainer = document.getElementById('api-furnis');
+      furniContainer.innerHTML = '';
+      furnis.slice(0, 6).forEach(furni => {
+        const img = document.createElement('img');
+        img.src = furni.image || furni.icon;
+        img.alt = furni.name;
+        img.title = furni.name;
+        img.style.width = "48px";
+        img.style.margin = "3px";
+        furniContainer.appendChild(img);
       });
-  </script>
+    })
+    .catch(err => {
+      const furniContainer = document.getElementById('api-furnis');
+      furniContainer.innerHTML = '<span style="color:red">Error al cargar furnis</span>';
+    });
+</script>
   <script>
     // --- Equipo con look de playa y estados ---
     const onlineUsers = {
