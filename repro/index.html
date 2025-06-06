@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KUSFM Player Principal Verano</title>
+  <title>KUSFM Player Compacto Verano</title>
   <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet"/>
   <style>
     body {
@@ -16,97 +16,87 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      border-radius: 1.6em;
-      box-shadow: 0 4px 22px #0002;
-      padding: 2em 1.5em 2.5em 1.5em;
+      border-radius: 1em;
+      box-shadow: 0 2px 10px #0002;
+      padding: 0.7em 0.8em 1.1em 0.8em;
       width: 100%;
-      max-width: 600px;
-      margin: 44px auto 40px auto;
+      max-width: 360px;
+      min-width: 210px;
+      margin: 14px auto 16px auto;
       position: relative;
-      min-height: 520px;
-      border: 2.5px solid #00dcff;
+      min-height: 0;
+      border: 2px solid #00dcff;
       background: url('https://images.habbo.com/c_images/article_images_hq/article_summer2011_newclothes.gif') center/cover no-repeat;
       overflow: visible;
     }
-    /* Adornos de verano */
+    /* Verano adornos */
     .verano-sun {
-      position: absolute; left: -33px; top: -28px; width: 56px; height:56px;
-      z-index: 2; pointer-events: none; animation: verano-sun-spin 11s linear infinite;
+      position: absolute; left: -14px; top: -12px; width: 27px; height:27px;
+      z-index: 2; pointer-events: none; animation: verano-sun-spin 8s linear infinite;
     }
     @keyframes verano-sun-spin { 0%{transform:rotate(0);} 100%{transform:rotate(360deg);} }
     .verano-palm {
-      position: absolute; right: -25px; bottom: -16px; width: 61px; height:61px;
-      z-index: 2; pointer-events: none; filter: drop-shadow(0 3px 7px #30d19180);
+      position: absolute; right: -15px; bottom: -12px; width: 30px; height:30px;
+      z-index: 2; pointer-events: none; filter: drop-shadow(0 1.5px 3px #30d19180);
       animation: verano-palm-swing 2.5s ease-in-out infinite alternate;
     }
     @keyframes verano-palm-swing { 0%{transform:rotate(-6deg);} 100%{transform:rotate(6deg);} }
-    .verano-flower {
-      position: absolute; left: 20px; top: -23px; width: 43px; height:43px;
-      z-index: 2; pointer-events: none; filter: drop-shadow(0 2px 7px #ffb5e2);
-      animation: verano-flower-bounce 2.1s ease-in-out infinite alternate;
-    }
-    @keyframes verano-flower-bounce { 0%{transform:translateY(0);} 100%{transform:translateY(12px);} }
-    /* Cabecera */
-    .player-top {
-      display: flex;
-      align-items: flex-start;
-      width: 100%;
-      margin-bottom: 1.5em;
-      gap: 1.2em;
-    }
+    /* Avatar compacto */
     .player-avatar-wrap {
       position: relative;
-      width: 110px;
-      min-width: 110px;
-      height: 110px;
-      border-radius: 24px;
+      width: 52px;
+      min-width: 52px;
+      height: 68px;
+      border-radius: 10px;
       overflow: visible;
       background: none;
       display: flex;
       align-items: flex-end;
       justify-content: center;
+      margin-bottom: 0.1em;
+      margin-right: 7px;
     }
     .player-avatar-bg {
       position: absolute;
       left: 0; top: 0;
-      width: 110px; height: 110px;
-      border-radius: 24px;
+      width: 52px; height: 68px;
+      border-radius: 10px;
       background: url('https://img.freepik.com/free-photo/rock-texture-background_1194-5519.jpg?w=300&q=70') center/cover no-repeat;
       filter: brightness(0.93) contrast(1.13) grayscale(0.11);
-      box-shadow: 0 4px 16px #0005, 0 0 0 6px #2224;
+      box-shadow: 0 2px 8px #0003, 0 0 0 2px #2224;
       z-index: 1;
     }
     .player-avatar-disco {
       position: absolute;
       left: 0; top: 0;
-      width: 110px; height: 110px;
-      border-radius: 24px;
+      width: 52px; height: 68px;
+      border-radius: 10px;
       z-index: 2;
       pointer-events: none;
       background: repeating-conic-gradient(
-        #ffdf2a 0deg 30deg, #ff72b5 30deg 60deg, #00dcff 60deg 90deg, #30d191 90deg 120deg, #ffdf2a 120deg 150deg
+        #ffdf2a 0deg 20deg, #ff72b5 20deg 40deg, #00dcff 40deg 60deg, #30d191 60deg 80deg, #ffdf2a 80deg 100deg
       );
-      opacity: 0.32;
+      opacity: 0.33;
       mix-blend-mode: lighten;
-      animation: disco-colors 2.6s linear infinite;
+      animation: disco-colors 2.2s linear infinite;
     }
     @keyframes disco-colors {
-      0% { filter: hue-rotate(0deg) brightness(1.06);}
-      100% { filter: hue-rotate(360deg) brightness(1.13);}
+      0% { filter: hue-rotate(0deg) brightness(1.04);}
+      100% { filter: hue-rotate(360deg) brightness(1.08);}
     }
     .player-avatar-img {
-      width: 92px; height: 106px;
+      width: 42px; height: 64px;
       object-fit: contain;
       object-position: bottom center;
-      border-radius: 14px;
+      border-radius: 7px;
       background: #fff;
-      border: 4px solid #fff;
-      box-shadow: 0 2px 16px #30d19199, 0 0px 0px #0001;
+      border: 2.5px solid #fff;
+      box-shadow: 0 1.5px 7px #30d19199, 0 0px 0px #0001;
       position: relative;
       z-index: 3;
       display: block;
-      margin-left: 9px;
-      margin-top: 2px;
+      margin-left: 4px;
+      margin-top: 1px;
     }
     /* Info principal de canción */
     .player-maininfo {
@@ -114,57 +104,67 @@
       min-width:0;
       display: flex;
       flex-direction: column;
-      gap: 0.4em;
-      margin-top: 0.5em;
+      gap: 0.15em;
+      margin-top: 0.1em;
     }
     .main-title-artist {
-      font-size: 1.38em;
+      font-size: 1em;
       color: #23203a;
       font-weight: bold;
-      text-shadow: 0 2px 6px #fffa, 0 2px 10px #00d5ff30;
-      background: rgba(255,255,255,0.63);
-      border-radius: 12px;
-      padding: 9px 21px 9px 12px;
-      margin-bottom: 0.3em;
+      text-shadow: 0 1.5px 4px #fffa, 0 2px 10px #00d5ff30;
+      background: rgba(255,255,255,0.66);
+      border-radius: 7px;
+      padding: 6px 10px 6px 8px;
+      margin-bottom: 0.18em;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
       display: flex;
       align-items: center;
-      gap: 0.7em;
+      gap: 0.4em;
+      min-height: 1.5em;
     }
     .main-dj {
       color: #ff72b5;
-      font-size: 1.13em;
+      font-size: 0.97em;
       font-weight: 600;
-      text-shadow: 0 2px 8px #fff7;
-      background: rgba(0,0,0,0.19);
-      border-radius: 9px;
-      padding: 4px 14px;
+      text-shadow: 0 1.5px 6px #fff7;
+      background: rgba(0,0,0,0.16);
+      border-radius: 6px;
+      padding: 2.5px 9px;
       display: inline-block;
-      margin-bottom: 0.25em;
+      margin-bottom: 0.08em;
+      margin-top:1px;
     }
     .main-listeners {
       color: #00dcff;
-      background: rgba(0,0,0,0.13);
-      font-size: 1.09em;
-      border-radius: 8px;
-      padding: 3px 13px;
-      margin-bottom: 0.2em;
+      background: rgba(0,0,0,0.10);
+      font-size: 0.95em;
+      border-radius: 5px;
+      padding: 2px 8px;
+      margin-bottom: 0.02em;
       display: inline-block;
       font-weight: 600;
+    }
+    /* Flex container fila */
+    .player-rowflex {
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+      gap: 0.38em;
     }
     /* Controles */
     .player-controls-row {
       display: flex;
       align-items: center;
-      gap: 1em;
-      margin: 1.7em 0 0.7em 0;
+      gap: 0.45em;
+      margin: 1em 0 0.2em 0;
       width: 100%;
+      justify-content: center;
     }
     .player-controls {
       display: flex;
-      gap: 0.7em;
+      gap: 0.22em;
       align-items: center;
     }
     .player-controls button {
@@ -172,15 +172,15 @@
       color: #23203a;
       border: none;
       border-radius: 50%;
-      width: 48px; height: 48px;
-      font-size: 1.7em;
+      width: 28px; height: 28px;
+      font-size: 1.13em;
       cursor: pointer;
-      border: 2.5px solid #ffdf2a;
+      border: 1.5px solid #ffdf2a;
       transition: background .18s, color .18s;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 12px #00dcff22;
+      box-shadow: 0 1px 5px #00dcff22;
     }
     .player-controls button:active, .player-controls button:focus {
       background: #ffdf2a;
@@ -189,43 +189,45 @@
     .player-volume-group {
       display: flex;
       align-items: center;
-      gap: 0.6em;
+      gap: 0.25em;
     }
     .player-volume {
-      background: rgba(0,0,0,0.24);
-      border-radius: 8px;
-      padding: 7px 17px;
+      background: rgba(0,0,0,0.18);
+      border-radius: 5px;
+      padding: 2px 7px;
       display: flex;
       align-items: center;
-      gap: 0.2em;
+      gap: 0.13em;
       color: #fff;
-      font-size: 1.12em;
-      min-height: 38px;
+      font-size: 1em;
+      min-height: 23px;
     }
     .player-volume input[type="range"] {
-      width: 85px;
+      width: 40px;
       accent-color: #30d191;
-      margin-left: 4px;
+      margin-left: 2px;
     }
     /* Nota historial animada */
     .player-history-note {
       display: flex;
       align-items: center;
-      gap: 0.55em;
+      gap: 0.35em;
       background: #fffbe8ee;
       color: #ff72b5;
       border-radius: 1em;
-      font-size: 1.13em;
-      padding: 8px 23px 8px 16px;
-      margin: 1.8em 0 0.7em 0;
+      font-size: 1em;
+      padding: 5px 13px 5px 10px;
+      margin: 0.7em auto 0.3em auto;
       font-weight: 700;
-      box-shadow: 0 2px 8px #ffe15a39, 0 1.5px 7px #ffb5e2;
-      border: 1.8px solid #ffdf2a;
+      box-shadow: 0 2px 6px #ffe15a39, 0 1.5px 7px #ffb5e2;
+      border: 1.2px solid #ffdf2a;
       animation: note-pop 1.5s cubic-bezier(.3,1.5,.55,0.9) alternate infinite;
       cursor: pointer;
       position: relative;
       transition: background 0.18s, color 0.18s;
       user-select: none;
+      justify-content:center;
+      width: fit-content;
     }
     @keyframes note-pop {
       0% {transform:scale(1);}
@@ -233,7 +235,7 @@
       100% {transform:scale(1.08);}
     }
     .player-history-note .note-emoji {
-      font-size: 1.45em;
+      font-size: 1.22em;
       animation: note-swing 2.3s linear infinite alternate;
       display: inline-block;
     }
@@ -255,9 +257,9 @@
     .modal-content {
       background: #111d;
       color: #fff;
-      border-radius: 1em;
-      padding: 28px 24px 22px 24px;
-      max-width: 400px;
+      border-radius: 0.8em;
+      padding: 21px 9px 11px 9px;
+      max-width: 320px;
       width: 97vw;
       text-align: center;
       position: relative;
@@ -267,46 +269,42 @@
     }
     @keyframes modalIn { from { transform:scale(0.85); opacity:0; } to { transform:scale(1); opacity:1; } }
     .modal-close {
-      position: absolute; right: 10px; top: 10px; font-size: 1.6em;
+      position: absolute; right: 7px; top: 7px; font-size: 1.25em;
       background: none; color: #fff; border: none; cursor: pointer;
     }
     .modal-album {
       margin: 8px auto 8px auto;
-      border-radius: 13px;
-      width: 150px; height: 150px;
+      border-radius: 9px;
+      width: 82px; height: 82px;
       object-fit: cover;
-      box-shadow:0 3px 18px #000a;
+      box-shadow:0 2px 11px #000a;
     }
     .modal-label {
-      font-size:1.09em; margin-top: 16px; color: #ffdf2a;
+      font-size:0.99em; margin-top: 10px; color: #ffdf2a;
     }
     .modal-history-list {
       text-align: left;
-      margin: 16px 0 0 0;
+      margin: 11px 0 0 0;
       padding: 0;
       list-style: none;
     }
     .modal-history-list li {
-      margin: 6px 0;
-      font-size: 1.06em;
+      margin: 5px 0;
+      font-size: 0.98em;
       border-bottom: 1px solid #fff2;
-      padding-bottom: 3px;
+      padding-bottom: 2px;
       color: #fffbe8;
-      text-shadow: 0 1.5px 4px #000a;
+      text-shadow: 0 1px 3px #000a;
     }
-    /* Responsive */
-    @media (max-width:700px) {
-      .kusfm-player { max-width: 99vw; padding: 1.2em 0.2em 1.8em 0.2em;}
+    /* Responsive, para iframe mini */
+    @media (max-width:420px), (max-height:420px) {
+      .kusfm-player { max-width: 99vw; font-size: 0.91em;}
       .player-avatar-wrap,
       .player-avatar-bg,
-      .player-avatar-disco { width: 78px; height: 78px;}
-      .player-avatar-img { width: 62px; height: 76px; margin-left:5px;}
-      .main-title-artist { font-size: 1.05em;}
-      .modal-content { max-width: 99vw; }
-    }
-    @media (max-width:480px) {
-      .kusfm-player { min-height: 0; padding: 0.5em 0.1em 1em 0.1em;}
-      .main-title-artist { font-size: 1em;}
+      .player-avatar-disco { width: 36px; height: 45px;}
+      .player-avatar-img { width: 28px; height: 40px; margin-left:2px;}
+      .main-title-artist { font-size: 0.95em; padding:4px 4px 4px 6px;}
+      .modal-content { max-width: 99vw; padding: 11px 3px 6px 3px;}
     }
   </style>
 </head>
@@ -314,9 +312,8 @@
   <div class="kusfm-player">
     <img class="verano-sun" src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Sol verano" />
     <img class="verano-palm" src="https://cdn-icons-png.flaticon.com/512/619/619034.png" alt="Palmera verano" />
-    <img class="verano-flower" src="https://cdn-icons-png.flaticon.com/512/3038/3038938.png" alt="Flor verano" />
 
-    <div class="player-top">
+    <div class="player-rowflex">
       <div class="player-avatar-wrap">
         <div class="player-avatar-bg"></div>
         <div class="player-avatar-disco"></div>
@@ -354,7 +351,7 @@
     <!-- Nota historial animada -->
     <div class="player-history-note" id="player-history-note" title="Ver historial de canciones">
       <span class="note-emoji">&#127925;</span>
-      <span>Historial de canciones</span>
+      <span>Historial</span>
       <span class="note-emoji">&#127926;</span>
     </div>
 
@@ -367,19 +364,17 @@
       <button class="modal-close" id="player-history-close" title="Cerrar">&times;</button>
       <img src="" class="modal-album" id="modal-album-art" alt="Portada álbum" style="display:none;">
       <div class="modal-label">Tema actual</div>
-      <div id="modal-current-song" style="font-size:1.15em; margin:8px 0 12px 0;"></div>
-      <div class="modal-label">Últimos 6 temas</div>
+      <div id="modal-current-song" style="font-size:1.01em; margin:5px 0 9px 0;"></div>
+      <div class="modal-label">Últimos 4 temas</div>
       <ul class="modal-history-list" id="modal-song-history"></ul>
     </div>
   </div>
-
   <script>
     // --- Configuración ---
     const API_NOWPLAYING_URL = 'https://radio.estacionkusmedios.com/api/nowplaying/esmerosound';
     function getHabboAvatar(username) {
       return `https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(username)}&gesture=std&action=std&direction=2&head_direction=2&headonly=0`;
     }
-
     // --- Actualizar player principal y modal ---
     function updatePlayer() {
       fetch(API_NOWPLAYING_URL)
@@ -391,7 +386,6 @@
           const artist = song.artist || "Desconocido";
           const title = song.title || "Desconocido";
           document.getElementById('main-song-marquee').textContent = `${artist} - ${title}`;
-
           // DJ info
           let nombreDj;
           if (live && live.is_live && live.streamer_name) {
@@ -402,15 +396,13 @@
             document.getElementById('player-dj-avatar').src = getHabboAvatar("estacionkusfm");
           }
           document.getElementById('main-dj-name').textContent = "DJ: " + nombreDj;
-
           // Oyentes
           document.getElementById('main-listeners').textContent = listeners !== undefined ? listeners : "0";
-
           // Modal historial
           window.playerModalData = {
             albumArt: song.art || "",
             current: `${artist} - ${title}`,
-            history: (data.song_history || []).slice(0, 6).map(s => `${s.song.artist} - ${s.song.title}`)
+            history: (data.song_history || []).slice(0, 4).map(s => `${s.song.artist} - ${s.song.title}`)
           };
         })
         .catch(() => {
@@ -421,7 +413,6 @@
           window.playerModalData = { albumArt: "", current: "", history: [] };
         });
     }
-
     // --- Controles de audio ---
     function setupPlayerControls() {
       const audio = document.getElementById('player-audio');
@@ -438,7 +429,6 @@
       audio.volume = volume.value / 100;
       volume.addEventListener('input', () => { audio.volume = volume.value / 100; });
     }
-
     // --- Historial Modal ---
     function setupHistoryModal() {
       const modal = document.getElementById('player-history-modal');
@@ -447,7 +437,6 @@
       const modalAlbum = document.getElementById('modal-album-art');
       const modalCurrent = document.getElementById('modal-current-song');
       const modalHistory = document.getElementById('modal-song-history');
-
       function openModal() {
         let d = window.playerModalData || {};
         if (d.albumArt) {
@@ -465,13 +454,11 @@
         });
         modal.classList.add('active');
       }
-
       noteBtn.onclick = openModal;
       modalClose.onclick = () => modal.classList.remove('active');
       modal.onclick = e => { if (e.target === modal) modal.classList.remove('active'); };
       window.addEventListener('keydown', e => { if (e.key === "Escape") modal.classList.remove('active'); });
     }
-
     // --- Inicialización ---
     window.addEventListener("load", () => {
       updatePlayer();
