@@ -303,12 +303,164 @@
 </head>
 <body>
   <!-- Menú de navegación Bootstrap -->
-  <!-- ... (el resto de tu HTML no cambia) ... -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">KUSFM</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#radio">Radio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#equipo">Equipo</a></li>
+          <li class="nav-item"><a class="nav-link" href="#alianzas">Alianzas</a></li>
+          <li class="nav-item"><a class="nav-link" href="#eventos">Eventos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#ranking">Ranking</a></li>
+          <li class="nav-item"><a class="nav-link" href="#galeria">Galería</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link" href="generator.html">generador habbo</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- HERO: Reproductor de radio ancho completo -->
+  <section style="background:rgba(255,255,255,0.96);box-shadow:0 4px 24px #ffd60044;" id="radio">
+    <div class="container py-4">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10">
+          <div class="text-center mb-2">
+            <span class="sidebar-title" style="font-size:1.6rem;">Radio en vivo</span>
+          </div>
+          <iframe 
+            src="repro/index.html" 
+            title="Reproductor KusFM" 
+            width="100%" 
+            height="420" 
+            style="border-radius: 16px; border: none; background: #fff; box-shadow:0 2px 15px #ffd60099;" 
+            allow="autoplay">
+          </iframe>
+          <div class="fansite-btns-row mt-3 justify-content-center">
+            <button class="peticion-btn" onclick="document.getElementById('peticion-popup-bg').style.display='flex'">🌊 Peticiones</button>
+            <button class="destacados-btn" onclick="document.getElementById('destacados-popup-bg').style.display='flex'">🌞 Destacados</button>
+            <button class="vacantes-btn" onclick="document.getElementById('vacantes-popup-bg').style.display='flex'">🏄 Vacantes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Encabezado fansite -->
+  <div class="fansite-header" id="inicio">
+    <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=srp&action=wlk&direction=4&head_direction=2&headonly=0&size=l" alt="Logo EstacionKusFM" class="fansite-logo">
+    <div class="fansite-title">☀️ estacionkusfm 🏖️</div>
+    <div class="fansite-sub">Tu fansite Habbo con la mejor radio y comunidad <span style="font-size:1.3em;">🌴</span></div>
+  </div>
+  <!-- Reloj digital -->
+  <div class="container text-center mt-3 mb-2">
+    <div style="display:inline-block; background:rgba(255,255,255,0.85); border-radius:10px; padding:8px 28px; box-shadow:0 2px 10px #70e1f599;">
+      <span style="font-size:1.3rem; color:#ff9800; font-family: 'Contrail One', Arial, sans-serif;">
+        <i class="fas fa-clock"></i> Hora actual: <span id="clock" style="font-weight:bold;"></span>
+      </span>
+    </div>
+  </div>
+  <!-- MAIN: contenido principal y sidebar -->
   <div class="container mt-4">
     <div class="row">
       <!-- CONTENIDO PRINCIPAL -->
       <div class="col-lg-8">
-        <!-- ... (contenido principal) ... -->
+        <!-- Noticias / Comunidad -->
+        <section class="mb-4">
+          <div class="sidebar-section" style="background:rgba(255,255,255,0.88)">
+            <span class="sidebar-title">Noticias / Comunidad</span>
+            <p>¡Bienvenido a la mejor radio de Habbo! Disfruta música, placas, comunidad y mucho más.</p>
+          </div>
+        </section>
+        <!-- Equipo -->
+        <section class="mb-4" id="equipo">
+          <div class="sidebar-section">
+            <span class="sidebar-title">Equipo</span>
+            <div id="equipo-todo">
+              <span class="equipo-titulo">Equipo Fundador</span>
+              <div class="equipo-miembros" id="fundadores"></div>
+              <span class="equipo-titulo">Administradores</span>
+              <div class="equipo-miembros" id="admins"></div>
+              <span class="equipo-titulo">Ayudantes</span>
+              <div class="equipo-miembros" id="ayudantes"></div>
+              <span class="equipo-titulo">Locutores</span>
+              <div class="equipo-miembros" id="locutores"></div>
+              <span class="equipo-titulo">Guías</span>
+              <div class="equipo-miembros" id="guias"></div>
+              <span class="equipo-titulo">Publicistas</span>
+              <div class="equipo-miembros" id="publicistas"></div>
+            </div>
+          </div>
+        </section>
+        <!-- Alianzas -->
+        <section class="mb-4" id="alianzas">
+          <div class="sidebar-section">
+            <span class="sidebar-title">Alianzas</span>
+            <div class="alianzas-lista">
+              <a class="alianza-room" href="https://www.habbo.es/room/12345678" target="_blank">Agencia HabboSegura</a>
+              <a class="alianza-room" href="https://www.habbo.es/room/23456789" target="_blank">Imperio Real</a>
+              <a class="alianza-room" href="https://www.habbo.es/room/34567890" target="_blank">Osio Club</a>
+              <a class="alianza-room" href="https://www.habbo.es/room/45678901" target="_blank">FansiteManía</a>
+              <a class="alianza-room" href="https://www.habbo.es/room/56789012" target="_blank">Modo Habbo</a>
+              <a class="alianza-room" href="https://www.habbo.es/room/67890123" target="_blank">Club Pixelados</a>
+            </div>
+          </div>
+        </section>
+        <!-- Eventos -->
+        <section class="mb-4" id="eventos">
+          <div class="sidebar-section">
+            <span class="sidebar-title">Eventos</span>
+            <ul style="text-align:left; padding-left:18px;">
+              <li>
+                <b>Gran Fiesta Playera</b> (<span style="color:#00cfff;">08/06/2025</span>)<br>
+                ¡Ven con tu look más veraniego! Música en vivo, sorteos de furnis exclusivos y placas especiales para los asistentes.
+              </li>
+              <li class="mt-2">
+                <b>Concurso de Djs Novatos</b> (<span style="color:#00cfff;">15/06/2025</span>)<br>
+                ¿Te gustaría ser locutor en KUSFM? Participa, demuestra tu talento y gana tu propio espacio en la radio.
+              </li>
+              <li class="mt-2">
+                <b>Búsqueda del Tesoro en Habbo</b> (<span style="color:#00cfff;">22/06/2025</span>)<br>
+                Encuentra los objetos ocultos en las salas aliadas y consigue premios únicos.
+              </li>
+              <li class="mt-2">
+                <b>Trivia Musical KusFM</b> (<span style="color:#00cfff;">29/06/2025</span>)<br>
+                Responde preguntas sobre música y Habbo, y gana furnis y placas por tus conocimientos.
+              </li>
+            </ul>
+            <div style="margin-top:8px;">
+              <i class="fas fa-calendar-alt" style="color:#ff9800;"></i>
+              <b>¡Consulta nuestras redes para enterarte de más sorpresas cada semana!</b>
+            </div>
+          </div>
+        </section>
+        <!-- FAQ -->
+        <section class="mb-4" id="faq">
+          <div class="sidebar-section">
+            <span class="sidebar-title">Preguntas Frecuentes (FAQ)</span>
+            <div class="text-left" style="padding-left:5px; padding-right:5px;">
+              <b>¿Cómo escucho la radio?</b><br>
+              Solo presiona el botón de play en el reproductor de la parte superior de la web.<br><br>
+              <b>¿Cómo puedo pedir una canción?</b><br>
+              Haz clic en el botón “Peticiones” bajo el reproductor y completa el formulario.<br><br>
+              <b>¿Qué son las placas y cómo las gano?</b><br>
+              Las placas son premios digitales que puedes conseguir participando en nuestros eventos y concursos.<br><br>
+              <b>¿Cómo me uno al equipo?</b><br>
+              En la sección “Vacantes” puedes ver las posiciones abiertas y postularte desde el botón correspondiente.<br><br>
+              <b>¿Dónde veo los ganadores de los eventos?</b><br>
+              Los anunciamos en la radio, en la web y en nuestras redes sociales.<br><br>
+              <b>¿Tienen Discord?</b><br>
+              ¡Sí! Únete a nuestra comunidad desde el botón de redes sociales en la barra lateral.<br><br>
+              <b>¿Puedo sugerir nuevas actividades?</b><br>
+              ¡Claro! Nos encanta escuchar a la comunidad. Mándanos tu sugerencia por el formulario de contacto o Discord.
+            </div>
+          </div>
+        </section>
       </div>
       <!-- SIDEBAR DERECHO -->
       <div class="col-lg-4 sidebar-right">
@@ -375,7 +527,31 @@
       </div>
     </div>
   </div>
-  <!-- FOOTER, POPUPS y scripts van aquí igual que antes... -->
+  <div class="fansite-footer mt-4">
+    &copy; 2025 estacionkusfm • Fansite Habbo no oficial · Hecho con <span style="color:#ff9800;">♥</span> para la comunidad<br>
+    Versión 1.0.0
+  </div>
+
+  <!-- Popups funcionales -->
+  <!-- Aquí van tus popups: peticiones, destacados y vacantes (igual que antes) -->
+  <!-- ... PEGAR AQUÍ TU CÓDIGO DE POPUPS ORIGINAL ... -->
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/df2a1fbcf1.js" crossorigin="anonymous"></script>
+  <script>
+    // Reloj digital
+    function updateClock() {
+      const now = new Date();
+      let h = now.getHours().toString().padStart(2, '0');
+      let m = now.getMinutes().toString().padStart(2, '0');
+      let s = now.getSeconds().toString().padStart(2, '0');
+      document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
   <script>
     // Placas (badges)
     const exampleBadges = [
@@ -395,7 +571,7 @@
     fetch('https://habbofurni.com/api/v1/furniture?hotel=1')
       .then(res => res.json())
       .then(response => {
-        const furnis = response.data || response; // Normalmente está en .data
+        const furnis = response.data || response;
         const furniContainer = document.getElementById('api-furnis');
         furniContainer.innerHTML = '';
         furnis.slice(0, 6).forEach(furni => {
@@ -413,6 +589,129 @@
         furniContainer.innerHTML = '<span style="color:red">Error al cargar furnis</span>';
       });
   </script>
-  <!-- ... (el resto de tus scripts y HTML) ... -->
+  <script>
+    // --- Equipo con look de playa y estados ---
+    const onlineUsers = {
+      "estacionkusfm": true,
+      "ser03z-51": false,
+      "djmanuelloca": true
+    };
+    const fundadores = [
+      {user: "estacionkusfm", nombre: "estacionkusfm"},
+      {user: "ser03z-51", nombre: "ser03z-51"}
+    ];
+    const admins = [];
+    const ayudantes = [
+      {user: "djmanuelloca", nombre: "djmanuelloca"}
+    ];
+    const locutores = [
+      {user: "ser03z-51", nombre: "ser03z-51"}
+    ];
+    const guias = [];
+    const publicistas = [];
+
+    function renderEquipo(arr, id, total=6) {
+      const cont = document.getElementById(id);
+      cont.innerHTML = '';
+      arr.forEach(miembro => {
+        const div = document.createElement('div');
+        div.className = "equipo-miembro";
+        let estado = '';
+        if(typeof onlineUsers[miembro.user] !== "undefined") {
+          estado = onlineUsers[miembro.user]
+            ? `<span class="equipo-status" title="Online">🔵</span>`
+            : `<span class="equipo-status" title="Offline">🔴</span>`;
+        }
+        div.innerHTML = `
+          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(miembro.user)}&gesture=sml&action=wlk&direction=2&head_direction=2&headonly=0&size=l" alt="${miembro.nombre}">
+          ${estado}
+          <span>${miembro.nombre}</span>`;
+        cont.appendChild(div);
+      });
+      for(let i=arr.length; i<total; i++) {
+        const empty = document.createElement('div');
+        empty.className = "equipo-miembro vacio";
+        cont.appendChild(empty);
+      }
+    }
+    renderEquipo(fundadores, "fundadores", 2);
+    renderEquipo(admins, "admins", 4);
+    renderEquipo(ayudantes, "ayudantes", 1);
+    renderEquipo(locutores, "locutores", 2);
+    renderEquipo(guias, "guias", 2);
+    renderEquipo(publicistas, "publicistas", 0);
+  </script>
+  <script>
+    // Scripts para vacantes dinámico y envío a backend
+    function mostrarRequisitos() {
+      const puesto = document.getElementById('puesto-vacante').value;
+      let html = '';
+      if (puesto === 'locutor') {
+        html = `
+          <div class="form-group">
+            <label>Sube una captura con VirtualDJ abierto <b>(obligatorio)</b></label>
+            <input type="file" name="archivo1" class="form-control" accept="image/*" required>
+          </div>
+          <div class="form-group">
+            <label>Si no tienes VirtualDJ, sube foto de tu keko en la sala Disco de Habbo</label>
+            <input type="file" name="archivo2" class="form-control" accept="image/*">
+          </div>
+        `;
+      }
+      if (puesto === 'guia') {
+        html = `
+          <div class="form-group">
+            <label>Sube una foto de tu keko en sala Disco de Habbo</label>
+            <input type="file" name="archivo1" class="form-control" accept="image/*" required>
+          </div>
+        `;
+      }
+      if (puesto === 'diseñador') {
+        html = `
+          <div class="form-group">
+            <label>Sube una captura de tu sala de diseño en Habbo</label>
+            <input type="file" name="archivo1" class="form-control" accept="image/*" required>
+          </div>
+          <div class="form-group">
+            <label>Link de la sala en Habbo</label>
+            <input type="url" name="salaurl" class="form-control" placeholder="https://www.habbo.es/room/..." required>
+          </div>
+        `;
+      }
+      if (puesto === 'publicista') {
+        html = `
+          <div class="form-group">
+            <label>Sube una captura de una promoción que hayas hecho (puede ser ficticia)</label>
+            <input type="file" name="archivo1" class="form-control" accept="image/*" required>
+          </div>
+        `;
+      }
+      document.getElementById('requisitos-extra').innerHTML = html;
+    }
+    document.getElementById('vacanteForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      document.querySelector('#result-vacantes').style.display = 'none';
+      document.querySelector('#result-vacantes').innerHTML = '';
+      try {
+        const resp = await fetch('/api/vacante', {
+          method: 'POST',
+          body: data
+        });
+        if (resp.ok) {
+          document.querySelector('#result-vacantes').style.display = 'block';
+          document.querySelector('#result-vacantes').innerHTML = "<div class='alert alert-success'>¡Postulación enviada correctamente!</div>";
+          form.reset();
+          document.getElementById('requisitos-extra').innerHTML = '';
+        } else {
+          throw new Error('Error al enviar. Intenta de nuevo.');
+        }
+      } catch (err) {
+        document.querySelector('#result-vacantes').style.display = 'block';
+        document.querySelector('#result-vacantes').innerHTML = "<div class='alert alert-danger'>Hubo un error al enviar tu postulación.</div>";
+      }
+    });
+  </script>
 </body>
 </html>
