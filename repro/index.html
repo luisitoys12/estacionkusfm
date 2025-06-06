@@ -16,86 +16,50 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      border-radius: 1.2em;
-      box-shadow: 0 2px 10px #0002;
-      padding: 1em 1em 1.1em 1em;
-      width: 100%;
+      border-radius: 0.5em;
+      box-shadow: none;
+      padding: 0.5em;
+      width: auto;
       max-width: 410px;
       min-width: 210px;
-      margin: 14px auto 16px auto;
+      margin: 0 auto;
       position: relative;
-      min-height: 0;
+      min-height: unset;
       border: 2px solid #00dcff;
-      background: url('https://images.habbo.com/c_images/article_images_hq/article_summer2011_newclothes.gif') center/cover no-repeat;
+      background: #fff;
       overflow: visible;
     }
-    /* Verano adornos */
-    .verano-sun {
-      position: absolute; left: -14px; top: -12px; width: 27px; height:27px;
-      z-index: 2; pointer-events: none; animation: verano-sun-spin 8s linear infinite;
-    }
-    @keyframes verano-sun-spin { 0%{transform:rotate(0);} 100%{transform:rotate(360deg);} }
-    .verano-palm {
-      position: absolute; right: -15px; bottom: -12px; width: 30px; height:30px;
-      z-index: 2; pointer-events: none; filter: drop-shadow(0 1.5px 3px #30d19180);
-      animation: verano-palm-swing 2.5s ease-in-out infinite alternate;
-    }
-    @keyframes verano-palm-swing { 0%{transform:rotate(-6deg);} 100%{transform:rotate(6deg);} }
-    /* Avatar GRANDE */
+    /* Elimina adornos de verano */
+    .verano-sun, .verano-palm { display: none !important; }
+    /* Avatar */
     .player-avatar-wrap {
       position: relative;
-      width: 92px;
-      min-width: 92px;
-      height: 120px;
-      border-radius: 16px;
+      width: 70px;
+      min-width: 70px;
+      height: 90px;
+      border-radius: 10px;
       overflow: visible;
       background: none;
       display: flex;
       align-items: flex-end;
       justify-content: center;
       margin-bottom: 0.1em;
-      margin-right: 14px;
+      margin-right: 10px;
     }
-    .player-avatar-bg {
-      position: absolute;
-      left: 0; top: 0;
-      width: 92px; height: 120px;
-      border-radius: 16px;
-      background: url('https://img.freepik.com/free-photo/rock-texture-background_1194-5519.jpg?w=300&q=70') center/cover no-repeat;
-      filter: brightness(0.93) contrast(1.13) grayscale(0.11);
-      box-shadow: 0 2px 10px #0003, 0 0 0 3px #2224;
-      z-index: 1;
-    }
-    .player-avatar-disco {
-      position: absolute;
-      left: 0; top: 0;
-      width: 92px; height: 120px;
-      border-radius: 16px;
-      z-index: 2;
-      pointer-events: none;
-      background: repeating-conic-gradient(
-        #ffdf2a 0deg 20deg, #ff72b5 20deg 40deg, #00dcff 40deg 60deg, #30d191 60deg 80deg, #ffdf2a 80deg 100deg
-      );
-      opacity: 0.33;
-      mix-blend-mode: lighten;
-      animation: disco-colors 2.2s linear infinite;
-    }
-    @keyframes disco-colors {
-      0% { filter: hue-rotate(0deg) brightness(1.04);}
-      100% { filter: hue-rotate(360deg) brightness(1.08);}
-    }
+    .player-avatar-bg,
+    .player-avatar-disco { display: none; }
     .player-avatar-img {
-      width: 80px; height: 116px;
+      width: 65px; height: 86px;
       object-fit: contain;
       object-position: bottom center;
-      border-radius: 10px;
+      border-radius: 8px;
       background: #fff;
-      border: 3.2px solid #fff;
-      box-shadow: 0 2px 10px #30d19199, 0 0px 0px #0001;
+      border: 2px solid #fff;
+      box-shadow: 0 1.5px 4px #30d19166;
       position: relative;
       z-index: 3;
       display: block;
-      margin-left: 6px;
+      margin-left: 2px;
       margin-top: 2px;
     }
     /* Info principal de canción */
@@ -104,69 +68,68 @@
       min-width:0;
       display: flex;
       flex-direction: column;
-      gap: 0.15em;
+      gap: 0.1em;
       margin-top: 0.1em;
     }
     .main-title-artist {
-      font-size: 1.08em;
+      font-size: 1em;
       color: #23203a;
       font-weight: bold;
-      text-shadow: 0 1.5px 4px #fffa, 0 2px 10px #00d5ff30;
-      background: rgba(255,255,255,0.66);
-      border-radius: 9px;
-      padding: 7px 13px 7px 12px;
-      margin-bottom: 0.18em;
+      background: #f3f8fa;
+      border-radius: 7px;
+      padding: 5px 10px 5px 9px;
+      margin-bottom: 0.1em;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
       display: flex;
       align-items: center;
-      gap: 0.4em;
-      min-height: 1.8em;
+      gap: 0.2em;
+      min-height: 1.5em;
+      box-shadow: none;
+      text-shadow: none;
     }
     .main-dj {
       color: #ff72b5;
-      font-size: 1em;
+      font-size: 0.97em;
       font-weight: 600;
-      text-shadow: 0 1.5px 6px #fff7;
-      background: rgba(0,0,0,0.16);
-      border-radius: 8px;
-      padding: 3px 11px;
-      display: inline-block;
-      margin-bottom: 0.12em;
+      background: #fff0;
+      border-radius: 6px;
+      padding: 2px 9px;
+      margin-bottom: 0.05em;
       margin-top:1px;
+      text-shadow: none;
     }
     .main-listeners {
       color: #00dcff;
-      background: rgba(0,0,0,0.10);
-      font-size: 1em;
-      border-radius: 7px;
-      padding: 3px 10px;
-      margin-bottom: 0.02em;
-      display: inline-block;
+      background: #fff0;
+      font-size: 0.97em;
+      border-radius: 5px;
+      padding: 2px 8px;
+      margin-bottom: 0.01em;
       font-weight: 600;
     }
-    /* Flex container fila */
+    /* Flex fila */
     .player-rowflex {
       display: flex;
       align-items: flex-start;
       width: 100%;
-      gap: 0.38em;
-      margin-bottom: 0.2em;
-      margin-top: 0.2em;
+      gap: 0.2em;
+      margin-bottom: 0.08em;
+      margin-top: 0.08em;
     }
     /* Controles */
     .player-controls-row {
       display: flex;
       align-items: center;
-      gap: 0.45em;
-      margin: 0.6em 0 0.2em 0;
+      gap: 0.28em;
+      margin: 0.3em 0 0.08em 0;
       width: 100%;
       justify-content: center;
     }
     .player-controls {
       display: flex;
-      gap: 0.22em;
+      gap: 0.11em;
       align-items: center;
     }
     .player-controls button {
@@ -174,15 +137,15 @@
       color: #23203a;
       border: none;
       border-radius: 50%;
-      width: 32px; height: 32px;
-      font-size: 1.15em;
+      width: 26px; height: 26px;
+      font-size: 1em;
       cursor: pointer;
-      border: 1.7px solid #ffdf2a;
+      border: 1.2px solid #ffdf2a;
       transition: background .18s, color .18s;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 1px 5px #00dcff22;
+      box-shadow: none;
     }
     .player-controls button:active, .player-controls button:focus {
       background: #ffdf2a;
@@ -191,21 +154,21 @@
     .player-volume-group {
       display: flex;
       align-items: center;
-      gap: 0.25em;
+      gap: 0.13em;
     }
     .player-volume {
-      background: rgba(0,0,0,0.18);
-      border-radius: 6px;
-      padding: 3px 9px;
+      background: #fff0;
+      border-radius: 4px;
+      padding: 2px 7px;
       display: flex;
       align-items: center;
-      gap: 0.13em;
-      color: #fff;
+      gap: 0.1em;
+      color: #00dcff;
       font-size: 1em;
-      min-height: 23px;
+      min-height: 20px;
     }
     .player-volume input[type="range"] {
-      width: 50px;
+      width: 40px;
       accent-color: #30d191;
       margin-left: 2px;
     }
@@ -213,17 +176,17 @@
     .player-history-note {
       display: flex;
       align-items: center;
-      gap: 0.35em;
-      background: #fffbe8ee;
+      gap: 0.2em;
+      background: #fafdff;
       color: #ff72b5;
-      border-radius: 1em;
-      font-size: 1em;
-      padding: 5px 13px 5px 10px;
-      margin: 0.7em auto 0.3em auto;
+      border-radius: 0.7em;
+      font-size: 0.97em;
+      padding: 3px 8px 3px 7px;
+      margin: 0.3em auto 0.1em auto;
       font-weight: 700;
-      box-shadow: 0 2px 6px #ffe15a39, 0 1.5px 7px #ffb5e2;
-      border: 1.2px solid #ffdf2a;
-      animation: note-pop 1.5s cubic-bezier(.3,1.5,.55,0.9) alternate infinite;
+      box-shadow: none;
+      border: 1px solid #ffdf2a;
+      animation: none;
       cursor: pointer;
       position: relative;
       transition: background 0.18s, color 0.18s;
@@ -231,19 +194,10 @@
       justify-content:center;
       width: fit-content;
     }
-    @keyframes note-pop {
-      0% {transform:scale(1);}
-      70% {transform:scale(1.04);}
-      100% {transform:scale(1.08);}
-    }
     .player-history-note .note-emoji {
-      font-size: 1.22em;
-      animation: note-swing 2.3s linear infinite alternate;
+      font-size: 1.1em;
+      animation: none;
       display: inline-block;
-    }
-    @keyframes note-swing { 
-      0% { transform: rotate(-13deg); }
-      100% { transform: rotate(14deg);}
     }
     /* Modal historial canción */
     .modal-bg {
@@ -260,58 +214,57 @@
       background: #111d;
       color: #fff;
       border-radius: 0.8em;
-      padding: 17px 7px 8px 7px;
-      max-width: 270px;
+      padding: 14px 6px 6px 6px;
+      max-width: 250px;
       width: 98vw;
       text-align: center;
       position: relative;
-      box-shadow: 0 4px 32px #000a;
+      box-shadow: 0 4px 22px #000a;
       font-family: 'Contrail One', Arial, sans-serif;
       animation: modalIn .2s;
     }
-    @keyframes modalIn { from { transform:scale(0.85); opacity:0; } to { transform:scale(1); opacity:1; } }
+    @keyframes modalIn { from { transform:scale(0.88); opacity:0; } to { transform:scale(1); opacity:1; } }
     .modal-close {
-      position: absolute; right: 7px; top: 7px; font-size: 1.15em;
+      position: absolute; right: 7px; top: 7px; font-size: 1.1em;
       background: none; color: #fff; border: none; cursor: pointer;
     }
     .modal-album {
-      margin: 8px auto 8px auto;
-      border-radius: 9px;
-      width: 64px; height: 64px;
+      margin: 7px auto 7px auto;
+      border-radius: 7px;
+      width: 48px; height: 48px;
       object-fit: cover;
-      box-shadow:0 2px 8px #000a;
+      box-shadow:0 1.5px 6px #000a;
     }
     .modal-label {
-      font-size:0.97em; margin-top: 9px; color: #ffdf2a;
+      font-size:0.92em; margin-top: 7px; color: #ffdf2a;
     }
     .modal-history-list {
       text-align: left;
-      margin: 6px 0 0 0;
+      margin: 4px 0 0 0;
       padding: 0;
       list-style: none;
     }
     .modal-history-list li {
-      margin: 3.5px 0;
-      font-size: 0.97em;
+      margin: 2.5px 0;
+      font-size: 0.90em;
       border-bottom: 1px solid #fff2;
       padding-bottom: 2px;
       color: #fffbe8;
       text-shadow: 0 1px 3px #000a;
     }
-    /* Responsive, para iframe mini */
+    /* Responsive */
     @media (max-width:470px), (max-height:470px) {
-      .kusfm-player { max-width: 99vw; font-size: 0.92em;}
+      .kusfm-player { max-width: 99vw; font-size: 0.90em;}
       .player-avatar-wrap,
-      .player-avatar-bg,
-      .player-avatar-disco { width: 58px; height: 78px;}
-      .player-avatar-img { width: 48px; height: 74px; margin-left:2px;}
-      .main-title-artist { font-size: 0.95em; padding:4px 4px 4px 6px;}
-      .modal-content { max-width: 99vw; padding: 9px 2px 4px 2px;}
+      .player-avatar-img { width: 42px; height: 54px;}
+      .main-title-artist { font-size: 0.93em; padding:3px 4px 3px 4px;}
+      .modal-content { max-width: 99vw; padding: 8px 2px 4px 2px;}
     }
   </style>
 </head>
 <body>
   <div class="kusfm-player">
+    <!-- Iconos de verano ocultos por CSS compacto -->
     <img class="verano-sun" src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Sol verano" />
     <img class="verano-palm" src="https://cdn-icons-png.flaticon.com/512/619/619034.png" alt="Palmera verano" />
 
