@@ -551,36 +551,132 @@
     </div>
   </div>
 
+  <!-- NUEVO POPUP VACANTES INTEGRADO -->
   <div class="vacantes-popup-bg" id="vacantes-popup-bg" onclick="if(event.target==this)this.style.display='none'">
     <div class="vacantes-popup">
       <button class="close-btn" onclick="document.getElementById('vacantes-popup-bg').style.display='none'"><i class="fas fa-times"></i></button>
       <h2 style="color:#388e3c;font-size:1.3rem;">Postula a una vacante</h2>
-      <form>
-        <div class="form-group">
-          <label for="nombre-vacante">Nombre</label>
-          <input type="text" class="form-control" id="nombre-vacante" placeholder="Tu nombre" required>
+      <form id="vacanteForm" enctype="multipart/form-data">
+        <div class="form-group"><label>Nombre real</label>
+          <input type="text" name="nombre" class="form-control" required>
         </div>
-        <div class="form-group">
-          <label for="correo-vacante">Correo electrónico</label>
-          <input type="email" class="form-control" id="correo-vacante" placeholder="tucorreo@ejemplo.com" required>
+        <div class="form-group"><label>Nombre del keko</label>
+          <input type="text" name="keko" class="form-control" required>
         </div>
-        <div class="form-group">
-          <label for="puesto-vacante">Puesto a postular</label>
-          <select class="form-control" id="puesto-vacante" required>
+        <div class="form-group"><label>Usuario de Discord</label>
+          <input type="text" name="discord" class="form-control" required>
+        </div>
+        <div class="form-group"><label>Correo electrónico</label>
+          <input type="email" name="correo" class="form-control" required>
+        </div>
+        <div class="form-group"><label>Puesto a postular</label>
+          <select name="puesto" id="puesto-vacante" class="form-control" required onchange="mostrarRequisitos()">
             <option value="">Selecciona...</option>
-            <option>Locutor/a</option>
-            <option>Editor/a de noticias</option>
-            <option>Diseñador/a</option>
+            <option value="locutor">Locutor/a</option>
+            <option value="guia">Guía</option>
+            <option value="diseñador">Diseñador/a</option>
+            <option value="publicista">Publicista</option>
           </select>
         </div>
-        <div class="form-group">
-          <label for="experiencia-vacante">Experiencia (opcional)</label>
-          <textarea class="form-control" id="experiencia-vacante" rows="2" placeholder="Cuéntanos si tienes experiencia en el puesto"></textarea>
+        <div id="requisitos-extra"></div>
+        <div class="form-group"><label>Experiencia previa</label>
+          <textarea name="experiencia" class="form-control" rows="2"></textarea>
+        </div>
+        <div class="form-group"><label>¿Por qué quieres unirte a KusFM?</label>
+          <textarea name="motivo1" class="form-control" required></textarea>
+        </div>
+        <div class="form-group"><label>¿Disponibilidad horaria?</label>
+          <textarea name="motivo2" class="form-control" required></textarea>
+        </div>
+        <div class="form-group"><label>¿Has sido parte de otros fansites?</label>
+          <textarea name="motivo3" class="form-control" required></textarea>
+        </div>
+        <div class="form-group"><label>¿Qué aportarías al equipo?</label>
+          <textarea name="motivo4" class="form-control" required></textarea>
+        </div>
+        <div class="form-group"><label>¿Te comprometes a respetar las normas y usar Discord?</label>
+          <select name="motivo5" class="form-control" required>
+            <option value="">Selecciona...</option>
+            <option>Sí</option>
+            <option>No</option>
+          </select>
         </div>
         <button type="submit" class="btn btn-main btn-block mt-2">Enviar postulación</button>
       </form>
+      <div id="result-vacantes" style="display:none;margin-top:10px;"></div>
     </div>
   </div>
+  <script>
+    function mostrarRequisitos() {
+      const puesto = document.getElementById('puesto-vacante').value;
+      let html = '';
+      if (puesto === 'locutor') {
+        html = `
+          <div class="form-group">
+            <label>Sube una captura con VirtualDJ abierto <b>(obligatorio)</b></label>
+            <input type="file" name="archivo1" class="form-control" accept="image/*" required>
+          </div>
+          <div class="form-group">
+            <label>Si no tienes VirtualDJ, sube foto de tu keko en la sala Disco de Habbo</label>
+            <input type="file" name="archivo2" class="form-control" accept="image/*">
+          </div>
+        `;
+      }
+      if (puesto === 'guia') {
+        html = `
+          <div class="form-group">
+            <label>Sube una foto de tu keko en sala Disco de Habbo</label>
+            <input type="file" name="archivo1" class="form-control" accept="image/*" required>
+          </div>
+        `;
+      }
+      if (puesto === 'diseñador') {
+        html = `
+          <div class="form-group">
+            <label>Sube una captura de tu sala de diseño en Habbo</label>
+            <input type="file" name="archivo1" class="form-control" accept="image/*" required>
+          </div>
+          <div class="form-group">
+            <label>Link de la sala en Habbo</label>
+            <input type="url" name="salaurl" class="form-control" placeholder="https://www.habbo.es/room/..." required>
+          </div>
+        `;
+      }
+      if (puesto === 'publicista') {
+        html = `
+          <div class="form-group">
+            <label>Sube una captura de una promoción que hayas hecho (puede ser ficticia)</label>
+            <input type="file" name="archivo1" class="form-control" accept="image/*" required>
+          </div>
+        `;
+      }
+      document.getElementById('requisitos-extra').innerHTML = html;
+    }
+    document.getElementById('vacanteForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      document.querySelector('#result-vacantes').style.display = 'none';
+      document.querySelector('#result-vacantes').innerHTML = '';
+      try {
+        const resp = await fetch('/api/vacante', {
+          method: 'POST',
+          body: data
+        });
+        if (resp.ok) {
+          document.querySelector('#result-vacantes').style.display = 'block';
+          document.querySelector('#result-vacantes').innerHTML = "<div class='alert alert-success'>¡Postulación enviada correctamente!</div>";
+          form.reset();
+          document.getElementById('requisitos-extra').innerHTML = '';
+        } else {
+          throw new Error('Error al enviar. Intenta de nuevo.');
+        }
+      } catch (err) {
+        document.querySelector('#result-vacantes').style.display = 'block';
+        document.querySelector('#result-vacantes').innerHTML = "<div class='alert alert-danger'>Hubo un error al enviar tu postulación.</div>";
+      }
+    });
+  </script>
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
