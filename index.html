@@ -554,17 +554,34 @@
   <div class="vacantes-popup-bg" id="vacantes-popup-bg" onclick="if(event.target==this)this.style.display='none'">
     <div class="vacantes-popup">
       <button class="close-btn" onclick="document.getElementById('vacantes-popup-bg').style.display='none'"><i class="fas fa-times"></i></button>
-      <h2 style="color:#388e3c;font-size:1.3rem;">Vacantes abiertas</h2>
-      <ul style="text-align:left;">
-        <li><b>Locutor/a</b>: Haz tu prueba en vivo.</li>
-        <li><b>Editor/a de noticias</b>: ¡Postula tu artículo!</li>
-        <li><b>Diseñador/a</b>: ¡Muestra tu portafolio!</li>
-      </ul>
-      <a href="contacto.html" class="btn btn-main btn-block mt-2">Postularme</a>
+      <h2 style="color:#388e3c;font-size:1.3rem;">Postula a una vacante</h2>
+      <form>
+        <div class="form-group">
+          <label for="nombre-vacante">Nombre</label>
+          <input type="text" class="form-control" id="nombre-vacante" placeholder="Tu nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="correo-vacante">Correo electrónico</label>
+          <input type="email" class="form-control" id="correo-vacante" placeholder="tucorreo@ejemplo.com" required>
+        </div>
+        <div class="form-group">
+          <label for="puesto-vacante">Puesto a postular</label>
+          <select class="form-control" id="puesto-vacante" required>
+            <option value="">Selecciona...</option>
+            <option>Locutor/a</option>
+            <option>Editor/a de noticias</option>
+            <option>Diseñador/a</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="experiencia-vacante">Experiencia (opcional)</label>
+          <textarea class="form-control" id="experiencia-vacante" rows="2" placeholder="Cuéntanos si tienes experiencia en el puesto"></textarea>
+        </div>
+        <button type="submit" class="btn btn-main btn-block mt-2">Enviar postulación</button>
+      </form>
     </div>
   </div>
 
-  <!-- Scripts Bootstrap y reloj -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
@@ -654,12 +671,12 @@
         cont.appendChild(empty);
       }
     }
-    renderEquipo(fundadores, "fundadores", 6);
-    renderEquipo(admins, "admins", 6);
-    renderEquipo(ayudantes, "ayudantes", 6);
-    renderEquipo(locutores, "locutores", 6);
-    renderEquipo(guias, "guias", 6);
-    renderEquipo(publicistas, "publicistas", 6);
+    renderEquipo(fundadores, "fundadores", 2);
+    renderEquipo(admins, "admins", 4);
+    renderEquipo(ayudantes, "ayudantes", 1);
+    renderEquipo(locutores, "locutores", 2);
+    renderEquipo(guias, "guias", 2);
+    renderEquipo(publicistas, "publicistas", 0);
   </script>
 </body>
 </html>
