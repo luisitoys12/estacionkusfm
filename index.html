@@ -354,14 +354,27 @@
             <span class="sidebar-title" style="font-size:1.6rem;">Radio en vivo</span>
           </div>
           <div style="display:flex;justify-content:center;">
-  <iframe 
-    class="kusfm-player-frame"
-    src="repro/index.html" 
-    title="Reproductor KusFM"
-    allow="autoplay"
-    loading="lazy"
-  ></iframe>
-</div>
+ <!-- Ejemplo de uso del frame compacto KUSFM -->
+<iframe
+  src="/repro/index.html"
+  title="Radio KUSFM en vivo"
+  allow="autoplay"
+  loading="lazy"
+  scrolling="no"
+  style="
+    width: 100%;
+    max-width: 820px;
+    min-width: 220px;
+    height: 600px;
+    border: none;
+    border-radius: 1.2em;
+    box-shadow: 0 2px 10px #0002;
+    background: transparent;
+    overflow: hidden;
+    margin: 0 auto;
+    display: block;
+  "
+></iframe>
           <div class="fansite-btns-row mt-3 justify-content-center">
             <button class="peticion-btn" onclick="document.getElementById('peticion-popup-bg').style.display='flex'">🌊 Peticiones</button>
             <button class="destacados-btn" onclick="document.getElementById('destacados-popup-bg').style.display='flex'">🌞 Destacados</button>
