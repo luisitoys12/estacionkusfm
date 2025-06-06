@@ -261,6 +261,44 @@
       border: 2px solid #70e1f5;
       background: #fff;
     }
+    /* --- POPUPS --- */
+    .vacantes-popup-bg {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.65);
+      justify-content: center;
+      align-items: center;
+    }
+    .vacantes-popup {
+      background: #fffbe9;
+      border-radius: 14px;
+      max-width: 95vw;
+      width: 400px;
+      padding: 24px 18px 18px 18px;
+      box-shadow: 0 2px 24px #ffd60099;
+      position: relative;
+      animation: popupshow .2s;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    @keyframes popupshow { from {transform: scale(.93);} to {transform: scale(1);} }
+    .vacantes-popup .close-btn {
+      position: absolute;
+      top: 9px; right: 13px;
+      font-size: 1.45rem;
+      color: #ff9800;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    @media (max-width: 500px) {
+      .vacantes-popup { width: 97vw; padding: 12px 2vw 12px 2vw;}
+    }
+    /* --- FIN POPUPS --- */
   </style>
 </head>
 <body>
@@ -482,15 +520,48 @@
     Versión 1.0.0
   </div>
 
-  <!-- Popups (debes tener el HTML de los popups en tu archivo, o incluirlos aquí) -->
-  <div class="vacantes-popup-bg" id="vacantes-popup-bg" onclick="if(event.target==this)this.style.display='none'">
-    <!-- ...contenido igual... -->
-  </div>
+  <!-- Popups funcionales -->
   <div class="vacantes-popup-bg" id="peticion-popup-bg" onclick="if(event.target==this)this.style.display='none'">
-    <!-- ...contenido igual... -->
+    <div class="vacantes-popup">
+      <button class="close-btn" onclick="document.getElementById('peticion-popup-bg').style.display='none'"><i class="fas fa-times"></i></button>
+      <h2 style="color:#00cfff;font-size:1.3rem;">Pide tu canción</h2>
+      <form>
+        <div class="form-group">
+          <label for="cancion">Canción o artista</label>
+          <input type="text" class="form-control" id="cancion" placeholder="Ej: Camilo - Vida de Rico">
+        </div>
+        <div class="form-group">
+          <label for="dedicatoria">Dedicatoria (opcional)</label>
+          <input type="text" class="form-control" id="dedicatoria" placeholder="Para quien va tu saludo">
+        </div>
+        <button type="submit" class="btn btn-main btn-block mt-2">Enviar petición</button>
+      </form>
+    </div>
   </div>
+
   <div class="vacantes-popup-bg" id="destacados-popup-bg" onclick="if(event.target==this)this.style.display='none'">
-    <!-- ...contenido igual... -->
+    <div class="vacantes-popup">
+      <button class="close-btn" onclick="document.getElementById('destacados-popup-bg').style.display='none'"><i class="fas fa-times"></i></button>
+      <h2 style="color:#ff9800;font-size:1.3rem;">Destacados de la Semana</h2>
+      <ul style="text-align:left;">
+        <li><b>DJManuelloca</b> – Mejor locutor</li>
+        <li><b>Annita</b> – Mejor oyente</li>
+        <li><b>Ser03z-51</b> – Más activo en Discord</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="vacantes-popup-bg" id="vacantes-popup-bg" onclick="if(event.target==this)this.style.display='none'">
+    <div class="vacantes-popup">
+      <button class="close-btn" onclick="document.getElementById('vacantes-popup-bg').style.display='none'"><i class="fas fa-times"></i></button>
+      <h2 style="color:#388e3c;font-size:1.3rem;">Vacantes abiertas</h2>
+      <ul style="text-align:left;">
+        <li><b>Locutor/a</b>: Haz tu prueba en vivo.</li>
+        <li><b>Editor/a de noticias</b>: ¡Postula tu artículo!</li>
+        <li><b>Diseñador/a</b>: ¡Muestra tu portafolio!</li>
+      </ul>
+      <a href="contacto.html" class="btn btn-main btn-block mt-2">Postularme</a>
+    </div>
   </div>
 
   <!-- Scripts Bootstrap y reloj -->
@@ -572,7 +643,7 @@
             : `<span class="equipo-status" title="Offline">🔴</span>`;
         }
         div.innerHTML = `
-          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(miembro.user)}&gesture=sml&action=wlk&direction=2&head_direction=2&headonly=0&size=l" alt="${miembro.nombre}" />
+          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(miembro.user)}&gesture=sml&action=wlk&direction=2&head_direction=2&headonly=0&size=l" alt="${miembro.nombre}">
           ${estado}
           <span>${miembro.nombre}</span>`;
         cont.appendChild(div);
