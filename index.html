@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>estacionkusfm • Fansite Habbo</title>
+  <!-- Bootstrap 4.3.1 CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://kit.fontawesome.com/df2a1fbcf1.css" crossorigin="anonymous">
@@ -374,6 +375,46 @@
         <section class="mb-4">
           <div class="sidebar-section" style="background:rgba(255,255,255,0.88)">
             <span class="sidebar-title">Noticias / Comunidad</span>
+            <!-- SLIDESHOW INICIO -->
+            <div id="noticiasCarousel" class="carousel slide mb-3" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li data-target="#noticiasCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#noticiasCarousel" data-slide-to="1"></li>
+                <li data-target="#noticiasCarousel" data-slide-to="2"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" class="d-block w-100 rounded" alt="Noticia 1">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>¡Bienvenido a la mejor radio de Habbo!</h5>
+                    <p>Disfruta música, placas, comunidad y mucho más.</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" class="d-block w-100 rounded" alt="Noticia 2">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Participa en nuestros eventos</h5>
+                    <p>¡Placas exclusivas y premios cada semana!</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <img src="https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?auto=format&fit=crop&w=600&q=80" class="d-block w-100 rounded" alt="Noticia 3">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Únete a nuestra comunidad</h5>
+                    <p>Música, diversión y amigos en Habbo.</p>
+                  </div>
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#noticiasCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+              </a>
+              <a class="carousel-control-next" href="#noticiasCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Siguiente</span>
+              </a>
+            </div>
+            <!-- SLIDESHOW FIN -->
             <p>¡Bienvenido a la mejor radio de Habbo! Disfruta música, placas, comunidad y mucho más.</p>
           </div>
         </section>
@@ -533,9 +574,96 @@
   </div>
 
   <!-- Popups funcionales -->
-  <!-- Aquí van tus popups: peticiones, destacados y vacantes (igual que antes) -->
-  <!-- ... PEGAR AQUÍ TU CÓDIGO DE POPUPS ORIGINAL ... -->
+  <div class="vacantes-popup-bg" id="peticion-popup-bg" onclick="if(event.target==this)this.style.display='none'">
+    <div class="vacantes-popup">
+      <button class="close-btn" onclick="document.getElementById('peticion-popup-bg').style.display='none'"><i class="fas fa-times"></i></button>
+      <h2 style="color:#00cfff;font-size:1.3rem;">Pide tu canción</h2>
+      <form>
+        <div class="form-group">
+          <label for="cancion">Canción o artista</label>
+          <input type="text" class="form-control" id="cancion" placeholder="Ej: Camilo - Vida de Rico">
+        </div>
+        <div class="form-group">
+          <label for="dedicatoria">Dedicatoria (opcional)</label>
+          <input type="text" class="form-control" id="dedicatoria" placeholder="Para quien va tu saludo">
+        </div>
+        <button type="submit" class="btn btn-main btn-block mt-2">Enviar petición</button>
+      </form>
+    </div>
+  </div>
+  <div class="vacantes-popup-bg" id="destacados-popup-bg" onclick="if(event.target==this)this.style.display='none'">
+    <div class="vacantes-popup">
+      <button class="close-btn" onclick="document.getElementById('destacados-popup-bg').style.display='none'"><i class="fas fa-times"></i></button>
+      <h2 style="color:#ff9800;font-size:1.3rem;">Destacados de la Semana</h2>
+      <div style="display:flex; flex-direction:column; gap:18px; align-items:center;">
+        <div style="display:flex; align-items:center; gap:16px; background:rgba(255,233,121,0.25); border-radius:12px; padding:10px 24px; box-shadow:0 1px 6px #ffd60080; min-width:230px;">
+          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=djmanuelloca&gesture=sml&action=wav&direction=2&head_direction=2&headonly=0&size=m" alt="DJManuelloca" style="width:48px;height:64px;border-radius:4px;">
+          <div>
+            <div style="font-family:'Contrail One',Arial,sans-serif;font-size:1.18rem;color:#ff9800;">DJManuelloca</div>
+            <div style="color:#00cfff;font-size:1rem;">
+              <i class="fas fa-trophy" style="color:#ffd700;"></i> Mejor locutor
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="vacantes-popup-bg" id="vacantes-popup-bg" onclick="if(event.target==this)this.style.display='none'">
+    <div class="vacantes-popup">
+      <button class="close-btn" onclick="document.getElementById('vacantes-popup-bg').style.display='none'"><i class="fas fa-times"></i></button>
+      <h2 style="color:#388e3c;font-size:1.3rem;">Postula a una vacante</h2>
+      <form id="vacanteForm" enctype="multipart/form-data">
+        <div class="form-group"><label>Nombre real</label>
+          <input type="text" name="nombre" class="form-control" required>
+        </div>
+        <div class="form-group"><label>Nombre del keko</label>
+          <input type="text" name="keko" class="form-control" required>
+        </div>
+        <div class="form-group"><label>Usuario de Discord</label>
+          <input type="text" name="discord" class="form-control" required>
+        </div>
+        <div class="form-group"><label>Correo electrónico</label>
+          <input type="email" name="correo" class="form-control" required>
+        </div>
+        <div class="form-group"><label>Puesto a postular</label>
+          <select name="puesto" id="puesto-vacante" class="form-control" required onchange="mostrarRequisitos()">
+            <option value="">Selecciona...</option>
+            <option value="locutor">Locutor/a</option>
+            <option value="guia">Guía</option>
+            <option value="diseñador">Diseñador/a</option>
+            <option value="publicista">Publicista</option>
+          </select>
+        </div>
+        <div id="requisitos-extra"></div>
+        <div class="form-group"><label>Experiencia previa</label>
+          <textarea name="experiencia" class="form-control" rows="2"></textarea>
+        </div>
+        <div class="form-group"><label>¿Por qué quieres unirte a KusFM?</label>
+          <textarea name="motivo1" class="form-control" required></textarea>
+        </div>
+        <div class="form-group"><label>¿Disponibilidad horaria?</label>
+          <textarea name="motivo2" class="form-control" required></textarea>
+        </div>
+        <div class="form-group"><label>¿Has sido parte de otros fansites?</label>
+          <textarea name="motivo3" class="form-control" required></textarea>
+        </div>
+        <div class="form-group"><label>¿Qué aportarías al equipo?</label>
+          <textarea name="motivo4" class="form-control" required></textarea>
+        </div>
+        <div class="form-group"><label>¿Te comprometes a respetar las normas y usar Discord?</label>
+          <select name="motivo5" class="form-control" required>
+            <option value="">Selecciona...</option>
+            <option>Sí</option>
+            <option>No</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-main btn-block mt-2">Enviar postulación</button>
+      </form>
+      <div id="result-vacantes" style="display:none;margin-top:10px;"></div>
+    </div>
+  </div>
 
+  <!-- SCRIPTS Bootstrap 4 y tus scripts -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
