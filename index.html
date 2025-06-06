@@ -680,8 +680,9 @@
           furniContainer.appendChild(img);
         });
       });
-
-    // Equipo con look de playa
+  </script>
+  <script>
+    // --- Equipo con look de playa y estados ---
     const onlineUsers = {
       "estacionkusfm": true,
       "ser03z-51": false,
@@ -700,6 +701,7 @@
     ];
     const guias = [];
     const publicistas = [];
+
     function renderEquipo(arr, id, total=6) {
       const cont = document.getElementById(id);
       cont.innerHTML = '';
@@ -713,7 +715,7 @@
             : `<span class="equipo-status" title="Offline">🔴</span>`;
         }
         div.innerHTML = `
-          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(miembro.user)}&gesture=sml&action=wlk&direction=2&head_direction=2&headonly=0&size=l" alt="${miembro.nombre[...]
+          <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(miembro.user)}&gesture=sml&action=wlk&direction=2&head_direction=2&headonly=0&size=l" alt="${miembro.nombre}" style="width:54px;height:68px;border-radius:6px;margin-bottom:3px;background:#fff;border:2px solid #00dcffcc;box-shadow:0 2px 10px #0af4;">
           ${estado}
           <span>${miembro.nombre}</span>`;
         cont.appendChild(div);
