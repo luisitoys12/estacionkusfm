@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>KUSFM MiniPlayer Verano</title>
-  <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet"/>
   <style>
+    /* ----- General ----- */
     body {
       background: #e5fff9;
       margin: 0;
       padding: 0;
+      font-family: 'Contrail One', Arial, sans-serif;
     }
+
+    /* ----- Player ----- */
     .kusfm-miniplayer {
       display: flex;
       align-items: center;
@@ -19,21 +23,29 @@
       padding: 1em 1.2em;
       width: 100%;
       max-width: 530px;
-      font-family: 'Contrail One', Arial, sans-serif;
+      margin: 40px auto;
       position: relative;
       min-height: 110px;
       border: 2.5px solid #00dcff;
-      margin: 40px auto;
       background: url('https://images.habbo.com/c_images/article_images_hq/article_summer2011_newclothes.gif') center/cover no-repeat;
       overflow: visible;
     }
     .mini-avatar {
-      width: 56px; height: 56px; border-radius: 50%; background: #eee; object-fit: cover;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: #eee;
+      object-fit: cover;
       box-shadow: 0 3px 12px #00dcff60;
       flex-shrink: 0;
       border: 3.5px solid #30d191;
     }
-    .mini-info { flex:1; min-width:0; display:flex; flex-direction:column; gap:0.5em;}
+    .mini-info {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+    }
     .mini-title-artist {
       font-size: 1.1em;
       color: #fff;
@@ -42,40 +54,69 @@
       background: rgba(0,0,0,0.30);
       padding: 4px 10px;
       border-radius: 8px;
-      overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
     }
-    .mini-dj {
+    .mini-dj, .mini-listeners {
       font-size: 1em;
       color: #fff;
       text-shadow: 0 2px 4px #000c;
     }
     .mini-listeners {
-      font-size:1em;
-      color:#fff;
-      text-shadow: 0 2px 4px #000c;
       display: flex;
       align-items: center;
       gap: 0.3em;
     }
-    .mini-controls { display:flex; gap:0.5em; margin-top:0.5em;}
+    .mini-controls {
+      display: flex;
+      gap: 0.5em;
+      margin-top: 0.5em;
+    }
     .mini-controls button {
-      background: #00dcff; color: #23203a; border: none; border-radius: 50%;
-      width: 34px; height: 34px; font-size: 1.2em;
+      background: #00dcff;
+      color: #23203a;
+      border: none;
+      border-radius: 50%;
+      width: 34px; height: 34px;
+      font-size: 1.2em;
       cursor: pointer;
       border: 2px solid #ffdf2a;
       transition: background .18s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .mini-controls button:active, .mini-controls button:focus { background: #ffdf2a; color:#00dcff;}
-    .mini-volume { margin-left: 0.5em; display: flex; align-items: center; gap: 0.2em;}
-    .mini-volume input[type="range"] { width: 58px; accent-color: #30d191;}
+    .mini-controls button:active, .mini-controls button:focus {
+      background: #ffdf2a;
+      color: #00dcff;
+    }
+    .mini-volume {
+      margin-left: 0.5em;
+      display: flex;
+      align-items: center;
+      gap: 0.2em;
+    }
+    .mini-volume input[type="range"] {
+      width: 58px;
+      accent-color: #30d191;
+    }
+
+    /* ----- Redes sociales ----- */
     .mini-socials {
       margin-top: 0.3em;
       display: flex;
       gap: 8px;
     }
     .mini-socials img {
-      width: 24px; height: 24px; border-radius: 4px; background: #fff8; padding: 2px;
+      width: 24px; height: 24px;
+      border-radius: 4px;
+      background: #fff8;
+      padding: 2px;
       box-shadow:0 1.5px 7px #ffdf2a40;
       transition: transform 0.15s;
     }
@@ -83,6 +124,8 @@
       transform: scale(1.15);
       background: #fff;
     }
+
+    /* ----- Nota musical btn ----- */
     .mini-music-info-btn {
       background: #fff;
       color: #23203a;
@@ -90,8 +133,7 @@
       border-radius: 50%;
       font-size: 1.7em;
       margin-left: 10px;
-      width: 40px;
-      height: 40px;
+      width: 40px; height: 40px;
       box-shadow: 0 3px 12px #0003;
       cursor: pointer;
       display: flex;
@@ -103,7 +145,8 @@
       background: #ffdf2a;
       color: #00dcff;
     }
-    /* Modal */
+
+    /* ----- Modal ----- */
     .modal-bg {
       display: none;
       position: fixed;
@@ -133,12 +176,29 @@
       background: none; color: #fff; border: none; cursor: pointer;
     }
     .modal-album {
-      margin: 8px auto 8px auto; border-radius: 12px; width: 120px; height: 120px; object-fit: cover; box-shadow:0 3px 18px #000a;
+      margin: 8px auto 8px auto;
+      border-radius: 12px;
+      width: 120px; height: 120px;
+      object-fit: cover;
+      box-shadow:0 3px 18px #000a;
     }
-    .modal-label { font-size:1.02em; margin-top: 10px; color: #ffdf2a;}
-    .modal-history-list { text-align: left; margin: 10px 0 0 0; padding: 0; list-style: none;}
-    .modal-history-list li { margin: 4px 0; font-size: 0.98em; border-bottom: 1px solid #fff2; padding-bottom: 2px;}
-    /* Adornos */
+    .modal-label {
+      font-size:1.02em; margin-top: 10px; color: #ffdf2a;
+    }
+    .modal-history-list {
+      text-align: left;
+      margin: 10px 0 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .modal-history-list li {
+      margin: 4px 0;
+      font-size: 0.98em;
+      border-bottom: 1px solid #fff2;
+      padding-bottom: 2px;
+    }
+
+    /* ----- Adornos de verano ----- */
     .verano-sun {
       position: absolute; left: -33px; top: -28px; width: 56px; height:56px;
       z-index: 2; pointer-events: none; animation: verano-sun-spin 11s linear infinite;
@@ -156,6 +216,8 @@
       animation: verano-flower-bounce 2.2s ease-in-out infinite alternate;
     }
     @keyframes verano-flower-bounce { 0%{transform:translateY(0);} 100%{transform:translateY(9px);} }
+
+    /* ----- Responsive ----- */
     @media (max-width:600px) {
       .kusfm-miniplayer { max-width: 100%; font-size: 0.95em;}
       .mini-avatar { width: 40px; height: 40px; }
@@ -169,17 +231,24 @@
 <body>
   <div class="kusfm-miniplayer">
     <!-- Adornos de verano -->
-    <img class="verano-sun" src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Sol verano">
-    <img class="verano-palm" src="https://cdn-icons-png.flaticon.com/512/619/619034.png" alt="Palmera verano">
-    <img class="verano-flower" src="https://cdn-icons-png.flaticon.com/512/3038/3038938.png" alt="Flor verano">
-    <img id="mini-dj-avatar" class="mini-avatar" src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=wav&action=std&direction=2&head_direction=2&headonly=0" alt="DJ Avatar">
+    <img class="verano-sun" src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Sol verano" />
+    <img class="verano-palm" src="https://cdn-icons-png.flaticon.com/512/619/619034.png" alt="Palmera verano" />
+    <img class="verano-flower" src="https://cdn-icons-png.flaticon.com/512/3038/3038938.png" alt="Flor verano" />
+    <img
+      id="mini-dj-avatar"
+      class="mini-avatar"
+      src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=wav&action=std&direction=2&head_direction=2&headonly=0"
+      alt="DJ Avatar"
+    />
     <div class="mini-info">
       <div class="mini-title-artist">
         <span id="mini-song-marquee">Cargando canción...</span>
         <button class="mini-music-info-btn" id="mini-music-info-btn" title="Info musical">&#127925;</button>
       </div>
       <div class="mini-dj" id="mini-dj-name">DJ: ...</div>
-      <div class="mini-listeners">👥 <span id="mini-listeners">0</span> oyentes</div>
+      <div class="mini-listeners">
+        👥 <span id="mini-listeners">0</span> oyentes
+      </div>
       <div class="mini-controls">
         <button id="mini-play" title="Reproducir">&#9654;</button>
         <button id="mini-pause" title="Pausar">&#10073;&#10073;</button>
@@ -187,7 +256,7 @@
         <button id="mini-reload" title="Recargar">&#x21bb;</button>
         <div class="mini-volume" title="Volumen">
           <span>&#128266;</span>
-          <input id="mini-volume-slider" type="range" min="0" max="100" value="80">
+          <input id="mini-volume-slider" type="range" min="0" max="100" value="80" />
         </div>
       </div>
       <div class="mini-socials">
@@ -198,6 +267,7 @@
       <audio id="mini-audio" src="https://radio.estacionkusmedios.com/listen/esmerosound/radio.mp3" preload="none"></audio>
     </div>
   </div>
+
   <!-- Modal musical -->
   <div class="modal-bg" id="mini-music-modal">
     <div class="modal-content">
@@ -209,25 +279,31 @@
       <ul class="modal-history-list" id="modal-song-history"></ul>
     </div>
   </div>
+
   <script>
+    // --- Configuración ---
     const MINI_API_NOWPLAYING_URL = 'https://radio.estacionkusmedios.com/api/nowplaying/esmerosound';
+
+    // --- Utilidades ---
     function getMiniHabboAvatar(username) {
-      return "https://www.habbo.es/habbo-imaging/avatarimage"
-        + "?user=" + encodeURIComponent(username)
-        + "&gesture=wav&action=std&direction=2&head_direction=2&headonly=0";
+      return `https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(username)}&gesture=wav&action=std&direction=2&head_direction=2&headonly=0`;
     }
+
+    // --- Actualiza el player y modal ---
     function updateMiniPlayer() {
       fetch(MINI_API_NOWPLAYING_URL)
-        .then(r=>r.json())
-        .then(data=>{
+        .then(r => r.json())
+        .then(data => {
           const song = data.now_playing.song;
           const live = data.live;
           const listeners = data.listeners.current;
-          let artist = song.artist ? song.artist : "Desconocido";
-          let title = song.title ? song.title : "Desconocido";
-          document.getElementById('mini-song-marquee').textContent = artist + " - " + title;
+          const artist = song.artist || "Desconocido";
+          const title = song.title || "Desconocido";
+          document.getElementById('mini-song-marquee').textContent = `${artist} - ${title}`;
+
+          // DJ info
           let nombreDj;
-          if(live && live.is_live && live.streamer_name){
+          if (live && live.is_live && live.streamer_name) {
             nombreDj = live.streamer_name;
             document.getElementById('mini-dj-avatar').src = getMiniHabboAvatar(nombreDj);
           } else {
@@ -235,81 +311,83 @@
             document.getElementById('mini-dj-avatar').src = getMiniHabboAvatar("estacionkusfm");
           }
           document.getElementById('mini-dj-name').textContent = "DJ: " + nombreDj;
+
+          // Oyentes
           document.getElementById('mini-listeners').textContent = listeners !== undefined ? listeners : "0";
 
-          // Guardar info actual para el modal
+          // Para el modal
           window.miniMusicModalData = {
-            albumArt: song.art ? song.art : "",
+            albumArt: song.art || "",
             current: `${artist} - ${title}`,
-            history: (data.song_history || []).slice(0,4).map(s => `${s.song.artist} - ${s.song.title}`)
+            history: (data.song_history || []).slice(0, 4).map(s => `${s.song.artist} - ${s.song.title}`)
           };
         })
-        .catch(()=>{
+        .catch(() => {
           document.getElementById('mini-song-marquee').textContent = "";
           document.getElementById('mini-dj-name').textContent = "DJ: ...";
           document.getElementById('mini-dj-avatar').src = getMiniHabboAvatar("estacionkusfm");
           document.getElementById('mini-listeners').textContent = "0";
-          window.miniMusicModalData = {
-            albumArt: "",
-            current: "",
-            history: []
-          };
+          window.miniMusicModalData = { albumArt: "", current: "", history: [] };
         });
     }
-    window.addEventListener("load", updateMiniPlayer);
-    setInterval(updateMiniPlayer,5000);
 
-    // Controles básicos
-    const miniAudio = document.getElementById('mini-audio');
-    document.getElementById('mini-play').onclick = ()=>miniAudio.play();
-    document.getElementById('mini-pause').onclick = ()=>miniAudio.pause();
-    document.getElementById('mini-mute').onclick = ()=>{
-      miniAudio.muted = !miniAudio.muted;
-    };
-    document.getElementById('mini-reload').onclick = ()=>{
-      miniAudio.pause();
-      miniAudio.src = miniAudio.src.split('?')[0] + '?t=' + new Date().getTime();
-      miniAudio.load();
-      miniAudio.play();
-    };
-    const miniVolume = document.getElementById('mini-volume-slider');
-    miniAudio.volume = miniVolume.value/100;
-    miniVolume.addEventListener('input', e => { miniAudio.volume = miniVolume.value/100; });
-
-    // Modal musical
-    const modal = document.getElementById('mini-music-modal');
-    const modalBtn = document.getElementById('mini-music-info-btn');
-    const modalClose = document.getElementById('mini-music-close');
-    const modalAlbum = document.getElementById('modal-album-art');
-    const modalCurrent = document.getElementById('modal-current-song');
-    const modalHistory = document.getElementById('modal-song-history');
-
-    function openMusicModal() {
-      // Rellenar datos
-      let d = window.miniMusicModalData || {};
-      // Portada
-      if(d.albumArt){
-        modalAlbum.src = d.albumArt;
-        modalAlbum.style.display = '';
-      } else {
-        modalAlbum.style.display = 'none';
-      }
-      // Tema actual
-      modalCurrent.textContent = d.current || '';
-      // Historial
-      modalHistory.innerHTML = "";
-      (d.history || []).forEach(t => {
-        let li = document.createElement("li");
-        li.textContent = t;
-        modalHistory.appendChild(li);
-      });
-      modal.classList.add('active');
+    // --- Controles player ---
+    function setupPlayerControls() {
+      const audio = document.getElementById('mini-audio');
+      document.getElementById('mini-play').onclick = () => audio.play();
+      document.getElementById('mini-pause').onclick = () => audio.pause();
+      document.getElementById('mini-mute').onclick = () => audio.muted = !audio.muted;
+      document.getElementById('mini-reload').onclick = () => {
+        audio.pause();
+        audio.src = audio.src.split('?')[0] + '?t=' + Date.now();
+        audio.load();
+        audio.play();
+      };
+      const volume = document.getElementById('mini-volume-slider');
+      audio.volume = volume.value / 100;
+      volume.addEventListener('input', () => { audio.volume = volume.value / 100; });
     }
-    modalBtn.onclick = openMusicModal;
-    modalClose.onclick = ()=>modal.classList.remove('active');
-    modal.onclick = e => { if(e.target===modal) modal.classList.remove('active'); };
-    // Cerrar con Esc
-    window.addEventListener('keydown', e => { if(e.key==="Escape") modal.classList.remove('active'); });
+
+    // --- Modal musical ---
+    function setupMusicModal() {
+      const modal = document.getElementById('mini-music-modal');
+      const modalBtn = document.getElementById('mini-music-info-btn');
+      const modalClose = document.getElementById('mini-music-close');
+      const modalAlbum = document.getElementById('modal-album-art');
+      const modalCurrent = document.getElementById('modal-current-song');
+      const modalHistory = document.getElementById('modal-song-history');
+
+      function openMusicModal() {
+        let d = window.miniMusicModalData || {};
+        if (d.albumArt) {
+          modalAlbum.src = d.albumArt;
+          modalAlbum.style.display = '';
+        } else {
+          modalAlbum.style.display = 'none';
+        }
+        modalCurrent.textContent = d.current || '';
+        modalHistory.innerHTML = "";
+        (d.history || []).forEach(t => {
+          let li = document.createElement("li");
+          li.textContent = t;
+          modalHistory.appendChild(li);
+        });
+        modal.classList.add('active');
+      }
+
+      modalBtn.onclick = openMusicModal;
+      modalClose.onclick = () => modal.classList.remove('active');
+      modal.onclick = e => { if (e.target === modal) modal.classList.remove('active'); };
+      window.addEventListener('keydown', e => { if (e.key === "Escape") modal.classList.remove('active'); });
+    }
+
+    // --- Inicialización ---
+    window.addEventListener("load", () => {
+      updateMiniPlayer();
+      setupPlayerControls();
+      setupMusicModal();
+      setInterval(updateMiniPlayer, 5000);
+    });
   </script>
 </body>
 </html>
