@@ -6,210 +6,91 @@
   <title>KUSFM MiniPlayer Verano</title>
   <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --kusfm1: #00dcff;
-      --kusfm2: #ffdf2a;
-      --kusfm-bg: linear-gradient(120deg, #fffbe8 0%, #e5fff9 100%);
-      --kusfm-shadow: #0002;
-      --kusfm-sun: #ffdf2a;
-      --kusfm-palm: #30d191;
-      --kusfm-pink: #ffb5e2;
-    }
     body {
-      background: var(--kusfm-bg);
+      background: #e5fff9;
       margin: 0;
       padding: 0;
     }
     .kusfm-miniplayer {
       display: flex;
       align-items: center;
-      background: var(--kusfm-bg);
       border-radius: 1.2em;
-      box-shadow: 0 3px 16px var(--kusfm-shadow);
-      padding: 0.7em 1.2em 0.7em 1.2em;
-      gap: 1.1em;
+      box-shadow: 0 3px 16px #0002;
+      padding: 1em 1.2em;
       width: 100%;
       max-width: 530px;
       font-family: 'Contrail One', Arial, sans-serif;
       position: relative;
-      min-height: 98px;
-      border: 2.5px solid var(--kusfm1);
+      min-height: 110px;
+      border: 2.5px solid #00dcff;
+      margin: 40px auto;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+      /* Puedes cambiar esta URL por tu playa favorita */
       overflow: visible;
     }
     .mini-avatar {
       width: 56px; height: 56px; border-radius: 50%; background: #eee; object-fit: cover;
-      box-shadow: 0 3px 12px #00dcff60, 0 0px 0px #0001;
+      box-shadow: 0 3px 12px #00dcff60;
       flex-shrink: 0;
-      transition: transform 0.16s;
-      border: 3.5px solid var(--kusfm-palm);
-      background: linear-gradient(130deg,#fff,#fffbf2 65%,#e5fff9 100%);
+      border: 3.5px solid #30d191;
     }
-    .mini-avatar:hover { transform: scale(1.13) rotate(-8deg);}
-    .mini-info { flex:1; min-width:0; display:flex; flex-direction:column; gap:0.16em;}
+    .mini-info { flex:1; min-width:0; display:flex; flex-direction:column; gap:0.5em;}
     .mini-title-artist {
-      overflow: hidden; white-space: nowrap; width: 100%; font-size: 1.15em; color: #23203a;
-      min-height: 1.45em; position: relative; line-height: 1.4;
-      font-weight: bold; letter-spacing: .02em;
+      font-size: 1.1em; color: #23203a; font-weight: bold;
       text-shadow: 0 2px 4px #fffa, 0 2px 10px #00d5ff30;
+      background: rgba(255,255,255,0.55);
+      padding: 2px 8px; border-radius: 8px;
+      overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+      margin-bottom: 3px;
     }
-    .mini-marquee {
-      display: inline-block; min-width: 100%; vertical-align: middle; font-size: 1em;
-    }
-    .mini-marquee.marquee-animate {
-      animation: mini-marquee 9s linear infinite; will-change: transform; padding-left: 100%;
-    }
-    @keyframes mini-marquee { 0% { transform: translateX(0%);} 100% { transform: translateX(-100%);} }
-    .mini-dj { font-size: 1.01em; color: var(--kusfm-pink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; line-height: 1.15; text-shadow: 0 2px 9px #fff7;}
-    .mini-listeners { display:inline-flex; align-items:center; gap:0.21em; font-size:1em; color:var(--kusfm1);}
-    .mini-listeners-icon { font-size:1.15em; color: var(--kusfm1);}
-    .mini-live-dot { width: 11px; height: 11px; border-radius: 50%; background: #ff4e2a; display:inline-block; margin-right:4px; box-shadow:0 0 7px #f33;}
-    .mini-off-dot { background:#aaa;}
-    .mini-row {
-      display: flex;
-      align-items: center;
-      gap: 1em;
-      font-size: 1em;
-      margin-top: 3px;
-      flex-wrap: wrap;
-    }
-    .mini-nextsong { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #ff72b5; font-weight: 600;}
-    .mini-alliance {
-      color: var(--kusfm2);
-      background: #fffae3;
-      border-radius: 1em;
-      font-size: 1.06em;
-      padding: 2px 18px 2px 12px;
-      margin-left: 0.18em;
-      font-weight: 700;
-      box-shadow: 0 2px 8px #ffe15a39;
-      display: flex;
-      align-items: center;
-      gap: 0.5em;
-      letter-spacing: .03em;
-      border: 1.5px solid var(--kusfm2);
-    }
-    .mini-req-btn {
-      background: var(--kusfm2); color: #23203a; border: none; border-radius: 1em;
-      padding: 2px 13px; font-size: 1.01em; cursor: pointer; font-family:inherit; font-weight:600; transition: background .13s, color .13s;
-      margin-left: 0.2em; box-shadow: 0 2px 6px #ffdf2a15;
-    }
-    .mini-req-btn:active, .mini-req-btn:focus { background: var(--kusfm1); color:var(--kusfm2);}
-    .mini-controls { display:flex; gap:0.5em; margin-top:0.08em;}
+    .mini-dj { font-size: 1em; color: #ffb5e2; }
+    .mini-listeners { font-size:1em; color:#00dcff;}
+    .mini-controls { display:flex; gap:0.5em; margin-top:0.5em;}
     .mini-controls button {
-      background: var(--kusfm1); color: #23203a; border: none; border-radius: 50%;
-      width: 34px; height: 34px; font-size: 1.22em;
-      cursor: pointer; box-shadow: 0 2px 10px #00dcff25, 0 0px 0 #0000; transition: background .18s;
-      display: flex; align-items: center; justify-content: center;
-      border: 2px solid var(--kusfm2);
+      background: #00dcff; color: #23203a; border: none; border-radius: 50%;
+      width: 34px; height: 34px; font-size: 1.2em;
+      cursor: pointer;
+      border: 2px solid #ffdf2a;
+      transition: background .18s;
     }
-    .mini-controls button:active, .mini-controls button:focus { background: var(--kusfm2); color:var(--kusfm1);}
-    .kusfm-brand { position: absolute; right: 10px; bottom: 6px; font-size: .83em; color: var(--kusfm1); text-decoration: none; opacity: .77; font-family: inherit; font-weight:600; letter-spacing: .06em; transition: opacity .2s;}
-    .kusfm-brand:hover { opacity: 1; color: var(--kusfm2);}
-    .mini-volume { margin-left: 0.5em; display: flex; align-items: center; gap: 0.17em;}
-    .mini-volume input[type="range"] { width: 58px; accent-color: var(--kusfm-palm); vertical-align: middle; background: #fffbe8; border-radius: 2em;}
-    .mini-volume-icon { font-size: 1.1em; color: var(--kusfm-palm);}
-    .mini-socials {margin-top:2px;}
-    .mini-socials a {margin-right:4px;}
-    .mini-socials img {width:20px; height:20px; border-radius:4px; box-shadow:0 1.5px 7px #ffdf2a40;}
-    .mini-clock { font-size:.98em; color:#00b2ae; margin-left: 0.9em;}
-    .mini-bit { font-size:.85em; color:#0097b2; margin-left:3px;}
-    /* Adornos de verano */
-    .verano-sun {
-      position: absolute; left: -33px; top: -28px; width: 56px; height:56px;
-      z-index: 2; pointer-events: none; animation: verano-sun-spin 11s linear infinite;
-    }
-    @keyframes verano-sun-spin { 0%{transform:rotate(0);} 100%{transform:rotate(360deg);} }
-    .verano-palm {
-      position: absolute; left: -27px; bottom: -14px; width: 54px; height:54px;
-      z-index: 2; pointer-events: none; filter: drop-shadow(0 3px 7px #30d19180);
-      animation: verano-palm-swing 2.5s ease-in-out infinite alternate;
-    }
-    @keyframes verano-palm-swing { 0%{transform:rotate(-6deg);} 100%{transform:rotate(6deg);} }
-    .verano-flower {
-      position: absolute; right: -22px; top: -20px; width: 37px; height:37px;
-      z-index: 2; pointer-events: none; filter: drop-shadow(0 2px 7px #ffb5e2);
-      animation: verano-flower-bounce 2.2s ease-in-out infinite alternate;
-    }
-    @keyframes verano-flower-bounce { 0%{transform:translateY(0);} 100%{transform:translateY(9px);} }
-    @media (max-width:560px) {
-      .kusfm-miniplayer { max-width: 100%; padding: 0.44em; font-size: 0.97em;}
-      .mini-avatar { width: 36px; height: 36px; }
-      .mini-controls button { width: 22px; height: 22px; font-size: .93em; }
-      .kusfm-brand { right: 5px; font-size: .7em;}
-      .mini-volume input[type="range"] { width: 32px;}
-      .mini-dj { font-size: .91em;}
-      .mini-row { gap: .29em; }
-      .verano-sun { left:-14px; top:-9px; width:33px; height:33px;}
-      .verano-palm { left:-12px; bottom:-5px; width:28px; height:28px;}
-      .verano-flower { right:-8px; top:-7px; width:19px; height:19px;}
-      .mini-alliance { font-size: .96em; padding: 2px 10px 2px 8px;}
+    .mini-controls button:active, .mini-controls button:focus { background: #ffdf2a; color:#00dcff;}
+    .mini-volume { margin-left: 0.5em; display: flex; align-items: center; gap: 0.2em;}
+    .mini-volume input[type="range"] { width: 58px; accent-color: #30d191;}
+    @media (max-width:600px) {
+      .kusfm-miniplayer { max-width: 100%; font-size: 0.95em;}
+      .mini-avatar { width: 40px; height: 40px; }
     }
   </style>
 </head>
 <body>
   <div class="kusfm-miniplayer">
-    <!-- Adornos de verano -->
-    <img class="verano-sun" src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Sol verano">
-    <img class="verano-palm" src="https://cdn-icons-png.flaticon.com/512/619/619034.png" alt="Palmera verano">
-    <img class="verano-flower" src="https://cdn-icons-png.flaticon.com/512/3038/3038938.png" alt="Flor verano">
-    <img id="mini-dj-avatar" class="mini-avatar" src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=wav&action=std&direction=2&head_direction=2&headonly=0" alt="DJ Avatar" onerror="this.style.display='none';">
+    <img id="mini-dj-avatar" class="mini-avatar" src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=wav&action=std&direction=2&head_direction=2&headonly=0" alt="DJ Avatar">
     <div class="mini-info">
-      <div class="mini-alliance" id="mini-alliance-banner">
-        🤝 Alianza con KUSFM
-      </div>
       <div class="mini-title-artist">
-        <span id="mini-song-marquee" class="mini-marquee"></span>
+        <span id="mini-song-marquee">Cargando canción...</span>
       </div>
-      <div class="mini-dj" id="mini-dj-name"><span class="mini-live-dot"></span>DJ: ...</div>
-      <div class="mini-listeners"><span class="mini-listeners-icon">&#128101;</span><span id="mini-listeners">0</span> oyentes</div>
-      <div class="mini-row">
-        </span>
-        <button id="mini-req-btn" class="mini-req-btn" title="Solicita tu canción 🎤">🎤 Pide tu canción</button>
-        <span class="mini-clock" id="mini-clock"></span>
-        <span class="mini-bit" id="mini-bitrate"></span>
-      </div>
-      <audio id="mini-audio" src="https://radio.estacionkusmedios.com/listen/esmerosound/radio.mp3" preload="none"></audio>
-      <div style="display:flex;align-items:center;">
-        <div class="mini-controls">
-          <button id="mini-play" title="Reproducir">&#9654;</button>
-          <button id="mini-pause" title="Pausar">&#10073;&#10073;</button>
-          <button id="mini-mute" title="Mute">&#128263;</button>
-          <button id="mini-reload" title="Recargar">&#x21bb;</button>
-        </div>
+      <div class="mini-dj" id="mini-dj-name">DJ: ...</div>
+      <div class="mini-listeners">👥 <span id="mini-listeners">0</span> oyentes</div>
+      <div class="mini-controls">
+        <button id="mini-play" title="Reproducir">&#9654;</button>
+        <button id="mini-pause" title="Pausar">&#10073;&#10073;</button>
+        <button id="mini-mute" title="Mute">&#128263;</button>
+        <button id="mini-reload" title="Recargar">&#x21bb;</button>
         <div class="mini-volume" title="Volumen">
-          <span class="mini-volume-icon">&#128266;</span>
+          <span>&#128266;</span>
           <input id="mini-volume-slider" type="range" min="0" max="100" value="80">
         </div>
-        <div class="mini-socials">
-          <a href="https://facebook.com/estacionkusfm" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook"></a>
-          <a href="https://twitter.com/estacionkusfm" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter"></a>
-          <a href="https://instagram.com/estacionkusfm" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
-        </div>
       </div>
+      <audio id="mini-audio" src="https://radio.estacionkusmedios.com/listen/esmerosound/radio.mp3" preload="none"></audio>
     </div>
-    <a class="kusfm-brand" href="https://estacionkusfm.com" target="_blank" rel="noopener">KUSFM</a>
   </div>
   <script>
-    // Configuración endpoints
     const MINI_API_NOWPLAYING_URL = 'https://radio.estacionkusmedios.com/api/nowplaying/esmerosound';
     function getMiniHabboAvatar(username) {
       return "https://www.habbo.es/habbo-imaging/avatarimage"
         + "?user=" + encodeURIComponent(username)
         + "&gesture=wav&action=std&direction=2&head_direction=2&headonly=0";
     }
-    // Marquee inteligente
-    function actualizarAnimacionMarquee() {
-      const marquee = document.getElementById('mini-song-marquee');
-      const parent = marquee.parentElement;
-      marquee.classList.remove('marquee-animate');
-      marquee.style.paddingLeft = '0';
-      void marquee.offsetWidth;
-      if (marquee.scrollWidth > parent.offsetWidth+2) {
-        marquee.classList.add('marquee-animate');
-        marquee.style.paddingLeft = '100%';
-      }
-    }
-    // Actualiza todo cada 5s igual que el player
     function updateMiniPlayer() {
       fetch(MINI_API_NOWPLAYING_URL)
         .then(r=>r.json())
@@ -217,60 +98,36 @@
           const song = data.now_playing.song;
           const live = data.live;
           const listeners = data.listeners.current;
-          const bitrate = data.station.bitrate ? data.station.bitrate+"kbps" : '';
           let artist = song.artist ? song.artist : "Desconocido";
           let title = song.title ? song.title : "Desconocido";
           document.getElementById('mini-song-marquee').textContent = artist + " - " + title;
-
-          // DJ info
           let nombreDj;
           if(live && live.is_live && live.streamer_name){
             nombreDj = live.streamer_name;
             document.getElementById('mini-dj-avatar').src = getMiniHabboAvatar(nombreDj);
-            document.querySelector('#mini-dj-name .mini-live-dot').classList.remove('mini-off-dot');
           } else {
             nombreDj = "AutoDJ";
             document.getElementById('mini-dj-avatar').src = getMiniHabboAvatar("estacionkusfm");
-            document.querySelector('#mini-dj-name .mini-live-dot').classList.add('mini-off-dot');
           }
-          document.getElementById('mini-dj-name').innerHTML = `<span class="mini-live-dot ${nombreDj==='AutoDJ'?'mini-off-dot':''}"></span>DJ: ${nombreDj}`;
-
-          // Listeners
+          document.getElementById('mini-dj-name').textContent = "DJ: " + nombreDj;
           document.getElementById('mini-listeners').textContent = listeners !== undefined ? listeners : "0";
-
-          // Next song
-          const nextSong = data.playing_next && data.playing_next.song && data.playing_next.song.title
-            ? `${data.playing_next.song.artist} - ${data.playing_next.song.title}` : "";
-          document.getElementById('mini-next-title').textContent = nextSong;
-          document.getElementById('mini-next-icon').style.display = nextSong ? "" : "none";
-
-          // Bitrate info
-          document.getElementById('mini-bitrate').textContent = bitrate ? `Bitrate: ${bitrate}` : '';
-          setTimeout(actualizarAnimacionMarquee, 100);
         })
         .catch(()=>{
           document.getElementById('mini-song-marquee').textContent = "";
-          document.getElementById('mini-dj-name').innerHTML = `<span class="mini-live-dot mini-off-dot"></span>DJ: ...`;
+          document.getElementById('mini-dj-name').textContent = "DJ: ...";
           document.getElementById('mini-dj-avatar').src = getMiniHabboAvatar("estacionkusfm");
           document.getElementById('mini-listeners').textContent = "0";
-          document.getElementById('mini-next-title').textContent = "";
-          document.getElementById('mini-next-icon').style.display = "none";
-          document.getElementById('mini-bitrate').textContent = "";
-          setTimeout(actualizarAnimacionMarquee, 100);
         });
     }
-    window.addEventListener("load", actualizarAnimacionMarquee);
-    updateMiniPlayer();
+    window.addEventListener("load", updateMiniPlayer);
     setInterval(updateMiniPlayer,5000);
-    window.addEventListener('resize', ()=> { setTimeout(actualizarAnimacionMarquee, 100); });
 
-    // Play/Pause/Mute/Reload controles
+    // Controles básicos
     const miniAudio = document.getElementById('mini-audio');
     document.getElementById('mini-play').onclick = ()=>miniAudio.play();
     document.getElementById('mini-pause').onclick = ()=>miniAudio.pause();
     document.getElementById('mini-mute').onclick = ()=>{
       miniAudio.muted = !miniAudio.muted;
-      document.getElementById('mini-mute').style.background = miniAudio.muted ? '#aaa' : '';
     };
     document.getElementById('mini-reload').onclick = ()=>{
       miniAudio.pause();
@@ -278,39 +135,9 @@
       miniAudio.load();
       miniAudio.play();
     };
-
-    // Volumen
     const miniVolume = document.getElementById('mini-volume-slider');
     miniAudio.volume = miniVolume.value/100;
     miniVolume.addEventListener('input', e => { miniAudio.volume = miniVolume.value/100; });
-
-    // Auto-pausa si el usuario sale de la pestaña
-    document.addEventListener("visibilitychange", ()=>{ if(document.hidden) miniAudio.pause(); });
-
-    // Barra espaciadora play/pause (accesibilidad)
-    document.addEventListener('keydown', function(e){
-      if(document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
-      if (e.code === 'Space' || e.key === ' ') {
-        if(miniAudio.paused) { miniAudio.play(); } else { miniAudio.pause(); }
-        e.preventDefault();
-      }
-    });
-
-    // Botón de solicitud
-    document.getElementById('mini-req-btn').onclick = ()=>{
-      window.open('https://estacionkusfm.com/pedir', '_blank');
-    };
-
-    // Reloj en vivo (zona local)
-    function updateClock() {
-      const now = new Date();
-      const h = String(now.getHours()).padStart(2,'0');
-      const m = String(now.getMinutes()).padStart(2,'0');
-      const s = String(now.getSeconds()).padStart(2,'0');
-      document.getElementById('mini-clock').textContent = `${h}:${m}:${s}`;
-    }
-    updateClock();
-    setInterval(updateClock, 1000);
   </script>
 </body>
 </html>
