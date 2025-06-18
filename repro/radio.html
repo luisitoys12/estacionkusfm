@@ -1,0 +1,460 @@
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Habbo Player con Marquee Completo Ajustado</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+    body {
+      font-family: "Ubuntu", sans-serif;
+      background: #2a4a6e;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+    .player-container {
+      position: relative;
+      width: 320px;
+      height: 90px;
+      background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_Ij4VppbX2xPFh0PUvGVc3ELAXsVS5tU0ImfL1sSymYreML88L1VCNuQ&s=10") no-repeat center;
+      background-size: cover;
+      border: 2px solid #a3b9d9;
+      border-radius: 0.75rem;
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+      user-select: none;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .player-container::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 3px solid #cbd9f2;
+      border-radius: 0.75rem;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .avatar-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      z-index: 10;
+      min-width: 60px;
+      width: 48px;
+      height: 72px;
+      margin-top: 4px;
+    }
+    .avatar-img {
+      width: 48px !important;
+      height: 72px !important;
+      object-fit: contain;
+      position: relative;
+      z-index: 20;
+      border-radius: 6px;
+      box-shadow:
+        0 0 0 2px #1f3a5a,
+        0 0 6px #30d191aa;
+      user-select: none;
+    }
+    .info-controls {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      z-index: 10;
+      min-width: 0;
+      justify-content: center;
+    }
+    .controls-top {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .btn-play,
+    .btn-pause {
+      width: 28px;
+      height: 28px;
+      border-radius: 9999px;
+      border: 1.5px solid white;
+      background: transparent;
+      color: white;
+      font-size: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.15s, color 0.15s;
+      user-select: none;
+    }
+    .btn-play:hover,
+    .btn-pause:hover {
+      background: white;
+      color: #1f3a5a;
+    }
+    .volume-control {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      background: #1f3a5a;
+      border: 1.5px solid white;
+      border-radius: 0.375rem;
+      padding: 2px 6px;
+      width: 120px;
+      box-sizing: border-box;
+      user-select: none;
+    }
+    .volume-icon {
+      font-size: 10px;
+      color: white;
+      user-select: none;
+    }
+    .volume-slider-wrapper {
+      position: relative;
+      flex: 1;
+      height: 16px;
+      background: #a3b9d9;
+      border-radius: 9999px;
+      cursor: pointer;
+    }
+    .volume-slider-thumb {
+      position: absolute;
+      top: 50%;
+      left: 30%;
+      width: 12px;
+      height: 12px;
+      background: white;
+      border-radius: 9999px;
+      transform: translateY(-50%);
+      box-shadow: 0 0 3px 1px #a3b9d9;
+      cursor: pointer;
+      user-select: none;
+    }
+    .timer-wrapper {
+      width: 28px;
+      height: 28px;
+      border-radius: 0.375rem;
+      border: 1.5px solid white;
+      color: white;
+      font-size: 10px;
+      font-weight: 600;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      cursor: default;
+      flex-shrink: 0;
+      background: #1f3a5a;
+      position: relative;
+    }
+    .info-middle {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #1f3a5a;
+      border: 1.5px solid #a3b9d9;
+      border-radius: 0.375rem;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: white;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .green-dot {
+      width: 12px;
+      height: 12px;
+      background: #3ecb3e;
+      border-radius: 9999px;
+      flex-shrink: 0;
+    }
+    .info-middle a {
+      margin-left: auto;
+      color: white;
+      font-size: 12px;
+      user-select: none;
+      transition: color 0.15s;
+    }
+    .info-middle a:hover {
+      color: #3ecb3e;
+    }
+    .info-bottom {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #1f3a5a;
+      border: 1.5px solid #a3b9d9;
+      border-radius: 0.375rem;
+      padding: 2px 8px;
+      font-size: 11px;
+      color: white;
+      overflow: hidden;
+      user-select: none;
+    }
+    .peak-count {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1;
+      min-width: 32px;
+      text-align: left;
+      user-select: none;
+      color: #ff3b3b;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .music-icon {
+      font-size: 14px;
+      user-select: none;
+      flex-shrink: 0;
+    }
+    .info-bottom .marquee-container {
+      overflow: hidden;
+      flex: 1;
+      position: relative;
+      height: 18px;
+      padding-left: 4px;
+    }
+    .info-bottom .marquee {
+      display: inline-block;
+      white-space: nowrap;
+      position: absolute;
+      will-change: transform;
+      animation: marqueeAnim 25s linear infinite;
+      padding-left: 100%;
+    }
+    @keyframes marqueeAnim {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="player-container" role="region" aria-label="Reproductor de música Habbo">
+    <div class="avatar-wrapper" aria-label="Avatar">
+      <a href="https://www.habbo.es/profile/estacionkusfm" target="_blank" rel="noopener noreferrer" aria-label="Perfil de estacionkusfm">
+        <img
+          id="avatar"
+          class="avatar-img"
+          src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=std&action=std&direction=2&head_direction=2&headonly=0"
+          alt="Avatar pixel art estilo Habbo de usuario estacionkusfm"
+          draggable="false"
+        />
+      </a>
+    </div>
+    <div class="info-controls" aria-live="polite" aria-atomic="true">
+      <div class="controls-top" role="group" aria-label="Controles de reproducción">
+        <button
+          id="btn-play"
+          class="btn-play"
+          aria-label="Reproducir"
+          title="Reproducir"
+          type="button"
+        >
+          <i class="fas fa-play"></i>
+        </button>
+        <button
+          id="btn-pause"
+          class="btn-pause"
+          aria-label="Pausar"
+          title="Pausar"
+          type="button"
+          style="display:none"
+        >
+          <i class="fas fa-pause"></i>
+        </button>
+        <div class="volume-control" aria-label="Control de volumen">
+          <i class="fas fa-volume-up volume-icon" aria-hidden="true"></i>
+          <div class="volume-slider-wrapper" id="volume-slider-wrapper" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="80" aria-label="Volumen">
+            <div class="volume-slider-thumb" id="volume-thumb"></div>
+          </div>
+          <i class="fas fa-volume-mute volume-icon" aria-hidden="true"></i>
+        </div>
+        <div class="timer-wrapper" aria-label="Cantidad de oyentes" title="Cantidad de oyentes" role="text" aria-live="polite" aria-atomic="true" id="listeners-count">
+          5
+        </div>
+      </div>
+      <div class="info-middle" aria-label="Nombre del usuario y enlace externo">
+        <div class="green-dot" aria-hidden="true"></div>
+        <span id="username" class="truncate" title="estacionkusfm">estacionkusfm</span>
+        <a
+          href="https://www.habbo.es/profile/estacionkusfm"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Abrir perfil de estacionkusfm"
+          title="Abrir perfil de estacionkusfm"
+          ><i class="fas fa-external-link-alt"></i
+        ></a>
+      </div>
+      <div class="info-bottom" aria-label="Información de pico de oyentes y canción">
+        <div class="peak-count" aria-live="polite" aria-atomic="true" id="peak-count">
+          <i class="fas fa-headphones" style="color:#ff3b3b; margin-right:4px;"></i>0
+        </div>
+        <i class="fas fa-music music-icon" aria-hidden="true"></i>
+        <div class="marquee-container" aria-label="Canción actual">
+          <div class="marquee" id="song-info" title="Cargando canción...">Cargando canción... - #EKFM</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="audio-player" preload="none" src="https://radio.estacionkusmedios.com/listen/esmerosound/radio.mp3"></audio>
+
+  <script>
+    (() => {
+      const audio = document.getElementById("audio-player");
+      const btnPlay = document.getElementById("btn-play");
+      const btnPause = document.getElementById("btn-pause");
+      const volumeWrapper = document.getElementById("volume-slider-wrapper");
+      const volumeThumb = document.getElementById("volume-thumb");
+      const listenersCount = document.getElementById("listeners-count");
+      const usernameSpan = document.getElementById("username");
+      const avatarImg = document.getElementById("avatar");
+      const songInfoDiv = document.getElementById("song-info");
+      const peakCountSpan = document.getElementById("peak-count");
+
+      // Estado inicial
+      let isPlaying = false;
+      let volumePercent = 80;
+
+      // Actualizar posición del thumb en slider (0-100%)
+      function updateVolumeThumb() {
+        volumeThumb.style.left = volumePercent + "%";
+        volumeWrapper.setAttribute("aria-valuenow", volumePercent);
+      }
+
+      // Cambiar volumen audio y actualizar thumb
+      function setVolume(value) {
+        volumePercent = Math.min(100, Math.max(0, value));
+        audio.volume = volumePercent / 100;
+        updateVolumeThumb();
+      }
+
+      // Control play/pause toggle
+      function togglePlayPause(play) {
+        if (play) {
+          audio.play();
+          btnPlay.style.display = "none";
+          btnPause.style.display = "flex";
+          isPlaying = true;
+        } else {
+          audio.pause();
+          btnPlay.style.display = "flex";
+          btnPause.style.display = "none";
+          isPlaying = false;
+        }
+      }
+
+      // Actualizar datos del player desde API
+      async function updatePlayerData() {
+        try {
+          const res = await fetch(
+            "https://radio.estacionkusmedios.com/api/nowplaying/esmerosound"
+          );
+          if (!res.ok) throw new Error("Error en API");
+          const data = await res.json();
+
+          // Actualizar oyentes actuales
+          const listeners = data.listeners?.current ?? 5;
+          listenersCount.textContent = listeners;
+
+          // Actualizar pico de oyentes
+          const peak = data.listeners?.peak ?? 0;
+          peakCountSpan.innerHTML = `<i class="fas fa-headphones" style="color:#ff3b3b; margin-right:4px;"></i>${peak}`;
+
+          // Actualizar canción con formato artista - tema - #EKFM
+          const song = data.now_playing?.song;
+          if (song) {
+            const artist = song.artist || "Desconocido";
+            const title = song.title || "Desconocido";
+            const text = `${artist} - ${title} - #EKFM`;
+            songInfoDiv.textContent = text;
+            songInfoDiv.title = text;
+
+            // Reiniciar animación para que se repita si cambia texto
+            songInfoDiv.style.animation = "none";
+            void songInfoDiv.offsetWidth;
+            songInfoDiv.style.animation = null;
+          } else {
+            songInfoDiv.textContent = "Cargando canción... - #EKFM";
+            songInfoDiv.title = "Cargando canción... - #EKFM";
+          }
+
+          // Usuario fijo estacionkusfm y avatar fijo
+          usernameSpan.textContent = "estacionkusfm";
+          usernameSpan.title = "estacionkusfm";
+          avatarImg.src = `https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=std&action=std&direction=2&head_direction=2&headonly=0`;
+        } catch {
+          listenersCount.textContent = "5";
+          peakCountSpan.innerHTML = `<i class="fas fa-headphones" style="color:#ff3b3b; margin-right:4px;"></i>0`;
+          songInfoDiv.textContent = "Cargando canción... - #EKFM";
+          usernameSpan.textContent = "estacionkusfm";
+          avatarImg.src =
+            "https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=std&action=std&direction=2&head_direction=2&headonly=0";
+        }
+      }
+
+      // Control volumen con mouse/touch
+      function onVolumeChange(clientX) {
+        const rect = volumeWrapper.getBoundingClientRect();
+        let pos = clientX - rect.left;
+        let percent = (pos / rect.width) * 100;
+        setVolume(percent);
+      }
+
+      // Eventos volumen
+      let dragging = false;
+      volumeWrapper.addEventListener("mousedown", (e) => {
+        dragging = true;
+        onVolumeChange(e.clientX);
+      });
+      window.addEventListener("mouseup", () => {
+        dragging = false;
+      });
+      window.addEventListener("mousemove", (e) => {
+        if (dragging) {
+          onVolumeChange(e.clientX);
+        }
+      });
+      volumeWrapper.addEventListener("touchstart", (e) => {
+        dragging = true;
+        onVolumeChange(e.touches[0].clientX);
+      });
+      window.addEventListener("touchend", () => {
+        dragging = false;
+      });
+      window.addEventListener("touchmove", (e) => {
+        if (dragging) {
+          onVolumeChange(e.touches[0].clientX);
+        }
+      });
+
+      // Click en play/pause
+      btnPlay.addEventListener("click", () => togglePlayPause(true));
+      btnPause.addEventListener("click", () => togglePlayPause(false));
+
+      // Inicializar volumen y datos
+      setVolume(volumePercent);
+      updatePlayerData();
+
+      // Actualizar datos cada 5 segundos
+      setInterval(updatePlayerData, 5000);
+    })();
+  </script>
+</body>
+</html>
