@@ -130,7 +130,7 @@
     .volume-slider-thumb {
       position: absolute;
       top: 50%;
-      left: 30%;
+      left: 80%;
       width: 12px;
       height: 12px;
       background: white;
@@ -369,15 +369,15 @@
           if (!res.ok) throw new Error("Error en API");
           const data = await res.json();
 
-          // Actualizar oyentes actuales
+          // Oyentes actuales
           const listeners = data.listeners?.current ?? 5;
           listenersCount.textContent = listeners;
 
-          // Actualizar pico de oyentes
+          // Pico de oyentes
           const peak = data.listeners?.peak ?? 0;
           peakCountSpan.innerHTML = `<i class="fas fa-headphones" style="color:#ff3b3b; margin-right:4px;"></i>${peak}`;
 
-          // Actualizar canción con formato artista - tema - #EKFM
+          // Canción actual
           const song = data.now_playing?.song;
           if (song) {
             const artist = song.artist || "Desconocido";
@@ -386,7 +386,7 @@
             songInfoDiv.textContent = text;
             songInfoDiv.title = text;
 
-            // Reiniciar animación para que se repita si cambia texto
+            // Reiniciar animación
             songInfoDiv.style.animation = "none";
             void songInfoDiv.offsetWidth;
             songInfoDiv.style.animation = null;
@@ -395,10 +395,34 @@
             songInfoDiv.title = "Cargando canción... - #EKFM";
           }
 
-          // Usuario fijo estacionkusfm y avatar fijo
-          usernameSpan.textContent = "estacionkusfm";
-          usernameSpan.title = "estacionkusfm";
-          avatarImg.src = `https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=std&action=std&direction=2&head_direction=2&headonly=0`;
+          // Si hay DJ al aire, mostrar su nombre y avatar
+          if (data.live?.is_live && data.live?.streamer_name) {
+            const djName = data.live.streamer_name;
+            usernameSpan.textContent = djName;
+            usernameSpan.title = djName;
+            avatarImg.src = `https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(djName)}&gesture=std&action=std&direction=2&head_direction=2&headonly=0`;
+            // Cambia también el enlace del perfil y externo
+            const avatarLink = avatarImg.parentElement;
+            avatarLink.href = `https://www.habbo.es/profile/${encodeURIComponent(djName)}`;
+            avatarLink.setAttribute("aria-label", "Perfil de " + djName);
+            avatarLink.setAttribute("title", "Abrir perfil de " + djName);
+            const externalLink = document.querySelector('.info-middle a');
+            externalLink.href = `https://www.habbo.es/profile/${encodeURIComponent(djName)}`;
+            externalLink.setAttribute("aria-label", "Abrir perfil de " + djName);
+            externalLink.setAttribute("title", "Abrir perfil de " + djName);
+          } else {
+            usernameSpan.textContent = "estacionkusfm";
+            usernameSpan.title = "estacionkusfm";
+            avatarImg.src = `https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=std&action=std&direction=2&head_direction=2&headonly=0`;
+            const avatarLink = avatarImg.parentElement;
+            avatarLink.href = `https://www.habbo.es/profile/estacionkusfm`;
+            avatarLink.setAttribute("aria-label", "Perfil de estacionkusfm");
+            avatarLink.setAttribute("title", "Abrir perfil de estacionkusfm");
+            const externalLink = document.querySelector('.info-middle a');
+            externalLink.href = `https://www.habbo.es/profile/estacionkusfm`;
+            externalLink.setAttribute("aria-label", "Abrir perfil de estacionkusfm");
+            externalLink.setAttribute("title", "Abrir perfil de estacionkusfm");
+          }
         } catch {
           listenersCount.textContent = "5";
           peakCountSpan.innerHTML = `<i class="fas fa-headphones" style="color:#ff3b3b; margin-right:4px;"></i>0`;
@@ -406,6 +430,14 @@
           usernameSpan.textContent = "estacionkusfm";
           avatarImg.src =
             "https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=std&action=std&direction=2&head_direction=2&headonly=0";
+          const avatarLink = avatarImg.parentElement;
+          avatarLink.href = `https://www.habbo.es/profile/estacionkusfm`;
+          avatarLink.setAttribute("aria-label", "Perfil de estacionkusfm");
+          avatarLink.setAttribute("title", "Abrir perfil de estacionkusfm");
+          const externalLink = document.querySelector('.info-middle a');
+          externalLink.href = `https://www.habbo.es/profile/estacionkusfm`;
+          externalLink.setAttribute("aria-label", "Abrir perfil de estacionkusfm");
+          externalLink.setAttribute("title", "Abrir perfil de estacionkusfm");
         }
       }
 
