@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>La efectiva · Player</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #1a2840, #050816);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #f5f5f5;
+    }
+
+    #laefectiva-player {
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+      background: radial-gradient(circle at top, #111827, #020617);
+      border-radius: 24px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+    }
+
+    .lep-header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .lep-logo {
+      max-width: 200px;
+      height: auto;
+    }
+
+    .lep-nowplaying {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .lep-cover-wrap {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, #ff7a29, #ff3069, #19d3ff);
+    }
+
+    .lep-cover-wrap img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .lep-track-info {
+      flex: 1;
+    }
+
+    #lep-station-name {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    #lep-track-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    #lep-track-artist {
+      font-size: 0.9rem;
+      color: #e5e7eb;
+    }
+
+    #lep-live-badge {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 2px 8px;
+      font-size: 0.7rem;
+      border-radius: 999px;
+      background: #ef4444;
+      box-shadow: 0 0 12px rgba(239,68,68,0.8);
+    }
+
+    .lep-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .lep-controls button {
+      background: transparent;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 6px;
+    }
+
+    .lep-controls button:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+
+    #lep-play {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff7a29, #ff3069);
+      color: #fff;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    }
+
+    #lep-play.paused {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+    }
+
+    #lep-volume {
+      flex: 1;
+      accent-color: #ff7a29;
+    }
+
+    .lep-progress {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    .lep-bar {
+      flex: 1;
+      height: 4px;
+      background: rgba(148,163,184,0.4);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    #lep-bar-inner {
+      width: 25%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff7a29, #ff3069);
+    }
+
+    .lep-history {
+      margin-top: 16px;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+
+    .lep-history h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+
+    #lep-history-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #lep-history-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(148,163,184,0.2);
+      font-size: 0.8rem;
+    }
+
+    .lep-history-cover {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .lep-history-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .lep-history-meta {
+      flex: 1;
+    }
+
+    .lep-history-time {
+      color: #9ca3af;
+      font-size: 0.7rem;
+    }
+  </style>
+</head>
+<body>
+
+<div id="laefectiva-player">
+  <div class="lep-header">
+    <!-- CAMBIA la ruta del logo -->
+    <img src="LOGO_LA_EFECTIVA.png" alt="La efectiva La Voz 14 Online" class="lep-logo">
+  </div>
+
+  <div class="lep-nowplaying">
+    <div class="lep-cover-wrap">
+      <!-- CAMBIA cover-default.jpg si quieres otra imagen por defecto -->
+      <img id="lep-cover" src="cover-default.jpg" alt="Cover actual">
+    </div>
+    <div class="lep-track-info">
+      <div id="lep-station-name">La efectiva · La Voz 14 Online</div>
+      <div id="lep-track-title">Conectando…</div>
+      <div id="lep-track-artist"></div>
+      <div id="lep-live-badge">En vivo</div>
+    </div>
+  </div>
+
+  <div class="lep-controls">
+    <button id="lep-mute" aria-label="Silencio">🔈</button>
+    <button id="lep-prev" disabled>⏮</button>
+    <button id="lep-play" aria-label="Play/Pause">▶</button>
+    <button id="lep-next" disabled>⏭</button>
+    <input id="lep-volume" type="range" min="0" max="1" step="0.01" value="0.8">
+  </div>
+
+  <div class="lep-progress">
+    <span id="lep-current-time">LIVE</span>
+    <div class="lep-bar">
+      <div id="lep-bar-inner"></div>
+    </div>
+    <span id="lep-total-time">ON AIR</span>
+  </div>
+
+  <div class="lep-history">
+    <h3>Historial de canciones</h3>
+    <ul id="lep-history-list"></ul>
+  </div>
+
+  <audio id="lep-audio" preload="none"
+         src="https://lavoz14.vitrinamusical.com/listen/la_efectividad_la_voz_14_online_/radio.mp3">
+  </audio>
+</div>
+
+<script>
+  const STREAM_URL = "https://lavoz14.vitrinamusical.com/listen/la_efectividad_la_voz_14_online_/radio.mp3";
+  const API_NOWPLAYING = "https://lavoz14.vitrinamusical.com/api/nowplaying/1"; // ajusta el 1 al ID real
+  const DEFAULT_COVER = "cover-default.jpg";
+
+  const audioEl   = document.getElementById("lep-audio");
+  const playBtn   = document.getElementById("lep-play");
+  const muteBtn   = document.getElementById("lep-mute");
+  const volumeInp = document.getElementById("lep-volume");
+  const barInner  = document.getElementById("lep-bar-inner");
+
+  const titleEl   = document.getElementById("lep-track-title");
+  const artistEl  = document.getElementById("lep-track-artist");
+  const coverEl   = document.getElementById("lep-cover");
+  const historyUl = document.getElementById("lep-history-list");
+
+  audioEl.src = STREAM_URL;
+
+  // Play / pause con interacción del usuario (evita bloqueos de autoplay)
+  playBtn.addEventListener("click", () => {
+    if (audioEl.paused) {
+      audioEl.play()
+        .then(() => {
+          playBtn.textContent = "⏸";
+          playBtn.classList.add("paused");
+        })
+        .catch(err => console.error(err));
+    } else {
+      audioEl.pause();
+      playBtn.textContent = "▶";
+      playBtn.classList.remove("paused");
+    }
+  });
+
+  // Volumen
+  volumeInp.addEventListener("input", () => {
+    audioEl.volume = volumeInp.value;
+    localStorage.setItem("lep-volume", volumeInp.value);
+  });
+
+  // Mute
+  muteBtn.addEventListener("click", () => {
+    audioEl.muted = !audioEl.muted;
+    muteBtn.textContent = audioEl.muted ? "🔇" : "🔈";
+  });
+
+  // Restaurar volumen guardado
+  const savedVol = localStorage.getItem("lep-volume");
+  if (savedVol !== null) {
+    volumeInp.value = savedVol;
+    audioEl.volume = savedVol;
+  }
+
+  // Progreso decorativo (solo animación visual, porque es streaming)
+  let fakeProgress = 0;
+  setInterval(() => {
+    fakeProgress += 3;
+    if (fakeProgress > 100) fakeProgress = 0;
+    barInner.style.width = fakeProgress + "%";
+  }, 1000);
+
+  // Obtener datos de AzuraCast
+  async function fetchNowPlaying() {
+    try {
+      const res = await fetch(API_NOWPLAYING);
+      if (!res.ok) return;
+      const data = await res.json();
+
+      // Estructura típica AzuraCast: data.now_playing con song + song_history[]
+      const now = data.now_playing || data.nowPlaying || data;
+      const song = now.song || {};
+      const npTitle  = song.title || now.song?.text || "En reproducción";
+      const npArtist = song.artist || "";
+
+      titleEl.textContent  = npTitle;
+      artistEl.textContent = npArtist;
+
+      const art =
+        song.art ||
+        now.art ||
+        (data.station && data.station.art) ||
+        null;
+      coverEl.src = art || DEFAULT_COVER;
+
+      const history = data.song_history || data.songHistory || [];
+      historyUl.innerHTML = "";
+      history.forEach(item => {
+        const hSong = item.song || {};
+        const li = document.createElement("li");
+
+        const coverWrap = document.createElement("div");
+        coverWrap.className = "lep-history-cover";
+        const img = document.createElement("img");
+        img.src = hSong.art || art || DEFAULT_COVER;
+        coverWrap.appendChild(img);
+
+        const meta = document.createElement("div");
+        meta.className = "lep-history-meta";
+        meta.textContent = (hSong.artist || "") + " - " + (hSong.title || "");
+
+        const time = document.createElement("div");
+        time.className = "lep-history-time";
+        const played = item.played_at ? new Date(item.played_at * 1000) : null;
+        time.textContent = played
+          ? played.toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"})
+          : "";
+
+        li.appendChild(coverWrap);
+        li.appendChild(meta);
+        li.appendChild(time);
+        historyUl.appendChild(li);
+      });
+
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  // Cargar al inicio y refrescar cada 15 s
+  fetchNowPlaying();
+  setInterval(fetchNowPlaying, 15000);
+</script>
+
+</body>
+</html>
