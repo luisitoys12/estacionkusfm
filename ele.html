@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>La efectiva · Player</title>
+  <title>La efectiva · Player con letras</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     * {
@@ -23,21 +23,42 @@
 
     #laefectiva-player {
       width: 100%;
-      max-width: 420px;
-      padding: 20px;
+      max-width: 430px;
+      padding: 22px 20px 18px;
       background: radial-gradient(circle at top, #111827, #020617);
-      border-radius: 24px;
+      border-radius: 26px;
       box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Halo animado detrás del cover */
+    #laefectiva-player::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(255,122,41,0.35), transparent 70%);
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      filter: blur(8px);
+      opacity: 0.9;
+      pointer-events: none;
     }
 
     .lep-header {
       text-align: center;
       margin-bottom: 10px;
+      position: relative;
+      z-index: 2;
     }
 
     .lep-logo {
-      max-width: 200px;
+      max-width: 210px;
       height: auto;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
     }
 
     .lep-nowplaying {
@@ -45,14 +66,21 @@
       align-items: center;
       gap: 16px;
       margin-bottom: 16px;
+      position: relative;
+      z-index: 2;
     }
 
     .lep-cover-wrap {
-      width: 96px;
-      height: 96px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
-      padding: 3px;
-      background: linear-gradient(135deg, #ff7a29, #ff3069, #19d3ff);
+      padding: 4px;
+      background: conic-gradient(from 180deg,
+        #ff7a29,
+        #ff3069,
+        #19d3ff,
+        #ff7a29);
+      animation: rotateGlow 16s linear infinite;
     }
 
     .lep-cover-wrap img {
@@ -60,6 +88,11 @@
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.7);
+    }
+
+    @keyframes rotateGlow {
+      to { transform: rotate(360deg); }
     }
 
     .lep-track-info {
@@ -75,7 +108,7 @@
     }
 
     #lep-track-title {
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 600;
     }
 
@@ -85,13 +118,24 @@
     }
 
     #lep-live-badge {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       margin-top: 6px;
-      padding: 2px 8px;
+      padding: 2px 8px 2px 5px;
       font-size: 0.7rem;
       border-radius: 999px;
       background: #ef4444;
-      box-shadow: 0 0 12px rgba(239,68,68,0.8);
+      box-shadow: 0 0 12px rgba(239,68,68,0.7);
+    }
+
+    #lep-live-badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #fee2e2;
+      box-shadow: 0 0 6px #fee2e2;
     }
 
     .lep-controls {
@@ -100,6 +144,8 @@
       justify-content: center;
       gap: 10px;
       margin: 10px 0;
+      position: relative;
+      z-index: 2;
     }
 
     .lep-controls button {
@@ -117,20 +163,20 @@
     }
 
     #lep-play {
-      width: 52px;
-      height: 52px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #ff7a29, #ff3069);
-      color: #fff;
-      font-size: 1.3rem;
+      background: radial-gradient(circle at 30% 20%, #ffe9d5, #ff7a29);
+      color: #111827;
+      font-size: 1.4rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.7);
     }
 
     #lep-play.paused {
-      background: linear-gradient(135deg, #22c55e, #16a34a);
+      background: radial-gradient(circle at 30% 20%, #dcfce7, #22c55e);
     }
 
     #lep-volume {
@@ -144,6 +190,8 @@
       gap: 8px;
       font-size: 0.75rem;
       color: #9ca3af;
+      position: relative;
+      z-index: 2;
     }
 
     .lep-bar {
@@ -160,14 +208,65 @@
       background: linear-gradient(90deg, #ff7a29, #ff3069);
     }
 
+    /* Tabs inferiores */
+    .lep-tabs {
+      display: flex;
+      margin-top: 14px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.85);
+      padding: 3px;
+      font-size: 0.75rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .lep-tab {
+      flex: 1;
+      text-align: center;
+      padding: 6px 0;
+      border-radius: 999px;
+      cursor: pointer;
+      color: #9ca3af;
+      user-select: none;
+    }
+
+    .lep-tab.active {
+      background: linear-gradient(135deg, #ff7a29, #ff3069);
+      color: #0b1120;
+      font-weight: 600;
+    }
+
+    .lep-panels {
+      margin-top: 10px;
+      position: relative;
+      z-index: 2;
+      min-height: 150px;
+    }
+
+    .lep-panel {
+      display: none;
+      font-size: 0.8rem;
+    }
+
+    .lep-panel.active {
+      display: block;
+    }
+
+    /* Panel info (historial resumido) */
+    .lep-panel-info p {
+      color: #e5e7eb;
+      margin-bottom: 6px;
+    }
+
+    /* Panel historial (lista completa) */
     .lep-history {
-      margin-top: 16px;
-      max-height: 180px;
+      max-height: 190px;
       overflow-y: auto;
+      padding-right: 4px;
     }
 
     .lep-history h3 {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: #9ca3af;
@@ -211,20 +310,57 @@
       color: #9ca3af;
       font-size: 0.7rem;
     }
+
+    /* Panel lyrics */
+    .lep-lyrics {
+      max-height: 190px;
+      overflow-y: auto;
+      padding-right: 4px;
+      line-height: 1.45;
+    }
+
+    .lep-lyrics-line {
+      color: #d1d5db;
+      margin-bottom: 4px;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .lep-lyrics-line.active {
+      color: #f9fafb;
+      transform: translateX(4px);
+    }
+
+    .lep-lyrics-empty {
+      color: #9ca3af;
+      font-style: italic;
+    }
+
+    /* Scrollbar sutil */
+    .lep-history::-webkit-scrollbar,
+    .lep-lyrics::-webkit-scrollbar {
+      width: 4px;
+    }
+    .lep-history::-webkit-scrollbar-thumb,
+    .lep-lyrics::-webkit-scrollbar-thumb {
+      background: rgba(148,163,184,0.7);
+      border-radius: 999px;
+    }
   </style>
 </head>
 <body>
 
 <div id="laefectiva-player">
   <div class="lep-header">
-    <!-- CAMBIA la ruta del logo -->
-    <img src="https://i.imgur.com/f1OOFhr.jpeg" alt="La efectiva La Voz 14 Online" class="lep-logo">
+    <img src="https://i.imgur.com/f1OOFhr.jpeg"
+         alt="La efectiva La Voz 14 Online"
+         class="lep-logo">
   </div>
 
   <div class="lep-nowplaying">
     <div class="lep-cover-wrap">
-      <!-- CAMBIA cover-default.jpg si quieres otra imagen por defecto -->
-      <img id="lep-cover" src="cover-default.jpg" alt="Cover actual">
+      <img id="lep-cover"
+           src="https://213.199.52.0/api/station/la_efectividad_la_voz_14_online_/art/e9f895412bc8d44987b9c1dd-1759266818.jpg"
+           alt="Cover actual">
     </div>
     <div class="lep-track-info">
       <div id="lep-station-name">La efectiva · La Voz 14 Online</div>
@@ -250,9 +386,35 @@
     <span id="lep-total-time">ON AIR</span>
   </div>
 
-  <div class="lep-history">
-    <h3>Historial de canciones</h3>
-    <ul id="lep-history-list"></ul>
+  <!-- Tabs -->
+  <div class="lep-tabs">
+    <div class="lep-tab active" data-target="info">Info</div>
+    <div class="lep-tab" data-target="history">Historial</div>
+    <div class="lep-tab" data-target="lyrics">Lyrics</div>
+  </div>
+
+  <!-- Paneles -->
+  <div class="lep-panels">
+    <div class="lep-panel lep-panel-info active" id="panel-info">
+      <p id="lep-info-text">
+        Disfruta la mejor música en La efectiva, la voz 14 online.
+      </p>
+    </div>
+
+    <div class="lep-panel" id="panel-history">
+      <div class="lep-history">
+        <h3>Historial de canciones</h3>
+        <ul id="lep-history-list"></ul>
+      </div>
+    </div>
+
+    <div class="lep-panel" id="panel-lyrics">
+      <div class="lep-lyrics" id="lep-lyrics-box">
+        <p class="lep-lyrics-empty">
+          Las letras aparecerán aquí si están disponibles para esta canción.
+        </p>
+      </div>
+    </div>
   </div>
 
   <audio id="lep-audio" preload="none"
@@ -261,9 +423,14 @@
 </div>
 
 <script>
-  const STREAM_URL = "https://lavoz14.vitrinamusical.com/listen/la_efectividad_la_voz_14_online_/radio.mp3";
-  const API_NOWPLAYING = "https://lavoz14.vitrinamusical.com/la_efectividad_la_voz_14_online_/now_playing"; // ajusta el 1 al ID real
-  const DEFAULT_COVER = "https://i.imgur.com/f1OOFhr.jpeg";
+  const STREAM_URL =
+    "https://lavoz14.vitrinamusical.com/listen/la_efectividad_la_voz_14_online_/radio.mp3";
+
+  const API_NOWPLAYING =
+    "https://lavoz14.vitrinamusical.com/api/nowplaying/la_efectividad_la_voz_14_online_";
+
+  const DEFAULT_COVER =
+    "https://213.199.52.0/api/station/la_efectividad_la_voz_14_online_/art/e9f895412bc8d44987b9c1dd-1759266818.jpg";
 
   const audioEl   = document.getElementById("lep-audio");
   const playBtn   = document.getElementById("lep-play");
@@ -275,10 +442,11 @@
   const artistEl  = document.getElementById("lep-track-artist");
   const coverEl   = document.getElementById("lep-cover");
   const historyUl = document.getElementById("lep-history-list");
+  const lyricsBox = document.getElementById("lep-lyrics-box");
 
   audioEl.src = STREAM_URL;
 
-  // Play / pause con interacción del usuario (evita bloqueos de autoplay)
+  // Play / pause
   playBtn.addEventListener("click", () => {
     if (audioEl.paused) {
       audioEl.play()
@@ -306,14 +474,14 @@
     muteBtn.textContent = audioEl.muted ? "🔇" : "🔈";
   });
 
-  // Restaurar volumen guardado
+  // Restaurar volumen
   const savedVol = localStorage.getItem("lep-volume");
   if (savedVol !== null) {
     volumeInp.value = savedVol;
     audioEl.volume = savedVol;
   }
 
-  // Progreso decorativo (solo animación visual, porque es streaming)
+  // Progreso decorativo
   let fakeProgress = 0;
   setInterval(() => {
     fakeProgress += 3;
@@ -321,14 +489,144 @@
     barInner.style.width = fakeProgress + "%";
   }, 1000);
 
-  // Obtener datos de AzuraCast
+  // Tabs
+  document.querySelectorAll(".lep-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document
+        .querySelectorAll(".lep-tab")
+        .forEach(t => t.classList.remove("active"));
+      document
+        .querySelectorAll(".lep-panel")
+        .forEach(p => p.classList.remove("active"));
+
+      tab.classList.add("active");
+      const target = tab.getAttribute("data-target");
+      document.getElementById("panel-" + target).classList.add("active");
+    });
+  });
+
+  // Lyrics: estructura interna para posible sync
+  let currentLyrics = []; // {time: segundos o null, text: string}
+  let lyricsSyncInterval = null;
+
+  function clearLyrics() {
+    currentLyrics = [];
+    if (lyricsSyncInterval) {
+      clearInterval(lyricsSyncInterval);
+      lyricsSyncInterval = null;
+    }
+    lyricsBox.innerHTML =
+      '<p class="lep-lyrics-empty">Las letras aparecerán aquí si están disponibles para esta canción.</p>';
+  }
+
+  function renderLyrics(lines) {
+    // lines: array de objetos {time: segundos|null, text: string}
+    currentLyrics = lines;
+    lyricsBox.innerHTML = "";
+
+    lines.forEach((line, index) => {
+      const p = document.createElement("p");
+      p.className = "lep-lyrics-line";
+      p.dataset.index = index.toString();
+      p.textContent = line.text;
+      lyricsBox.appendChild(p);
+    });
+
+    if (lines.some(l => typeof l.time === "number")) {
+      // Lyrics con timestamps
+      lyricsSyncInterval = setInterval(() => {
+        const t = audioEl.currentTime;
+        let activeIndex = -1;
+        for (let i = 0; i < currentLyrics.length; i++) {
+          const l = currentLyrics[i];
+          const next = currentLyrics[i + 1];
+          if (typeof l.time === "number") {
+            const start = l.time;
+            const end = typeof next?.time === "number" ? next.time : t + 10;
+            if (t >= start && t < end) {
+              activeIndex = i;
+              break;
+            }
+          }
+        }
+        document
+          .querySelectorAll(".lep-lyrics-line")
+          .forEach(el => el.classList.remove("active"));
+        if (activeIndex >= 0) {
+          const activeEl = document.querySelector(
+            '.lep-lyrics-line[data-index="' + activeIndex + '"]'
+          );
+          if (activeEl) {
+            activeEl.classList.add("active");
+            const parent = lyricsBox;
+            const offsetTop = activeEl.offsetTop;
+            parent.scrollTo({
+              top: offsetTop - parent.clientHeight / 2 + 20,
+              behavior: "smooth"
+            });
+          }
+        }
+      }, 500);
+    }
+  }
+
+  // Demo de fetchLyrics:
+  // Por ahora hace una petición GET a una URL ficticia; tú solo cambias baseURL
+  async function fetchLyrics(artist, title) {
+    clearLyrics();
+
+    if (!artist && !title) return;
+
+    // Ajusta esta URL a tu backend o API de letras
+    const baseURL = "https://example.com/lyrics-api"; // REEMPLAZAR
+    const url =
+      baseURL +
+      "?artist=" +
+      encodeURIComponent(artist) +
+      "&title=" +
+      encodeURIComponent(title);
+
+    try {
+      // Si aún no tienes backend, comentas todo este bloque y pones unas lyrics de demo.
+      const res = await fetch(url);
+      if (!res.ok) {
+        console.warn("No hay lyrics para:", artist, title);
+        return;
+      }
+      const data = await res.json();
+      // Se espera un JSON tipo:
+      // { lines: [ { time: 12.3, text: "línea 1" }, { time: null, text: "línea 2" } ] }
+      if (Array.isArray(data.lines) && data.lines.length) {
+        renderLyrics(data.lines);
+      }
+    } catch (err) {
+      console.error("Error al cargar lyrics", err);
+    }
+  }
+
+  // Para mostrar algo al cliente, dejamos un fallback de letras de demo
+  function renderDemoLyrics(artist, title) {
+    clearLyrics();
+    const demo = [
+      { time: null, text: "♫ " + (artist || "Artista") + " - " + (title || "Canción") + " ♫" },
+      { time: null, text: "" },
+      { time: null, text: "Letra de ejemplo para mostrar" },
+      { time: null, text: "cómo se verían las líneas de la canción" },
+      { time: null, text: "dentro del player de La efectiva." },
+      { time: null, text: "" },
+      { time: null, text: "Cuando se conecte a una API real," },
+      { time: null, text: "aquí aparecerán las letras verdaderas." }
+    ];
+    renderLyrics(demo);
+  }
+
+  // Now playing + historial + lyrics
   async function fetchNowPlaying() {
     try {
       const res = await fetch(API_NOWPLAYING);
       if (!res.ok) return;
       const data = await res.json();
 
-      // Estructura típica AzuraCast: data.now_playing con song + song_history[]
       const now = data.now_playing || data.nowPlaying || data;
       const song = now.song || {};
       const npTitle  = song.title || now.song?.text || "En reproducción";
@@ -341,8 +639,8 @@
         song.art ||
         now.art ||
         (data.station && data.station.art) ||
-        null;
-      coverEl.src = art || DEFAULT_COVER;
+        DEFAULT_COVER;
+      coverEl.src = art;
 
       const history = data.song_history || data.songHistory || [];
       historyUl.innerHTML = "";
@@ -358,7 +656,10 @@
 
         const meta = document.createElement("div");
         meta.className = "lep-history-meta";
-        meta.textContent = (hSong.artist || "") + " - " + (hSong.title || "");
+        meta.textContent =
+          (hSong.artist || "").trim() +
+          (hSong.artist && hSong.title ? " - " : "") +
+          (hSong.title || "");
 
         const time = document.createElement("div");
         time.className = "lep-history-time";
@@ -373,12 +674,15 @@
         historyUl.appendChild(li);
       });
 
+      // Lyrics: primero intenta API (comentada) y dejamos demo para cliente
+      // await fetchLyrics(npArtist, npTitle);
+      renderDemoLyrics(npArtist, npTitle);
+
     } catch (e) {
       console.error(e);
     }
   }
 
-  // Cargar al inicio y refrescar cada 15 s
   fetchNowPlaying();
   setInterval(fetchNowPlaying, 15000);
 </script>
