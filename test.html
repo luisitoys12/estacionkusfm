@@ -1,588 +1,91 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KUSFM Navidad Player 🎄</title>
-    <link href="https://fonts.googleapis.com/css2?family=Contrail+One:wght@400;700&family=Fredoka+One&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Contrail One', 'Fredoka One', Tahoma, Arial, sans-serif;
-            background: linear-gradient(160deg, #0a0a23 0%, #1a1a3a 50%, #0d1422 100%);
-            color: #fff; 
-            overflow-x: hidden;
-            height: 100vh;
-            position: relative;
-        }
-        
-        /* NIEVE CARENDO */
-        .snowflakes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .snowflake {
-            position: absolute;
-            color: #fff;
-            font-size: 1.2em;
-            animation: snowfall linear infinite;
-            opacity: 0.8;
-        }
-        
-        @keyframes snowfall {
-            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-        }
-        
-        #kusfm-navidad-player {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 440px;
-            max-width: 95vw;
-            background: linear-gradient(145deg, #1e0533, #2d0b41, #3a0f51);
-            border-radius: 28px;
-            padding: 24px;
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            box-shadow: 
-                0 25px 50px rgba(0,0,0,0.9),
-                0 0 100px rgba(255,20,147,0.3),
-                inset 0 1px 0 rgba(255,255,255,0.1);
-            border: 3px solid;
-            border-image: linear-gradient(45deg, #ff0080, #ff1493, #ff69b4, #ff1493) 1;
-            z-index: 99999;
-            backdrop-filter: blur(20px);
-            animation: navidad-glow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes navidad-glow {
-            0% { box-shadow: 0 25px 50px rgba(0,0,0,0.9), 0 0 100px rgba(255,20,147,0.3); }
-            100% { box-shadow: 0 25px 50px rgba(0,0,0,0.9), 0 0 120px rgba(255,105,180,0.5); }
-        }
-
-        /* Avatar navideño */
-        .avatar-navidad-wrapper {
-            position: relative;
-            width: 88px;
-            height: 120px;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-        }
-
-        .avatar-navidad-bg {
-            position: absolute;
-            width: 88px;
-            height: 120px;
-            background: radial-gradient(circle at 50% 20%, #ff4757 0%, #c44569 50%, #8e44ad 100%);
-            border-radius: 24px;
-            filter: blur(1px);
-            box-shadow: 0 8px 32px rgba(255,71,87,0.6);
-            z-index: 1;
-            animation: bg-pulse 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes bg-pulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(1.05); opacity: 1; }
-        }
-
-        .avatar-navidad-luces {
-            position: absolute;
-            width: 88px;
-            height: 120px;
-            border-radius: 24px;
-            background: repeating-linear-gradient(
-                90deg,
-                transparent 0px,
-                #ffd700 50px,
-                transparent 100px,
-                #ff1493 150px,
-                transparent 200px
-            );
-            opacity: 0.6;
-            mix-blend-mode: screen;
-            animation: luces-navidad 1.5s linear infinite;
-            z-index: 2;
-        }
-
-        @keyframes luces-navidad {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.8; }
-        }
-
-        .navidad-avatar {
-            width: 78px;
-            height: 112px;
-            border-radius: 22px;
-            object-fit: contain;
-            object-position: bottom center;
-            border: 4px solid #fff;
-            box-shadow: 
-                0 8px 24px rgba(255,255,255,0.4),
-                inset 0 2px 0 rgba(255,255,255,0.3);
-            z-index: 3;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .navidad-avatar::before {
-            content: '🎅';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 20px;
-            animation: gorro-bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes gorro-bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-4px); }
-        }
-
-        .navidad-avatar:hover {
-            transform: scale(1.1) rotate(-5deg);
-            filter: drop-shadow(0 0 20px #ff1493);
-        }
-
-        .player-info-navidad {
-            flex: 1;
-            min-width: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .navidad-badge {
-            background: linear-gradient(45deg, #ff4757, #ff6b7a, #ff8e9e);
-            color: #fff;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            padding: 8px 16px;
-            width: fit-content;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            box-shadow: 0 6px 20px rgba(255,71,87,0.5);
-            animation: badge-navidad 2s ease-in-out infinite;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .navidad-badge::before {
-            content: '🎄';
-            margin-right: 6px;
-        }
-
-        @keyframes badge-navidad {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            50% { transform: scale(1.05) rotate(2deg); }
-        }
-
-        .song-navidad {
-            font-size: 17px;
-            font-weight: 700;
-            color: #fff;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-shadow: 0 3px 12px rgba(0,0,0,0.9);
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            padding: 12px 16px;
-            border-radius: 16px;
-            border: 2px solid rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-            animation: song-shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes song-shimmer {
-            0%, 100% { background-position: -200px 0; }
-            50% { background-position: 200px 0; }
-        }
-
-        .dj-navidad, .listeners-navidad {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            color: #ffd700;
-            background: rgba(255,215,0,0.1);
-            padding: 8px 14px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,215,0,0.3);
-        }
-
-        .player-navidad-controls {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            align-items: center;
-        }
-
-        .controls-navidad {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-navidad {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-play-navidad { 
-            background: linear-gradient(145deg, #00ff88, #00cc6a);
-            color: #000;
-            width: 58px;
-            height: 58px;
-            font-size: 22px;
-            font-weight: bold;
-        }
-
-        .btn-play-navidad.paused { 
-            background: linear-gradient(145deg, #ff4757, #ff6b7a);
-            color: #fff;
-        }
-
-        .btn-navidad::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-navidad:hover::before { left: 100%; }
-        .btn-navidad:hover { transform: scale(1.15) rotate(360deg); }
-
-        .info-navidad {
-            background: linear-gradient(145deg, #ffd700, #ffed4a);
-            color: #000;
-            width: 48px;
-            height: 48px;
-            border-radius: 16px;
-            font-size: 20px;
-        }
-
-        .volume-navidad {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255,255,255,0.1);
-            padding: 10px 14px;
-            border-radius: 24px;
-            font-size: 13px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        #volume-navidad {
-            width: 80px;
-            height: 5px;
-            border-radius: 3px;
-            background: rgba(255,255,255,0.3);
-            outline: none;
-            cursor: pointer;
-            appearance: none;
-        }
-
-        #volume-navidad::-webkit-slider-thumb {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: linear-gradient(145deg, #ff1493, #ff69b4);
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(255,20,147,0.6);
-        }
-
-        .status-navidad {
-            font-size: 12px;
-            color: #00ff88;
-            text-align: center;
-            margin-top: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            animation: status-twinkle 1.5s ease-in-out infinite;
-        }
-
-        @keyframes status-twinkle {
-            0%, 100% { opacity: 1; text-shadow: 0 0 10px #00ff88; }
-            50% { opacity: 0.7; text-shadow: 0 0 20px #00ff88; }
-        }
-
-        /* Modal navideño */
-        .modal-navidad {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0,0,20,0.95);
-            z-index: 10000;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(15px);
-        }
-
-        .modal-navidad.active { display: flex; }
-
-        .modal-navidad-content {
-            background: linear-gradient(145deg, #2d0b41, #1e0533);
-            border-radius: 30px;
-            padding: 35px;
-            max-width: 400px;
-            width: 90vw;
-            text-align: center;
-            border: 4px solid;
-            border-image: linear-gradient(45deg, #ff0080, #00ff88, #ffd700) 1;
-            box-shadow: 
-                0 30px 80px rgba(255,20,147,0.4),
-                inset 0 1px 0 rgba(255,255,255,0.1);
-            animation: modal-navidad-pop 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            position: relative;
-            overflow: hidden;
-        }
-
-        @keyframes modal-navidad-pop {
-            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
-            100% { transform: scale(1) rotate(0deg); opacity: 1; }
-        }
-
-        .modal-navidad-content::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,20,147,0.1) 0%, transparent 70%);
-            animation: modal-sparkle 4s linear infinite;
-        }
-
-        @keyframes modal-sparkle {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 480px) {
-            #kusfm-navidad-player {
-                width: 95vw;
-                padding: 20px;
-                flex-direction: column;
-                gap: 18px;
-                align-items: center;
-            }
-            
-            .avatar-navidad-wrapper {
-                width: 76px;
-                height: 105px;
-            }
-            
-            .navidad-avatar {
-                width: 68px;
-                height: 98px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KUSFM Navidad 🎄</title>
+<style>
+* {margin:0;padding:0;box-sizing:border-box;}
+body {font-family:Tahoma,Arial,sans-serif;background:#000;color:#fff;overflow:hidden;height:100vh;position:relative;}
+.snowflakes{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:1;}
+.snowflake{position:absolute;color:#fff;font-size:1.2em;animation:snowfall linear infinite;opacity:0.8;}
+@keyframes snowfall{0%{transform:translateY(-100vh) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(360deg);opacity:0;}}
+#player{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);width:420px;max-width:95vw;background:linear-gradient(145deg,#1e0533,#2d0b41);border-radius:24px;padding:20px;display:flex;align-items:flex-start;gap:16px;box-shadow:0 25px 50px rgba(0,0,0,0.9),0 0 60px rgba(255,20,147,0.4);border:2px solid;border-image:linear-gradient(45deg,#ff0080,#ff1493) 1;z-index:99999;}
+.avatar-wrapper{position:relative;width:80px;height:110px;display:flex;align-items:flex-start;justify-content:center;}
+.avatar-bg{position:absolute;width:80px;height:110px;background:radial-gradient(circle at 50% 20%,#ff4757 0%,#c44569 50%,#8e44ad 100%);border-radius:20px;filter:blur(1px);box-shadow:0 8px 32px rgba(255,71,87,0.6);z-index:1;animation:bg-pulse 2s infinite alternate;}
+@keyframes bg-pulse{0%{transform:scale(1);opacity:0.8;}100%{transform:scale(1.05);opacity:1;}}
+.avatar-luces{position:absolute;width:80px;height:110px;border-radius:20px;background:repeating-linear-gradient(90deg,transparent 0px,#ffd700 50px,transparent 100px,#ff1493 150px,transparent 200px);opacity:0.6;mix-blend-mode:screen;animation:luces 1.5s infinite;z-index:2;}
+@keyframes luces{0%,100%{opacity:0.4;}50%{opacity:0.8;}}
+.avatar{width:72px;height:104px;border-radius:18px;object-fit:contain;object-position:bottom center;border:3px solid #fff;box-shadow:0 8px 24px rgba(255,255,255,0.4);z-index:3;transition:all .3s;position:relative;}
+.avatar::before{content:'🎅';position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:20px;animation:gorro 2s infinite;}
+@keyframes gorro{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-4px);}}
+.avatar:hover{transform:scale(1.1) rotate(-5deg);filter:drop-shadow(0 0 20px #ff1493);}
+.info{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px;}
+.badge{background:linear-gradient(45deg,#ff4757,#ff6b7a);color:#fff;border-radius:16px;font-size:12px;font-weight:700;padding:6px 12px;width:fit-content;text-transform:uppercase;letter-spacing:1px;box-shadow:0 6px 20px rgba(255,71,87,0.5);animation:badge-glow 2s infinite;}
+@keyframes badge-glow{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+.badge::before{content:'🎄 ';margin-right:4px;}
+.song{font-size:16px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 2px 8px #000;background:rgba(0,0,0,0.5);padding:10px 14px;border-radius:14px;border-left:4px solid #00ff88;}
+.dj-info,.listeners-info{display:flex;align-items:center;gap:8px;font-size:13px;color:#ffd700;background:rgba(255,215,0,0.1);padding:8px 12px;border-radius:12px;border:1px solid rgba(255,215,0,0.3);}
+.controls{display:flex;flex-direction:column;gap:12px;align-items:center;}
+.main-controls{display:flex;gap:8px;}
+.btn{width:44px;height:44px;border-radius:50%;border:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .3s;box-shadow:0 6px 20px rgba(0,0,0,0.5);}
+.btn-play{background:linear-gradient(145deg,#00ff88,#00cc6a);color:#000;width:52px;height:52px;font-size:20px;}
+.btn-play.paused{background:linear-gradient(145deg,#ff4757,#ff6b7a);color:#fff;}
+.btn:hover{transform:scale(1.15);}
+.info-btn{background:linear-gradient(145deg,#ffd700,#ffed4a);color:#000;width:44px;height:44px;border-radius:12px;font-size:18px;}
+.volume{display:flex;align-items:center;gap:6px;background:rgba(0,0,0,0.5);padding:8px 12px;border-radius:20px;font-size:12px;}
+#volume{width:70px;height:4px;background:rgba(255,255,255,0.3);outline:none;cursor:pointer;border-radius:2px;appearance:none;}
+#volume::-webkit-slider-thumb{appearance:none;width:18px;height:18px;border-radius:50%;background:#ff1493;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.4);}
+.status{font-size:11px;color:#00ff88;text-align:center;margin-top:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px;animation:twinkle 1.5s infinite;}
+@keyframes twinkle{0%,100%{opacity:1;text-shadow:0 0 10px #00ff88;}50%{opacity:0.7;text-shadow:0 0 20px #00ff88;}}
+.modal{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,20,0.95);z-index:10000;align-items:center;justify-content:center;backdrop-filter:blur(10px);}
+.modal.active{display:flex;}
+.modal-content{background:linear-gradient(145deg,#2d0b41,#1e0533);border-radius:28px;padding:30px;max-width:380px;width:90vw;text-align:center;border:3px solid;border-image:linear-gradient(45deg,#ff0080,#00ff88) 1;box-shadow:0 30px 80px rgba(255,20,147,0.4);animation:modal-pop .4s;}
+@keyframes modal-pop{0%{transform:scale(0);opacity:0;}100%{transform:scale(1);opacity:1;}}
+.modal-close{position:absolute;top:15px;right:20px;background:rgba(255,255,255,0.2);border:none;color:#fff;font-size:24px;cursor:pointer;width:45px;height:45px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.modal-close:hover{background:rgba(255,255,255,0.4);}
+.modal-title{font-size:20px;margin:20px 0;color:#ffd700;text-shadow:0 0 20px #ffd700;}
+.modal-history{text-align:left;max-height:220px;overflow-y:auto;}
+.history-item{background:rgba(255,255,255,0.08);margin:10px 0;padding:14px;border-radius:14px;border-left:5px solid #00ff88;font-size:14px;}
+@media (max-width:450px){#player{width:95vw;padding:16px;flex-direction:column;gap:16px;align-items:center;}.avatar-wrapper{width:70px;height:95px;}.avatar{width:62px;height:90px;}}
+</style>
 </head>
 <body>
-
-<!-- NIEVE CAYENDO -->
-<div class="snowflakes" id="snow-container"></div>
-
-<div id="kusfm-navidad-player">
-    <div class="avatar-navidad-wrapper">
-        <div class="avatar-navidad-bg"></div>
-        <div class="avatar-navidad-luces"></div>
-        <img id="dj-navidad-avatar" class="navidad-avatar" src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm" alt="DJ 🎅">
-    </div>
-    
-    <div class="player-info-navidad">
-        <div class="navidad-badge">🎄 KUSFM NAVIDAD LIVE</div>
-        <div class="song-navidad" id="navidad-song">Cargando villancico...</div>
-        <div class="dj-navidad" id="navidad-dj">
-            🎙️ DJ: estacionkusfm
-        </div>
-        <div class="listeners-navidad" id="navidad-listeners">
-            👥 0 duendes oyentes
-        </div>
-    </div>
-    
-    <div class="player-navidad-controls">
-        <div class="controls-navidad">
-            <button id="navidad-play" class="btn-navidad btn-play-navidad" title="Play/Pause">▶</button>
-            <button id="navidad-info" class="btn-navidad info-navidad" title="🎁 Historia">🎁</button>
-        </div>
-        <div class="volume-navidad">
-            <span>🎵</span>
-            <input id="volume-navidad" type="range" min="0" max="100" value="80">
-        </div>
-    </div>
+<div class="snowflakes" id="snow"></div>
+<div id="player">
+<div class="avatar-wrapper">
+<div class="avatar-bg"></div>
+<div class="avatar-luces"></div>
+<img id="avatar" class="avatar" src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&gesture=std&action=std&direction=2&head_direction=2&headonly=0" alt="DJ">
 </div>
-
-<audio id="navidad-audio" preload="metadata">
-    <source src="https://radio.kusmedios.lat/listen/ekus-fm/radio.mp3" type="audio/mpeg">
-</audio>
-
-<div class="status-navidad" id="navidad-status">🎅 ¡Feliz Navidad!</div>
-
-<!-- Modal Navidad -->
-<div class="modal-navidad" id="navidad-modal">
-    <div class="modal-navidad-content">
-        <button class="modal-close" id="navidad-close" style="
-            position: absolute; top: 20px; right: 25px; 
-            background: rgba(255,255,255,0.2); border: none; 
-            color: #fff; font-size: 28px; cursor: pointer;
-            width: 50px; height: 50px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-        ">❌</button>
-        <img id="navidad-album" style="display:none;" alt="Portada">
-        <div style="font-size: 22px; margin: 20px 0; color: #ffd700; text-shadow: 0 0 20px #ffd700;">🎄 CANCIÓN NAVIDEÑA</div>
-        <div id="navidad-current" style="font-size: 18px; margin-bottom: 25px; color: #fff;"></div>
-        <div style="text-align: left; max-height: 220px; overflow-y: auto;">
-            <div id="navidad-history"></div>
-        </div>
-    </div>
+<div class="info">
+<div class="badge">🎄 KUSFM NAVIDAD</div>
+<div class="song" id="song">Cargando...</div>
+<div class="dj-info" id="dj">🎙️ DJ: estacionkusfm</div>
+<div class="listeners-info" id="listeners">👥 0 oyentes</div>
 </div>
-
+<div class="controls">
+<div class="main-controls">
+<button id="play" class="btn btn-play" title="Play/Pause">▶</button>
+<button id="info" class="btn info-btn" title="Historia">🎁</button>
+</div>
+<div class="volume">
+<span>🔊</span><input id="volume" type="range" min="0" max="100" value="80">
+</div>
+</div>
+</div>
+<audio id="audio" preload="metadata"></audio>
+<div class="status" id="status">🎅 Conectando...</div>
+<div class="modal" id="modal">
+<div class="modal-content">
+<button class="modal-close" id="close">&times;</button>
+<div class="modal-title" id="modal-song">Cargando villancico...</div>
+<div class="modal-history" id="history"></div>
+</div>
+</div>
 <script>
-class KusFMNavidad {
-    constructor() {
-        this.audio = document.getElementById('navidad-audio');
-        this.playBtn = document.getElementById('navidad-play');
-        this.volumeSlider = document.getElementById('volume-navidad');
-        this.songTitle = document.getElementById('navidad-song');
-        this.djInfo = document.getElementById('navidad-dj');
-        this.listenersInfo = document.getElementById('navidad-listeners');
-        this.djAvatar = document.getElementById('dj-navidad-avatar');
-        this.statusBar = document.getElementById('navidad-status');
-        
-        this.apiUrl = 'https://radio.kusmedios.lat/api/nowplaying/estacionkusfm';
-        this.streamUrl = 'https://radio.kusmedios.lat/listen/ekus-fm/radio.mp3';
-        this.modalData = {};
-        
-        this.init();
-        this.createSnow();
-    }
-    
-    init() {
-        this.audio.src = this.streamUrl;
-        this.audio.volume = 0.8;
-        
-        this.playBtn.onclick = () => this.togglePlay();
-        this.volumeSlider.oninput = (e) => this.audio.volume = e.target.value / 100;
-        
-        document.getElementById('navidad-info').onclick = () => this.openNavidadModal();
-        document.getElementById('navidad-close').onclick = () => this.closeNavidadModal();
-        document.getElementById('navidad-modal').onclick = (e) => {
-            if (e.target.id === 'navidad-modal') this.closeNavidadModal();
-        };
-        
-        this.audio.addEventListener('loadstart', () => this.setStatus('🎅 Conectando trineo...'));
-        this.audio.addEventListener('waiting', () => this.setStatus('⛄ Preparando regalos...'));
-        this.audio.addEventListener('playing', () => this.setStatus('🎄 ¡Navidad en vivo!'));
-        this.audio.addEventListener('error', () => this.setStatus('❄️ Problemas invernales'));
-        
-        this.updateData();
-        setInterval(() => this.updateData(), 5000);
-    }
-    
-    createSnow() {
-        const snowContainer = document.getElementById('snow-container');
-        const snowflakes = ['❄️', '⭐', '🎅', '🎄', '✨'];
-        
-        for (let i = 0; i < 100; i++) {
-            const snowflake = document.createElement('div');
-            snowflake.className = 'snowflake';
-            snowflake.innerHTML = snowflakes[Math.floor(Math.random() * snowflakes.length)];
-            snowflake.style.left = Math.random() * 100 + '%';
-            snowflake.style.animationDuration = (Math.random() * 3 + 2) + 's';
-            snowflake.style.animationDelay = Math.random() * 2 + 's';
-            snowflake.style.opacity = Math.random() * 0.5 + 0.3;
-            snowContainer.appendChild(snowflake);
-        }
-    }
-    
-    async updateData() {
-        try {
-            const res = await fetch(this.apiUrl);
-            const data = await res.json();
-            
-            const song = data.now_playing.song;
-            const live = data.live;
-            const listeners = data.listeners?.current || 0;
-            
-            this.songTitle.textContent = `${song.artist || '🎅'} - ${song.title || 'Villancico Live'}`;
-            
-            const djName = live?.is_live && live.streamer_name ? live.streamer_name : 'estacionkusfm';
-            this.djInfo.innerHTML = `🎙️ DJ: ${djName}`;
-            this.djAvatar.src = `https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(djName)}&gesture=std&action=std&direction=2&head_direction=2&headonly=0`;
-            
-            this.listenersInfo.innerHTML = `👥 ${listeners} duendes oyentes`;
-            
-            this.modalData = {
-                album: song.art || '',
-                current: `${song.artist || '🎅'} - ${song.title || 'En vivo'}`,
-                history: (data.song_history || []).slice(0, 6).map(s => 
-                    `${s.song.artist || '❄️'} - ${s.song.title || 'Navideña'}`
-                )
-            };
-            
-        } catch (e) {
-            this.setDefaultData();
-        }
-    }
-    
-    togglePlay() {
-        if (this.audio.paused) {
-            this.audio.play().catch(console.error);
-            this.playBtn.textContent = '⏸';
-            this.playBtn.classList.add('paused');
-        } else {
-            this.audio.pause();
-            this.playBtn.textContent = '▶';
-            this.playBtn.classList.remove('paused');
-        }
-    }
-    
-    setDefaultData() {
-        this.songTitle.textContent = '🎄 ESTACIONKUSFM NAVIDAD';
-        this.djInfo.innerHTML = '🎙️ DJ: estacionkusfm';
-        this.listenersInfo.innerHTML = '👥 0 duendes oyentes';
-    }
-    
-    setStatus(text) {
-        this.statusBar.textContent = text;
-    }
-    
-    openNavidadModal() {
-        const modal = document.getElementById('navidad-modal');
-        const album = document.getElementById('navidad-album');
-        const current = document.getElementById('navidad-current');
-        const history = document.getElement
+class Player{constructor(){this.audio=document.getElementById('audio');this.playBtn=document.getElementById('play');this.volume=document.getElementById('volume');this.song=document.getElementById('song');this.dj=document.getElementById('dj');this.listeners=document.getElementById('listeners');this.avatar=document.getElementById('avatar');this.status=document.getElementById('status');this.api='https://radio.kusmedios.lat/api/nowplaying/estacionkusfm';this.stream='https://radio.kusmedios.lat/listen/ekus-fm/radio.mp3';this.modalData={};this.init();this.snow();}init(){this.audio.src=this.stream;this.audio.volume=0.8;this.playBtn.onclick=()=>this.toggle();this.volume.oninput=e=>this.audio.volume=e.target.value/100;document.getElementById('info').onclick=()=>this.modalOpen();document.getElementById('close').onclick=()=>this.modalClose();document.getElementById('modal').onclick=e=>{if(e.target.id==='modal')this.modalClose();};this.audio.onloadstart=()=>this.status.textContent='🎅 Conectando...';this.audio.onwaiting=()=>this.status.textContent='⛄ Buffer...';this.audio.onplaying=()=>this.status.textContent='🎄 ¡En vivo!';this.audio.onerror=()=>this.status.textContent='❄️ Error';this.update();setInterval(()=>this.update(),5000);}snow(){const snow=document.getElementById('snow');const emojis=['❄️','⭐','🎄','✨'];for(let i=0;i<80;i++){const s=document.createElement('div');s.className='snowflake';s.innerHTML=emojis[Math.floor(Math.random()*4)];s.style.left=Math.random()*100+'%';s.style.animationDuration=(Math.random()*3+2)+'s';s.style.animationDelay=Math.random()*2+'s';snow.appendChild(s);}}async update(){try{const r=await fetch(this.api);const d=await r.json();const song=d.now_playing.song;const live=d.live;const listeners=d.listeners?.current||0;this.song.textContent=`${song.artist||'🎅'}-${song.title||'Live'}`;const dj=live?.is_live&&live.streamer_name?live.streamer_name:'estacionkusfm';this.dj.innerHTML=`🎙️ DJ: ${dj}`;this.avatar.src=`https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(dj)}&gesture=std&action=std&direction=2&head_direction=2&headonly=0`;this.listeners.innerHTML=`👥 ${listeners} duendes`;this.modalData={current:`${song.artist||'🎅'}-${song.title||'Live'}`,history:(d.song_history||[]).slice(0,6).map(s=>`${s.song.artist||'❄️'}-${s.song.title||'Navideña'}`)};}catch{this.defaultData();}}toggle(){if(this.audio.paused){this.audio.play().catch(()=>{});this.playBtn.textContent='⏸';this.playBtn.classList.add('paused');}else{this.audio.pause();this.playBtn.textContent='▶';this.playBtn.classList.remove('paused');}}defaultData(){this.song.textContent='🎄 KUSFM NAVIDAD';this.dj.innerHTML='🎙️ DJ: estacionkusfm';this.listeners.innerHTML='👥 0 duendes';}modalOpen(){const m=document.getElementById('modal');const title=document.getElementById('modal-song');const h=document.getElementById('history');title.textContent=this.modalData.current||'🎅 Villancico';h.innerHTML='';this.modalData.history.forEach((s,i)=>{const div=document.createElement('div');div.className='history-item';div.textContent=s;h.appendChild(div);});m.classList.add('active');}modalClose(){document.getElementById('modal').classList.remove('active');}}
+document.addEventListener('DOMContentLoaded',()=>new Player());
+</script>
+</body>
+</html>
