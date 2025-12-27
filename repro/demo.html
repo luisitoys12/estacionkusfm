@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Habbo Fansite – Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-dark:#10121a;--bg-dark-alt:#171a24;--accent:#ff9b1a;--accent-soft:#ffb341;
+      --text-main:#ffffff;--text-muted:#a2a6b3;--card-bg:#1f2230;--card-light:#f4f4f4;
+      --border-soft:#262a3a;--radius:6px;--gap:16px;
+      --font-main:'Roboto',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:var(--font-main);background:var(--bg-dark);color:var(--text-main);}
+    a{text-decoration:none;color:inherit}
+
+    .wrapper{max-width:1200px;margin:0 auto;padding:0 16px;}
+
+    /* MODAL AVISO */
+    .dev-modal-bg{
+      position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;
+      align-items:center;justify-content:center;z-index:9999;
+    }
+    .dev-modal{
+      background:#1f2230;border-radius:10px;padding:24px 24px 18px;
+      max-width:420px;width:100%;text-align:center;box-shadow:0 10px 30px #000a;
+    }
+    .dev-modal h1{font-size:20px;margin-bottom:8px;color:var(--accent-soft);}
+    .dev-modal p{font-size:14px;color:var(--text-muted);margin-bottom:12px;}
+    .dev-modal button{
+      margin-top:6px;background:var(--accent);border:none;border-radius:999px;
+      padding:8px 22px;color:#111;font-weight:600;cursor:pointer;
+    }
+
+    /* HEADER */
+    .site-header{background:var(--bg-dark-alt);border-bottom:1px solid var(--border-soft);}
+    .site-header-top{
+      display:flex;align-items:center;justify-content:space-between;padding:10px 0;
+    }
+    .logo-area{display:flex;align-items:center;gap:12px;}
+    .logo{width:120px;height:40px;border-radius:var(--radius);
+      background:linear-gradient(90deg,#ffb341,#ff6b1a);}
+    .site-name{font-weight:700;font-size:18px;}
+    .user-panel{display:flex;align-items:center;gap:10px;font-size:13px;}
+    .user-avatar{width:32px;height:32px;border-radius:50%;background:#333;}
+    .user-info span:nth-child(2){color:var(--accent-soft);}
+
+    .main-nav{background:var(--bg-dark);border-top:1px solid var(--border-soft);
+      border-bottom:1px solid var(--border-soft);}
+    .main-nav ul{list-style:none;display:flex;gap:24px;}
+    .main-nav a{display:block;padding:10px 0;font-size:14px;color:var(--text-muted);}
+    .main-nav a:hover{color:var(--accent);}
+
+    .hero{height:150px;background:url('banner-demo.jpg') center/cover no-repeat;
+      position:relative;}
+    .hero::after{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(90deg,rgba(0,0,0,.6),rgba(0,0,0,0));
+    }
+
+    /* GRID PRINCIPAL */
+    .layout-main{display:grid;grid-template-columns:3fr 1fr;gap:var(--gap);padding:24px 0 40px;}
+    .block{background:var(--card-bg);border-radius:var(--radius);padding:16px;margin-bottom:var(--gap);}
+    .block-header{display:flex;justify-content:space-between;margin-bottom:10px;}
+    .block-title{font-size:15px;font-weight:600;}
+    .block-actions a{font-size:12px;color:var(--accent-soft);}
+
+    .card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);}
+    .card{background:var(--card-light);color:#111;border-radius:var(--radius);overflow:hidden;font-size:13px;}
+    .card-dark{background:var(--card-bg);color:var(--text-main);}
+    .card img{width:100%;height:90px;object-fit:cover;}
+    .card-body{padding:8px 10px;}
+    .card-meta{font-size:11px;color:#9ca3af;}
+
+    /* SIDEBAR */
+    .sidebar .widget{background:var(--card-bg);border-radius:var(--radius);padding:12px;margin-bottom:var(--gap);}
+    .widget-title{font-size:14px;font-weight:600;margin-bottom:8px;}
+    .badge-grid,.avatar-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;}
+    .badge-grid div,.avatar-grid div{width:32px;height:32px;background:#333;border-radius:4px;}
+
+    /* FOOTER */
+    .site-footer{background:#070910;color:var(--text-muted);
+      padding:24px 0;border-top:1px solid var(--border-soft);font-size:12px;}
+    .footer-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);}
+    .footer-bottom{margin-top:14px;border-top:1px solid:var(--border-soft);padding-top:10px;text-align:center;}
+
+    @media(max-width:980px){
+      .layout-main{grid-template-columns:1fr;}
+      .card-grid{grid-template-columns:repeat(2,1fr);}
+    }
+    @media(max-width:640px){
+      .site-header-top{flex-direction:column;align-items:flex-start;gap:6px;}
+      .card-grid{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- MODAL “WEB EN DESARROLLO” -->
+<div class="dev-modal-bg" id="devModal">
+  <div class="dev-modal">
+    <h1>Web en desarrollo</h1>
+    <p>Estás viendo una previsualización estática del nuevo sitio basado en WordPress.</p>
+    <p>Algunos módulos son solo de **diseño** y no tienen funciones reales todavía.</p>
+    <button onclick="document.getElementById('devModal').style.display='none'">
+      Entrar igualmente
+    </button>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrapper site-header-top">
+    <div class="logo-area">
+      <div class="logo"></div>
+      <div class="site-name">Habbo Fansite</div>
+    </div>
+    <div class="user-panel">
+      <div class="user-avatar"></div>
+      <div class="user-info">
+        <span>Invitado</span>
+        <span>Login pronto disponible</span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="main-nav">
+    <div class="wrapper">
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Noticias</a></li>
+        <li><a href="#">Eventos</a></li>
+        <li><a href="#">Radio</a></li>
+        <li><a href="#">Equipo</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="hero"></div>
+</header>
+
+<div class="wrapper layout-main">
+  <main>
+    <!-- Noticias principales -->
+    <section class="block">
+      <div class="block-header">
+        <div class="block-title">Últimas noticias</div>
+        <div class="block-actions"><a href="#">Ver todas</a></div>
+      </div>
+      <div class="card-grid">
+        <!-- Repite 3 tarjetas como en el Behance -->
+        <article class="card card-dark">
+          <img src="https://placehold.co/300x90" alt="">
+          <div class="card-body">
+            <div class="card-meta">Habbo Hotel · 2h</div>
+            <h3>Noticia demo del fansite</h3>
+          </div>
+        </article>
+        <!-- ...2 más -->
+      </div>
+    </section>
+
+    <!-- Bloque “Hotel” / updates -->
+    <section class="block">
+      <div class="block-header">
+        <div class="block-title">Actualizaciones del Hotel</div>
+        <div class="block-actions"><a href="#">Más info</a></div>
+      </div>
+      <div class="card-grid">
+        <!-- 6 tarjetas tipo pequeña -->
+        <article class="card">
+          <div class="card-body">
+            <div class="card-meta">Nuevo furni</div>
+            <h3>Pack Jardín Pixelado</h3>
+          </div>
+        </article>
+        <!-- … -->
+      </div>
+    </section>
+
+    <!-- Bloque “Fansite” (producciones/banners) -->
+    <section class="block">
+      <div class="block-header">
+        <div class="block-title">Producciones del fansite</div>
+      </div>
+      <div class="card-grid">
+        <article class="card">
+          <img src="https://placehold.co/300x90/f04/fff" alt="">
+          <div class="card-body">
+            <h3>Banner evento demo</h3>
+          </div>
+        </article>
+        <!-- … -->
+      </div>
+    </section>
+  </main>
+
+  <aside class="sidebar">
+    <div class="widget">
+      <div class="widget-title">Últimas placas</div>
+      <div class="badge-grid">
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+      </div>
+    </div>
+
+    <div class="widget">
+      <div class="widget-title">Últimos looks</div>
+      <div class="avatar-grid">
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+      </div>
+    </div>
+
+    <div class="widget">
+      <div class="widget-title">Radio en vivo</div>
+      <p style="font-size:12px;color:var(--text-muted);">
+        El reproductor real se integrará con WordPress.<br>
+        Esta caja es solo un ejemplo visual.
+      </p>
+    </div>
+
+    <div class="widget">
+      <div class="widget-title">Top usuarios</div>
+      <ul style="list-style:none;font-size:12px;color:var(--text-muted);">
+        <li>#1 UsuarioDemo</li>
+        <li>#2 HabboFan</li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<footer class="site-footer">
+  <div class="wrapper">
+    <div class="footer-cols">
+      <div>
+        <h4>Sobre el fansite</h4>
+        <p>Fansite no oficial inspirado en Habbo Hotel.</p>
+      </div>
+      <div>
+        <h4>Enlaces rápidos</h4>
+        <p><a href="#">Aviso legal</a> · <a href="#">Contacto</a></p>
+      </div>
+      <div>
+        <h4>Síguenos</h4>
+        <p>Twitter · Discord · Twitch</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Habbo Fansite · Web en desarrollo.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
