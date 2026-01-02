@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vive la Magia, la Aventura y la Emoción</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #ffcc00, #ff66cc, #66ccff);
+      background-size: 400% 400%;
+      animation: gradient 10s ease infinite;
+      color: #333;
+      font-family: 'Poppins', sans-serif;
+    }
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+    .hero {
+      text-align: center;
+      padding: 120px 20px 60px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.3);
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+    .btn-primary {
+      background-color: #ff4081;
+      border: none;
+      font-size: 1.2rem;
+      padding: 12px 25px;
+    }
+    .section {
+      padding: 80px 20px;
+      background: #fff;
+      border-radius: 15px;
+      margin: 40px 0;
+    }
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+    /* Estilo del contador */
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .countdown div {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 15px 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#inicio">🎨 Vive la Magia</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="#aprende">Aprende</a></li>
+          <li class="nav-item"><a class="nav-link" href="#actividades">Actividades</a></li>
+          <li class="nav-item"><a class="nav-link" href="#costos">Costos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#inscripcion">Inscripción</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="inicio" class="hero d-flex flex-column justify-content-center align-items-center vh-100">
+    <h1>🎉 Vive la Magia, la Aventura y la Emoción 🎭</h1>
+    <p class="lead mt-3">El primer festival de pintacaritas en el Parque Irekua. ¡Diversión, arte y color para toda la familia!</p>
+
+    <div class="countdown text-white" id="countdown">
+      <div><span id="days">00</span><br>Días</div>
+      <div><span id="hours">00</span><br>Horas</div>
+      <div><span id="minutes">00</span><br>Min</div>
+      <div><span id="seconds">00</span><br>Seg</div>
+    </div>
+
+    <p class="mt-4 fs-5">📍 Frente a la zona infantil del Parque Irekua</p>
+    <p class="fs-6">🗓️ 14 de marzo de 2026 — 12:00 PM</p>
+
+    <a href="#inscripcion" class="btn btn-primary mt-3">¡Inscríbete ahora! Plazas limitadas</a>
+  </section>
+
+  <!-- APRENDE -->
+  <section id="aprende" class="section container text-center">
+    <h2>🎨 Aprende Pintacaritas</h2>
+    <p class="lead">Descubre cómo crear diseños increíbles como <strong>Spiderman</strong> y <strong>Payaso</strong>. Aprende de expertos en un ambiente divertido y educativo.</p>
+    <img src="https://cdn.pixabay.com/photo/2017/03/01/22/14/children-2114953_1280.jpg" class="img-fluid rounded shadow mt-3" alt="Pintacaritas">
+  </section>
+
+  <!-- ACTIVIDADES -->
+  <section id="actividades" class="section container text-center">
+    <h2>🎉 Actividades del Festival</h2>
+    <ul class="list-unstyled lead">
+      <li>✨ Talleres de pintura facial</li>
+      <li>🎭 Espectáculos y concursos</li>
+      <li>🎨 Zona de creatividad infantil</li>
+      <li>📸 Sesiones de fotos divertidas</li>
+    </ul>
+  </section>
+
+  <!-- COSTOS -->
+  <section id="costos" class="section container text-center">
+    <h2>💰 Costos</h2>
+    <p class="lead">Entrada general: <strong>$150 MXN</strong></p>
+    <p class="lead">Incluye materiales, participación en talleres y certificado de aprendizaje.</p>
+  </section>
+
+  <!-- INSCRIPCIÓN -->
+  <section id="inscripcion" class="section container text-center">
+    <h2>📝 Inscripción</h2>
+    <p class="lead">¡Asegura tu lugar hoy mismo! Las plazas son limitadas.</p>
+    <form class="row g-3 justify-content-center">
+      <div class="col-md-5">
+        <input type="text" class="form-control" placeholder="Tu nombre completo" required>
+      </div>
+      <div class="col-md-5">
+        <input type="email" class="form-control" placeholder="Tu correo electrónico" required>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-primary btn-lg" type="submit">¡Inscríbete ahora! Plazas limitadas</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Vive la Magia Festival de Pintacaritas | Frente a zona infantil, Parque Irekua 🇲🇽</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- SCRIPT DEL CONTADOR -->
+  <script>
+    const countdown = () => {
+      const eventDate = new Date("March 14, 2026 12:00:00").getTime();
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "<h4>¡El festival ha comenzado! 🎉</h4>";
+      }
+    };
+    setInterval(countdown, 1000);
+  </script>
+
+</body>
+</html>
