@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Aventura MX Player</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .player-container {
+            width: 100%;
+            max-width: 320px;
+            background: white;
+            border-radius: 20px;
+            padding: 30px 25px 25px 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Watermark background effect */
+        .player-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDMyMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0wIDIwMEM1MCAzMDAsMjcwIDEwMCwzMjAgMjAwQzI3MCAzMDAsNTAgMTAwLDAgMjAwWiIgZmlsbD0iIzAwMDAwMDAzIi8+Cjwvc3ZnPg==') no-repeat center center;
+            background-size: cover;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .player-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Album Art Circle with exact styling */
+        .album-art-container {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 25px;
+            position: relative;
+        }
+
+        .album-art {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-image: url('https://i.imgur.com/placeholder-album.jpg');
+            background-size: cover;
+            background-position: center;
+            border: 4px solid #d1d5db;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Default album art with Radio Aventura MX logo */
+        .album-art.default {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* Station Category */
+        .station-category {
+            color: #6b7280;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Song/Station Title */
+        .song-title {
+            color: #1f2937;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+
+        /* Progress Bar exactly like the image */
+        .progress-container {
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f97316 0%, #ea580c 100%);
+            width: 25%;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .progress-handle {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            background: #f97316;
+            border-radius: 50%;
+            right: 75%;
+            box-shadow: 0 2px 8px rgba(249, 115, 22, 0.4);
+        }
+
+        /* Bottom Controls Row - exact layout */
+        .bottom-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 25px 0;
+            padding: 0 5px;
+        }
+
+        /* Mute button with X */
+        .mute-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #374151;
+            padding: 8px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .mute-btn:hover {
+            background: #f3f4f6;
+        }
+
+        .volume-display {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #6b7280;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .speaker-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #374151;
+            padding: 8px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .speaker-btn:hover {
+            background: #f3f4f6;
+        }
+
+        /* Main Controls - exact positioning */
+        .main-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding: 0 5px;
+        }
+
+        .equalizer-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 12px;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .equalizer-btn:hover {
+            background: #f3f4f6;
+        }
+
+        .equalizer-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            gap: 2px;
+        }
+
+        .eq-bar {
+            width: 3px;
+            background: #374151;
+            border-radius: 1px;
+            animation: equalizer 1.5s ease-in-out infinite;
+        }
+
+        .eq-bar:nth-child(1) { height: 8px; animation-delay: 0s; }
+        .eq-bar:nth-child(2) { height: 14px; animation-delay: 0.2s; }
+        .eq-bar:nth-child(3) { height: 10px; animation-delay: 0.4s; }
+        .eq-bar:nth-child(4) { height: 16px; animation-delay: 0.6s; }
+
+        @keyframes equalizer {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.5); }
+        }
+
+        /* Play/Pause Button - exact styling */
+        .play-pause-btn {
+            width: 60px;
+            height: 60px;
+            background: #1f2937;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .play-pause-btn:hover {
+            background: #374151;
+            transform: scale(1.05);
+        }
+
+        .play-pause-btn:active {
+            transform: scale(0.95);
+        }
+
+        .play-icon, .pause-icon {
+            color: white;
+            font-size: 20px;
+        }
+
+        /* Live indicator - exact styling */
+        .live-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .live-indicator:hover {
+            background: #f3f4f6;
+        }
+
+        .signal-icon {
+            width: 24px;
+            height: 18px;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            gap: 2px;
+        }
+
+        .signal-bar {
+            width: 3px;
+            background: #6b7280;
+            border-radius: 1px;
+        }
+
+        .signal-bar:nth-child(1) { height: 6px; }
+        .signal-bar:nth-child(2) { height: 10px; }
+        .signal-bar:nth-child(3) { height: 14px; }
+        .signal-bar:nth-child(4) { height: 18px; }
+
+        .live-text {
+            color: #6b7280;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 400px) {
+            .player-container {
+                max-width: 280px;
+                padding: 25px 20px;
+            }
+            
+            .album-art-container {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+        /* Hidden audio element */
+        #radioPlayer {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="player-container">
+        <div class="player-content">
+            <!-- Album Art -->
+            <div class="album-art-container">
+                <div class="album-art default" id="albumArt">
+                    RADIO<br>AVENTURA MX
+                </div>
+            </div>
+            
+            <!-- Station Category -->
+            <div class="station-category">Radio Online</div>
+            
+            <!-- Station/Song Title -->
+            <div class="song-title">Radio Aventura MX - En vivo</div>
+
+            <!-- Progress Bar with Handle -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                    <div class="progress-handle"></div>
+                </div>
+            </div>
+
+            <!-- Bottom Controls Row -->
+            <div class="bottom-controls">
+                <!-- Mute Button -->
+                <button class="mute-btn" onclick="toggleMute()" id="muteBtn">
+                    🔇
+                </button>
+
+                <!-- Volume Display -->
+                <div class="volume-display">
+                    <span id="volumePercent">19%</span>
+                </div>
+
+                <!-- Speaker Button -->
+                <button class="speaker-btn">
+                    🔊
+                </button>
+            </div>
+
+            <!-- Main Controls -->
+            <div class="main-controls">
+                <!-- Equalizer -->
+                <button class="equalizer-btn" onclick="toggleEqualizer()">
+                    <div class="equalizer-icon">
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                    </div>
+                </button>
+
+                <!-- Play/Pause Button -->
+                <button class="play-pause-btn" onclick="togglePlay()" id="playPauseBtn">
+                    <span class="play-icon">▶</span>
+                </button>
+
+                <!-- Live Indicator -->
+                <div class="live-indicator" onclick="showLiveInfo()">
+                    <div class="signal-icon">
+                        <div class="signal-bar"></div>
+                        <div class="signal-bar"></div>
+                        <div class="signal-bar"></div>
+                        <div class="signal-bar"></div>
+                    </div>
+                    <span class="live-text">LIVE</span>
+                </div>
+            </div>
+
+            <!-- Hidden Audio Element -->
+            <audio id="radioPlayer" preload="none" crossorigin="anonymous">
+                <source src="YOUR_RADIO_STREAM_URL_HERE" type="audio/mpeg">
+                <source src="YOUR_RADIO_STREAM_URL_HERE" type="audio/aac">
+                Tu navegador no soporta la reproducción de audio.
+            </audio>
+        </div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('radioPlayer');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const muteBtn = document.getElementById('muteBtn');
+        const volumePercent = document.getElementById('volumePercent');
+        const progressFill = document.getElementById('progressFill');
+        const albumArt = document.getElementById('albumArt');
+
+        let isPlaying = false;
+        let isMuted = true;
+        let currentVolume = 0.19;
+
+        // Initialize player state
+        audio.volume = currentVolume;
+        audio.muted = isMuted;
+        updateVolumeDisplay();
+
+        // Play/Pause functionality
+        function togglePlay() {
+            if (isPlaying) {
+                audio.pause();
+                playPauseBtn.innerHTML = '<span class="play-icon">▶</span>';
+                isPlaying = false;
+                stopAlbumRotation();
+            } else {
+                // Attempt to play
+                const playPromise = audio.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        // Autoplay started successfully
+                        playPauseBtn.innerHTML = '<span class="pause-icon">⏸</span>';
+                        isPlaying = true;
+                        startAlbumRotation();
+                    }).catch(error => {
+                        // Autoplay was prevented
+                        console.log('Error al reproducir:', error);
+                        alert('Por favor, haz clic en play para iniciar la transmisión.');
+                    });
+                }
+            }
+        }
+
+        // Mute/Unmute functionality
+        function toggleMute() {
+            if (isMuted) {
+                audio.muted = false;
+                audio.volume = currentVolume;
+                muteBtn.innerHTML = '🔊';
+                isMuted = false;
+            } else {
+                audio.muted = true;
+                muteBtn.innerHTML = '🔇';
+                isMuted = true;
+            }
+            updateVolumeDisplay();
+        }
+
+        // Update volume display
+        function updateVolumeDisplay() {
+            if (isMuted || audio.muted) {
+                volumePercent.textContent = '0%';
+            } else {
+                volumePercent.textContent = Math.round(audio.volume * 100) + '%';
+            }
+        }
+
+        // Album art rotation
+        function startAlbumRotation() {
+            albumArt.style.animation = 'none';
+            albumArt.offsetHeight; // Trigger reflow
+            albumArt.style.animation = 'spin 8s linear infinite';
+        }
+
+        function stopAlbumRotation() {
+            albumArt.style.animation = 'none';
+        }
+
+        // Equalizer toggle
+        function toggleEqualizer() {
+            alert('Ecualizador - Radio Aventura MX\n¡Próximamente más funciones!');
+        }
+
+        // Live info
+        function showLiveInfo() {
+            alert('🔴 EN VIVO\nRadio Aventura MX\nEstación Kusmedios Digital');
+        }
+
+        // Simulate progress animation for live radio
+        function animateProgress() {
+            if (isPlaying) {
+                let width = parseInt(progressFill.style.width) || 25;
+                if (width >= 100) {
+                    width = 0;
+                }
+                width += 0.2;
+                progressFill.style.width = width + '%';
+            }
+        }
+
+        // Add rotation animation
+        const rotationStyle = document.createElement('style');
+        rotationStyle.textContent = `
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(rotationStyle);
+
+        // Progress animation interval
+        setInterval(animateProgress, 100);
+
+        // Audio event listeners
+        audio.addEventListener('play', () => {
+            isPlaying = true;
+            playPauseBtn.innerHTML = '<span class="pause-icon">⏸</span>';
+            startAlbumRotation();
+        });
+
+        audio.addEventListener('pause', () => {
+            isPlaying = false;
+            playPauseBtn.innerHTML = '<span class="play-icon">▶</span>';
+            stopAlbumRotation();
+        });
+
+        audio.addEventListener('error', (e) => {
+            console.error('Error de audio:', e);
+            alert('Error al conectar con Radio Aventura MX. Verifica tu conexión.');
+            isPlaying = false;
+            playPauseBtn.innerHTML = '<span class="play-icon">▶</span>';
+        });
+
+        audio.addEventListener('volumechange', updateVolumeDisplay);
+    </script>
+</body>
+</html>
