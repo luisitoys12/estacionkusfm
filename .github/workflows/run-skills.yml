@@ -1,0 +1,96 @@
+name: Run UI/UX Pro Max Skills
+
+on:
+  workflow_dispatch:
+    inputs:
+      query:
+        description: 'Search query (ej: community radio entertainment music streaming)'
+        required: false
+        default: 'community radio entertainment music streaming'
+      persist:
+        description: 'Guardar design system en design-system/MASTER.md?'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+  push:
+    paths:
+      - '.claude/skills/ui-ux-pro-max/**'
+
+jobs:
+  run-design-system:
+    name: Generate KUS FM Design System
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install uipro-cli and init skill
+        run: |
+          npx --yes uipro-cli init --ai claude
+
+      - name: Run Design System generation
+        run: |
+          python3 .claude/skills/ui-ux-pro-max/scripts/search.py \
+            "${{ github.event.inputs.query || 'community radio entertainment music streaming' }}" \
+            --design-system \
+            -p "KUS FM" \
+            -f markdown \
+            | tee design-system-output.md
+
+      - name: Run domain searches
+        run: |
+          echo "## Style Search" >> domain-searches.md
+          python3 .claude/skills/ui-ux-pro-max/scripts/search.py \
+            "dark mode vibrant music entertainment" --domain style -n 5 >> domain-searches.md || true
+
+          echo "## Color Palette" >> domain-searches.md
+          python3 .claude/skills/ui-ux-pro-max/scripts/search.py \
+            "entertainment vibrant" --domain color -n 5 >> domain-searches.md || true
+
+          echo "## Typography" >> domain-searches.md
+          python3 .claude/skills/ui-ux-pro-max/scripts/search.py \
+            "modern bold music" --domain typography -n 5 >> domain-searches.md || true
+
+          echo "## UX Guidelines" >> domain-searches.md
+          python3 .claude/skills/ui-ux-pro-max/scripts/search.py \
+            "animation accessibility audio player" --domain ux -n 5 >> domain-searches.md || true
+
+      - name: Persist design system to repo
+        if: ${{ github.event.inputs.persist == 'true' || github.event_name == 'push' }}
+        run: |
+          python3 .claude/skills/ui-ux-pro-max/scripts/search.py \
+            "${{ github.event.inputs.query || 'community radio entertainment music streaming' }}" \
+            --design-system --persist \
+            -p "KUS FM" || true
+
+      - name: Upload design system artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kus-fm-design-system
+          path: |
+            design-system-output.md
+            domain-searches.md
+            design-system/
+          retention-days: 30
+
+      - name: Commit design-system folder if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add design-system/ || true
+          git diff --cached --quiet || git commit -m "chore: update KUS FM design system [skip ci]"
+          git push || true
