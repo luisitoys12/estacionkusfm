@@ -3,275 +3,104 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Contacto • estacionkusfm</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Contrail+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
-  <style>
-    body { font-family: 'Contrail One', Arial, sans-serif; background: #f8e473; }
-    .container { max-width: 500px; margin-top: 60px; }
-    .card { border-radius: 14px; box-shadow: 0 2px 10px #ffe082; }
-    .card-title { color: #ff9800; }
-    .btn-main { background: #70e1f5; color: #ff9800; font-weight: bold; }
-    .btn-main:hover { background: #ffe082; color: #388e3c; }
-    .mini-player {
-      background: #fffbe9;
-      border: 2px solid #70e1f5;
-      border-radius: 14px;
-      box-shadow: 0 1px 8px #ffd60066;
-      padding: 13px 18px;
-      margin-bottom: 22px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      max-width: 320px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .mini-player-avatar {
-      width: 58px;
-      height: 58px;
-      border-radius: 10px;
-      border: 2px solid #00dcff;
-      background: #fff;
-      object-fit: cover;
-      box-shadow: 0 2px 10px #70e1f533;
-    }
-    .mini-player-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      min-width: 0;
-    }
-    .mini-player-dj {
-      font-family: 'Contrail One', Arial, sans-serif;
-      font-size: 1.22rem;
-      color: #ff9800;
-      margin-bottom: 3px;
-      word-break: break-all;
-      max-width: 200px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .mini-player-song-wrap {
-      width: 170px;
-      height: 21px;
-      margin-bottom: 2px;
-      overflow: hidden;
-      position: relative;
-    }
-    .mini-player-song {
-      font-size: 1.01rem;
-      color: #666;
-      min-height: 17px;
-      font-family: Arial, sans-serif;
-      word-break: break-all;
-      display: inline-block;
-      white-space: nowrap;
-      will-change: transform;
-      animation: marquee 9s linear infinite;
-    }
-    .mini-player-song.short {
-      animation: none;
-      white-space: normal;
-      display: inline;
-    }
-    @keyframes marquee {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-    .mini-player-oyentes {
-      font-size: 1rem;
-      color: #00cfff;
-    }
-    .mini-player-controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 7px;
-    }
-    .mini-btn {
-      background: #70e1f5;
-      color: #ff9800;
-      border: none;
-      border-radius: 6px;
-      width: 34px;
-      height: 34px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.18rem;
-      box-shadow: 0 1px 5px #ffd60066;
-      cursor: pointer;
-      transition: background 0.2s;
-      outline: none;
-    }
-    .mini-btn:active, .mini-btn:focus {
-      background: #ffe082;
-      color: #388e3c;
-    }
-    .mini-btn[disabled] {
-      opacity: 0.55;
-      pointer-events: none;
-    }
-    .mini-player-error {
-      font-size: 0.97rem;
-      color: #c00;
-      margin-top: 7px;
-      font-family: Arial, sans-serif;
-    }
-    @media (max-width: 550px) {
-      .container { max-width: 99vw; }
-      .mini-player { padding: 13px 5px; max-width: 99vw;}
-      .mini-player-avatar { width: 46px; height: 46px; }
-      .mini-btn { width: 28px; height: 28px; font-size: 1rem;}
-      .mini-player-song-wrap { width: 100px; }
-      .mini-player-dj { max-width: 100px;}
-    }
-  </style>
+  <title>Contacto • Estación KUS FM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/fansite2026.css">
 </head>
 <body>
-  <div class="container">
-    <!-- MINI PLAYER DJ -->
-    <div class="mini-player" id="mini-player">
-      <img id="mini-dj-head" class="mini-player-avatar"
-        src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&headonly=1&size=m&direction=2&head_direction=2"
-        alt="DJ Head">
-      <div class="mini-player-info">
-        <div class="mini-player-dj" id="mini-dj-name">estacionkusfm</div>
-        <div class="mini-player-song-wrap">
-          <span class="mini-player-song short" id="mini-dj-song"></span>
-        </div>
-        <div class="mini-player-oyentes"><i class="fa-solid fa-user-group"></i> <span id="mini-dj-listeners">0</span> oyentes</div>
-        <div class="mini-player-controls">
-          <button class="mini-btn" id="mini-btn-reload" title="Recargar"><i class="fa-solid fa-rotate-right"></i></button>
-          <button class="mini-btn" id="mini-btn-play" title="Reproducir"><i class="fa-solid fa-play"></i></button>
-          <button class="mini-btn" id="mini-btn-pause" title="Pausar"><i class="fa-solid fa-pause"></i></button>
-        </div>
-        <audio id="mini-audio" preload="none">
-          <source src="https://radio.estacionkusmedios.com/listen/esmerosound/radio.mp3" type="audio/mpeg">
-          Tu navegador no soporta audio HTML5.
-        </audio>
-        <div class="mini-player-error" id="mini-player-error" style="display:none;"></div>
-      </div>
-    </div>
-    <!-- FIN MINI PLAYER -->
 
-    <div class="card p-4">
-      <h1 class="card-title text-center mb-4">Contacto</h1>
-      <form>
-        <div class="form-group">
-          <label for="nombre">Nombre</label>
-          <input type="text" class="form-control" id="nombre" placeholder="Tu nombre" required>
-        </div>
-        <div class="form-group">
-          <label for="correo">Correo electrónico</label>
-          <input type="email" class="form-control" id="correo" placeholder="tucorreo@ejemplo.com" required>
-        </div>
-        <div class="form-group">
-          <label for="mensaje">Mensaje</label>
-          <textarea class="form-control" id="mensaje" rows="3" placeholder="¿En qué podemos ayudarte?" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-main btn-block mt-3">Enviar</button>
-      </form>
-      <div class="text-center mt-4">
-        <a href="index.html" class="btn btn-link">Volver al inicio</a>
+<div class="topbar">
+  <div class="topbar-inner">
+    <span><i class="fas fa-shield-halved"></i> Este fansite <b>NUNCA</b> te pedirá tu contraseña de Habbo</span>
+  </div>
+</div>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-bubble">KUS</div>
+      <span>KUS<b>FM</b></span>
+    </a>
+    <button class="navbar-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    <ul class="navbar-menu" id="navMenu">
+      <li><a href="index.html#inicio"><i class="fas fa-house"></i> Inicio</a></li>
+      <li><a href="index.html#radio"><i class="fas fa-radio"></i> Radio</a></li>
+      <li><a href="index.html#noticias"><i class="fas fa-newspaper"></i> Noticias</a></li>
+      <li><a href="index.html#equipo"><i class="fas fa-users"></i> Equipo</a></li>
+      <li><a href="index.html#eventos"><i class="fas fa-calendar-star"></i> Eventos</a></li>
+      <li><a href="index.html#alianzas"><i class="fas fa-handshake"></i> Alianzas</a></li>
+      <li><a href="contacto.html" class="nav-special active"><i class="fas fa-envelope"></i> Contacto</a></li>
+      <li><a href="generator.html"><i class="fas fa-wand-magic-sparkles"></i> Generador</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="page-wrapper">
+  <section class="page-hero">
+    <h1><i class="fas fa-envelope-open-text"></i> Contacto</h1>
+    <p>¿Tienes una duda, propuesta o quieres colaborar con KUS FM? Envíanos un mensaje.</p>
+  </section>
+
+  <section class="page-grid">
+    <div class="card page-main">
+      <div class="card-header">
+        <h2><i class="fas fa-paper-plane"></i> Escríbenos</h2>
       </div>
+      <form class="form-grid">
+        <div>
+          <label>Nombre</label>
+          <input type="text" class="form-input" placeholder="Tu nombre" required>
+        </div>
+        <div>
+          <label>Correo electrónico</label>
+          <input type="email" class="form-input" placeholder="tucorreo@ejemplo.com" required>
+        </div>
+        <div class="full">
+          <label>Mensaje</label>
+          <textarea rows="4" class="form-input" placeholder="Cuéntanos en qué podemos ayudarte" required></textarea>
+        </div>
+        <button type="submit" class="btn-primary w100"><i class="fas fa-paper-plane"></i> Enviar mensaje</button>
+      </form>
+      <p class="form-hint"><i class="fas fa-info-circle"></i> Muy pronto este formulario se conectará directo a tu panel (n8n / Asana).</p>
+    </div>
+
+    <aside class="card page-side">
+      <div class="card-header">
+        <h2><i class="fas fa-headset"></i> Otras formas</h2>
+      </div>
+      <ul class="contact-list">
+        <li><i class="fab fa-discord"></i> Discord: próximamente</li>
+        <li><i class="fab fa-facebook"></i> Facebook: <a href="https://facebook.com/ekusfm" target="_blank">@ekusfm</a></li>
+        <li><i class="fas fa-location-dot"></i> Desde Irapuato, Gto. MX</li>
+      </ul>
+      <div class="mini-player-note">
+        <i class="fas fa-music"></i> Escucha la radio mientras escribes desde la página principal.
+      </div>
+    </aside>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="logo-bubble sm">KUS</div>
+      <span>KUS<b>FM</b></span>
+    </div>
+    <p>© 2026 Estación KUS FM · Fansite Habbo no oficial</p>
+    <div class="footer-links">
+      <a href="index.html">Inicio</a>
+      <a href="generator.html">Generador</a>
     </div>
   </div>
-  <script>
-    // Actualiza info DJ y oyentes y tema
-    function updateMiniPlayer() {
-      fetch('https://radio.estacionkusmedios.com/api/nowplaying/esmerosound')
-        .then(res => res.json())
-        .then(data => {
-          const live = data.live;
-          const listeners = data.listeners && data.listeners.current ? data.listeners.current : 0;
-          let dj = "estacionkusfm";
-          if (live && live.is_live && live.streamer_name) {
-            dj = live.streamer_name;
-          }
-          document.getElementById('mini-dj-name').textContent = dj;
-          document.getElementById('mini-dj-listeners').textContent = listeners;
-          document.getElementById('mini-dj-head').src =
-            `https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(dj)}&headonly=1&size=m&direction=2&head_direction=2`;
-          // Mostrar tema/canción animado si es largo
-          let song = "";
-          if (data.now_playing && data.now_playing.song && data.now_playing.song.title) {
-            song = data.now_playing.song.title;
-          } else {
-            song = "Andy - 8Uno que paso";
-          }
-          const songEl = document.getElementById('mini-dj-song');
-          songEl.textContent = song;
-          // Quitar/poner animación según largo
-          if(song.length > 22){
-            songEl.classList.remove('short');
-          }else{
-            songEl.classList.add('short');
-          }
-        }).catch(() => {
-          // Si hay error en la API, poner el valor por defecto
-          const songEl = document.getElementById('mini-dj-song');
-          songEl.textContent = "Andy - 8Uno que paso";
-          songEl.classList.remove('short');
-        });
-    }
-    setInterval(updateMiniPlayer, 7000);
-    updateMiniPlayer();
+</footer>
 
-    // Mini player controles audio
-    const audio = document.getElementById('mini-audio');
-    const btnPlay = document.getElementById('mini-btn-play');
-    const btnPause = document.getElementById('mini-btn-pause');
-    const btnReload = document.getElementById('mini-btn-reload');
-    const errorDiv = document.getElementById('mini-player-error');
-
-    btnPlay.onclick = function() {
-      errorDiv.style.display = "none";
-      audio.play().catch(function(e){
-        errorDiv.textContent = "No se pudo reproducir. Haz clic para intentar de nuevo.";
-        errorDiv.style.display = "block";
-      });
-    };
-    btnPause.onclick = function() {
-      audio.pause();
-    };
-    btnReload.onclick = function() {
-      audio.pause();
-      // Forzar recarga con nuevo parámetro para saltar caché
-      audio.src = "https://radio.estacionkusmedios.com/listen/esmerosound/radio.mp3?t=" + new Date().getTime();
-      audio.load();
-      setTimeout(() => {
-        audio.play().catch(function(e){
-          errorDiv.textContent = "No se pudo reproducir. Haz clic para intentar de nuevo.";
-          errorDiv.style.display = "block";
-        });
-      }, 200);
-    };
-
-    function updateBtnState() {
-      if (audio.paused) {
-        btnPlay.disabled = false;
-        btnPause.disabled = true;
-      } else {
-        btnPlay.disabled = true;
-        btnPause.disabled = false;
-      }
-    }
-    audio.addEventListener('play', function() {
-      errorDiv.style.display = "none";
-      updateBtnState();
-    });
-    audio.addEventListener('pause', updateBtnState);
-    audio.addEventListener('ended', updateBtnState);
-    audio.addEventListener('error', function() {
-      errorDiv.textContent = "Error: No se pudo cargar el stream. Intenta recargar.";
-      errorDiv.style.display = "block";
-    });
-    updateBtnState();
-  </script>
+<script>
+  document.getElementById('navToggle').addEventListener('click',()=>{
+    document.getElementById('navMenu').classList.toggle('open');
+  });
+</script>
 </body>
 </html>
