@@ -21,10 +21,31 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```
 @.claude/skills/ui-ux-pro-max/SKILL.md
 ```
-Use for all design decisions — styles, color palettes, typography, UX guidelines, component patterns.
+Use for all design decisions — styles, color palettes, typography, UX guidelines, component patterns.  
 Installed from: https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
 
-### Security
+### SuperDesign
+```
+@.claude/skills/superdesign/SKILL.md
+```
+Use for finding design inspirations, generating design drafts on infinite canvas, and iterating on UI.  
+Installed from: https://skills.sh/superdesigndev/superdesign-skill/superdesign
+
+### GitHub Actions Templates
+```
+@.claude/skills/github-actions-templates/SKILL.md
+```
+Use when creating or improving CI/CD pipelines, Docker builds, security scans, or deployment workflows.  
+Installed from: https://skills.sh/wshobson/agents/github-actions-templates
+
+### Security Best Practices
+```
+@.claude/skills/security-best-practices/SKILL.md
+```
+Use for OWASP Top 10 hardening, HTTPS enforcement, input validation, JWT auth, CSRF protection.  
+Installed from: https://skills.sh/supercent-io/skills-template/security-best-practices
+
+### Security (KUS FM Custom)
 ```
 @.claude/skills/security/SKILL.md
 ```
@@ -52,3 +73,4 @@ Use for brand-specific decisions — KUS FM colors, typography, radio UI pattern
 - Radio stream URLs are configured in AzuraCast, referenced in the HTML player
 - WhatsApp API integration uses form-data + multer for media uploads
 - No build step required — static files served directly
+- Run `npm audit` before every deployment
