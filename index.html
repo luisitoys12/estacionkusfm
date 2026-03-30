@@ -23,7 +23,7 @@
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar">
   <div class="navbar-inner">
-    <a href="#" class="navbar-logo">
+    <a href="index.html" class="navbar-logo">
       <div class="logo-bubble">KUS</div>
       <span>KUS<b>FM</b></span>
     </a>
@@ -97,7 +97,7 @@
       </div>
       <div class="player-wrap">
         <iframe
-          src="/repro/index.html"
+          src="repro/index.html"
           title="Radio KUSFM en vivo"
           allow="autoplay"
           loading="lazy"
@@ -409,7 +409,6 @@
 
 <!-- SCRIPTS -->
 <script>
-// Reloj
 function updateClock() {
   const now = new Date();
   document.getElementById('clock').textContent =
@@ -417,12 +416,10 @@ function updateClock() {
 }
 setInterval(updateClock,1000); updateClock();
 
-// Navbar toggle mobile
 document.getElementById('navToggle').addEventListener('click',()=>{
   document.getElementById('navMenu').classList.toggle('open');
 });
 
-// Placas
 const badgeCodes = ["ES620","ES621","ES622","UKU","ES624","ES625"];
 const badgeContainer = document.getElementById('api-badges');
 badgeCodes.forEach(code => {
@@ -432,7 +429,6 @@ badgeCodes.forEach(code => {
   badgeContainer.appendChild(img);
 });
 
-// Equipo
 const onlineUsers = { "estacionkusfm": true, "ser03z-51": false, "djmanuelloca": true };
 const equipoData = {
   fundadores: [{user:"estacionkusfm",nombre:"estacionkusfm"},{user:"ser03z-51",nombre:"ser03z-51"}],
@@ -455,7 +451,6 @@ Object.entries(equipoData).forEach(([id, arr]) => {
       <small>${online?'🟢 Online':'🔴 Offline'}</small>`;
     cont.appendChild(el);
   });
-  // vacíos
   for(let i=arr.length; i<(arr===equipoData.admins?4:2); i++) {
     const el = document.createElement('div');
     el.className = 'miembro-card vacio';
@@ -464,7 +459,6 @@ Object.entries(equipoData).forEach(([id, arr]) => {
   }
 });
 
-// Vacantes
 function mostrarRequisitos() {
   const puesto = document.getElementById('puesto-vacante').value;
   let html = '';
