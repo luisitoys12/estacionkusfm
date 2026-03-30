@@ -1,541 +1,85 @@
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>
-   Ciricco 8 Ball &amp; Games &amp; Pintacaritas &amp; Lógica Matemática
-  </title>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&amp;display=swap" rel="stylesheet"/>
-  <style>
-   body {
-      font-family: 'Luckiest Guy', cursive;
-    }
-  </style>
- </head>
- <body class="bg-yellow-400 flex flex-col items-center justify-start min-h-screen p-4">
-  <div class="relative w-full max-w-md aspect-square">
-   <img alt="Red and white striped circus tent with two red flags on top, a clown with red hair and a black top hat in the center, and a red banner with yellow border at the bottom reading 'CiRicco' in white stylized text, all on a bright yellow background" class="w-full h-full object-contain" height="512" id="clown" role="button" src="https://storage.googleapis.com/a1aa/image/24b626b0-b891-4232-784f-b320e2efab7a.jpg" tabindex="0" width="512"/>
-   <!-- Red banner with only "CiRicco" text -->
-   <div class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-red-800 border-4 border-yellow-400 rounded-3xl px-6 py-3 w-[90%] text-center text-white text-4xl select-none" style="font-family: 'Luckiest Guy', cursive;">
-    CiRicco
-   </div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Ciricco Games • Minis KUS FM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/fansite2026.css">
+</head>
+<body class="minis-body">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <span><i class="fas fa-gamepad"></i> Minijuegos Ciricco integrados a la red KUS FM</span>
   </div>
-  <!-- 8 Ball Section -->
-  <div class="mt-8 bg-red-800 rounded-3xl p-6 w-full max-w-md text-center text-yellow-400 select-none" id="eightBallContainer">
-   <div class="mx-auto mb-4 w-40 h-40 rounded-full bg-black flex items-center justify-center relative shadow-lg select-none">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full bg-white flex items-center justify-center text-6xl font-bold text-black">
-     8
-    </div>
-   </div>
-   <form id="eightBallForm" class="mt-4">
-    <label for="eightBallQuestion" class="block mb-2 text-xl font-semibold text-yellow-400 select-text">Pregunta a la bola 8:</label>
-    <input aria-label="Pregunta para la bola 8" class="w-full rounded-lg p-2 text-black text-center text-lg" id="eightBallQuestion" name="eightBallQuestion" placeholder="Escribe tu pregunta aquí" required="" type="text"/>
-    <button aria-label="Preguntar a la bola 8" class="mt-3 w-full bg-yellow-400 text-red-800 font-bold py-3 rounded-lg shadow hover:bg-yellow-300 transition" type="submit">
-     Preguntar
-    </button>
-   </form>
-   <div class="min-h-[3rem] mt-4 text-xl font-semibold tracking-wide" id="eightBallAnswer" role="region" aria-live="polite" aria-atomic="true">
-   </div>
+</div>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="logo-bubble">KUS</div>
+      <span>KUS<b>FM</b></span>
+    </a>
+    <button class="navbar-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+    <ul class="navbar-menu" id="navMenu">
+      <li><a href="index.html#inicio"><i class="fas fa-house"></i> Inicio</a></li>
+      <li><a href="index.html#radio"><i class="fas fa-radio"></i> Radio</a></li>
+      <li><a href="index.html#noticias"><i class="fas fa-newspaper"></i> Noticias</a></li>
+      <li><a href="index.html#equipo"><i class="fas fa-users"></i> Equipo</a></li>
+      <li><a href="index.html#eventos"><i class="fas fa-calendar-star"></i> Eventos</a></li>
+      <li><a href="index.html#alianzas"><i class="fas fa-handshake"></i> Alianzas</a></li>
+      <li><a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+      <li><a href="generator.html"><i class="fas fa-wand-magic-sparkles"></i> Generador</a></li>
+    </ul>
   </div>
-  <!-- Buttons for other games -->
-  <div class="mt-8 w-full max-w-md bg-red-800 rounded-3xl p-6 text-yellow-400">
-   <h2 class="text-3xl mb-4 text-center font-bold select-none">
-    Otros Juegos
-   </h2>
-   <div class="grid grid-cols-2 gap-4">
-    <button aria-label="Juego de Piedra, Papel o Tijeras" class="bg-yellow-400 text-red-800 font-bold py-3 rounded-lg shadow hover:bg-yellow-300 transition" id="game1Btn" type="button">
-     Piedra, Papel o Tijeras
-    </button>
-    <button aria-label="Juego de Adivina el Número" class="bg-yellow-400 text-red-800 font-bold py-3 rounded-lg shadow hover:bg-yellow-300 transition" id="game2Btn" type="button">
-     Adivina el Número
-    </button>
-    <button aria-label="Juego de Memoria" class="bg-yellow-400 text-red-800 font-bold py-3 rounded-lg shadow hover:bg-yellow-300 transition" id="game3Btn" type="button">
-     Juego de Memoria
-    </button>
-    <button aria-label="Juego de Contar Clics" class="bg-yellow-400 text-red-800 font-bold py-3 rounded-lg shadow hover:bg-yellow-300 transition" id="game4Btn" type="button">
-     Contar Clics
-    </button>
-   </div>
-   <button aria-label="Guía de Pintacaritas" class="mt-6 w-full bg-yellow-400 text-red-800 font-bold py-3 rounded-lg shadow hover:bg-yellow-300 transition" id="facePaintGuideBtn" type="button">
-    Guía de Pintacaritas
-   </button>
-   <button aria-label="Reglas y sitio legal" class="mt-6 w-full bg-yellow-400 text-red-800 font-bold py-3 rounded-lg shadow hover:bg-yellow-300 transition" id="rulesBtn" type="button">
-    Reglas y Sitio Legal
-   </button>
-  </div>
-  <!-- Math Logic Section -->
-  <section class="mt-8 w-full max-w-md bg-red-800 rounded-3xl p-6 text-yellow-400 select-none">
-   <h2 class="text-3xl mb-4 text-center font-bold">
-    Lógica Matemática
-   </h2>
-   <div class="space-y-4 text-lg leading-relaxed">
-    <p>
-     <strong>Bola 8:</strong> Utiliza un conjunto de respuestas predefinidas y selecciona una al azar para simular la aleatoriedad y el misterio.
-    </p>
-    <p>
-     <strong>Piedra, Papel o Tijeras:</strong> Juego de elección simultánea con tres opciones, donde cada opción gana o pierde contra otra, implementado con lógica condicional.
-    </p>
-    <p>
-     <strong>Adivina el Número:</strong> El sistema genera un número aleatorio y el jugador intenta adivinarlo, recibiendo pistas para acercarse al número correcto.
-    </p>
-    <p>
-     <strong>Juego de Memoria:</strong> Se mezclan pares de cartas y el jugador debe encontrar las parejas iguales, usando lógica para comparar y recordar posiciones.
-    </p>
-    <p>
-     <strong>Contar Clics:</strong> Simple contador que incrementa con cada clic, demostrando conceptos básicos de acumulación y eventos.
-    </p>
-   </div>
+</nav>
+
+<main class="page-wrapper minis-wrapper">
+  <section class="page-hero">
+    <h1><i class="fas fa-dice"></i> Ciricco &amp; Minijuegos</h1>
+    <p>Zona de juegos rápidos para eventos, lógica y pintacaritas. Corre dentro de KUS FM o en ventana aparte.</p>
   </section>
-  <!-- Modal Overlay -->
-  <div aria-labelledby="modalTitle" aria-modal="true" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50" id="modalOverlay" role="dialog">
-   <div class="bg-yellow-400 rounded-3xl max-w-lg w-full p-6 relative text-red-900">
-    <button aria-label="Cerrar ventana" class="absolute top-3 right-3 text-red-900 hover:text-red-700 text-2xl font-bold" id="modalCloseBtn">
-     ×
-    </button>
-    <h3 class="text-3xl font-bold mb-4 text-center select-none" id="modalTitle">
-     Cómo jugar al 8 Ball
-    </h3>
-    <p class="mb-4 text-lg leading-relaxed">
-     Haz clic en la bola 8 o escribe tu pregunta y presiona "Preguntar" para recibir una respuesta divertida o sabia a tu pregunta. ¡Prueba con preguntas de sí o no y diviértete!
-    </p>
-    <p class="text-center font-bold text-xl">
-     ¡Haz clic en la bola 8 o usa el formulario para jugar!
-    </p>
-   </div>
-  </div>
-  <!-- Game Modals -->
-  <div aria-labelledby="gameModalTitle" aria-modal="true" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50" id="gameModal" role="dialog">
-   <div class="bg-yellow-400 rounded-3xl max-w-lg w-full p-6 relative text-red-900 overflow-y-auto max-h-[90vh]">
-    <button aria-label="Cerrar ventana de juego" class="absolute top-3 right-3 text-red-900 hover:text-red-700 text-2xl font-bold" id="gameModalCloseBtn">
-     ×
-    </button>
-    <h3 class="text-3xl font-bold mb-4 text-center select-none" id="gameModalTitle">
-     Juego
-    </h3>
-    <div class="text-center text-lg font-semibold" id="gameContent">
+
+  <section class="page-grid single-col">
+    <div class="card page-main">
+      <div class="card-header">
+        <h2><i class="fas fa-gamepad"></i> Jugar en línea</h2>
+      </div>
+      <div class="generator-frame-wrap minis-frame-wrap">
+        <iframe
+          src="minis-embed.html"
+          title="Minijuegos Ciricco"
+          loading="lazy"
+          class="generator-frame minis-frame"
+        ></iframe>
+      </div>
+      <p class="form-hint"><i class="fas fa-circle-info"></i> Si algún juego se ve pequeño, puedes abrirlo en una pestaña nueva desde el menú interno de Ciricco.</p>
     </div>
-    <div class="mt-4" id="gameControls">
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div class="logo-bubble sm">KUS</div>
+      <span>KUS<b>FM</b></span>
     </div>
-   </div>
-  </div>
-  <!-- Face Paint Guide Modal -->
-  <div aria-labelledby="facePaintModalTitle" aria-modal="true" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50" id="facePaintModal" role="dialog">
-   <div class="bg-yellow-400 rounded-3xl max-w-3xl w-full p-6 relative text-red-900 overflow-y-auto max-h-[90vh]">
-    <button aria-label="Cerrar ventana de guía de pintacaritas" class="absolute top-3 right-3 text-red-900 hover:text-red-700 text-2xl font-bold" id="facePaintModalCloseBtn">
-     ×
-    </button>
-    <h3 class="text-3xl font-bold mb-6 text-center select-none" id="facePaintModalTitle">
-     Guía de Pintacaritas
-    </h3>
-    <div class="space-y-8 text-center">
-     <section>
-      <h4 class="text-2xl font-bold mb-2 select-none">
-       Payaso
-      </h4>
-      <img alt="Ejemplo de pintacaritas de payaso con cara blanca, nariz roja y sonrisa grande" class="mx-auto rounded-lg border-4 border-red-800 shadow-lg max-w-full h-auto" height="300" src="https://storage.googleapis.com/a1aa/image/ec31396f-b858-4bb9-6f67-05ba598f89f9.jpg" width="400"/>
-      <p class="mt-2 px-4 text-lg leading-relaxed">
-       Para hacer la cara de payaso, pinta toda la cara de blanco, añade una nariz roja grande y dibuja una sonrisa exagerada con rojo y negro. Usa colores vivos y divertidos.
-      </p>
-     </section>
-     <section>
-      <h4 class="text-2xl font-bold mb-2 select-none">
-       Spiderman
-      </h4>
-      <img alt="Ejemplo de pintacaritas de Spiderman con máscara roja y telarañas negras" class="mx-auto rounded-lg border-4 border-red-800 shadow-lg max-w-full h-auto" height="300" src="https://storage.googleapis.com/a1aa/image/bb01595f-506e-48a6-f0c7-a30547ca7fe7.jpg" width="400"/>
-      <p class="mt-2 px-4 text-lg leading-relaxed">
-       Pinta la cara de rojo, dibuja telarañas negras alrededor de los ojos y pinta los ojos de blanco para imitar la máscara de Spiderman.
-      </p>
-     </section>
-     <section>
-      <h4 class="text-2xl font-bold mb-2 select-none">
-       Estrella de Circo
-      </h4>
-      <img alt="Ejemplo de pintacaritas de estrella de circo con colores brillantes y formas de estrella" class="mx-auto rounded-lg border-4 border-red-800 shadow-lg max-w-full h-auto" height="300" src="https://storage.googleapis.com/a1aa/image/a2df71fb-3a9e-4ee0-ffcb-890d593a8e06.jpg" width="400"/>
-      <p class="mt-2 px-4 text-lg leading-relaxed">
-       Usa colores brillantes como amarillo, rojo y azul para pintar una estrella grande en la cara, con detalles y brillos para un efecto mágico.
-      </p>
-     </section>
+    <p>© 2026 Estación KUS FM · Zona de minijuegos</p>
+    <div class="footer-links">
+      <a href="index.html">Inicio</a>
+      <a href="generator.html">Generador</a>
     </div>
-   </div>
   </div>
-  <!-- Rules & Legal Modal -->
-  <div aria-labelledby="rulesModalTitle" aria-modal="true" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50" id="rulesModal" role="dialog">
-   <div class="bg-yellow-400 rounded-3xl max-w-lg w-full p-6 relative text-red-900 overflow-y-auto max-h-[90vh]">
-    <button aria-label="Cerrar ventana de reglas y sitio legal" class="absolute top-3 right-3 text-red-900 hover:text-red-700 text-2xl font-bold" id="rulesModalCloseBtn">
-     ×
-    </button>
-    <h3 class="text-3xl font-bold mb-4 text-center select-none" id="rulesModalTitle">
-     Reglas y Sitio Legal
-    </h3>
-    <div class="text-left text-lg leading-relaxed space-y-4">
-     <p>
-      Bienvenido a Ciricco, un sitio divertido para jugar y aprender. Al usar este sitio, aceptas las siguientes reglas:
-     </p>
-     <ul class="list-disc list-inside">
-      <li>Este sitio es solo para entretenimiento y no ofrece consejos profesionales.</li>
-      <li>Los juegos son simples y para todas las edades.</li>
-      <li>Respetar a otros usuarios y usar el sitio de manera responsable.</li>
-      <li>Los resultados de los juegos y la bola 8 son aleatorios y para diversión.</li>
-     </ul>
-     <p>
-      Para más información legal, contacta con el administrador del sitio.
-     </p>
-    </div>
-   </div>
-  </div>
-  <script>
-   // 8 Ball logic
-    const eightBallForm = document.getElementById('eightBallForm');
-    const eightBallAnswer = document.getElementById('eightBallAnswer');
-    const modalOverlay = document.getElementById('modalOverlay');
-    const modalCloseBtn = document.getElementById('modalCloseBtn');
-    const clown = document.getElementById('clown');
+</footer>
 
-    const answers = [
-      "Sí, definitivamente",
-      "No cuentes con ello",
-      "Pregunta de nuevo más tarde",
-      "Es seguro decir que sí",
-      "Mis fuentes dicen que no",
-      "Probablemente",
-      "No puedo predecir ahora",
-      "Sin duda",
-      "Muy dudoso",
-      "Sí",
-      "No",
-      "Tal vez",
-      "Claro que sí",
-      "No lo creo",
-      "Concéntrate y pregunta otra vez"
-    ];
-
-    function getRandomAnswer() {
-      return answers[Math.floor(Math.random() * answers.length)];
-    }
-
-    // Show instructions modal on clown click
-    clown.addEventListener('click', () => {
-      modalOverlay.classList.remove('hidden');
-    });
-    clown.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        modalOverlay.classList.remove('hidden');
-      }
-    });
-
-    modalCloseBtn.addEventListener('click', () => {
-      modalOverlay.classList.add('hidden');
-    });
-
-    modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) {
-        modalOverlay.classList.add('hidden');
-      }
-    });
-
-    // 8 Ball form submit to get answer
-    eightBallForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const questionInput = e.target.elements['eightBallQuestion'];
-      const question = questionInput.value.trim();
-      if (!question) {
-        eightBallAnswer.textContent = 'Por favor escribe una pregunta.';
-        return;
-      }
-      const answer = getRandomAnswer();
-      eightBallAnswer.textContent = answer;
-      questionInput.value = '';
-    });
-
-    // Other games logic
-    const gameModal = document.getElementById('gameModal');
-    const gameModalCloseBtn = document.getElementById('gameModalCloseBtn');
-    const gameModalTitle = document.getElementById('gameModalTitle');
-    const gameContent = document.getElementById('gameContent');
-    const gameControls = document.getElementById('gameControls');
-
-    function closeGameModal() {
-      gameModal.classList.add('hidden');
-      gameContent.innerHTML = '';
-      gameControls.innerHTML = '';
-    }
-
-    gameModalCloseBtn.addEventListener('click', closeGameModal);
-    gameModal.addEventListener('click', (e) => {
-      if (e.target === gameModal) {
-        closeGameModal();
-      }
-    });
-
-    // Game 1: Piedra, Papel o Tijeras
-    function playRPS() {
-      gameModalTitle.textContent = 'Piedra, Papel o Tijeras';
-      gameContent.innerHTML = `
-        <p>Elige tu jugada:</p>
-        <div class="mt-4 flex justify-center gap-4">
-          <button class="bg-yellow-400 text-red-800 font-bold py-2 px-4 rounded-lg shadow hover:bg-yellow-300" data-choice="piedra">✊ Piedra</button>
-          <button class="bg-yellow-400 text-red-800 font-bold py-2 px-4 rounded-lg shadow hover:bg-yellow-300" data-choice="papel">✋ Papel</button>
-          <button class="bg-yellow-400 text-red-800 font-bold py-2 px-4 rounded-lg shadow hover:bg-yellow-300" data-choice="tijeras">✌️ Tijeras</button>
-        </div>
-        <p id="rpsResult" class="mt-4 font-bold text-xl"></p>
-      `;
-      const buttons = gameContent.querySelectorAll('button[data-choice]');
-      const rpsResult = document.getElementById('rpsResult');
-
-      buttons.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const userChoice = btn.getAttribute('data-choice');
-          const choices = ['piedra', 'papel', 'tijeras'];
-          const compChoice = choices[Math.floor(Math.random() * choices.length)];
-
-          let result = '';
-          if (userChoice === compChoice) {
-            result = `Empate! Ambos eligieron ${userChoice}.`;
-          } else if (
-            (userChoice === 'piedra' && compChoice === 'tijeras') ||
-            (userChoice === 'papel' && compChoice === 'piedra') ||
-            (userChoice === 'tijeras' && compChoice === 'papel')
-          ) {
-            result = `Ganaste! ${userChoice} vence a ${compChoice}.`;
-          } else {
-            result = `Perdiste! ${compChoice} vence a ${userChoice}.`;
-          }
-          rpsResult.textContent = result;
-        });
-      });
-      gameModal.classList.remove('hidden');
-    }
-
-    // Game 2: Adivina el Número
-    function playGuessNumber() {
-      gameModalTitle.textContent = 'Adivina el Número (1-10)';
-      let secretNumber = Math.floor(Math.random() * 10) + 1;
-      gameContent.innerHTML = `
-        <p>Adivina un número entre 1 y 10:</p>
-        <input type="number" id="guessInput" min="1" max="10" class="mt-2 p-2 rounded text-black w-20 text-center" />
-        <p id="guessResult" class="mt-4 font-bold text-xl"></p>
-      `;
-      gameControls.innerHTML = `
-        <button id="guessBtn" class="bg-yellow-400 text-red-800 font-bold py-2 px-4 rounded-lg shadow hover:bg-yellow-300">Adivinar</button>
-        <button id="resetGuessBtn" class="ml-4 bg-yellow-400 text-red-800 font-bold py-2 px-4 rounded-lg shadow hover:bg-yellow-300">Reiniciar</button>
-      `;
-
-      const guessInput = document.getElementById('guessInput');
-      const guessResult = document.getElementById('guessResult');
-      const guessBtn = document.getElementById('guessBtn');
-      const resetGuessBtn = document.getElementById('resetGuessBtn');
-
-      guessBtn.addEventListener('click', () => {
-        const guess = Number(guessInput.value);
-        if (!guess || guess < 1 || guess > 10) {
-          guessResult.textContent = 'Por favor ingresa un número válido entre 1 y 10.';
-          return;
-        }
-        if (guess === secretNumber) {
-          guessResult.textContent = '¡Correcto! ¡Ganaste!';
-        } else if (guess < secretNumber) {
-          guessResult.textContent = 'Demasiado bajo. Intenta otra vez.';
-        } else {
-          guessResult.textContent = 'Demasiado alto. Intenta otra vez.';
-        }
-      });
-
-      resetGuessBtn.addEventListener('click', () => {
-        secretNumber = Math.floor(Math.random() * 10) + 1;
-        guessInput.value = '';
-        guessResult.textContent = '';
-      });
-
-      gameModal.classList.remove('hidden');
-    }
-
-    // Game 3: Juego de Memoria (pares)
-    function playMemory() {
-      gameModalTitle.textContent = 'Juego de Memoria (Encuentra pares)';
-      const cards = [
-        '🍎', '🍎',
-        '🍌', '🍌',
-        '🍇', '🍇',
-        '🍓', '🍓'
-      ];
-      // Shuffle cards
-      for (let i = cards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [cards[i], cards[j]] = [cards[j], cards[i]];
-      }
-
-      gameContent.innerHTML = `
-        <p>Haz clic en dos cartas para encontrar pares iguales.</p>
-        <div id="memoryGrid" class="grid grid-cols-4 gap-4 mt-4 cursor-pointer select-none"></div>
-        <p id="memoryMessage" class="mt-4 font-bold text-xl"></p>
-      `;
-      gameControls.innerHTML = `
-        <button id="resetMemoryBtn" class="bg-yellow-400 text-red-800 font-bold py-2 px-4 rounded-lg shadow hover:bg-yellow-300">Reiniciar</button>
-      `;
-
-      const memoryGrid = document.getElementById('memoryGrid');
-      const memoryMessage = document.getElementById('memoryMessage');
-      const resetMemoryBtn = document.getElementById('resetMemoryBtn');
-
-      let firstCard = null;
-      let secondCard = null;
-      let matchedPairs = 0;
-      let lockBoard = false;
-
-      function createCard(index) {
-        const card = document.createElement('div');
-        card.className = 'bg-yellow-400 rounded-lg flex items-center justify-center text-4xl border-4 border-red-800 h-20 select-none';
-        card.dataset.index = index;
-        card.dataset.symbol = cards[index];
-        card.textContent = '';
-        return card;
-      }
-
-      function resetGame() {
-        firstCard = null;
-        secondCard = null;
-        matchedPairs = 0;
-        lockBoard = false;
-        memoryMessage.textContent = '';
-        // Shuffle cards again
-        for (let i = cards.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [cards[i], cards[j]] = [cards[j], cards[i]];
-        }
-        memoryGrid.innerHTML = '';
-        for (let i = 0; i < cards.length; i++) {
-          const card = createCard(i);
-          memoryGrid.appendChild(card);
-        }
-      }
-
-      function flipCard(card) {
-        if (lockBoard) return;
-        if (card === firstCard) return;
-        card.textContent = card.dataset.symbol;
-        card.classList.add('bg-white');
-        if (!firstCard) {
-          firstCard = card;
-          return;
-        }
-        secondCard = card;
-        lockBoard = true;
-
-        if (firstCard.dataset.symbol === secondCard.dataset.symbol) {
-          matchedPairs++;
-          firstCard.removeEventListener('click', onCardClick);
-          secondCard.removeEventListener('click', onCardClick);
-          resetTurn();
-          if (matchedPairs === cards.length / 2) {
-            memoryMessage.textContent = '¡Felicidades! Encontraste todos los pares.';
-          }
-        } else {
-          setTimeout(() => {
-            firstCard.textContent = '';
-            secondCard.textContent = '';
-            firstCard.classList.remove('bg-white');
-            secondCard.classList.remove('bg-white');
-            resetTurn();
-          }, 1000);
-        }
-      }
-
-      function resetTurn() {
-        [firstCard, secondCard] = [null, null];
-        lockBoard = false;
-      }
-
-      function onCardClick(e) {
-        flipCard(e.currentTarget);
-      }
-
-      resetMemoryBtn.addEventListener('click', resetGame);
-
-      resetGame();
-
-      memoryGrid.querySelectorAll('div').forEach(card => {
-        card.addEventListener('click', onCardClick);
-      });
-
-      gameModal.classList.remove('hidden');
-    }
-
-    // Game 4: Contar Clics
-    function playClickCounter() {
-      gameModalTitle.textContent = 'Contar Clics';
-      gameContent.innerHTML = `
-        <p>Haz clic en el botón para contar los clics.</p>
-        <p class="mt-4 text-6xl font-bold" id="clickCount">0</p>
-      `;
-      gameControls.innerHTML = `
-        <button id="clickBtn" class="bg-yellow-400 text-red-800 font-bold py-3 px-6 rounded-lg shadow hover:bg-yellow-300">Haz clic aquí</button>
-        <button id="resetClickBtn" class="ml-4 bg-yellow-400 text-red-800 font-bold py-3 px-6 rounded-lg shadow hover:bg-yellow-300">Reiniciar</button>
-      `;
-
-      let count = 0;
-      const clickCount = document.getElementById('clickCount');
-      const clickBtn = document.getElementById('clickBtn');
-      const resetClickBtn = document.getElementById('resetClickBtn');
-
-      clickBtn.addEventListener('click', () => {
-        count++;
-        clickCount.textContent = count;
-      });
-
-      resetClickBtn.addEventListener('click', () => {
-        count = 0;
-        clickCount.textContent = count;
-      });
-
-      gameModal.classList.remove('hidden');
-    }
-
-    // Buttons event listeners
-    document.getElementById('game1Btn').addEventListener('click', playRPS);
-    document.getElementById('game2Btn').addEventListener('click', playGuessNumber);
-    document.getElementById('game3Btn').addEventListener('click', playMemory);
-    document.getElementById('game4Btn').addEventListener('click', playClickCounter);
-
-    // Face Paint Guide modal logic
-    const facePaintGuideBtn = document.getElementById('facePaintGuideBtn');
-    const facePaintModal = document.getElementById('facePaintModal');
-    const facePaintModalCloseBtn = document.getElementById('facePaintModalCloseBtn');
-
-    facePaintGuideBtn.addEventListener('click', () => {
-      facePaintModal.classList.remove('hidden');
-    });
-
-    facePaintModalCloseBtn.addEventListener('click', () => {
-      facePaintModal.classList.add('hidden');
-    });
-
-    facePaintModal.addEventListener('click', (e) => {
-      if (e.target === facePaintModal) {
-        facePaintModal.classList.add('hidden');
-      }
-    });
-
-    // Rules & Legal modal logic
-    const rulesBtn = document.getElementById('rulesBtn');
-    const rulesModal = document.getElementById('rulesModal');
-    const rulesModalCloseBtn = document.getElementById('rulesModalCloseBtn');
-
-    rulesBtn.addEventListener('click', () => {
-      rulesModal.classList.remove('hidden');
-    });
-
-    rulesModalCloseBtn.addEventListener('click', () => {
-      rulesModal.classList.add('hidden');
-    });
-
-    rulesModal.addEventListener('click', (e) => {
-      if (e.target === rulesModal) {
-        rulesModal.classList.add('hidden');
-      }
-    });
-  </script>
- </body>
+<script>
+  document.getElementById('navToggle').addEventListener('click',()=>{
+    document.getElementById('navMenu').classList.toggle('open');
+  });
+</script>
+</body>
 </html>
