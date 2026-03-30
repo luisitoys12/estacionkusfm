@@ -1,0 +1,20 @@
+name: Static Site Checks
+
+on:
+  push:
+    branches: ["main", "develop"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  html-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install tidy
+        run: sudo apt-get update && sudo apt-get install -y tidy
+
+      - name: Validate HTML
+        run: |
+          find . -name "*.html" -print0 | xargs -0 -n1 tidy -qe || true
